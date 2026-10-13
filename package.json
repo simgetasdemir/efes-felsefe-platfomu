@@ -1,0 +1,7 @@
+{
+  "name": "efes-felsefe-platformu",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Antik Efes'i canlandıran felsefe platformu: oku, tartış, düşün.",
+  "engines": { "node": ">=18" }
+}

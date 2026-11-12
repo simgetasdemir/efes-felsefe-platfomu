@@ -11,6 +11,17 @@ Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak için
 | `api/katip.js` | Kâtip’i Anthropic API’ye bağlayan küçük sunucu fonksiyonu. API anahtarı yalnızca burada, sunucuda durur. |
 | `package.json` | Proje bilgisi. Ek paket kurulumu gerekmez. |
 | `og.jpg`, `og-kare.png` | Paylaşım önizleme görseli ve telefon ana ekranı ikonu. |
+| `manifest.webmanifest`, `ikon-192.png`, `ikon-512.png` | Siteyi telefona uygulama gibi eklemek için. |
+| `sw.js` | İnternetsiz çalışma: site bir kez açılınca telefona kaydedilir. |
+
+## Gezi rehberi (ören yeri için)
+
+- **Gezi** sekmesi, Efes'i gezen ziyaretçi içindir. Kişi hangi kapıdan girdiğini seçer, altı duraklık rota ona göre sıralanır. Artemis Tapınağı ve Matematik Köyü "ayrı bir günde" bölümündedir.
+- Her durakta dört adım var: **Bak**, **Dinle** (telefonun kendi yapay sesiyle, internetsiz de çalışır), **Düşün** (tek soru, isteğe bağlı not) ve **Mühür al**.
+- Mühürler **Efes Pasaportu**'nda toplanır, pasaport paylaşılabilir bir görsel karta dönüşür.
+- Gezi ekranları Türkçe ve İngilizcedir; sitenin geri kalanı şimdilik Türkçedir.
+- Durak metinleri `index.html` içindeki `DURAKLAR` listesindedir. Yayından önce sahada yürünüp bir uzmana okutulmalıdır.
+- `sw.js` içindeki `KAYIT` adını (ör. `efes-v2`) her büyük güncellemede değiştir; böylece eski kopyalar temizlenir.
 
 ## Nasıl çalışıyor?
 

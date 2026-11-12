@@ -8,6 +8,7 @@
 <title>Efes · Antik kentte felsefe: oku, tartış, düşün</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C2A3A'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23E3B38A'%3EΕ%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="og-kare.png">
+<link rel="manifest" href="manifest.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Efes">
@@ -73,7 +74,7 @@ textarea{resize:vertical;min-height:84px}
 .koyu .uyari{color:var(--zayif)}
 
 /* alt menü */
-nav.menu{position:sticky;bottom:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:8px 10px calc(14px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--tas);z-index:5}
+nav.menu{position:sticky;bottom:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:8px 6px calc(14px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--tas);z-index:5}
 nav.menu button{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:48px;background:none;border:0;font-size:13.5px;color:var(--soluk)}
 nav.menu button[aria-current="page"]{color:var(--ege);font-weight:600}
 .koyu nav.menu{background:#101A25;border-top-color:var(--gece-yuzey)}
@@ -321,6 +322,34 @@ details.koyu-alinti cite{color:#D9CFC0}
 @keyframes halka{to{transform:rotate(360deg)}}
 .halka{transform-box:fill-box;transform-origin:center;animation:halka 30s linear infinite}
 [hidden]{display:none!important}
+/* gezi */
+.gz-ust{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.dil-sec{display:inline-flex;border:1.5px solid var(--cizgi);border-radius:999px;overflow:hidden;background:#fff}
+.dil-sec button{min-height:40px;min-width:48px;border:0;background:none;font-weight:600;font-size:15px;color:var(--soluk)}
+.dil-sec button[aria-pressed="true"]{background:var(--ege);color:#fff}
+.gunes-btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border-radius:999px;border:1.5px solid var(--cizgi);background:#fff;font-size:15px;font-weight:600;color:var(--murekkep)}
+.gunes-btn[aria-pressed="true"]{background:#FFE7A3;border-color:#C99A1E}
+.adim{gap:10px}
+.adim-bas{display:flex;align-items:center;gap:10px}
+.adim-bas .yol-no{flex:0 0 30px;width:30px;height:30px;border-radius:15px;font-size:15px}
+.ses-metin{font-size:18px;line-height:1.55}
+.foto-not{position:absolute;right:10px;bottom:10px;padding:2px 8px;border-radius:999px;background:rgba(17,24,34,.7);color:#F4F1EA;font-size:12.5px}
+.gezi-giris{background:rgba(20,16,12,.55);color:var(--mermer);border:1.5px solid rgba(255,255,255,.35);font-size:15.5px;flex-wrap:wrap;line-height:1.2;padding:8px 14px}
+.gezi-giris span span{font-weight:400;font-size:14px;color:#E3DACB}
+.adim .paylas,#gz-durum .paylas{color:var(--toprak)}
+.muhur{flex:0 0 auto;width:104px;height:104px;border-radius:52px;border:2px dashed var(--cizgi);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;color:var(--soluk);font-size:14px;font-weight:600;line-height:1.15}
+.muhur.basili{border:3px double var(--toprak);background:rgba(160,86,31,.1);color:var(--toprak);transform:rotate(-6deg)}
+.muhur small{font-weight:400;font-size:11.5px;margin-top:4px;color:var(--toprak)}
+.muhur.kucuk{width:64px;height:64px;font-size:11px}
+.pasaport{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;justify-items:center;background:#fff;border-radius:22px;padding:18px 10px;border:1px solid var(--cizgi)}
+.pasaport button{background:none;border:0;padding:0}
+.pasaport button:nth-child(3n) .muhur.basili{transform:rotate(5deg)}
+/* güneş modu: parlak ışıkta okunurluk */
+#app.gunes{--mermer:#FFFFFF;--tas:#E6E6E6;--cizgi:#7A7A7A;--murekkep:#000;--soluk:#1E1E1E;--ege:#0B3D66;--toprak:#7A3A0C}
+#app.gunes body,#app.gunes .ic{font-size:20px}
+#app.gunes .kart,#app.gunes .yol-kart,#app.gunes .satir-btn{border:2px solid #000}
+#app.gunes .ses-metin,#app.gunes .kart p{font-size:20px;font-weight:500}
+#app.gunes .not{font-size:16.5px;color:#1E1E1E}
 /* söz kartı penceresi */
 #kart-pencere{position:fixed;inset:0;z-index:30;background:rgba(8,12,18,.86);display:flex;align-items:center;justify-content:center;padding:20px}
 #kart-pencere .kp-ic{width:min(400px,100%);display:flex;flex-direction:column;gap:12px}
@@ -528,11 +557,11 @@ var KONULAR = [
 var MASALAR = ['Yapay zekâ düşünebilir mi?', 'Mutluluk öğretilebilir mi?', 'Şehre borcumuz var mı?'];
 
 /* ---------- durum ---------- */
-var VARSAYILAN = { ad:'', limanTamam:false, sorular:[], tartisma:0, guclu:0, okunan:{}, notlar:[], sessizlik:0, seri:{ son:'', gun:0, rekor:0 } };
+var VARSAYILAN = { ad:'', limanTamam:false, sorular:[], tartisma:0, guclu:0, okunan:{}, notlar:[], sessizlik:0, seri:{ son:'', gun:0, rekor:0 }, gezi:{ dil:'tr', kapi:'', muhur:{}, gunes:false } };
 var P = JSON.parse(JSON.stringify(VARSAYILAN));
 var kayit = { db:null, uid:null, yuklendi:false, ad:'' };
 var sample = null, katipHazir = false;
-var gecici = { ekran:'acilis', oda:'herakleitos', bolum:0, odaSohbet:{}, tiyatro:{ konu:0, taraf:0, turlar:[], bekliyor:false, puan:{g:0,o:0,z:0}, ozel:'' }, agora:{ soru:'', turlar:[], bekliyor:false }, artemis:{ calisiyor:false, kalan:300, sayac:null }, odaBekliyor:false, ctl:null, limanSecim:null };
+var gecici = { durak:'devlet', ekran:'acilis', oda:'herakleitos', bolum:0, odaSohbet:{}, tiyatro:{ konu:0, taraf:0, turlar:[], bekliyor:false, puan:{g:0,o:0,z:0}, ozel:'' }, agora:{ soru:'', turlar:[], bekliyor:false }, artemis:{ calisiyor:false, kalan:300, sayac:null }, odaBekliyor:false, ctl:null, limanSecim:null };
 
 var app = document.getElementById('app');
 function h(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -574,7 +603,7 @@ var IK = {
 };
 
 function menu(aktif){
-  var ogeler = [['harita','Şehir',IK.sehir],['kutuphane','Okuma',IK.okuma],['tiyatro','Münazara',IK.munazara],['profil','Yurttaşlık',IK.kisi]];
+  var ogeler = [['gezi', gt('gezi'), GZ_IK.pusula],['harita','Şehir',IK.sehir],['kutuphane','Okuma',IK.okuma],['tiyatro','Münazara',IK.munazara],['profil','Yurttaşlık',IK.kisi]];
   return '<nav class="menu" aria-label="Ana menü">' + ogeler.map(function(o){
     return '<button type="button" data-git="' + o[0] + '"' + (o[0] === aktif ? ' aria-current="page"' : '') + '>' + o[2] + o[1] + '</button>';
   }).join('') + '</nav>';
@@ -837,7 +866,7 @@ var KILITLER = {
   yamac:{ kosul:function(){ return P.tartisma >= 3; }, sart:'3 argümandan sonra açılır', mesaj:function(){ return 'Yamaçevler’in sofrası, Tiyatro’da üç argüman sunduktan sonra kurulur. Şu an: ' + Math.min(P.tartisma, 3) + ' / 3.'; } },
   matematik:{ kosul:function(){ return P.guclu >= 3; }, sart:'Filozof olunca açılır', mesaj:function(){ return 'Matematik Köyü Filozoflara açılır: Tiyatro’da hakemin güçlü bulduğu üç itiraz kur. Şu an: ' + Math.min(P.guclu, 3) + ' / 3.'; } }
 };
-function kilitli(hedef){ var k = KILITLER[hedef]; return k && !k.kosul() ? k : null; }
+function kilitli(hedef){ return null; } /* ziyaretçi kurgusu: sahada kilitli yer yok, ilerlemeyi pasaport mühürleri gösterir */
 /* ---------- kandil: günlük seri ---------- */
 function gunAnahtar(d){ d = d || new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
 function seriDurum(){
@@ -873,7 +902,7 @@ async function sozKartiCiz(metin, kaynak, tur){
   try { await Promise.all([document.fonts.load('italic 400 64px "EB Garamond"'), document.fonts.load('600 64px "EB Garamond"')]); } catch(e){}
   c.fillStyle = '#1A1410'; c.fillRect(0, 0, W, H);
   try {
-    var im = await resimYukle((KART_FOTO[tur] || KART_FOTO.fragman)());
+    var im = await resimYukle((KART_FOTO[tur] || (typeof DURAK_FOTO !== 'undefined' && DURAK_FOTO[tur]) || KART_FOTO.fragman)());
     var o = Math.max(W / im.width, H / im.height), iw = im.width * o, ih = im.height * o;
     c.drawImage(im, (W - iw) / 2, (H - ih) / 2, iw, ih);
   } catch(e){}
@@ -900,13 +929,13 @@ async function sozKartiCiz(metin, kaynak, tur){
   return cv;
 }
 function kartKapat(){ var k = $('kart-pencere'); if (k) k.remove(); }
-async function sozKarti(metin, kaynak, tur){
+async function sozKarti(metin, kaynak, tur, uretici){
   kartKapat();
   var k = document.createElement('div'); k.id = 'kart-pencere'; k.setAttribute('role', 'dialog'); k.setAttribute('aria-modal', 'true'); k.setAttribute('aria-label', 'Söz kartı');
   k.innerHTML = '<div class="kp-ic"><div class="kp-yuk">Kart hazırlanıyor…</div></div>';
   k.addEventListener('click', function(e){ if (e.target === k || e.target.closest('[data-kp="kapat"]')) kartKapat(); });
   document.body.appendChild(k);
-  var cv = await sozKartiCiz(metin, kaynak, tur);
+  var cv = await (uretici ? uretici() : sozKartiCiz(metin, kaynak, tur));
   var blob = await new Promise(function(ok){ cv.toBlob(ok, 'image/png'); });
   var dosya = null; try { dosya = new File([blob], 'efes-soz.png', { type:'image/png' }); } catch(e){}
   var dosyaPaylas = !!(dosya && navigator.canShare && navigator.canShare({ files:[dosya] }));
@@ -965,6 +994,7 @@ function ekranAcilis(){
     '<div class="d3" style="display:flex;flex-direction:column;gap:12px">' +
     '<div class="uclu"><div><b>Oku</b><span>Celsus’ta metinler</span></div><div><b>Tartış</b><span>Bir filozofa karşı</span></div><div><b>Düşün</b><span>Beş sessiz dakika</span></div></div>' + alinti('Herakleitos’tan bir söz', '“Aynı nehre iki kez giremezsin.”', 'Herakleitos, Efes, MÖ 500 dolayları', true) + '' +
     '<button type="button" class="btn btn-okra tam" data-git="' + (P.limanTamam ? 'harita' : 'liman') + '">' + (P.limanTamam ? 'Şehirde gez' : 'Şehre gir') + IK.ileri + '</button>' +
+    '<button type="button" class="btn tam gezi-giris" data-git="gezi">' + GZ_IK.pusula + '<span style="display:flex;flex-direction:column;align-items:flex-start;text-align:left"><b>Efes’te misin? Gezi rehberi</b><span lang="en">Visiting Ephesus? Tour guide</span></span></button>' +
     '</div>' +
   '</div></section>';
 }
@@ -1012,6 +1042,7 @@ function ekranHarita(){
   '<div class="ic" style="padding-top:44px"><div class="etiket">ΕΦΕΣΟΣ · Efes</div><h1>' + (gorunenAd() ? 'Hoş geldin, ' + h(gorunenAd()) : 'Şehre hoş geldin') + '</h1><p class="soluk">Bir yapıya gir, bir düşünceye katıl.</p>' + kandilHTML() +
   panoramaHTML() +
   '<p class="not" style="margin-top:-6px">Bir yapıya dokun, içine gir.</p>' +
+  '<button type="button" class="bugun-btn" style="background:var(--ege)" data-git="gezi"><span><b>Efes’te misin?</b><small>Gezi rehberi: altı durak, sesli anlatım, pasaport</small></span>' + IK.ok + '</button>' +
   '<button type="button" class="bugun-btn" data-git="bugun"><span><b>Bugün Efes’te</b><small>Oku, tartış, düşün · günün fragmanı · Efes’in zamanı</small></span>' + IK.ok + '</button>' +
 
   '<div style="height:12px"></div></div><div class="bosluk"></div>' + menu('harita') + '</section>';
@@ -1151,7 +1182,7 @@ function ekranProfil(){
     '<svg class="akan" aria-hidden="true" viewBox="0 0 390 40" preserveAspectRatio="none" style="position:absolute;left:0;bottom:0;width:100%;height:40px"><path d="M-20 18 C60 6 120 30 200 18 S330 6 410 20" fill="none" stroke="#3E6E94" stroke-width="2.5" stroke-dasharray="36 18" stroke-linecap="round"/><path d="M-20 30 C70 18 140 40 210 30 S340 20 410 32" fill="none" stroke="#E3B38A" stroke-width="1.2" stroke-dasharray="12 26" stroke-linecap="round" opacity=".6"/></svg>' +
   '</div>' +
   '<div class="ic" style="padding-top:18px">' +
-    '<div class="kart"><h2>Açılacak yapılar</h2>' + [['agora','Agora'],['yamac','Yamaçevler'],['matematik','Matematik Köyü']].map(function(k){ var kl = kilitli(k[0]); return '<p style="display:flex;justify-content:space-between;gap:10px"><b>' + k[1] + '</b><span class="not">' + (kl ? KILITLER[k[0]].sart : 'Açık ✓') + '</span></p>'; }).join('') + '</div>' +
+    '<button type="button" class="bugun-btn" data-git="pasaport"><span><b>' + h(gt('pasaport')) + '</b><small>' + muhurSayi() + ' / ' + rotaSirasi().length + ' · ' + h(gt('pasaportAlt')) + '</small></span>' + IK.ok + '</button>' +
     '<div class="kart"><h2>Şehirdeki yerin</h2><div class="basamaklar">' + RUTBELER.map(function(x, i){ return '<div class="' + (i <= r ? 'dolu' : '') + (i === r ? ' simdi' : '') + '"><i style="animation-delay:' + (i*0.3) + 's"></i>' + x + '</div>'; }).join('') + '</div>' +
     '<p class="not">' + ['Liman’da sorunu seçince Metoikos olursun.', 'Bir bölüm oku ya da Tiyatro’da bir argüman sun: Yurttaş olursun.', 'Filozof olmak için Tiyatro’da hakemin güçlü bulduğu üç itiraz kur. Şu an: ' + Math.min(P.guclu,3) + ' / 3.', 'Filozofsun. Şehrin her yapısı sana açık.'][r] + '</p></div>' +
     '<div class="sayilar"><div class="sayi"><b>' + P.tartisma + '</b><span>Tiyatro’da sunulan argüman</span></div><div class="sayi"><b>' + P.guclu + '</b><span>Güçlü bulunan itiraz</span></div><div class="sayi"><b>' + okunanSayi() + '</b><span>Okunan bölüm</span></div><div class="sayi"><b>' + P.sessizlik + '</b><span>Tamamlanan sessizlik</span></div><div class="sayi"><b>' + seriDurum().gun + '</b><span>Günlük kandil serisi</span></div><div class="sayi"><b>' + seriDurum().rekor + '</b><span>En uzun seri</span></div></div>' +
@@ -1162,9 +1193,10 @@ function ekranProfil(){
   '<div style="height:12px"></div></div><div class="bosluk"></div>' + menu('profil') + '</section>';
 }
 
-var EKRANLAR = { bugun:ekranBugun, yamac:ekranYamac, matematik:ekranMatematik, acilis:ekranAcilis, liman:ekranLiman, harita:ekranHarita, kutuphane:ekranKutuphane, oda:ekranOda, tiyatro:ekranTiyatro, agora:ekranAgora, artemis:ekranArtemis, profil:ekranProfil };
+var EKRANLAR = { gezi:ekranGezi, durak:ekranDurak, pasaport:ekranPasaport, bugun:ekranBugun, yamac:ekranYamac, matematik:ekranMatematik, acilis:ekranAcilis, liman:ekranLiman, harita:ekranHarita, kutuphane:ekranKutuphane, oda:ekranOda, tiyatro:ekranTiyatro, agora:ekranAgora, artemis:ekranArtemis, profil:ekranProfil };
 
 function ciz(){
+  app.classList.toggle('gunes', !!(P.gezi && P.gezi.gunes));
   app.innerHTML = EKRANLAR[gecici.ekran]();
   if (gecici.ekran === 'tiyatro'){ tiyatroCiz(); }
   if (gecici.ekran === 'oda'){ odaCiz(); }
@@ -1173,6 +1205,7 @@ function ciz(){
 }
 function git(ekran){
   if (gecici.ctl && (gecici.tiyatro.bekliyor || gecici.agora.bekliyor || gecici.odaBekliyor)) { /* çalışan çağrı arka planda bitsin */ }
+  if (typeof sesDurdur === 'function') sesDurdur();
   gecici.ekran = ekran; ciz(); try { window.scrollTo(0, 0); } catch (e) {}
 }
 
@@ -1385,6 +1418,18 @@ function defter(){
 /* ---------- olaylar ---------- */
 app.addEventListener('click', function(e){
   var x;
+  if ((x = e.target.closest('[data-durak]'))){ gecici.durak = x.getAttribute('data-durak'); git('durak'); return; }
+  if ((x = e.target.closest('[data-gz]'))){
+    var gza = x.getAttribute('data-gz');
+    if (gza === 'dil'){ sesDurdur(); gz().dil = x.getAttribute('data-dil'); kaydet(); ciz(); }
+    else if (gza === 'gunes'){ gz().gunes = !gz().gunes; kaydet(); ciz(); }
+    else if (gza === 'kapi'){ gz().kapi = x.getAttribute('data-kapi'); kaydet(); ciz(); }
+    else if (gza === 'seslendir') seslendir();
+    else if (gza === 'muhur') muhurBas();
+    else if (gza === 'not') gzNot();
+    else if (gza === 'kart') sozKarti(gt('kartBaslik'), '', 'fragman', pasaportKartiCiz);
+    return;
+  }
   if ((x = e.target.closest('[data-git]'))){
     var hedef = x.getAttribute('data-git');
     var kl = kilitli(hedef); if (kl){ bildir(kl.mesaj()); return; }
@@ -1436,7 +1481,143 @@ app.addEventListener('keydown', function(e){
   if (e.key === 'Enter' && e.target.id === 'agora-yeni'){ var q = (e.target.value || '').trim(); if (q) agoraAc(q); }
 });
 
+/* ---------- gezi: ören yerinde rehber (Türkçe / İngilizce) ---------- */
+var DURAKLAR = [{"id": "devlet", "foto": "PANORAMA", "tr": {"ad": "Devlet Agorası ve Odeion", "alt": "Şehrin yönetildiği yer", "bak": "Geniş, açık meydana ve yanındaki küçük, yarım daire biçimli tiyatroya bak. Bu küçük yapı Odeion; basamaklarına çıkıp meydana tepeden bakabilirsin.", "dinle": "Burası Efes’in resmî yüzüydü. Ticaret aşağıdaki şehirde dönerken, bu meydanda kentin işleri konuşulurdu. Odeion, MS 2. yüzyılda yaptırılmış küçük bir salondur; kent meclisinin burada toplandığı, konser ve konuşmalar için de kullanıldığı düşünülür. Hemen yanındaki Prytaneion’da kentin hiç sönmemesi gereken kutsal ateşi yanardı. Bu ateş, şehrin yaşadığının işaretiydi.", "soru": "Bir şehirde yaşamak sana bir borç yükler mi? Yasaları sen seçmediysen bile onlara uymak zorunda mısın?"}, "en": {"ad": "State Agora and Odeion", "alt": "Where the city was governed", "bak": "Look at the wide open square and the small semicircular theatre beside it. That small building is the Odeion; climb its steps to look down over the square.", "dinle": "This was the official face of Ephesus. While trade went on in the lower city, the business of the city was discussed in this square. The Odeion is a small hall built in the 2nd century AD; the city council is thought to have met here, and it may also have hosted music and speeches. Next door, in the Prytaneion, burned the sacred flame that was never allowed to go out. That fire was the sign that the city was alive.", "soru": "Does living in a city put you in its debt? Must you obey its laws even if you never chose them?"}}, {"id": "kuretler", "foto": "PANORAMA", "tr": {"ad": "Kuretler Caddesi", "alt": "Yokuş aşağı, mermer bir yol", "bak": "Caddenin eğimine ve ayağının altındaki mermer levhalara bak. Cadde boyunca, kemerli cephesiyle küçük Hadrian Tapınağı’nı ara.", "dinle": "Bu cadde, yukarıdaki yönetim meydanını aşağıdaki Celsus Kütüphanesi’ne bağlar. Adını Kuretler denen bir rahip topluluğundan aldığı düşünülür. İki yanında çeşmeler, heykeller ve dükkânlar vardı. Herakleitos bu kentte şöyle dedi: “Yukarı giden yol ile aşağı inen yol bir ve aynıdır.” Yürüdüğün yol, sabah yukarı çıkan bir yurttaş için yokuştu, akşam evine inen biri için iniş.", "soru": "Bu yol yokuş mu, iniş mi? Bir şeyin ne olduğu, ona nereden baktığına mı bağlı?"}, "en": {"ad": "Curetes Street", "alt": "A marble road running downhill", "bak": "Notice the slope of the street and the marble slabs under your feet. Along the street, look for the small Temple of Hadrian with its arched front.", "dinle": "This street links the civic square above to the Library of Celsus below. It is thought to take its name from the Curetes, a college of priests. Fountains, statues and shops once lined both sides. Heraclitus, who lived in this city, said: “The road up and the road down are one and the same.” The road you are walking was a climb for a citizen going up in the morning and a descent for one going home at night.", "soru": "Is this road uphill or downhill? Does what a thing is depend on where you look at it from?"}}, {"id": "yamac", "foto": "YAMAC_FOTO", "tr": {"ad": "Yamaçevler", "alt": "Varlıklı ailelerin evleri", "bak": "Koruyucu çatının altında duvar resimlerine ve yer mozaiklerine bak. Yamaçevler için ayrı bilet gerekebilir.", "dinle": "Bülbül Dağı’nın yamacına teraslar hâlinde kurulan bu evler, Efes’in varlıklı ailelerine aitti. Duvarlarda renkli resimler, yerlerde mozaikler vardı; bazı evlerde akan su ve ısıtma bile bulunuyordu. Burada sofralar kurulur, misafirler ağırlanır, uzun sohbetler edilirdi. Antik dünyada iyi yaşamın ne olduğu sorusu çoğu zaman böyle sofralarda konuşuldu.", "soru": "Zenginlik iyi bir hayat için yeterli mi? Mutlu olmayı biri sana öğretebilir mi?"}, "en": {"ad": "Terrace Houses", "alt": "Homes of wealthy families", "bak": "Under the protective roof, look at the wall paintings and floor mosaics. The Terrace Houses may need a separate ticket.", "dinle": "Built in terraces on the slope of the hill, these houses belonged to the wealthy families of Ephesus. Their walls were painted and their floors covered in mosaics; some even had running water and heating. Here tables were laid, guests were received and long conversations went on into the night. In the ancient world the question of what makes a good life was often argued over dinners like these.", "soru": "Is wealth enough for a good life? Can someone teach you how to be happy?"}}, {"id": "celsus", "foto": "ACILIS_FOTO", "tr": {"ad": "Celsus Kütüphanesi", "alt": "Bir oğulun babasına anıtı", "bak": "Cephedeki dört nişe ve içlerindeki kadın heykellerine bak: Bilgelik, Bilgi, Düşünce ve Erdem. Buradakiler kopyadır; özgünleri Viyana’dadır.", "dinle": "Kütüphaneyi MS 2. yüzyılın başında Tiberius Julius Aquila, babası Celsus’un anısına yaptırdı. Celsus, binanın altındaki mezar odasında yatar. İçeride binlerce parşömen rulosunun saklandığı tahmin edilir. Herakleitos ise bundan çok önce uyarmıştı: “Çok şey öğrenmek anlayış kazandırmaz.” Bir kütüphane bilgiyi saklar; onu anlamak okuyana kalır.", "soru": "Çok şey bilip yine de bir şeyi anlamadığın oldu mu? Bilmek ile anlamak arasındaki fark ne?"}, "en": {"ad": "Library of Celsus", "alt": "A son’s monument to his father", "bak": "Look at the four niches on the façade and the female statues in them: Wisdom, Knowledge, Thought and Virtue. These are copies; the originals are in Vienna.", "dinle": "The library was built in the early 2nd century AD by Tiberius Julius Aquila in memory of his father, Celsus. Celsus lies in the tomb chamber beneath the building. Thousands of scrolls are thought to have been kept inside. Long before, Heraclitus had warned: “Much learning does not teach understanding.” A library stores knowledge; understanding it is left to the reader.", "soru": "Have you ever known a lot about something and still not understood it? What is the difference between knowing and understanding?"}}, {"id": "tiyatro", "foto": "TIYATRO_FOTO", "tr": {"ad": "Büyük Tiyatro", "alt": "Efes’in en büyük toplanma yeri", "bak": "En üst sıralara doğru bak ve buraya kaç kişinin sığabileceğini düşün. Kalabalığın sesinin bu basamaklarda nasıl yankılanacağını hayal et.", "dinle": "Tiyatro Panayır Dağı’nın yamacına kuruldu ve Roma döneminde büyütüldü. On binlerce kişinin sığdığı tahmin edilir. Burada yalnızca oyunlar oynanmadı; halk meclisi de toplandı. Elçilerin İşleri kitabına göre, Artemis heykelcikleri satan gümüşçüler Pavlus’a karşı burada ayaklandı. Kalabalığın sesi bazen haklıyı, bazen de en güçlüyü dinler.", "soru": "Adalet, güçlü olanın işine gelen şey mi? Kalabalık haklı olduğu için mi güçlüdür, güçlü olduğu için mi haklı?"}, "en": {"ad": "Great Theatre", "alt": "The largest gathering place in Ephesus", "bak": "Look up to the highest rows and imagine how many people could sit here. Picture how the voice of a crowd would echo off these steps.", "dinle": "The theatre was built into the slope of Mount Panayır and enlarged in Roman times. It is estimated to have held tens of thousands. It was used not only for plays but also for the citizens’ assembly. According to the Acts of the Apostles, the silversmiths who sold figurines of Artemis rioted here against Paul. The voice of a crowd sometimes listens to the just, and sometimes to the strongest.", "soru": "Is justice whatever suits the strong? Is a crowd strong because it is right, or right because it is strong?"}}, {"id": "liman", "foto": "LIMAN_FOTO", "tr": {"ad": "Liman Caddesi", "alt": "Denize giden, artık denize varmayan yol", "bak": "Caddenin batıya, ufka doğru uzanışına bak. Bir zamanlar sonunda liman vardı; bugün görebildiğin yalnızca ova.", "dinle": "Arkadiane adıyla da bilinen bu sütunlu cadde, tiyatrodan limana inerdi. Yeni gelen gemiciler kente bu yoldan girerdi. Ama Küçük Menderes yüzyıllar boyunca taşıdığı alüvyonla limanı doldurdu. Deniz kilometrelerce geri çekildi ve liman kenti karada kaldı. Herakleitos’un nehri, Efes’in kaderini de değiştirdi.", "soru": "Denizini kaybeden bir liman kenti hâlâ aynı şehir midir? Sen de değişirken aynı kişi misin?"}, "en": {"ad": "Harbour Street", "alt": "The road to the sea that no longer reaches it", "bak": "Look along the street towards the west, to the horizon. Once there was a harbour at its end; today you can only see the plain.", "dinle": "Also known as the Arcadiane, this colonnaded street ran from the theatre down to the harbour. Newly arrived sailors entered the city along this road. But over the centuries the Küçük Menderes, the ancient Cayster river, filled the harbour with silt. The sea retreated by kilometres and the port city was left on dry land. Heraclitus’ river changed the fate of Ephesus too.", "soru": "Is a port city that has lost its sea still the same city? Are you still the same person as you change?"}}, {"id": "artemis", "foto": "ARTEMIS_FOTO", "ayri": true, "tr": {"ad": "Artemis Tapınağı", "alt": "Selçuk · tek sütun", "bak": "Ovanın ortasında ayakta kalan tek sütuna ve tepesindeki leylek yuvasına bak.", "dinle": "Burada bir zamanlar antik dünyanın yedi harikasından biri sayılan büyük Artemis Tapınağı vardı. Bugün parçalardan yeniden dikilmiş tek bir sütun ayakta. Anlatılara göre Herakleitos kitabını bu tapınağa bırakmıştı. Burada kimseyle konuşmak zorunda değilsin. Beş dakika yalnızca bak ve dinle.", "soru": "Bir zamanlar harika olan bir şeyden geriye tek bir sütun kalınca, ondan geriye ne kalmış olur?"}, "en": {"ad": "Temple of Artemis", "alt": "Selçuk · a single column", "bak": "Look at the single column standing in the middle of the plain, and the stork’s nest on top of it.", "dinle": "Here once stood the great Temple of Artemis, counted among the seven wonders of the ancient world. Today a single column, re-erected from fragments, still stands. According to ancient tradition, Heraclitus deposited his book in this temple. You do not have to talk to anyone here. For five minutes, just look and listen.", "soru": "When only one column remains of something that was once a wonder, what is left of it?"}}, {"id": "sirince", "foto": "MATEMATIK_FOTO", "ayri": true, "tr": {"ad": "Matematik Köyü", "alt": "Şirince · kanıt odası", "bak": "Köyün taş evlerine ve yamaçtaki sessiz çalışma salonlarına bak.", "dinle": "Efes’e yaklaşık on kilometre uzaklıktaki Şirince yakınlarında, matematikçilerin kurduğu bir köy var. Yaz okullarında öğrenciler burada sabahtan akşama kanıtlar üzerinde çalışır. Antik Efes’te doğa üzerine akıl yürüten filozofların sorusu burada başka bir dille sürüyor: Bir şeyin doğru olduğunu nasıl bilirsin?", "soru": "Bir şeyin doğru olduğuna seni ne ikna eder: görmek mi, birinin söylemesi mi, yoksa bir kanıt mı?"}, "en": {"ad": "Mathematics Village", "alt": "Şirince · room of proofs", "bak": "Look at the stone houses of the village and the quiet study halls on the slope.", "dinle": "Near Şirince, about ten kilometres from Ephesus, there is a village founded by mathematicians. In its summer schools, students work on proofs from morning till evening. The question of the philosophers who reasoned about nature in ancient Ephesus continues here in another language: how do you know that something is true?", "soru": "What convinces you that something is true: seeing it, being told, or a proof?"}}];
+var GM = {"tr": {"gezi": "Gezi", "etiket": "Efes’te gezi", "baslik": "Yapının önünde dur, dinle, mühür al.", "giris": "Ören yerinde yürürken her durakta dört adım var: bak, dinle, düşün ve pasaportuna mühür al. Bir durak 3 ile 5 dakika sürer.", "kapiSoru": "Hangi kapıdan giriyorsun?", "ust": "Üst kapı", "ustAlt": "Güney kapısı · rota yokuş aşağı Liman’a iner", "alt": "Alt kapı", "altAlt": "Kuzey kapısı · rota tiyatrodan yukarı çıkar", "degistir": "Kapıyı değiştir", "rota": "Rotan", "ayri": "Ayrı bir günde", "devam": "Gezmeye devam et", "basla": "İlk durağa git", "pasaport": "Efes Pasaportu", "durak": "Durak", "bak": "Bak", "dinle": "Dinle", "durdur": "Durdur", "dusun": "Düşün", "notYer": "Bir cümle yaz. İsteğe bağlı; yalnızca defterine düşer.", "kaydet": "Deftere yaz", "yazildi": "Defterine yazıldı.", "muhur": "Mühür al", "muhurlu": "Mühürlendi", "muhurBildir": "Mühür pasaportuna basıldı.", "sonraki": "Sıradaki durak", "bitti": "Rota bitti. Pasaportuna bak.", "canlandirma": "Canlandırma · yapay zekâ görseli", "sesYok": "Bu cihaz sesli okumayı desteklemiyor; metni okuyabilirsin.", "cevrimdisi": "Gezmeden önce siteyi bir kez aç; sonra internetsiz de çalışır. Ana ekrana eklersen uygulama gibi açılır.", "gunes": "Güneş modu", "kart": "Pasaport kartını yap", "bos": "Henüz mühür yok. Rotadaki ilk durağa git.", "geriGezi": "Rotaya dön", "onceki": "Önceki", "pasaportAlt": "Efes’ten geçenlerin pasaportu", "kartBaslik": "Efes Pasaportu", "kartDurak": "durak mühürlendi", "acilisBtn": "Efes’te misin? Gezi rehberini aç"}, "en": {"gezi": "Tour", "etiket": "Touring Ephesus", "baslik": "Stop, listen, collect a stamp.", "giris": "As you walk through the site, each stop has four steps: look, listen, think, and stamp your passport. A stop takes 3 to 5 minutes.", "kapiSoru": "Which gate are you entering from?", "ust": "Upper gate", "ustAlt": "South gate · the route runs downhill to the harbour", "alt": "Lower gate", "altAlt": "North gate · the route climbs up from the theatre", "degistir": "Change gate", "rota": "Your route", "ayri": "On another day", "devam": "Continue the tour", "basla": "Go to the first stop", "pasaport": "Ephesus Passport", "durak": "Stop", "bak": "Look", "dinle": "Listen", "durdur": "Stop", "dusun": "Think", "notYer": "Write one sentence. Optional; it only goes into your notebook.", "kaydet": "Save to notebook", "yazildi": "Saved to your notebook.", "muhur": "Collect stamp", "muhurlu": "Stamped", "muhurBildir": "Stamp added to your passport.", "sonraki": "Next stop", "bitti": "Route complete. Look at your passport.", "canlandirma": "Illustration · AI-generated image", "sesYok": "This device cannot read aloud; you can read the text instead.", "cevrimdisi": "Open the site once before your visit; it then works offline. Add it to your home screen to open it like an app.", "gunes": "Sun mode", "kart": "Make your passport card", "bos": "No stamps yet. Go to the first stop on the route.", "geriGezi": "Back to route", "onceki": "Previous", "pasaportAlt": "A passport for those who pass through Ephesus", "kartBaslik": "Ephesus Passport", "kartDurak": "stops stamped", "acilisBtn": "Visiting Ephesus? Open the tour guide"}};
+var DURAK_FOTO = { PANORAMA:function(){ return PANORAMA; }, YAMAC_FOTO:function(){ return YAMAC_FOTO; }, ACILIS_FOTO:function(){ return ACILIS_FOTO; }, TIYATRO_FOTO:function(){ return TIYATRO_FOTO; }, LIMAN_FOTO:function(){ return LIMAN_FOTO; }, ARTEMIS_FOTO:function(){ return ARTEMIS_FOTO; }, MATEMATIK_FOTO:function(){ return MATEMATIK_FOTO; } };
+function gz(){ P.gezi = P.gezi || { dil:'tr', kapi:'', muhur:{}, gunes:false }; P.gezi.muhur = P.gezi.muhur || {}; return P.gezi; }
+function gt(k){ return (GM[gz().dil] || GM.tr)[k]; }
+function dk(d){ return d[gz().dil] || d.tr; }
+function rotaSirasi(){ var ana = DURAKLAR.filter(function(d){ return !d.ayri; }); return gz().kapi === 'alt' ? ana.slice().reverse() : ana; }
+function ayriDuraklar(){ return DURAKLAR.filter(function(d){ return d.ayri; }); }
+function durakBul(id){ for (var i = 0; i < DURAKLAR.length; i++) if (DURAKLAR[i].id === id) return DURAKLAR[i]; return DURAKLAR[0]; }
+function tarihYaz(t, kisa){ if (!/^\d{4}-\d{2}-\d{2}$/.test(t || '')) return t || ''; var d = new Date(t + 'T12:00:00'); return d.toLocaleDateString(gz().dil === 'en' ? 'en-GB' : 'tr-TR', { day:'numeric', month:kisa ? 'short' : 'long', year:'numeric' }); }
+function muhurSayi(){ return rotaSirasi().filter(function(d){ return gz().muhur[d.id]; }).length; }
+function siradaki(){ var r = rotaSirasi(); for (var i = 0; i < r.length; i++) if (!gz().muhur[r[i].id]) return r[i]; return null; }
+var GZ_IK = {
+  pusula:'<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>',
+  ses:'<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+  gunes:'<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+};
+function gzUst(){
+  var g = gz();
+  return '<div class="gz-ust"><div class="dil-sec" role="group" aria-label="Dil / Language"><button type="button" data-gz="dil" data-dil="tr" aria-pressed="' + (g.dil === 'tr') + '">TR</button><button type="button" data-gz="dil" data-dil="en" aria-pressed="' + (g.dil === 'en') + '">EN</button></div>' +
+    '<button type="button" class="gunes-btn" data-gz="gunes" aria-pressed="' + !!g.gunes + '">' + GZ_IK.gunes + h(gt('gunes')) + '</button></div>';
+}
+function muhurHTML(d, kucuk){
+  var t = gz().muhur[d.id];
+  return '<span class="muhur' + (t ? ' basili' : '') + (kucuk ? ' kucuk' : '') + '" aria-hidden="true"><span>' + h(dk(d).ad) + '</span>' + (t && !kucuk ? '<small>' + h(tarihYaz(t, true)) + '</small>' : '') + '</span>';
+}
+function durakSatir(d, no){
+  var t = gz().muhur[d.id];
+  return '<button type="button" class="yol-adim' + (t ? ' bitti' : '') + '" data-durak="' + d.id + '"><span class="yol-no" aria-hidden="true">' + (no || '·') + '</span><span><b>' + h(dk(d).ad) + '</b><small>' + h(t ? gt('muhurlu') + ' · ' + tarihYaz(t) : dk(d).alt) + '</small></span>' + IK.ok + '</button>';
+}
+function ekranGezi(){
+  var g = gz(), r = rotaSirasi(), s = siradaki();
+  var govde;
+  if (!g.kapi){
+    govde = '<div class="kart"><h2>' + h(gt('kapiSoru')) + '</h2>' +
+      '<button type="button" class="satir-btn" style="background:var(--mermer)" data-gz="kapi" data-kapi="ust"><span><b>' + h(gt('ust')) + '</b><small>' + h(gt('ustAlt')) + '</small></span>' + IK.ok + '</button>' +
+      '<button type="button" class="satir-btn" style="background:var(--mermer)" data-gz="kapi" data-kapi="alt"><span><b>' + h(gt('alt')) + '</b><small>' + h(gt('altAlt')) + '</small></span>' + IK.ok + '</button></div>';
+  } else {
+    govde = '<button type="button" class="btn btn-ege tam" data-durak="' + (s ? s.id : r[r.length - 1].id) + '">' + h(muhurSayi() ? gt('devam') : gt('basla')) + IK.ileri + '</button>' +
+      '<div class="yol-kart"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><h2>' + h(gt('rota')) + '</h2><span class="not" style="font-variant-numeric:tabular-nums">' + muhurSayi() + ' / ' + r.length + '</span></div>' +
+      r.map(function(d, i){ return durakSatir(d, i + 1); }).join('') +
+      '<button type="button" class="geri" data-gz="kapi" data-kapi="">' + h(gt('degistir')) + '</button></div>' +
+      '<div class="yol-kart"><h2>' + h(gt('ayri')) + '</h2>' + ayriDuraklar().map(function(d){ return durakSatir(d, ''); }).join('') + '</div>';
+  }
+  return '<section class="ekran">' +
+    '<div class="ic" style="padding-top:28px">' + gzUst() +
+    '<div class="etiket">' + h(gt('etiket')) + '</div><h1>' + h(gt('baslik')) + '</h1><p class="soluk">' + h(gt('giris')) + '</p>' +
+    govde +
+    '<button type="button" class="bugun-btn" data-git="pasaport"><span><b>' + h(gt('pasaport')) + '</b><small>' + muhurSayi() + ' / ' + r.length + ' · ' + h(gt('pasaportAlt')) + '</small></span>' + IK.ok + '</button>' +
+    '<p class="not">' + h(gt('cevrimdisi')) + '</p>' +
+    '<div style="height:12px"></div></div><div class="bosluk"></div>' + menu('gezi') + '</section>';
+}
+function ekranDurak(){
+  var d = durakBul(gecici.durak), m = dk(d), g = gz(), r = rotaSirasi();
+  var i = r.indexOf(d), no = i === -1 ? '' : (i + 1) + ' / ' + r.length;
+  var sonraki = i !== -1 && i < r.length - 1 ? r[i + 1] : null, onceki = i > 0 ? r[i - 1] : null;
+  var t = g.muhur[d.id];
+  var adim = function(n, baslik, ic){ return '<div class="kart adim"><div class="adim-bas"><span class="yol-no" aria-hidden="true">' + n + '</span><h2>' + h(baslik) + '</h2></div>' + ic + '</div>'; };
+  return '<section class="ekran">' +
+    '<div role="img" aria-label="' + h(m.ad) + '" style="position:relative;height:250px;overflow:hidden;background:#1A1410"><div style="position:absolute;inset:0;background-image:url(' + DURAK_FOTO[d.foto]() + ');background-size:cover;background-position:center"></div><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,24,34,.55) 0%,rgba(17,24,34,0) 40%,rgba(17,24,34,.65) 100%)"></div>' +
+    '<span class="foto-not">' + h(gt('canlandirma')) + '</span>' +
+    '<div style="position:absolute;left:20px;top:20px"><button type="button" class="geri" style="color:#fff" data-git="gezi">' + IK.geri + h(gt('geriGezi')) + '</button></div></div>' +
+    '<div class="ic" style="padding-top:18px">' + gzUst() +
+    '<div class="etiket">' + h(d.ayri ? gt('ayri') : gt('durak') + ' ' + no) + '</div><h1>' + h(m.ad) + '</h1><p class="soluk">' + h(m.alt) + '</p>' +
+    adim(1, gt('bak'), '<p>' + h(m.bak) + '</p>') +
+    adim(2, gt('dinle'), '<p class="ses-metin">' + h(m.dinle) + '</p><div class="eylemler"><button type="button" class="btn btn-okra" data-gz="seslendir" id="ses-btn">' + GZ_IK.ses + h(gt('dinle')) + '</button></div>' + ('speechSynthesis' in window ? '' : '<p class="not">' + h(gt('sesYok')) + '</p>')) +
+    adim(3, gt('dusun'), '<p class="ses" style="padding:0"><span style="font-family:var(--display);font-style:italic;font-size:21px;line-height:1.35">' + h(m.soru) + '</span></p><label for="gz-not" class="not">' + h(gt('notYer')) + '</label><textarea id="gz-not"></textarea><div class="eylemler"><button type="button" class="btn btn-hayalet" data-gz="not">' + h(gt('kaydet')) + '</button>' + sozBtn(m.soru, (g.dil === 'en' ? 'Ephesus · ' : 'Efes · ') + m.ad, d.foto, g.dil === 'en' ? 'Make a card' : 'Kart yap') + '</div><p class="not" id="gz-durum" role="status"></p>') +
+    adim(4, gt('muhur'), '<div style="display:flex;align-items:center;gap:16px">' + muhurHTML(d) + (t ? '<p><b>' + h(gt('muhurlu')) + '</b><br><span class="not">' + h(tarihYaz(t)) + '</span></p>' : '<button type="button" class="btn btn-ege" style="flex:1" data-gz="muhur">' + h(gt('muhur')) + '</button>') + '</div>') +
+    (sonraki ? '<button type="button" class="bugun-btn" data-durak="' + sonraki.id + '"><span><small>' + h(gt('sonraki')) + '</small><b>' + h(dk(sonraki).ad) + '</b></span>' + IK.ok + '</button>' : (i !== -1 ? '<button type="button" class="bugun-btn" data-git="pasaport"><span><b>' + h(gt('bitti')) + '</b></span>' + IK.ok + '</button>' : '')) +
+    (onceki ? '<button type="button" class="geri" data-durak="' + onceki.id + '">' + IK.geri + h(gt('onceki') + ': ' + dk(onceki).ad) + '</button>' : '') +
+    '<div style="height:12px"></div></div><div class="bosluk"></div>' + menu('gezi') + '</section>';
+}
+function ekranPasaport(){
+  var r = rotaSirasi(), a = ayriDuraklar(), n = muhurSayi();
+  return '<section class="ekran">' +
+    '<div class="ic" style="padding-top:28px">' + geri('gezi', gt('geriGezi')) + gzUst() +
+    '<div class="etiket">ΕΦΕΣΟΣ</div><h1>' + h(gt('pasaport')) + '</h1><p class="soluk">' + h(gt('pasaportAlt')) + '</p><p class="kandil yanik"><b>' + n + ' / ' + r.length + '</b></p>' +
+    '<div class="pasaport">' + r.concat(a).map(function(d){ return '<button type="button" data-durak="' + d.id + '" aria-label="' + h(dk(d).ad + (gz().muhur[d.id] ? ', ' + gt('muhurlu') : '')) + '">' + muhurHTML(d) + '</button>'; }).join('') + '</div>' +
+    (n ? '<button type="button" class="btn btn-okra tam" data-gz="kart">' + IK.paylas + h(gt('kart')) + '</button>' : '<p class="not">' + h(gt('bos')) + '</p>') +
+    '<div style="height:12px"></div></div><div class="bosluk"></div>' + menu('gezi') + '</section>';
+}
+/* yapay sesle dinleme: tarayıcının kendi sesi, internetsiz de çalışır */
+var gzSesCalisiyor = false;
+function sesDurdur(){ try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch(e){} gzSesCalisiyor = false; var b = $('ses-btn'); if (b) b.innerHTML = GZ_IK.ses + h(gt('dinle')); }
+function seslendir(){
+  if (!('speechSynthesis' in window)){ bildir(gt('sesYok')); return; }
+  if (gzSesCalisiyor){ sesDurdur(); return; }
+  var d = durakBul(gecici.durak), dil = gz().dil, u = new SpeechSynthesisUtterance(dk(d).dinle);
+  u.lang = dil === 'en' ? 'en-GB' : 'tr-TR'; u.rate = 0.95;
+  try { var sesler = speechSynthesis.getVoices().filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf(dil) === 0; }); if (sesler.length) u.voice = sesler[0]; } catch(e){}
+  u.onend = u.onerror = function(){ gzSesCalisiyor = false; var b = $('ses-btn'); if (b) b.innerHTML = GZ_IK.ses + h(gt('dinle')); };
+  speechSynthesis.cancel(); speechSynthesis.speak(u); gzSesCalisiyor = true;
+  var b = $('ses-btn'); if (b) b.innerHTML = GZ_IK.ses + h(gt('durdur'));
+}
+function muhurBas(){
+  var d = durakBul(gecici.durak); if (gz().muhur[d.id]) return;
+  gz().muhur[d.id] = gunAnahtar();
+  kaydet(); sesDurdur(); ciz(); bildir(gt('muhurBildir')); adimAt();
+}
+function gzNot(){
+  var a = $('gz-not'), m = (a && a.value || '').trim(); if (!m) return;
+  var d = durakBul(gecici.durak);
+  P.notlar.unshift({ tarih:new Date().toLocaleDateString('tr-TR'), yer:'Gezi · ' + dk(d).ad, metin:m }); P.notlar = P.notlar.slice(0, 40); kaydet();
+  a.value = ''; $('gz-durum').innerHTML = h(gt('yazildi')) + ' ' + sozBtn(m, (gz().dil === 'en' ? 'Ephesus · ' : 'Efes · ') + dk(d).ad, d.foto, gz().dil === 'en' ? 'Make a card' : 'Kart yap');
+}
+async function pasaportKartiCiz(){
+  var W = 1080, H = 1350, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  var c = cv.getContext('2d'), r = rotaSirasi(), a = ayriDuraklar(), hepsi = r.concat(a), en = gz().dil === 'en';
+  try { await Promise.all([document.fonts.load('italic 400 64px "EB Garamond"'), document.fonts.load('600 64px "EB Garamond"')]); } catch(e){}
+  c.fillStyle = '#1A1410'; c.fillRect(0, 0, W, H);
+  try { var im = await resimYukle(ACILIS_FOTO); var o = Math.max(W / im.width, H / im.height); c.drawImage(im, (W - im.width * o) / 2, (H - im.height * o) / 2, im.width * o, im.height * o); } catch(e){}
+  c.fillStyle = 'rgba(17,22,30,.84)'; c.fillRect(0, 0, W, H);
+  var X = 88;
+  c.fillStyle = '#E3B38A'; c.font = '600 30px "EB Garamond", Georgia, serif'; if ('letterSpacing' in c) c.letterSpacing = '10px'; c.fillText('ΕΦΕΣΟΣ', X, 130); if ('letterSpacing' in c) c.letterSpacing = '0px';
+  c.fillStyle = '#F4F1EA'; c.font = '600 84px "EB Garamond", Georgia, serif'; c.fillText(gt('kartBaslik'), X, 220);
+  c.fillStyle = '#D9CFC0'; c.font = 'italic 400 38px "EB Garamond", Georgia, serif'; c.fillText(muhurSayi() + ' / ' + r.length + ' ' + gt('kartDurak'), X, 278);
+  var R = 96, cx0 = 300, cx1 = 780, y0 = 400, dy = 215;
+  hepsi.forEach(function(d, i){
+    var cx = i % 2 ? cx1 : cx0, cy = y0 + Math.floor(i / 2) * dy, t = gz().muhur[d.id];
+    c.save(); c.translate(cx, cy); c.rotate((i % 3 - 1) * 0.08);
+    c.beginPath(); c.arc(0, 0, R, 0, Math.PI * 2);
+    if (t){ c.fillStyle = 'rgba(160,86,31,.28)'; c.fill(); c.lineWidth = 6; c.strokeStyle = '#E3B38A'; c.setLineDash([]); c.stroke(); c.beginPath(); c.arc(0, 0, R - 14, 0, Math.PI * 2); c.lineWidth = 2; c.stroke(); }
+    else { c.lineWidth = 3; c.strokeStyle = 'rgba(244,241,234,.28)'; c.setLineDash([10, 10]); c.stroke(); c.setLineDash([]); }
+    c.textAlign = 'center'; c.fillStyle = t ? '#F4F1EA' : 'rgba(244,241,234,.4)'; c.font = '600 30px "EB Garamond", Georgia, serif';
+    var sat = satirla(c, dk(d).ad, R * 1.6).slice(0, 3); sat.forEach(function(l, k){ c.fillText(l, 0, (k - (sat.length - 1) / 2) * 34 + (t ? -6 : 8)); });
+    if (t){ c.fillStyle = '#E3B38A'; c.font = 'italic 400 21px "EB Garamond", Georgia, serif'; c.fillText(tarihYaz(t, true), 0, (sat.length / 2) * 34 + 18); }
+    c.restore();
+  });
+  c.textAlign = 'left'; c.fillStyle = '#F4F1EA'; c.font = '600 56px "EB Garamond", Georgia, serif'; c.fillText('Efes', X, H - 96);
+  c.fillStyle = '#D9CFC0'; c.font = 'italic 400 30px "EB Garamond", Georgia, serif'; c.fillText(en ? 'Philosophy in the ancient city: read, debate, reflect.' : 'Antik kentte felsefe: oku, tartış, düşün.', X, H - 54);
+  c.textAlign = 'right'; c.fillStyle = '#E3B38A'; c.font = '600 28px "EB Garamond", Georgia, serif'; c.fillText(location.host || 'efes', W - X, H - 96);
+  return cv;
+}
+
 /* ---------- başlat ---------- */
+if ('serviceWorker' in navigator && location.protocol !== 'file:') { window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
 tiyatroSifirla();
 ciz();
 

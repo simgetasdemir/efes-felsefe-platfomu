@@ -321,6 +321,19 @@ details.koyu-alinti cite{color:#D9CFC0}
 @keyframes halka{to{transform:rotate(360deg)}}
 .halka{transform-box:fill-box;transform-origin:center;animation:halka 30s linear infinite}
 [hidden]{display:none!important}
+/* söz kartı penceresi */
+#kart-pencere{position:fixed;inset:0;z-index:30;background:rgba(8,12,18,.86);display:flex;align-items:center;justify-content:center;padding:20px}
+#kart-pencere .kp-ic{width:min(400px,100%);display:flex;flex-direction:column;gap:12px}
+#kart-pencere img{width:100%;max-height:68vh;object-fit:contain;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5);background:#1A1410}
+#kart-pencere .kp-yuk{aspect-ratio:4/5;border-radius:14px;background:#1A1410;display:flex;align-items:center;justify-content:center;color:#E3DACB}
+#kart-pencere .eylemler{justify-content:center}
+#kart-pencere .kp-not{color:#C3CEDA;font-size:14.5px;text-align:center}
+/* kandil (günlük seri) */
+.kandil{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:5px 12px 5px 8px;border-radius:999px;background:#fff;border:1px solid var(--cizgi);font-size:15px;color:var(--murekkep)}
+.kandil b{font-variant-numeric:tabular-nums}
+.kandil.sondu{color:var(--soluk)}
+.kandil svg{flex:0 0 auto}
+.kandil.yanik .kalev{transform-box:fill-box;transform-origin:50% 100%;animation:alev 1.6s ease-in-out infinite}
 /* açılış: üç adım */
 .uclu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .uclu div{display:flex;flex-direction:column;gap:2px;padding:10px 10px 11px;border-radius:14px;background:rgba(20,16,12,.55);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
@@ -515,7 +528,7 @@ var KONULAR = [
 var MASALAR = ['Yapay zekâ düşünebilir mi?', 'Mutluluk öğretilebilir mi?', 'Şehre borcumuz var mı?'];
 
 /* ---------- durum ---------- */
-var VARSAYILAN = { ad:'', limanTamam:false, sorular:[], tartisma:0, guclu:0, okunan:{}, notlar:[], sessizlik:0 };
+var VARSAYILAN = { ad:'', limanTamam:false, sorular:[], tartisma:0, guclu:0, okunan:{}, notlar:[], sessizlik:0, seri:{ son:'', gun:0, rekor:0 } };
 var P = JSON.parse(JSON.stringify(VARSAYILAN));
 var kayit = { db:null, uid:null, yuklendi:false, ad:'' };
 var sample = null, katipHazir = false;
@@ -825,6 +838,94 @@ var KILITLER = {
   matematik:{ kosul:function(){ return P.guclu >= 3; }, sart:'Filozof olunca açılır', mesaj:function(){ return 'Matematik Köyü Filozoflara açılır: Tiyatro’da hakemin güçlü bulduğu üç itiraz kur. Şu an: ' + Math.min(P.guclu, 3) + ' / 3.'; } }
 };
 function kilitli(hedef){ var k = KILITLER[hedef]; return k && !k.kosul() ? k : null; }
+/* ---------- kandil: günlük seri ---------- */
+function gunAnahtar(d){ d = d || new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+function seriDurum(){
+  var sr = P.seri || { son:'', gun:0, rekor:0 };
+  var bugun = gunAnahtar(), dun = gunAnahtar(new Date(Date.now() - 86400000));
+  return { gun:(sr.son === bugun || sr.son === dun) ? sr.gun : 0, bugunYandi:sr.son === bugun, rekor:sr.rekor || 0 };
+}
+function adimAt(){
+  var sr = P.seri = P.seri || { son:'', gun:0, rekor:0 };
+  var bugun = gunAnahtar(); if (sr.son === bugun) return;
+  sr.gun = (sr.son === gunAnahtar(new Date(Date.now() - 86400000))) ? sr.gun + 1 : 1;
+  sr.son = bugun; sr.rekor = Math.max(sr.rekor || 0, sr.gun); kaydet();
+  bildir(sr.gun === 1 ? 'Kandilini yaktın. Yarın da bir adım at, sönmesin.' : 'Kandilin ' + sr.gun + ' gündür yanıyor. Yarın da gel.');
+}
+function kandilHTML(){
+  var d = seriDurum();
+  var ikon = '<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24"><path d="M3 15c0 2.5 4 4 9 4s9-1.5 9-4c-2 .8-5 1.2-9 1.2S5 15.8 3 15z" fill="#A0561F"/><path d="M12 16c-4 0-7-.6-8.5-1.6C5 13 8 12 12 12s7 1 8.5 2.4C19 15.4 16 16 12 16z" fill="#C9773A"/><path class="kalev" d="M12 4c1.8 2.3 2.6 4 2.6 5.4A2.6 2.6 0 0 1 12 12a2.6 2.6 0 0 1-2.6-2.6C9.4 8 10.2 6.3 12 4z" fill="' + (d.bugunYandi ? '#F2A33A' : '#B9B2A5') + '"/></svg>';
+  var metin = d.bugunYandi ? '<b>' + d.gun + '</b> gündür yanıyor' : (d.gun ? '<b>' + d.gun + '</b> gün · bugün bir adım at' : 'Kandilini yak: bugün bir adım at');
+  return '<span class="kandil' + (d.bugunYandi ? ' yanik' : ' sondu') + '">' + ikon + '<span>' + metin + '</span></span>';
+}
+
+/* ---------- söz kartı: paylaşılabilir görsel ---------- */
+var KART_FOTO = { fragman:function(){ return ACILIS_FOTO; }, tiyatro:function(){ return TIYATRO_FOTO; }, artemis:function(){ return ARTEMIS_FOTO; } };
+function resimYukle(src){ return new Promise(function(ok, no){ var i = new Image(); i.onload = function(){ ok(i); }; i.onerror = no; i.src = src; }); }
+function satirla(c, metin, gen){
+  var kelime = metin.split(/\s+/), satir = [], s = '';
+  kelime.forEach(function(k){ var d = s ? s + ' ' + k : k; if (c.measureText(d).width > gen && s){ satir.push(s); s = k; } else s = d; });
+  if (s) satir.push(s); return satir;
+}
+async function sozKartiCiz(metin, kaynak, tur){
+  var W = 1080, H = 1350, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  var c = cv.getContext('2d');
+  try { await Promise.all([document.fonts.load('italic 400 64px "EB Garamond"'), document.fonts.load('600 64px "EB Garamond"')]); } catch(e){}
+  c.fillStyle = '#1A1410'; c.fillRect(0, 0, W, H);
+  try {
+    var im = await resimYukle((KART_FOTO[tur] || KART_FOTO.fragman)());
+    var o = Math.max(W / im.width, H / im.height), iw = im.width * o, ih = im.height * o;
+    c.drawImage(im, (W - iw) / 2, (H - ih) / 2, iw, ih);
+  } catch(e){}
+  var g = c.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, 'rgba(17,22,30,.82)'); g.addColorStop(.3, 'rgba(17,22,30,.55)'); g.addColorStop(.62, 'rgba(17,22,30,.7)'); g.addColorStop(1, 'rgba(14,12,10,.96)');
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
+  var X = 88, gen = W - X * 2;
+  c.fillStyle = '#E3B38A'; c.font = '600 30px "EB Garamond", Georgia, serif';
+  if ('letterSpacing' in c) c.letterSpacing = '10px';
+  c.fillText('ΕΦΕΣΟΣ', X, 128);
+  if ('letterSpacing' in c) c.letterSpacing = '0px';
+  var boy = 76, satir;
+  for (; boy >= 40; boy -= 4){ c.font = 'italic 400 ' + boy + 'px "EB Garamond", Georgia, serif'; satir = satirla(c, metin, gen); if (satir.length * boy * 1.28 <= 640) break; }
+  var sa = boy * 1.28, ust = 700 - (satir.length * sa) / 2 + boy * .4;
+  c.fillStyle = '#F4F1EA'; c.shadowColor = 'rgba(0,0,0,.45)'; c.shadowBlur = 18;
+  satir.forEach(function(l, i){ c.fillText(l, X, ust + i * sa); });
+  c.shadowBlur = 0;
+  c.fillStyle = '#E3B38A'; c.fillRect(X, ust + satir.length * sa - boy * .2, 64, 3);
+  c.font = '600 34px "EB Garamond", Georgia, serif';
+  satirla(c, kaynak, gen).slice(0, 2).forEach(function(l, i){ c.fillText(l, X, ust + satir.length * sa + 46 + i * 44); });
+  c.fillStyle = '#F4F1EA'; c.font = '600 56px "EB Garamond", Georgia, serif'; c.fillText('Efes', X, H - 120);
+  c.fillStyle = '#D9CFC0'; c.font = 'italic 400 32px "EB Garamond", Georgia, serif'; c.fillText('Antik kentte felsefe: oku, tartış, düşün.', X, H - 74);
+  c.textAlign = 'right'; c.fillStyle = '#E3B38A'; c.font = '600 28px "EB Garamond", Georgia, serif'; c.fillText(location.host || 'efes', W - X, H - 120);
+  return cv;
+}
+function kartKapat(){ var k = $('kart-pencere'); if (k) k.remove(); }
+async function sozKarti(metin, kaynak, tur){
+  kartKapat();
+  var k = document.createElement('div'); k.id = 'kart-pencere'; k.setAttribute('role', 'dialog'); k.setAttribute('aria-modal', 'true'); k.setAttribute('aria-label', 'Söz kartı');
+  k.innerHTML = '<div class="kp-ic"><div class="kp-yuk">Kart hazırlanıyor…</div></div>';
+  k.addEventListener('click', function(e){ if (e.target === k || e.target.closest('[data-kp="kapat"]')) kartKapat(); });
+  document.body.appendChild(k);
+  var cv = await sozKartiCiz(metin, kaynak, tur);
+  var blob = await new Promise(function(ok){ cv.toBlob(ok, 'image/png'); });
+  var dosya = null; try { dosya = new File([blob], 'efes-soz.png', { type:'image/png' }); } catch(e){}
+  var dosyaPaylas = !!(dosya && navigator.canShare && navigator.canShare({ files:[dosya] }));
+  var url = URL.createObjectURL(blob);
+  if (!$('kart-pencere')) return;
+  k.querySelector('.kp-ic').innerHTML = '<img alt="' + h('Söz kartı: ' + metin) + '" src="' + url + '">' +
+    '<div class="eylemler">' + (dosyaPaylas ? '<button type="button" class="btn btn-okra" data-kp="paylas">' + IK.paylas + 'Paylaş</button>' : '') +
+    '<a class="btn ' + (dosyaPaylas ? 'btn-hayalet' : 'btn-okra') + '" style="text-decoration:none' + (dosyaPaylas ? ';color:var(--mermer);border-color:#36495F' : '') + '" href="' + url + '" download="efes-soz.png">İndir</a>' +
+    '<button type="button" class="btn btn-hayalet" style="color:var(--mermer);border-color:#36495F" data-kp="kapat">Kapat</button></div>' +
+    '<p class="kp-not">Instagram hikâyesine ya da WhatsApp durumuna uygun boyutta.</p>';
+  var pb = k.querySelector('[data-kp="paylas"]');
+  if (pb) pb.addEventListener('click', function(){ navigator.share({ files:[dosya], title:'Efes', text:metin + '\n\n' + location.origin }).catch(function(){}); });
+  var kb = k.querySelector('[data-kp="kapat"]'); if (kb) kb.focus();
+}
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') kartKapat(); });
+function sozBtn(metin, kaynak, tur, etiket){
+  return '<button type="button" class="paylas" data-eylem="sozKarti" data-metin="' + h(metin) + '" data-kaynak="' + h(kaynak) + '" data-tur="' + tur + '">' + IK.paylas + h(etiket || 'Kart yap') + '</button>';
+}
+
 function paylas(metin){
   var url = location.origin + location.pathname;
   var tam = metin + '\n\nEfes’te sen de düşün: ' + url;
@@ -908,7 +1009,7 @@ function ekranHarita(){
   var oda = odaBul(onerilenOda());
   function pin(x, y, ad, alt, hedef, vurgu){ return '<button type="button" class="pin' + (vurgu ? ' vurgu' : '') + '" style="left:' + (x/342*100).toFixed(1) + '%;top:' + (y/360*100).toFixed(1) + '%" data-git="' + hedef + '"><b>' + ad + '</b><small>' + alt + '</small></button>'; }
   return '<section class="ekran">' +
-  '<div class="ic" style="padding-top:44px"><div class="etiket">ΕΦΕΣΟΣ · Efes</div><h1>' + (gorunenAd() ? 'Hoş geldin, ' + h(gorunenAd()) : 'Şehre hoş geldin') + '</h1><p class="soluk">Bir yapıya gir, bir düşünceye katıl.</p>' +
+  '<div class="ic" style="padding-top:44px"><div class="etiket">ΕΦΕΣΟΣ · Efes</div><h1>' + (gorunenAd() ? 'Hoş geldin, ' + h(gorunenAd()) : 'Şehre hoş geldin') + '</h1><p class="soluk">Bir yapıya gir, bir düşünceye katıl.</p>' + kandilHTML() +
   panoramaHTML() +
   '<p class="not" style="margin-top:-6px">Bir yapıya dokun, içine gir.</p>' +
   '<button type="button" class="bugun-btn" data-git="bugun"><span><b>Bugün Efes’te</b><small>Oku, tartış, düşün · günün fragmanı · Efes’in zamanı</small></span>' + IK.ok + '</button>' +
@@ -920,9 +1021,9 @@ function ekranBugun(){
   var gun = Math.floor(Date.now() / 86400000) % FRAGMANLAR.length;
   var f = FRAGMANLAR[gun];
   return '<section class="ekran">' +
-  '<div class="ic" style="padding-top:36px">' + geri('harita') + '<div class="etiket">ΕΦΕΣΟΣ · Bugün</div><h1>Bugün Efes’te</h1>' +
+  '<div class="ic" style="padding-top:36px">' + geri('harita') + '<div class="etiket">ΕΦΕΣΟΣ · Bugün</div><h1>Bugün Efes’te</h1>' + kandilHTML() +
   bugununYolu() +
-  '<div class="kart" style="background:var(--murekkep);color:var(--mermer)"><div class="etiket" style="color:var(--okra)">Günün fragmanı · Herakleitos ' + f[0] + '</div>' + alinti('Fragmanı aç', '“' + f[1] + '”', 'Herakleitos, ' + f[0], true) + '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><button type="button" class="geri" style="color:var(--okra);font-weight:600" data-git="artemis">Bunun üzerine düşün' + IK.ok + '</button><button type="button" class="paylas" data-eylem="paylas" data-metin="' + h('“' + f[1] + '” (Herakleitos, ' + f[0] + ')') + '">' + IK.paylas + 'Paylaş</button></div></div>' +
+  '<div class="kart" style="background:var(--murekkep);color:var(--mermer)"><div class="etiket" style="color:var(--okra)">Günün fragmanı · Herakleitos ' + f[0] + '</div>' + alinti('Fragmanı aç', '“' + f[1] + '”', 'Herakleitos, ' + f[0], true) + '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><button type="button" class="geri" style="color:var(--okra);font-weight:600" data-git="artemis">Bunun üzerine düşün' + IK.ok + '</button>' + sozBtn('“' + f[1] + '”', 'Herakleitos, ' + f[0], 'fragman', 'Kart yap ve paylaş') + '</div></div>' +
   zamanSeridi() +
   '<div style="height:12px"></div></div><div class="bosluk"></div>' + menu('harita') + '</section>';
 }
@@ -1020,7 +1121,7 @@ function ekranArtemis(){
   '<div class="sahne"><div role="img" aria-label="Gün batımında Artemis Tapınağı’ndan ayakta kalan tek sütun; arkada Ayasuluk tepesi" style="position:relative;height:320px;overflow:hidden"><div class="kenburns" style="position:absolute;inset:0;background-image:url(' + ARTEMIS_FOTO + ');background-size:cover;background-position:40% 35%"></div><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,36,54,0) 60%,rgba(26,36,54,1) 100%)"></div><svg aria-hidden="true" viewBox="0 0 390 320" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><circle class="nefes" id="nefes" cx="142" cy="128" r="96" fill="#FFD9A0" opacity="' + (a.calisiyor ? .3 : .08) + '"/><g fill="#FFE2B0"><circle class="ates" cx="70" cy="250" r="2"/><circle class="ates a2" cx="230" cy="262" r="1.6"/><circle class="ates a3" cx="300" cy="240" r="2"/><circle class="ates" style="animation-delay:5s" cx="120" cy="270" r="1.5"/></g></svg></div><div id="sure" aria-live="polite" style="position:absolute;left:0;right:0;top:42%;text-align:center"' + (a.calisiyor ? '' : ' hidden') + '><span style="font-family:var(--display);font-size:34px;font-weight:600;background:var(--mermer);color:var(--murekkep);padding:0 12px;border-radius:10px;font-variant-numeric:tabular-nums" id="sure-yazi"></span></div></div>' +
   '<div class="ic" style="padding-top:14px">' + geri('harita') +
   '<div class="etiket">Sessiz düşünme</div><h1>Artemis Tapınağı</h1><p class="soluk">Dünyanın yedi harikasından biriydi; bugün tek bir sütunu ayakta. Burada kimseyle konuşmazsın, sadece düşünürsün.</p>' + hikayeBlok('artemis') +
-  '<div class="kart"><div class="etiket">Bugünün tek sorusu · Herakleitos ' + f[0] + '</div>' + alinti('Sözü aç', '“' + f[1] + '”', 'Herakleitos, ' + f[0], true) + '</div>' +
+  '<div class="kart"><div class="etiket">Bugünün tek sorusu · Herakleitos ' + f[0] + '</div>' + alinti('Sözü aç', '“' + f[1] + '”', 'Herakleitos, ' + f[0], true) + sozBtn('“' + f[1] + '”', 'Herakleitos, ' + f[0], 'artemis') + '</div>' +
   '<label for="dusunce" class="soluk">Düşünceni yaz. Bunu kimse görmez, sadece senin defterine düşer.</label><textarea id="dusunce"></textarea>' +
   '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-okra" style="flex:1" data-eylem="sessizlik" id="sessiz-btn">' + (a.calisiyor ? 'Sessizliği bitir' : 'Beş dakika düşün') + '</button><button type="button" class="btn btn-hayalet" data-eylem="defter">Defterime yaz</button></div>' +
   '<p class="not" id="artemis-durum">' + h(kayitNotu()) + '</p>' +
@@ -1053,7 +1154,7 @@ function ekranProfil(){
     '<div class="kart"><h2>Açılacak yapılar</h2>' + [['agora','Agora'],['yamac','Yamaçevler'],['matematik','Matematik Köyü']].map(function(k){ var kl = kilitli(k[0]); return '<p style="display:flex;justify-content:space-between;gap:10px"><b>' + k[1] + '</b><span class="not">' + (kl ? KILITLER[k[0]].sart : 'Açık ✓') + '</span></p>'; }).join('') + '</div>' +
     '<div class="kart"><h2>Şehirdeki yerin</h2><div class="basamaklar">' + RUTBELER.map(function(x, i){ return '<div class="' + (i <= r ? 'dolu' : '') + (i === r ? ' simdi' : '') + '"><i style="animation-delay:' + (i*0.3) + 's"></i>' + x + '</div>'; }).join('') + '</div>' +
     '<p class="not">' + ['Liman’da sorunu seçince Metoikos olursun.', 'Bir bölüm oku ya da Tiyatro’da bir argüman sun: Yurttaş olursun.', 'Filozof olmak için Tiyatro’da hakemin güçlü bulduğu üç itiraz kur. Şu an: ' + Math.min(P.guclu,3) + ' / 3.', 'Filozofsun. Şehrin her yapısı sana açık.'][r] + '</p></div>' +
-    '<div class="sayilar"><div class="sayi"><b>' + P.tartisma + '</b><span>Tiyatro’da sunulan argüman</span></div><div class="sayi"><b>' + P.guclu + '</b><span>Güçlü bulunan itiraz</span></div><div class="sayi"><b>' + okunanSayi() + '</b><span>Okunan bölüm</span></div><div class="sayi"><b>' + P.sessizlik + '</b><span>Tamamlanan sessizlik</span></div></div>' +
+    '<div class="sayilar"><div class="sayi"><b>' + P.tartisma + '</b><span>Tiyatro’da sunulan argüman</span></div><div class="sayi"><b>' + P.guclu + '</b><span>Güçlü bulunan itiraz</span></div><div class="sayi"><b>' + okunanSayi() + '</b><span>Okunan bölüm</span></div><div class="sayi"><b>' + P.sessizlik + '</b><span>Tamamlanan sessizlik</span></div><div class="sayi"><b>' + seriDurum().gun + '</b><span>Günlük kandil serisi</span></div><div class="sayi"><b>' + seriDurum().rekor + '</b><span>En uzun seri</span></div></div>' +
     '<h2>Nişanlar</h2><div class="nisanlar">' + nisanlar.map(function(n){ return '<div class="nisan' + (n[1] ? '' : ' kapali') + '"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A0561F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="' + n[2] + '"/></svg>' + n[0] + '</div>'; }).join('') + '</div>' +
     '<div class="kart"><label for="ad-alan">Şehirdeki adın</label><div style="display:flex;gap:8px"><input type="text" id="ad-alan" value="' + h(P.ad || '') + '" placeholder="Örneğin Antigone"><button type="button" class="btn btn-ege" data-eylem="adKaydet">Kaydet</button></div><p class="not" id="ad-durum">Şehirde bu adla anılırsın.</p></div>' +
     '<details class="alinti"><summary><span>Defterin · yalnızca sana açık</span><span class="ac">Aç</span></summary><div class="defter" style="margin-top:10px">' + (P.notlar.length ? P.notlar.slice(0, 6).map(function(n){ return '<div class="kayit"><small>' + h(n.tarih) + ' · ' + h(n.yer) + '</small>' + h(n.metin) + '</div>'; }).join('') : '<p class="not">Henüz bir not yok. Artemis Tapınağı’nda ya da okuma odalarında yazdıkların burada birikir.</p>') + '</div></details>' +
@@ -1158,9 +1259,9 @@ async function tiyatroGonder(){
     var son = t.turlar[t.turlar.length - 1];
     son.hakem = { guc:guc, not:String(hk.not || ''), hata:String(hk.hata || '').trim(), soru:String(hk.soru || '').trim() };
     if (guc === 'güçlü'){ t.puan.g++; P.guclu++; } else if (guc === 'zayıf') t.puan.z++; else t.puan.o++;
-    P.tartisma++; kaydet();
+    P.tartisma++; kaydet(); adimAt();
     if (c && typeof c.karsi === 'string' && c.karsi.trim()) t.turlar.push({ kim:'karsi', metin:c.karsi.trim() });
-    if ($('tiyatro-durum')) $('tiyatro-durum').textContent = guc === 'güçlü' ? 'Güçlü bir itiraz! Filozof yoluna işlendi.' : 'Sıra sende.';
+    if ($('tiyatro-durum')) { if (guc === 'güçlü') $('tiyatro-durum').innerHTML = 'Güçlü bir itiraz! Filozof yoluna işlendi. ' + sozBtn(son.metin, 'Büyük Tiyatro’da ' + rakip + '’e karşı · hakem: güçlü', 'tiyatro', 'İtirazını kart yap'); else $('tiyatro-durum').textContent = 'Sıra sende.'; }
   } catch (e) {
     var geriAl = t.turlar.pop();
     if (e.code !== 'cancelled'){ if ($('arguman') && geriAl) $('arguman').value = geriAl.metin; if ($('tiyatro-durum')) { $('tiyatro-durum').textContent = hataMetni(e); $('tiyatro-durum').className = 'uyari'; } }
@@ -1265,7 +1366,7 @@ function sessizlik(){
   a.sayac = setInterval(function(){
     a.kalan--;
     if (a.kalan <= 0){
-      clearInterval(a.sayac); a.calisiyor = false; a.kalan = 300; P.sessizlik++; kaydet();
+      clearInterval(a.sayac); a.calisiyor = false; a.kalan = 300; P.sessizlik++; kaydet(); adimAt();
       if ($('artemis-durum')) $('artemis-durum').textContent = 'Beş dakikalık sessizlik tamamlandı. Düşünceni defterine yazmayı unutma.';
     }
     if (gecici.ekran === 'artemis') sureCiz();
@@ -1277,7 +1378,8 @@ function defter(){
   var f = FRAGMANLAR[Math.floor(Date.now() / 86400000) % FRAGMANLAR.length];
   P.notlar.unshift({ tarih:new Date().toLocaleDateString('tr-TR'), yer:'Artemis · ' + f[0], metin:metin });
   P.notlar = P.notlar.slice(0, 40); kaydet();
-  alan.value = ''; $('artemis-durum').textContent = 'Defterine yazıldı. Yurttaşlık ekranında görebilirsin.';
+  alan.value = ''; adimAt();
+  $('artemis-durum').innerHTML = 'Defterine yazıldı. Yurttaşlık ekranında görebilirsin. ' + sozBtn(metin, 'Artemis’te düşündüm · Herakleitos ' + f[0] + ' üzerine', 'artemis', 'Düşünceni kart yap');
 }
 
 /* ---------- olaylar ---------- */
@@ -1311,13 +1413,14 @@ app.addEventListener('click', function(e){
     else if (ey === 'tiyatroGonder') tiyatroGonder();
     else if (ey === 'tutanak') tutanakYaz();
     else if (ey === 'odaGonder'){ var a = $('oda-yazi'), m = (a.value || '').trim(); if (m){ a.value = ''; odaSor(m, m); } }
-    else if (ey === 'okundu'){ var lst = P.okunan[gecici.oda] = P.okunan[gecici.oda] || []; if (lst.indexOf(gecici.bolum) === -1){ lst.push(gecici.bolum); kaydet(); } var o = odaBul(gecici.oda); if (gecici.bolum < o.bolumler.length - 1) gecici.bolum++; ciz(); }
+    else if (ey === 'okundu'){ var lst = P.okunan[gecici.oda] = P.okunan[gecici.oda] || []; if (lst.indexOf(gecici.bolum) === -1){ lst.push(gecici.bolum); kaydet(); } adimAt(); var o = odaBul(gecici.oda); if (gecici.bolum < o.bolumler.length - 1) gecici.bolum++; ciz(); }
     else if (ey === 'agoraGonder') agoraGonder();
     else if (ey === 'agoraYeni'){ var q = ($('agora-yeni').value || '').trim(); if (q) agoraAc(q); }
     else if (ey === 'agoraCik'){ if (gecici.ctl && gecici.agora.bekliyor) gecici.ctl.abort(); gecici.agora = { yer:gecici.agora.yer, soru:'', turlar:[], bekliyor:false }; ciz(); }
     else if (ey === 'sessizlik') sessizlik();
     else if (ey === 'defter') defter();
     else if (ey === 'paylas') paylas(x.getAttribute('data-metin'));
+    else if (ey === 'sozKarti') sozKarti(x.getAttribute('data-metin'), x.getAttribute('data-kaynak'), x.getAttribute('data-tur'));
     else if (ey === 'adKaydet'){ var v = ($('ad-alan').value || '').trim().slice(0, 40); P.ad = v; kaydet(); ciz(); }
   }
 });

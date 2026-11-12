@@ -21,6 +21,7 @@ Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak için
 - Mühürler **Efes Pasaportu**'nda toplanır, pasaport paylaşılabilir bir görsel karta dönüşür.
 - Gezi ekranları Türkçe ve İngilizcedir; sitenin geri kalanı şimdilik Türkçedir.
 - Durak metinleri `index.html` içindeki `DURAKLAR` listesindedir. Yayından önce sahada yürünüp bir uzmana okutulmalıdır.
+- **Sesli anlatımlar (ElevenLabs):** `ELEVENLABS_API_KEY` ortam değişkeniyle `node scripts/ses-uret.mjs` çalıştır. Betik `ses/<durak>-<dil>.mp3` dosyalarını ve `ses/sesler.json` listesini yazar; var olan dosyaları atlar (`--yeniden` hepsini baştan üretir). Ses dosyası olmayan durakta Dinle düğmesi telefonun kendi sesine döner. Sesi değiştirmek için `ELEVENLABS_VOICE_TR` / `ELEVENLABS_VOICE_EN` ver. Ücretsiz planın sesleri yalnızca ticari olmayan kullanım içindir ve ElevenLabs'ın anılması gerekir; sesli rehber paketi satılmadan önce ücretli plana geçilmeli.
 - `sw.js` içindeki `KAYIT` adını (ör. `efes-v2`) her büyük güncellemede değiştir; böylece eski kopyalar temizlenir.
 
 ## Nasıl çalışıyor?

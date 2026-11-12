@@ -10,6 +10,7 @@ Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak için
 | `index.html` | Uygulamanın tamamı: ekranlar, metinler, görseller (görseller dosyanın içine gömülü). |
 | `api/katip.js` | Kâtip’i Anthropic API’ye bağlayan küçük sunucu fonksiyonu. API anahtarı yalnızca burada, sunucuda durur. |
 | `package.json` | Proje bilgisi. Ek paket kurulumu gerekmez. |
+| `og.jpg`, `og-kare.png` | Paylaşım önizleme görseli ve telefon ana ekranı ikonu. |
 
 ## Nasıl çalışıyor?
 
@@ -39,6 +40,9 @@ Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak için
 
 ### 4. (İsteğe bağlı) Kendi alan adın
 Vercel’de **Settings → Domains** bölümünden kendi alan adını (ör. `efes.org.tr`) bağlayabilirsin.
+
+### 5. Paylaşım önizlemesini tamamla
+Site WhatsApp, X ya da Instagram’da paylaşılınca `og.jpg` görseli çıkar. Bazı uygulamalar görselin tam adresini ister. Adresin belli olunca `index.html` içinde `<meta property="og:image" content="og.jpg">` satırını `https://senin-adresin/og.jpg` olarak değiştir.
 
 ## Ayarlar (Vercel ortam değişkenleri)
 

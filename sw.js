@@ -1,5 +1,5 @@
 /* Felsefe Haritası + Efes: ören yerinde internet zayıf olabilir. Önce ağdan dener, olmazsa kayıtlı kopyayı açar. */
-var KAYIT = 'felsefe-v8';
+var KAYIT = 'felsefe-v9';
 var TEMEL = ['/', '/efes', '/ortaklik.js', '/harita-veri.js', '/felsefe-veri.js', '/manifest.webmanifest', '/harita.webmanifest', '/ikon-192.png', '/og-kare.png'];
 self.addEventListener('install', function(e){
   e.waitUntil(caches.open(KAYIT).then(function(c){ return c.addAll(TEMEL); }));

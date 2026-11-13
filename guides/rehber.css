@@ -1,6 +1,6 @@
 /* Rehber yazıları: haritayla aynı sade dil */
 :root{--zemin:#F6F3EC;--yuzey:#FAF8F3;--ince:#ECE5D8;--koyu:#1F2A36;--soluk:#4A5868;--toprak:#A0561F;--okra:#E3B38A;
-  --ui:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--yazi:'EB Garamond',Georgia,serif;
+  --ui:'EB Garamond',Georgia,serif;--yazi:'EB Garamond',Georgia,serif;
   --golge:0 1px 2px rgba(40,30,20,.05),0 18px 40px -24px rgba(40,30,20,.3)}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -8,7 +8,7 @@ body{margin:0;background:var(--zemin);color:var(--koyu);font-family:var(--yazi);
 a{color:var(--toprak)}
 .ust{max-width:760px;margin:0 auto;padding:20px 16px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--ui);font-size:14px}
 .ust a{text-decoration:none;font-weight:600;color:var(--koyu)}
-.ust .marka{font-family:'Cinzel',Georgia,serif;letter-spacing:.04em}
+.ust .marka{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:17px;letter-spacing:.01em}
 main{max-width:760px;margin:0 auto;padding:12px 16px 56px}
 .etiket{font-family:var(--ui);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--toprak);margin-top:24px}
 h1{font-family:'EB Garamond',Georgia,serif;font-weight:600;font-size:clamp(34px,6vw,48px);line-height:1.1;margin:6px 0 12px}
@@ -35,3 +35,6 @@ blockquote{margin:16px 0;padding:6px 0 6px 18px;border-left:3px solid var(--topr
 .ilgili{display:grid;gap:10px;margin-top:12px}
 .ilgili a{display:block;background:#fff;border-radius:14px;padding:12px 16px;text-decoration:none;color:var(--koyu);box-shadow:var(--golge);font-weight:600}
 footer{max-width:760px;margin:0 auto;padding:0 16px 40px;font-family:var(--ui);font-size:13.5px;color:var(--soluk)}
+
+/* Garamond'un küçük x-yüksekliği için arayüz metinleri biraz büyük */
+.ust{font-size:16px}.etiket{font-size:13.5px}.ozet{font-size:17.5px}.cta small{font-size:13px}.cta a{font-size:17px}.not,footer{font-size:15.5px}

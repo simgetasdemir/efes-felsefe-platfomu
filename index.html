@@ -23,7 +23,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C2A3A'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23E3B38A'%3EΦ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap">
 <style>
 /* Efes platformuyla aynı dil: mermer, Ege mavisi, pişmiş toprak, okra. Harita solda, ayrıntı sağda; telefonda alt alta. */
 :root{
@@ -610,6 +610,31 @@ header.ust > .dil{position:absolute;right:16px;top:20px}
   .sayilar li,.sayilar li:first-child{padding:0 14px}
   .kahraman-dugmeler .ust-link{margin:4px auto 0}
 }
+
+/* ==========================================================================
+   YAZI TİPİ: tüm site EB Garamond (açık lisans, Türkçe karakterlerin tamamı var).
+   Garamond'un küçük x-yüksekliği için arayüz öğeleri biraz büyütüldü.
+   ========================================================================== */
+:root{--yazit:'EB Garamond',Georgia,serif}
+body,button,input,textarea,select{font-family:'EB Garamond',Georgia,serif}
+h1,h1#baslik{font-family:'EB Garamond',Georgia,serif;font-weight:600;letter-spacing:-.01em}
+h1#baslik{font-size:clamp(44px,7vw,88px);line-height:1}
+.etiket{font-size:13.5px;letter-spacing:.14em;font-weight:600}
+.btn{font-size:17.5px;font-weight:600}
+.cip{font-size:16.5px;font-weight:500}
+.ust-link{font-size:16.5px}
+.sayilar span{font-size:14px;letter-spacing:.08em}
+.sayilar b{font-size:38px}
+.dil button{font-size:16px;font-weight:600}
+.pin .ad{font-weight:700;letter-spacing:.01em}
+.sekmeler button{font-size:16px}
+.konak-btn,.tur-btn{font-size:16.5px}
+.km-btn,.gece-btn,.gece .gece-btn,.gun-tur{font-size:15px}
+@media (max-width:600px){
+  h1#baslik{font-size:46px}
+  .sayilar span{font-size:12.5px}
+  .sayilar b{font-size:31px}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Philosophy Map of Türkiye","alternateName":"Türkiye Felsefe Haritası","inLanguage":["en","tr"],"description":"From Göbekli Tepe to Rumi: eighteen places in Türkiye where philosophy and art were born, with ready-made routes and places to stay.","mainEntity":{"@type":"ItemList","name":"Philosophy and art stops","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"TouristAttraction","name":"Ephesus","description":"The philosophy of change and logos was born here. Heraclitus held that everything flows, but that the flow follows a measure, a \"logos\".","geo":{"@type":"GeoCoordinates","latitude":37.94,"longitude":27.34},"address":{"@type":"PostalAddress","addressRegion":"Selçuk, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":2,"item":{"@type":"TouristAttraction","name":"Miletus","description":"The first school of Western philosophy. Thales looked for the first stuff of the world; Anaximander called the source of all things the \"apeiron\", the boundless.","geo":{"@type":"GeoCoordinates","latitude":37.53,"longitude":27.28},"address":{"@type":"PostalAddress","addressRegion":"Didim, Aydın","addressCountry":"TR"}}},{"@type":"ListItem","position":3,"item":{"@type":"TouristAttraction","name":"Clazomenae","description":"The first philosopher to bring philosophy to Athens. He argued that a \"nous\", a mind, set the cosmos in order.","geo":{"@type":"GeoCoordinates","latitude":38.36,"longitude":26.77},"address":{"@type":"PostalAddress","addressRegion":"Urla, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":4,"item":{"@type":"TouristAttraction","name":"Assos","description":"After Plato's death (347 BC) Aristotle came to Assos and stayed about three years. Cleanthes, second head of the Stoic school, was also from Assos.","geo":{"@type":"GeoCoordinates","latitude":39.49,"longitude":26.34},"address":{"@type":"PostalAddress","addressRegion":"Ayvacık, Çanakkale","addressCountry":"TR"}}},{"@type":"ListItem","position":5,"item":{"@type":"TouristAttraction","name":"Pergamon","description":"Home to one of the greatest libraries of the ancient world, and birthplace of Galen (129–c. 200), physician and philosopher.","geo":{"@type":"GeoCoordinates","latitude":39.13,"longitude":27.18},"address":{"@type":"PostalAddress","addressRegion":"Bergama, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":6,"item":{"@type":"TouristAttraction","name":"Hierapolis","description":"Epictetus, born a slave and later one of the most widely read Stoic teachers, was born here in the 50s AD.","geo":{"@type":"GeoCoordinates","latitude":37.93,"longitude":29.13},"address":{"@type":"PostalAddress","addressRegion":"Pamukkale, Denizli","addressCountry":"TR"}}},{"@type":"ListItem","position":7,"item":{"@type":"TouristAttraction","name":"Aphrodisias","description":"The most influential ancient commentator on Aristotle. An inscription found here in 2001 calls him one of the heads of the philosophical schools in Athens.","geo":{"@type":"GeoCoordinates","latitude":37.71,"longitude":28.72},"address":{"@type":"PostalAddress","addressRegion":"Karacasu, Aydın","addressCountry":"TR"}}},{"@type":"ListItem","position":8,"item":{"@type":"TouristAttraction","name":"Sinope","description":"Diogenes (c. 404–323 BC), emblem of Cynic philosophy, was a citizen of Sinope who fled or was exiled from the city.","geo":{"@type":"GeoCoordinates","latitude":42.03,"longitude":35.15},"address":{"@type":"PostalAddress","addressRegion":"Sinop","addressCountry":"TR"}}},{"@type":"ListItem","position":9,"item":{"@type":"TouristAttraction","name":"Soli and Tarsus","description":"Chrysippus (c. 280–207 BC), who built the Stoic system, was born in Soli near today's Mersin. Tarsus was the city of Stoics such as Antipater.","geo":{"@type":"GeoCoordinates","latitude":36.8,"longitude":34.7},"address":{"@type":"PostalAddress","addressRegion":"Mersin","addressCountry":"TR"}}},{"@type":"ListItem","position":10,"item":{"@type":"TouristAttraction","name":"Konya","description":"Rumi was born in Balkh in 1207 and died in Konya in 1273. After his death his disciples organised the Mevlevi order; Konya adds Sufi thought to the map.","geo":{"@type":"GeoCoordinates","latitude":37.87,"longitude":32.48},"address":{"@type":"PostalAddress","addressRegion":"Konya","addressCountry":"TR"}}},{"@type":"ListItem","position":11,"item":{"@type":"TouristAttraction","name":"Istanbul","description":"For a thousand years the Byzantine capital, Constantinople, kept ancient Greek philosophy alive by teaching and copying it. Psellos revived Plato here; Plethon was born here.","geo":{"@type":"GeoCoordinates","latitude":41.01,"longitude":28.98},"address":{"@type":"PostalAddress","addressRegion":"Istanbul","addressCountry":"TR"}}},{"@type":"ListItem","position":12,"item":{"@type":"TouristAttraction","name":"Cappadocia","description":"In the 4th century three thinkers from this region brought Greek philosophy into dialogue with Christian thought. Kayseri (Caesarea) was Basil's city.","geo":{"@type":"GeoCoordinates","latitude":38.64,"longitude":34.83},"address":{"@type":"PostalAddress","addressRegion":"Nevşehir, Kayseri","addressCountry":"TR"}}},{"@type":"ListItem","position":13,"item":{"@type":"TouristAttraction","name":"Antalya: Perge and Aspendos","description":"Apollonius, \"the Great Geometer\", was born in Perge. We still use the names ellipse, parabola and hyperbola from his Conics.","geo":{"@type":"GeoCoordinates","latitude":36.96,"longitude":30.85},"address":{"@type":"PostalAddress","addressRegion":"Antalya","addressCountry":"TR"}}},{"@type":"ListItem","position":14,"item":{"@type":"TouristAttraction","name":"Şanlıurfa and Harran","description":"At Göbekli Tepe people raised monumental structures more than 11,000 years ago. The school of Edessa, Urfa's ancient name, translated Greek works into Syriac; Thabit ibn Qurra, born in Harran, carried Greek mathematics into Arabic.","geo":{"@type":"GeoCoordinates","latitude":37.16,"longitude":38.79},"address":{"@type":"PostalAddress","addressRegion":"Şanlıurfa","addressCountry":"TR"}}},{"@type":"ListItem","position":15,"item":{"@type":"TouristAttraction","name":"Gaziantep and Zeugma","description":"The mosaics from the villas of Zeugma on the Euphrates set myth and theatre in stone. This is an art stop: you see the stories philosophy told, in pictures.","geo":{"@type":"GeoCoordinates","latitude":37.06,"longitude":37.38},"address":{"@type":"PostalAddress","addressRegion":"Gaziantep","addressCountry":"TR"}}},{"@type":"ListItem","position":16,"item":{"@type":"TouristAttraction","name":"Bodrum","description":"Herodotus, who wrote history as an \"inquiry\" (historia), was born here in ancient Halicarnassus. The Mausoleum, one of the Seven Wonders, stood in this city.","geo":{"@type":"GeoCoordinates","latitude":37.04,"longitude":27.43},"address":{"@type":"PostalAddress","addressRegion":"Muğla","addressCountry":"TR"}}},{"@type":"ListItem","position":17,"item":{"@type":"TouristAttraction","name":"İznik","description":"Hipparchus, a founder of astronomy, was born in ancient Nicaea. The city later hosted two great church councils and, in the 16th century, the famous İznik tiles.","geo":{"@type":"GeoCoordinates","latitude":40.43,"longitude":29.72},"address":{"@type":"PostalAddress","addressRegion":"Bursa","addressCountry":"TR"}}},{"@type":"ListItem","position":18,"item":{"@type":"TouristAttraction","name":"Mardin and Nusaybin","description":"The School of Nisibis (Nusaybin) was one of the centres that translated Greek works into Syriac. The Arabs came to know Greek thought chiefly through these Syriac translations.","geo":{"@type":"GeoCoordinates","latitude":37.31,"longitude":40.74},"address":{"@type":"PostalAddress","addressRegion":"Mardin","addressCountry":"TR"}}}]}}</script>
 </head>
@@ -1152,7 +1177,7 @@ function muhurSVG(yer, basili){
     '<defs><path id="' + yid + '" d="M60 60m-43 0a43 43 0 1 1 86 0a43 43 0 1 1-86 0"/></defs>' +
     '<circle cx="60" cy="60" r="56" fill="none" stroke="' + renk + '" stroke-width="3"' + (basili ? '' : ' stroke-dasharray="5 5"') + '/>' +
     '<circle cx="60" cy="60" r="35" fill="none" stroke="' + renk + '" stroke-width="1.5"/>' + (basili ? '<circle cx="60" cy="60" r="51" fill="none" stroke="' + renk + '" stroke-width=".8"/>' : '') +
-    '<text font-size="10.5" letter-spacing="2.2" fill="' + renk + '" font-family="Cinzel,Georgia,serif" font-weight="700"><textPath href="#' + yid + '" startOffset="50%" text-anchor="middle">' + h(yer.yunan) + ' · ' + h((yer.mh || yer.tr.kim.split(',')[0]).toLocaleUpperCase('tr')) + '</textPath></text>' +
+    '<text font-size="10.5" letter-spacing="2.2" fill="' + renk + '" font-family="EB Garamond,Georgia,serif" font-weight="700"><textPath href="#' + yid + '" startOffset="50%" text-anchor="middle">' + h(yer.yunan) + ' · ' + h((yer.mh || yer.tr.kim.split(',')[0]).toLocaleUpperCase('tr')) + '</textPath></text>' +
     '<g transform="translate(38 38) scale(.69)">' + amblemSVG(yer.id, renk).replace('<svg ', '<svg width="64" height="64" ') + '</g>' +
     '</g></svg>';
 }
@@ -1412,7 +1437,7 @@ function amblemResmi(id){
 }
 async function kartYap(){
   var yer = bul(D.secili); if (!yer) return;
-  try { await Promise.all([document.fonts.load('600 34px Cinzel'), document.fonts.load('italic 500 64px "EB Garamond"')]); } catch(e){}
+  try { await Promise.all([document.fonts.load('600 34px "EB Garamond"'), document.fonts.load('italic 500 64px "EB Garamond"')]); } catch(e){}
   var c = document.createElement('canvas'); c.width = 1080; c.height = 1350;
   var x = c.getContext('2d'), s = yer.soz, F = '"EB Garamond", Georgia, serif';
   x.fillStyle = '#14202C'; x.fillRect(0, 0, 1080, 1350);
@@ -1423,14 +1448,14 @@ async function kartYap(){
   x.fillStyle = RENK[yer.id]; x.beginPath(); x.arc(540, 250, 140, 0, 7); x.fill();
   x.strokeStyle = '#E3B38A'; x.lineWidth = 3; x.beginPath(); x.arc(540, 250, 152, 0, 7); x.stroke();
   var img = await amblemResmi(yer.id); if (img) x.drawImage(img, 428, 138, 224, 224);
-  x.fillStyle = '#E3B38A'; x.textAlign = 'center'; x.font = '600 34px Cinzel, ' + F;
+  x.fillStyle = '#E3B38A'; x.textAlign = 'center'; x.font = '600 36px "EB Garamond", ' + F;
   x.fillText(yer.yunan.split('').join(' '), 540, 470);
   x.fillStyle = '#F4F1EA'; x.font = (s.eser ? '600 ' : 'italic 500 ') + '64px ' + F;
   var metin = s.eser ? s[D.dil] : '“' + s[D.dil] + '”', sat = satirlara(x, metin, 860), yuk = 82, y0 = 700 - (sat.length - 1) * yuk / 2;
   sat.forEach(function(l, i){ x.fillText(l, 540, y0 + i * yuk); });
   x.fillStyle = '#C3CEDA'; x.font = '400 32px ' + F;
   satirlara(x, (D.dil === 'en' && s.kaynakEn) ? s.kaynakEn : s.kaynak, 860).forEach(function(l, i){ x.fillText(l, 540, y0 + sat.length * yuk + 30 + i * 42); });
-  x.fillStyle = '#E3B38A'; x.font = '600 28px Cinzel, ' + F; x.fillText((t('kartAlt') + ' · ' + y(yer).ad).toLocaleUpperCase(D.dil === 'tr' ? 'tr' : 'en'), 540, 1215);
+  x.fillStyle = '#E3B38A'; x.font = '600 30px "EB Garamond", ' + F; x.fillText((t('kartAlt') + ' · ' + y(yer).ad).toLocaleUpperCase(D.dil === 'tr' ? 'tr' : 'en'), 540, 1215);
   c.toBlob(async function(b){
     var ad = 'felsefe-' + yer.id + '.png';
     try { var dosya = new File([b], ad, { type:'image/png' }); if (navigator.canShare && navigator.canShare({ files:[dosya] })){ await navigator.share({ files:[dosya], title:t('baslik') }); return; } } catch(e){ if (e && e.name === 'AbortError') return; }

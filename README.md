@@ -92,15 +92,23 @@ Gerçek maliyeti ilk günlerde Anthropic Console’daki **Usage** ekranından iz
 - `BAGLAR`: filozoflar arası hoca-öğrenci (düz çizgi) ve etki (kesikli çizgi) ilişkileri. Yeni bir bağ eklemek için listeye bir satır yeterli.
 - Harita çizgisi Natural Earth (kamu malı) verisinden `scripts/harita-ciz.mjs` ile bir kez üretildi (`harita-veri.js`). Tüm amblem ve mühür çizimleri bu site için özgün SVG'dir.
 
-### Otel bağlantıları (Hotels.com)
+### Gelir ve ortaklıklar (tek ayar yeri: `ortaklik.js`)
 
-Hotels.com, Expedia Group'un **Travel Creator Program** ortaklık programındadır.
+Haritadaki ve rehber sayfalarındaki tüm otel ve tur düğmeleri `ortaklik.js` dosyasından beslenir. Bir kimlik boşsa bağlantı yine çalışır, yalnızca komisyon gelmez. İlk kimlik eklendiğinde sayfalar ortaklık açıklamasını kendiliğinden gösterir.
 
-1. https://creator.expediagroup.com adresinden ücretsiz başvur (sitenin adresini ister).
-2. Onaydan sonra panelde **Links → Create link** bölümüne, sitedeki "Otelleri gör" düğmesinin açtığı Hotels.com arama adresini yapıştır.
-3. Programın verdiği izlenebilir bağlantıyı `index.html` en üstteki `OTEL.yerler.<mekân>.baglanti` alanına yaz.
+| Program | Nereden başvurulur | `ortaklik.js` içinde nereye yazılır |
+|---|---|---|
+| Booking.com Affiliate Partner Programme | booking.com/affiliate-program | `booking.aid` |
+| Hotels.com (Expedia Group Travel Creator Program) | creator.expediagroup.com | `hotels.baglantilar['Kasaba']`: her kasaba için panelde "Links → Create link" ile üretilen bağlantı |
+| GetYourGuide Partner Program | partner.getyourguide.com | `getyourguide.partner_id` |
+| Viator Affiliate Program | partnerresources.viator.com | `viator.pid` ve `viator.mcid` |
+| Sesli rehber bekleme listesi | Tally, Google Forms ya da Mailchimp'te ücretsiz bir form | `sesliRehber.kayit` (formun adresi) |
 
-`baglanti` boş kaldıkça düğme düz Hotels.com aramasına gider (komisyon yok). İlk bağlantı eklendiğinde sayfa ortaklık açıklamasını kendiliğinden gösterir.
+Bir sağlayıcıyı tamamen gizlemek için `goster: false` yap.
+
+### Rehber yazıları (`guides/`)
+
+İngilizce, arama motoru için yazılmış sayfalar: `/guides/philosophy-trip-turkey`, `/guides/where-to-stay-in-ephesus`, `/guides/ephesus-to-pamukkale-itinerary`, `/guides/where-to-stay-in-pamukkale`. Metinler `scripts/rehber-sayfalari.py` içinde; değiştirdikten sonra `python3 scripts/rehber-sayfalari.py` çalıştır. Alan adı belli olunca betikteki `ALAN` değişkenini doldur.
 
 ## Alan adını bağlama (Vercel)
 

@@ -1,24 +1,24 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Türkiye Felsefe Haritası</title>
-<meta name="description" content="Herakleitos'tan Mevlânâ'ya, Anadolu'da felsefenin doğduğu on yer: Efes, Milet, Assos, Bergama, Hierapolis, Sinop, Konya ve dahası. Filozofların temel fikirleri, yürüyüş rotaları, söz kartları ve felsefe pasaportu.">
+<title>Philosophy Map of Türkiye: places, routes and where to stay</title>
+<meta name="description" content="A map of the places in Türkiye where philosophy and art were born, from Heraclitus at Ephesus to Rumi in Konya. Key ideas, ancient theatres and sculpture, multi-day routes, and hotels and tours near every stop.">
 <meta name="theme-color" content="#3B2F22">
 <meta name="color-scheme" content="light">
 <link rel="manifest" href="/harita.webmanifest">
 <link rel="apple-touch-icon" href="/og-kare.png">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Türkiye Felsefe Haritası">
-<meta property="og:locale" content="tr_TR">
-<meta property="og:locale:alternate" content="en_GB">
-<meta property="og:title" content="Türkiye Felsefe Haritası">
-<meta property="og:description" content="Herakleitos'tan Mevlânâ'ya, Anadolu'da felsefenin izinde on durak: fikirler, rotalar, söz kartları ve pasaport.">
+<meta property="og:site_name" content="Philosophy Map of Türkiye">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:title" content="Philosophy Map of Türkiye">
+<meta property="og:description" content="From Heraclitus to Rumi: where philosophy and art were born in Türkiye, with routes, hotels and tours for every stop.">
 <meta property="og:image" content="/og-harita.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Antik gravür tarzında çizilmiş Türkiye haritası üzerinde on felsefe durağı">
+<meta property="og:image:alt" content="Map of Türkiye with philosophy stops from Ephesus to Konya">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C2A3A'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23E3B38A'%3EΦ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -506,6 +506,56 @@ details.katman > :not(summary){margin-top:6px;margin-bottom:10px}
 .pasaport::before{display:none}
 .pasaport button span{letter-spacing:.02em;font-size:13px}
 footer{font-style:normal}
+
+/* Otel ve tur düğmeleri (birden çok sağlayıcı) */
+.konak{flex-wrap:wrap;cursor:default}
+.konak:hover{transform:none}
+.konak-metin{padding-bottom:0}
+.konak-dugmeler{display:flex;gap:8px;flex:1 1 100%;flex-wrap:wrap}
+.konak-btn{flex:1;min-width:120px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;background:var(--okra);color:#1F2A36;font-family:var(--yazit);font-weight:700;font-size:14.5px;text-decoration:none;transition:transform .15s}
+.konak-btn + .konak-btn{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.konak-btn:hover,.km-btn:hover,.gece-btn:hover,.tur-btn:hover{transform:translateY(-1px)}
+.tur-kart{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:var(--yuzey);border-radius:18px;padding:14px 16px;margin-top:-6px}
+.tur-ikon{flex:none;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--r);display:grid;place-items:center;box-shadow:0 6px 12px -8px rgba(0,0,0,.4)}
+.tur-ikon svg{width:24px;height:24px}
+.tur-metin{display:flex;flex-direction:column;flex:1;min-width:0}
+.tur-metin small{font-family:var(--yazit);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--r);font-weight:600}
+.tur-metin b{font-size:18px}
+.tur-dugmeler{display:flex;gap:8px;flex:1 1 100%;flex-wrap:wrap}
+.tur-btn{flex:1;min-width:120px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;background:#fff;color:var(--koyu);font-family:var(--yazit);font-weight:600;font-size:14.5px;text-decoration:none;box-shadow:inset 0 0 0 1px var(--ince);transition:transform .15s}
+.konak-mini{flex-wrap:wrap;align-items:center}
+.km-metin{flex:1;min-width:0}
+.km-metin b{display:block}
+.km-dugmeler{display:flex;gap:6px;flex:1 1 100%}
+.km-btn{flex:1;min-height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:var(--koyu);color:#fff;font-family:var(--yazit);font-weight:600;font-size:13px;text-decoration:none;transition:transform .15s}
+.km-btn + .km-btn{background:var(--yuzey);color:var(--koyu)}
+.gece-dugmeler{display:flex;gap:6px;flex:1 1 100%;flex-wrap:wrap}
+.gece .gece-btn{flex:1 1 92px;letter-spacing:0;font-size:12.5px;padding:0 6px;white-space:nowrap}
+.gece-btn{flex:1 1 0;min-height:40px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:0 8px;font-size:12.5px;border-radius:999px;transition:transform .15s}
+.gece-btn + .gece-btn{background:rgba(255,255,255,.12);color:#fff}
+.gun-turlar{font-size:14.5px;margin:0;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.gun-turlar span{font-family:var(--yazit);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soluk);font-weight:600}
+.gun-tur{font-family:var(--yazit);font-weight:600;font-size:14px;color:var(--d);text-decoration:underline;text-underline-offset:3px;min-height:32px;display:inline-flex;align-items:center}
+
+/* Sesli rehber ve rehber yazıları */
+.ses-bolum,.rehber-bolum{max-width:1240px;margin:0 auto;padding:16px 16px 32px}
+.ses-kart{display:flex;gap:22px;align-items:center;background:var(--koyu);color:#F4EFE6;border-radius:24px;padding:26px 28px;box-shadow:0 24px 50px -28px rgba(20,15,10,.7);flex-wrap:wrap}
+.ses-ikon{flex:none;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;color:var(--okra);background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.18),rgba(255,255,255,0) 60%),#2C3A4A;box-shadow:0 14px 26px -12px rgba(0,0,0,.6)}
+.ses-ikon svg{width:46px;height:46px}
+.ses-metin{flex:1;min-width:240px}
+.ses-metin .etiket{color:var(--okra)}
+.ses-metin h2{color:#fff;margin:4px 0 6px}
+.ses-metin p{color:#D3CCC0;max-width:640px}
+.ses-dugmeler{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.ses-dugmeler .btn-hayalet{color:#fff;border-color:rgba(255,255,255,.3)}
+.ses-dugmeler .btn-okra{background:var(--okra);color:var(--koyu)}
+.ses-yakinda{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:12px;background:rgba(227,179,138,.16);color:var(--okra);font-family:var(--yazit);font-weight:600;font-size:15px}
+.rehber-izgara{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:14px}
+.rehber-kart{display:flex;flex-direction:column;gap:6px;background:#fff;border-radius:18px;padding:18px;text-decoration:none;color:var(--koyu);box-shadow:var(--golge);transition:transform .15s}
+.rehber-kart:hover{transform:translateY(-2px)}
+.rehber-kart b{font-family:'EB Garamond',Georgia,serif;font-size:21px;line-height:1.2}
+.rehber-kart span{color:var(--soluk);font-size:16px;line-height:1.4}
+.rehber-kart em{margin-top:auto;font-style:normal;font-family:var(--yazit);font-weight:600;font-size:14px;color:var(--toprak)}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Türkiye Felsefe Haritası", "alternateName": "Philosophy Map of Türkiye", "inLanguage": ["tr", "en"], "description": "Herakleitos'tan Mevlânâ'ya, Anadolu'da felsefenin doğduğu on yer.", "mainEntity": {"@type": "ItemList", "name": "Felsefe durakları", "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "TouristAttraction", "name": "Efes", "address": {"@type": "PostalAddress", "addressLocality": "Selçuk, İzmir", "addressCountry": "TR"}, "description": "Filozof: Herakleitos"}}, {"@type": "ListItem", "position": 2, "item": {"@type": "TouristAttraction", "name": "Milet", "address": {"@type": "PostalAddress", "addressLocality": "Didim, Aydın", "addressCountry": "TR"}, "description": "Filozof: Thales, Anaksimandros, Anaksimenes"}}, {"@type": "ListItem", "position": 3, "item": {"@type": "TouristAttraction", "name": "Klazomenai", "address": {"@type": "PostalAddress", "addressLocality": "Urla, İzmir", "addressCountry": "TR"}, "description": "Filozof: Anaksagoras"}}, {"@type": "ListItem", "position": 4, "item": {"@type": "TouristAttraction", "name": "Assos", "address": {"@type": "PostalAddress", "addressLocality": "Ayvacık, Çanakkale", "addressCountry": "TR"}, "description": "Filozof: Aristoteles, Kleanthes"}}, {"@type": "ListItem", "position": 5, "item": {"@type": "TouristAttraction", "name": "Bergama", "address": {"@type": "PostalAddress", "addressLocality": "Bergama, İzmir", "addressCountry": "TR"}, "description": "Filozof: Galenos"}}, {"@type": "ListItem", "position": 6, "item": {"@type": "TouristAttraction", "name": "Hierapolis", "address": {"@type": "PostalAddress", "addressLocality": "Pamukkale, Denizli", "addressCountry": "TR"}, "description": "Filozof: Epiktetos"}}, {"@type": "ListItem", "position": 7, "item": {"@type": "TouristAttraction", "name": "Afrodisias", "address": {"@type": "PostalAddress", "addressLocality": "Karacasu, Aydın", "addressCountry": "TR"}, "description": "Filozof: Afrodisiaslı Aleksandros"}}, {"@type": "ListItem", "position": 8, "item": {"@type": "TouristAttraction", "name": "Sinop", "address": {"@type": "PostalAddress", "addressLocality": "Sinop", "addressCountry": "TR"}, "description": "Filozof: Diogenes"}}, {"@type": "ListItem", "position": 9, "item": {"@type": "TouristAttraction", "name": "Soli ve Tarsus", "address": {"@type": "PostalAddress", "addressLocality": "Mersin", "addressCountry": "TR"}, "description": "Filozof: Khrysippos, Tarsuslu Antipatros"}}, {"@type": "ListItem", "position": 10, "item": {"@type": "TouristAttraction", "name": "Konya", "address": {"@type": "PostalAddress", "addressLocality": "Konya", "addressCountry": "TR"}, "description": "Filozof: Mevlânâ Celâleddîn Rûmî"}}]}}</script>
 </head>
@@ -518,7 +568,7 @@ footer{font-style:normal}
     <a class="ust-link" id="ust-link" href="/efes"></a>
   </div>
   <div class="dil" role="group" aria-label="Dil / Language">
-    <button type="button" data-dil="tr">TR</button><button type="button" data-dil="en">EN</button>
+    <button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button>
   </div>
 </header>
 <div class="ust-meander"><div class="meander" aria-hidden="true"></div></div>
@@ -541,46 +591,45 @@ footer{font-style:normal}
 <noscript><section style="max-width:780px;margin:0 auto;padding:16px"><h2>On felsefe durağı</h2><ol><li><b>Efes</b> (Selçuk, İzmir): Herakleitos</li><li><b>Milet</b> (Didim, Aydın): Thales, Anaksimandros, Anaksimenes</li><li><b>Klazomenai</b> (Urla, İzmir): Anaksagoras</li><li><b>Assos</b> (Ayvacık, Çanakkale): Aristoteles, Kleanthes</li><li><b>Bergama</b> (Bergama, İzmir): Galenos</li><li><b>Hierapolis</b> (Pamukkale, Denizli): Epiktetos</li><li><b>Afrodisias</b> (Karacasu, Aydın): Afrodisiaslı Aleksandros</li><li><b>Sinop</b> (Sinop): Diogenes</li><li><b>Soli ve Tarsus</b> (Mersin): Khrysippos, Tarsuslu Antipatros</li><li><b>Konya</b> (Konya): Mevlânâ Celâleddîn Rûmî</li></ol><p>Haritayı ve ayrıntıları görmek için JavaScript gerekir.</p></section></noscript>
 <section class="rota-bolum" id="rota-bolum" aria-labelledby="rota-h"></section>
 <section class="konak-bolum" id="konak-bolum" aria-labelledby="konak-h"></section>
-<section class="pasaport-bolum" id="pasaport-bolum" aria-label="Felsefe Pasaportu"></section>
+<section class="ses-bolum" id="ses-bolum" aria-labelledby="ses-h"></section>
+<section class="rehber-bolum" id="rehber-bolum" aria-labelledby="rehber-h"></section>
+<section class="pasaport-bolum" id="pasaport-bolum" aria-label="Philosophy Passport"></section>
 
 <footer id="alt"></footer>
 <div class="bildirim" id="bildirim" role="status"></div>
 <button type="button" class="haritaya" id="haritaya" hidden></button>
 
+<script src="ortaklik.js"></script>
 <script src="harita-veri.js"></script>
 <script src="felsefe-veri.js"></script>
 <script>
 /* ==========================================================================
-   OTEL BAĞLANTILARI: tek ayar yeri
-   --------------------------------------------------------------------------
-   Hotels.com, Expedia Group'un "Travel Creator Program" ortaklık programındadır.
-   1) creator.expediagroup.com adresinden ücretsiz katıl.
-   2) Panelde Links > Create link bölümüne, aşağıdaki her yerin "arama" adresini
-      (sayfanın ürettiği Hotels.com arama bağlantısını) yapıştır.
-   3) Programın verdiği izlenebilir bağlantıyı o yerin "baglanti" alanına yaz.
-   "baglanti" boş kaldıkça düğme düz Hotels.com aramasına gider (komisyon yok).
-   En az bir bağlantı dolunca sayfa otomatik olarak ortaklık açıklamasını gösterir.
+   KONAKLAMA VE TUR ARAMALARI: her mekân için kalınacak kasaba ve tur arama sözcüğü.
+   Ortaklık kimlikleri burada değil, ortaklik.js dosyasındadır (tek ayar yeri).
    ========================================================================== */
-var OTEL = {
-  goster: true,
-  yerler: {
-    efes:       { arama: 'Selçuk, İzmir',        baglanti: '' },
-    milet:      { arama: 'Didim, Aydın',          baglanti: '' },
-    klazomenai: { arama: 'Urla, İzmir',           baglanti: '' },
-    assos:      { arama: 'Behramkale, Ayvacık',   baglanti: '' },
-    bergama:    { arama: 'Bergama, İzmir',        baglanti: '' },
-    hierapolis: { arama: 'Pamukkale, Denizli',    baglanti: '' },
-    afrodisias: { arama: 'Karacasu, Aydın',       baglanti: '' },
-    sinop:      { arama: 'Sinop',                 baglanti: '' },
-    soli:       { arama: 'Mersin',                baglanti: '' },
-    konya:      { arama: 'Konya',                 baglanti: '' }
-  }
+var YER_ARAMA = {
+  efes:       { kasaba: 'Selçuk',     tur: 'Ephesus' },
+  milet:      { kasaba: 'Didim',      tur: 'Miletus' },
+  klazomenai: { kasaba: 'Urla',       tur: 'Urla' },
+  assos:      { kasaba: 'Behramkale', tur: 'Assos' },
+  bergama:    { kasaba: 'Bergama',    tur: 'Pergamon' },
+  hierapolis: { kasaba: 'Pamukkale',  tur: 'Pamukkale' },
+  afrodisias: { kasaba: 'Karacasu',   tur: 'Aphrodisias' },
+  sinop:      { kasaba: 'Sinop',      tur: 'Sinop' },
+  soli:       { kasaba: 'Mersin',     tur: 'Tarsus' },
+  konya:      { kasaba: 'Konya',      tur: 'Konya' }
 };
-function otelAdresi(id){
-  var o = OTEL.yerler[id]; if (!o) return '';
-  return o.baglanti || ('https://www.hotels.com/Hotel-Search?destination=' + encodeURIComponent(o.arama));
+var O = window.ORTAKLIK;
+function kasaba(id){ return YER_ARAMA[id] ? YER_ARAMA[id].kasaba : ''; }
+function otelDugmeleri(id, sinif){
+  if (!YER_ARAMA[id]) return '';
+  return O.oteller().map(function(sg){ return '<a class="' + sinif + '" href="' + h(O.otel(sg, kasaba(id))) + '" target="_blank" rel="sponsored noopener" data-eylem="otel">' + h(O.ad[sg]) + '</a>'; }).join('');
 }
-function ortaklikVar(){ for (var k in OTEL.yerler) if (OTEL.yerler[k].baglanti) return true; return false; }
+function turDugmeleri(id, sinif){
+  if (!YER_ARAMA[id]) return '';
+  return O.turlar().map(function(sg){ return '<a class="' + sinif + '" href="' + h(O.tur(sg, YER_ARAMA[id].tur)) + '" target="_blank" rel="sponsored noopener" data-eylem="otel">' + h(O.ad[sg]) + '</a>'; }).join('');
+}
+function aciklama(){ return O.kazanc() ? '<p class="not konak-not">' + h(t('otelAcik')) + '</p>' : ''; }
 
 /* ==========================================================================
    AMBLEMLER: her yer için özgün çizgi çizimi (64x64, currentColor)
@@ -757,8 +806,8 @@ var SANAT = {
 };
 
 /* ==========================================================================
-   ÇOK GÜNLÜK ROTALAR: gündüz durak, gece konak (otel bağlantısı OTEL ayarından gelir)
-   gunler: [durak, başlık, açıklama, gece kalınacak OTEL yeri (ya da null), gece sayısı]
+   ÇOK GÜNLÜK ROTALAR: gündüz durak, gece konak (otel ve tur bağlantıları ortaklik.js'ten gelir)
+   gunler: [durak, başlık, açıklama, gece kalınacak yer (YER_ARAMA anahtarı ya da null), gece sayısı]
    ========================================================================== */
 var ROTALAR = [
   { id:'ege', renk:'#1F5C8A', zum:'ege', duraklar:['efes','milet','afrodisias','hierapolis'],
@@ -815,19 +864,19 @@ var M = {
  tr:{ etiket:'ΦΙΛΟΣΟΦΙΑ · Anadolu', baslik:'Türkiye Felsefe Haritası', giris:'Herakleitos\'tan Mevlânâ\'ya, felsefenin ve sanatın bu topraklarda doğduğu on yer. Bir yere dokun ya da hazır bir rotayla yola çık: fikirler, tiyatrolar, heykeller ve her gece için kalacak yer.',
    tum:'Tüm Türkiye', ege:'Ege\'ye yakınlaş', egeNot:'Ege kıyısında yedi durak var; yakınlaşarak seç.', kim:'Filozof', donem:'Dönem', neden:'Neden burada?', soz:'Söz kartı', eser:'Eser', dogru:'Kaynakta doğrulandı', bekliyor:'Çeviri birincil kaynakta kontrol ediliyor',
    kartYap:'Kartı indir', rota:'Yürüyüş rotası', muhur:'Mühür al', muhurlu:'Mühürlendi', muhurNot:'Bu yeri gezdiysen pasaportuna mühür bas.', muhurBildir:'Mühür pasaportuna basıldı.',
-   oteller:'Gezini burada uzat', otelNot:'Bu yere yakın otelleri Hotels.com\'da gör.', otelBtn:'Otelleri gör', otelAcik:'Bu bağlantılardan yapılan rezervasyonlardan site komisyon alabilir; sana ek ücret yansımaz.',
+   oteller:'Gezini burada uzat', otelNot:'Bu yere yakın otelleri Hotels.com\'da gör.', otelBtn:'Otelleri gör', otelAcik:'Otel ve tur bağlantılarının bazıları ortaklık bağlantısıdır (Booking.com, Hotels.com, GetYourGuide, Viator). Bunlardan rezervasyon yaparsan site komisyon alabilir; sana ek ücret yansımaz.', turlar:'Turlar ve biletler', sesEtiket:'Sesli rehber paketi · yakında', sesBaslik:'Kulağında bir filozofla gez', sesAlt:'Efes, Bergama, Hierapolis ve diğer duraklar için indirilebilir, anlatımlı yürüyüşler hazırlanıyor. Çıktığında ilk sen haberdar ol.', sesKayit:'Bekleme listesine katıl', sesYakinda:'Çok yakında', sesDene:'Ücretsiz Efes rehberini dene', rehberBaslik:'Gezi rehberleri', oku:'Oku', rehberDil:'Rehber yazıları şimdilik İngilizce.',
    rehber:'Efes gezi rehberini aç', rehberNot:'Efes için sesli anlatımlı tam gezi rehberi hazır.', kaynaklar:'Kaynaklar', pasaport:'Felsefe Pasaportu', pasaportAlt:'Gezdiğin her yer için bir mühür.',
    yakinda:'Yakında: Kolophon (Ksenofanes), Priene, Harran, Hacıbektaş, Nusaybin ve İstanbul.', alt1:'Çizimler bu site için özgün olarak yapıldı. Harita verisi: Natural Earth (kamu malı).', alt2:'Bilgiler Stanford Encyclopedia of Philosophy, Internet Encyclopedia of Philosophy, Britannica ve UNESCO sayfalarına dayanır.', sec:'Haritadan bir yer seç.', kartAlt:'Türkiye Felsefe Haritası',
    dinle:'Dinle', durdur:'Durdur', dusun:'Düşün', notYer:'Bir cümle yaz. Yalnızca bu cihazda saklanır.', kaydet:'Kaydet', kaydedildi:'Notun kaydedildi.', sesYok:'Bu cihaz sesli okumayı desteklemiyor; metni okuyabilirsin.',
-   baglar:'Bağlantılar', baglarGoster:'Bağlantılar', hoca:'Hoca ve öğrenci', etki:'Etki', baglarNot:'Düz çizgi hoca ile öğrenciyi, kesikli çizgi etkiyi gösterir.', baglarYok:'Bu yerin bağları haritanın dışına uzanıyor: Belh, Tebriz ve İslam düşüncesinin geniş dünyası.', sDusunce:'Düşünce', sGezi:'Gezi ve sanat', sBaglar:'Bağlar ve kaynaklar', fikirler:'Temel fikirler', hayat:'Hayat çizgisi', bilinmeyen:'Bilmediklerimiz', miras:'Mirası', konakBaslik:'{yer} ve çevresindeki oteller', basla:'Nereden başlamalı?', hosgeldin:'On durak, on sekiz yüzyıl.', gununSozu:'Günün sözü', git:'Bu durağa git', y1b:'Baştan başla', y1k:'Efes\'te Herakleitos ile: her şey akar.', y2b:'Hazır rotalar', y2k:'2–4 günlük, her gecesi planlı.', y3b:'Beni şaşırt', y3k:'Rastgele bir filozofla tanış.', nasil:'Nasıl gezilir', n1b:'Oku', n1k:'Fikirler, hayat çizgisi, doğrulanmış söz.', n2b:'Yürü', n2k:'Ören yerinde rota, yakında otel.', n3b:'Mühürle', n3k:'Her durak pasaportuna bir mühür.', konakBolum:'Felsefe rotasında konakla', konakBolumAlt:'Her durağın yakınındaki otelleri Hotels.com\'da gör.', haritaya:'↑ Harita', efesLink:'Efes gezi rehberi →', sanat:'Sanat ve yapılar', rotaBaslik:'Hazır rotalar: gündüz felsefe, gece konak', rotaAlt:'Her durakta ne göreceğin ve her gece nerede kalacağın planlı. Geceye dokun, o kasabanın otellerini Hotels.com\'da gör.', gun:'Gün', gece:'Gece', geceKal:'{n} gece kal', haritadaGoster:'Rotayı haritada göster', rotaKapat:'Rotayı kapat', rotaCip:'Rota: {ad} ✕', oteleGit:'Otelleri gör', durak:'Durak', rotaOzet:'Bu rotanın gecelerini planla', ozetNot:'Düşünce bölümü SEP maddelerinin bu site için yazılmış özetidir; ayrıntı ve tartışmalar için maddelerin kendisine bakın.', birincil:'Birincil kaynak', ceviri:'Türkçesi bu siteye ait.' },
+   baglar:'Bağlantılar', baglarGoster:'Bağlantılar', hoca:'Hoca ve öğrenci', etki:'Etki', baglarNot:'Düz çizgi hoca ile öğrenciyi, kesikli çizgi etkiyi gösterir.', baglarYok:'Bu yerin bağları haritanın dışına uzanıyor: Belh, Tebriz ve İslam düşüncesinin geniş dünyası.', sDusunce:'Düşünce', sGezi:'Gezi ve sanat', sBaglar:'Bağlar ve kaynaklar', fikirler:'Temel fikirler', hayat:'Hayat çizgisi', bilinmeyen:'Bilmediklerimiz', miras:'Mirası', konakBaslik:'{yer} ve çevresindeki oteller', basla:'Nereden başlamalı?', hosgeldin:'On durak, on sekiz yüzyıl.', gununSozu:'Günün sözü', git:'Bu durağa git', y1b:'Baştan başla', y1k:'Efes\'te Herakleitos ile: her şey akar.', y2b:'Hazır rotalar', y2k:'2–4 günlük, her gecesi planlı.', y3b:'Beni şaşırt', y3k:'Rastgele bir filozofla tanış.', nasil:'Nasıl gezilir', n1b:'Oku', n1k:'Fikirler, hayat çizgisi, doğrulanmış söz.', n2b:'Yürü', n2k:'Ören yerinde rota, yakında otel.', n3b:'Mühürle', n3k:'Her durak pasaportuna bir mühür.', konakBolum:'Felsefe rotasında konakla', konakBolumAlt:'Her durağın yakınındaki otelleri Booking.com ya da Hotels.com\'da karşılaştır.', haritaya:'↑ Harita', efesLink:'Efes gezi rehberi →', sanat:'Sanat ve yapılar', rotaBaslik:'Hazır rotalar: gündüz felsefe, gece konak', rotaAlt:'Her durakta ne göreceğin, hangi turu alabileceğin ve her gece nerede kalacağın planlı.', gun:'Gün', gece:'Gece', geceKal:'{n} gece kal', haritadaGoster:'Rotayı haritada göster', rotaKapat:'Rotayı kapat', rotaCip:'Rota: {ad} ✕', oteleGit:'Otelleri gör', durak:'Durak', rotaOzet:'Bu rotanın gecelerini planla', ozetNot:'Düşünce bölümü SEP maddelerinin bu site için yazılmış özetidir; ayrıntı ve tartışmalar için maddelerin kendisine bakın.', birincil:'Birincil kaynak', ceviri:'Türkçesi bu siteye ait.' },
  en:{ etiket:'ΦΙΛΟΣΟΦΙΑ · Anatolia', baslik:'Philosophy Map of Türkiye', giris:'From Heraclitus to Rumi: ten places where philosophy and art were born in this land. Tap a place or follow a ready-made route: ideas, theatres, sculpture and a place to stay every night.',
    tum:'All of Türkiye', ege:'Zoom to the Aegean', egeNot:'Seven stops lie on the Aegean coast; zoom in to choose.', kim:'Philosopher', donem:'Period', neden:'Why here?', soz:'Quote card', eser:'Work', dogru:'Checked against sources', bekliyor:'Translation being checked against the original',
    kartYap:'Download card', rota:'Walking route', muhur:'Collect stamp', muhurlu:'Stamped', muhurNot:'If you have visited, stamp your passport.', muhurBildir:'Stamp added to your passport.',
-   oteller:'Stay a little longer', otelNot:'See hotels near this place on Hotels.com.', otelBtn:'See hotels', otelAcik:'This site may earn a commission on bookings made through these links, at no extra cost to you.',
+   oteller:'Stay a little longer', otelNot:'See hotels near this place on Hotels.com.', otelBtn:'See hotels', otelAcik:'Some hotel and tour links are affiliate links (Booking.com, Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.', turlar:'Tours and tickets', sesEtiket:'Audio guide pack · coming soon', sesBaslik:'Walk with a philosopher in your ear', sesAlt:'Narrated walks for Ephesus, Pergamon, Hierapolis and the other stops, to download before your trip. Be the first to hear when they are ready.', sesKayit:'Join the waitlist', sesYakinda:'Coming soon', sesDene:'Try the free Ephesus guide', rehberBaslik:'Travel guides', oku:'Read', rehberDil:'Guides are in English for now.',
    rehber:'Open the Ephesus tour guide', rehberNot:'A full audio tour guide is ready for Ephesus.', kaynaklar:'Sources', pasaport:'Philosophy Passport', pasaportAlt:'One stamp for every place you visit.',
    yakinda:'Coming soon: Colophon (Xenophanes), Priene, Harran, Hacıbektaş, Nusaybin and Istanbul.', alt1:'All illustrations are original to this site. Map data: Natural Earth (public domain).', alt2:'Facts are based on the Stanford Encyclopedia of Philosophy, the Internet Encyclopedia of Philosophy, Britannica and UNESCO.', sec:'Choose a place on the map.', kartAlt:'Philosophy Map of Türkiye',
    dinle:'Listen', durdur:'Stop', dusun:'Think', notYer:'Write one sentence. It stays on this device only.', kaydet:'Save', kaydedildi:'Your note was saved.', sesYok:'This device cannot read aloud; you can read the text instead.',
-   baglar:'Connections', baglarGoster:'Connections', hoca:'Teacher and pupil', etki:'Influence', baglarNot:'Solid lines show teacher and pupil, dashed lines show influence.', baglarYok:'This place’s connections reach beyond the map: Balkh, Tabriz and the wide world of Islamic thought.', sDusunce:'Thought', sGezi:'Visit and art', sBaglar:'Links & sources', fikirler:'Key ideas', hayat:'Timeline', bilinmeyen:'What we don’t know', miras:'Legacy', konakBaslik:'Hotels in and around {yer}', basla:'Where to begin', hosgeldin:'Ten stops, eighteen centuries.', gununSozu:'Words for today', git:'Go to this stop', y1b:'Start at the beginning', y1k:'With Heraclitus at Ephesus: everything flows.', y2b:'Ready-made routes', y2k:'2 to 4 days, every night planned.', y3b:'Surprise me', y3k:'Meet a philosopher at random.', nasil:'How it works', n1b:'Read', n1k:'Ideas, a timeline, a verified quote.', n2b:'Walk', n2k:'A route on site, a hotel nearby.', n3b:'Stamp', n3k:'A passport stamp for every stop.', konakBolum:'Stay along the philosophy route', konakBolumAlt:'See hotels near every stop on Hotels.com.', haritaya:'↑ Map', efesLink:'Ephesus tour guide →', sanat:'Art and monuments', rotaBaslik:'Ready-made routes: philosophy by day, a good bed by night', rotaAlt:'What to see at every stop and where to sleep every night. Tap a night to see that town\'s hotels on Hotels.com.', gun:'Day', gece:'Night', geceKal:'Stay {n} night(s)', haritadaGoster:'Show route on the map', rotaKapat:'Hide route', rotaCip:'Route: {ad} ✕', oteleGit:'See hotels', durak:'Stop', rotaOzet:'Plan the nights of this route', ozetNot:'The Thought section summarises SEP entries in this site’s own words; see the entries themselves for detail and debate.', birincil:'Primary source', ceviri:'English rendering is this site’s own.' }
+   baglar:'Connections', baglarGoster:'Connections', hoca:'Teacher and pupil', etki:'Influence', baglarNot:'Solid lines show teacher and pupil, dashed lines show influence.', baglarYok:'This place’s connections reach beyond the map: Balkh, Tabriz and the wide world of Islamic thought.', sDusunce:'Thought', sGezi:'Visit and art', sBaglar:'Links & sources', fikirler:'Key ideas', hayat:'Timeline', bilinmeyen:'What we don’t know', miras:'Legacy', konakBaslik:'Hotels in and around {yer}', basla:'Where to begin', hosgeldin:'Ten stops, eighteen centuries.', gununSozu:'Words for today', git:'Go to this stop', y1b:'Start at the beginning', y1k:'With Heraclitus at Ephesus: everything flows.', y2b:'Ready-made routes', y2k:'2 to 4 days, every night planned.', y3b:'Surprise me', y3k:'Meet a philosopher at random.', nasil:'How it works', n1b:'Read', n1k:'Ideas, a timeline, a verified quote.', n2b:'Walk', n2k:'A route on site, a hotel nearby.', n3b:'Stamp', n3k:'A passport stamp for every stop.', konakBolum:'Stay along the philosophy route', konakBolumAlt:'Compare hotels near every stop on Booking.com or Hotels.com.', haritaya:'↑ Map', efesLink:'Free Ephesus audio guide →', sanat:'Art and monuments', rotaBaslik:'Ready-made routes: philosophy by day, a good bed by night', rotaAlt:'What to see at every stop, which tours to book and where to sleep every night.', gun:'Day', gece:'Night', geceKal:'Stay {n} night(s)', haritadaGoster:'Show route on the map', rotaKapat:'Hide route', rotaCip:'Route: {ad} ✕', oteleGit:'See hotels', durak:'Stop', rotaOzet:'Plan the nights of this route', ozetNot:'The Thought section summarises SEP entries in this site’s own words; see the entries themselves for detail and debate.', birincil:'Primary source', ceviri:'English rendering is this site’s own.' }
 };
 
 /* ==========================================================================
@@ -989,14 +1038,15 @@ function muhurSVG(yer, basili){
    AYRINTI PANELİ
    ========================================================================== */
 var KONAK_SVG = '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 30 32 11l24 19"/><path d="M14 26v28h36V26"/><path d="M26 54V41a6 6 0 0 1 12 0v13"/><path d="M41 31h6v7h-6z"/><path d="M18 31h5v7h-5z"/><path d="M46 8a5 5 0 1 0 6 6 4 4 0 0 1-6-6z" fill="currentColor"/></svg>';
+var TUR_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16v4a2 2 0 0 0 0 4v2H4v-2a2 2 0 0 0 0-4z"/><path d="M14 8v10" stroke-dasharray="2 2"/></svg>';
 function konakKart(yer){
-  if (!OTEL.goster || !OTEL.yerler[yer.id]) return '';
-  var yerAd = OTEL.yerler[yer.id].arama.split(',')[0];
-  return '<a class="konak" href="' + h(otelAdresi(yer.id)) + '" target="_blank" rel="sponsored noopener" data-eylem="otel">' +
-    '<span class="konak-ikon">' + KONAK_SVG + '</span>' +
-    '<span class="konak-metin"><small>' + h(t('oteller')) + '</small><b>' + h(t('konakBaslik').replace('{yer}', yerAd)) + '</b><em>' + h(t('otelBtn')) + ' · Hotels.com</em></span>' +
-    '<span class="konak-ok" aria-hidden="true">→</span></a>' +
-    (ortaklikVar() ? '<p class="not konak-not">' + h(t('otelAcik')) + '</p>' : '');
+  var ot = otelDugmeleri(yer.id, 'konak-btn'), tr = turDugmeleri(yer.id, 'tur-btn');
+  if (!ot && !tr) return '';
+  return (ot ? '<div class="konak"><span class="konak-ikon">' + KONAK_SVG + '</span>' +
+      '<span class="konak-metin"><small>' + h(t('oteller')) + '</small><b>' + h(t('konakBaslik').replace('{yer}', kasaba(yer.id))) + '</b></span>' +
+      '<span class="konak-dugmeler">' + ot + '</span></div>' : '') +
+    (tr ? '<div class="tur-kart"><span class="tur-ikon">' + TUR_SVG + '</span><span class="tur-metin"><small>' + h(t('turlar')) + '</small><b>' + h(y(yer).ad) + '</b></span><span class="tur-dugmeler">' + tr + '</span></div>' : '') +
+    aciklama();
 }
 function felsefeBolum(yer){
   var F = window.FELSEFE && FELSEFE[yer.id]; if (!F) return '';
@@ -1088,14 +1138,13 @@ function karsilamaCiz(p){
 }
 function konakBolumCiz(){
   var el = $('konak-bolum');
-  if (!OTEL.goster){ el.hidden = true; return; }
+  if (!O.oteller().length){ el.hidden = true; return; }
   el.innerHTML = '<div class="etiket">ΚΑΤΑΛΥΜΑ</div><h2 id="konak-h">' + h(t('konakBolum')) + '</h2><p class="soluk">' + h(t('konakBolumAlt')) + '</p>' +
-    '<div class="konak-izgara">' + YERLER.filter(function(yer){ return OTEL.yerler[yer.id]; }).map(function(yer){
-      var kasaba = OTEL.yerler[yer.id].arama.split(',')[0];
-      return '<a class="konak-mini" style="--r:' + RENK[yer.id] + '" href="' + h(otelAdresi(yer.id)) + '" target="_blank" rel="sponsored noopener" data-eylem="otel">' +
-        '<span class="no">' + (YERLER.indexOf(yer) + 1) + '</span><span><b>' + h(kasaba) + '</b><small>' + h(y(yer).ad) + ' · ' + h(y(yer).kim.split(',')[0]) + '</small></span>' +
-        '<span class="ok" aria-hidden="true">→</span><span class="gizli"> · ' + h(t('otelBtn')) + ' · Hotels.com</span></a>';
-    }).join('') + '</div>' + (ortaklikVar() ? '<p class="not konak-not">' + h(t('otelAcik')) + '</p>' : '');
+    '<div class="konak-izgara">' + YERLER.filter(function(yer){ return YER_ARAMA[yer.id]; }).map(function(yer){
+      return '<div class="konak-mini" style="--r:' + RENK[yer.id] + '"><span class="no">' + (YERLER.indexOf(yer) + 1) + '</span>' +
+        '<span class="km-metin"><b>' + h(kasaba(yer.id)) + '</b><small>' + h(y(yer).ad) + ' · ' + h(y(yer).kim.split(',')[0]) + '</small></span>' +
+        '<span class="km-dugmeler">' + otelDugmeleri(yer.id, 'km-btn') + '</span></div>';
+    }).join('') + '</div>' + aciklama();
 }
 
 var AY_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.5 3.2a8.6 8.6 0 1 0 6.3 13.6A7.2 7.2 0 0 1 14.5 3.2z"/></svg>';
@@ -1104,27 +1153,27 @@ function sanatBolum(yer){
   return '<section class="sanat"><div class="etiket" style="margin-bottom:10px">' + h(t('sanat')) + '</div><ul>' + S[D.dil].map(function(x){ return '<li><b>' + h(x[0]) + '</b><span>' + h(x[1]) + '</span></li>'; }).join('') + '</ul></section>';
 }
 function rotaBul(id){ for (var i = 0; i < ROTALAR.length; i++) if (ROTALAR[i].id === id) return ROTALAR[i]; return null; }
-function kasaba(id){ return OTEL.yerler[id] ? OTEL.yerler[id].arama.split(',')[0] : ''; }
 function rotaBolumCiz(){
   var R = rotaBul(D.rotaSec) || ROTALAR[0], m = R[D.dil], geceNo = 0;
   var ciplar = '<div class="rota-ciplar" role="tablist">' + ROTALAR.map(function(x){
     return '<button type="button" role="tab" class="rota-cip" style="--r:' + x.renk + '" data-rota="' + x.id + '" aria-selected="' + (x.id === R.id) + '"><b>' + h(x[D.dil].ad) + '</b><small>' + h(x[D.dil].sure) + '</small></button>'; }).join('') + '</div>';
   var gunler = m.gunler.map(function(g, i){
     var yer = bul(g[0]), gece = '';
-    if (g[3] && OTEL.goster && OTEL.yerler[g[3]]){
+    if (g[3] && YER_ARAMA[g[3]] && O.oteller().length){
       geceNo += 1;
-      gece = '<a class="gece" href="' + h(otelAdresi(g[3])) + '" target="_blank" rel="sponsored noopener" data-eylem="otel">' +
-        '<span class="ay">' + AY_SVG + '</span><span class="gece-metin"><small>' + h(t('gece')) + ' ' + geceNo + (g[4] > 1 ? '–' + (geceNo + g[4] - 1) : '') + '</small><b>' + h(kasaba(g[3])) + '</b></span>' +
-        '<span class="gece-btn">' + h(t('oteleGit')) + ' →</span></a>';
+      gece = '<div class="gece"><span class="ay">' + AY_SVG + '</span><span class="gece-metin"><small>' + h(t('gece')) + ' ' + geceNo + (g[4] > 1 ? '–' + (geceNo + g[4] - 1) : '') + '</small><b>' + h(kasaba(g[3])) + '</b></span>' +
+        '<span class="gece-dugmeler">' + otelDugmeleri(g[3], 'gece-btn') + '</span></div>';
       geceNo += (g[4] || 1) - 1;
     }
+    var tr = turDugmeleri(g[0], 'gun-tur');
+    if (tr && (i === 0 || m.gunler[i - 1][0] !== g[0])) gece = '<p class="gun-turlar"><span>' + h(t('turlar')) + ':</span> ' + tr + '</p>' + gece;
     return '<li style="--d:' + RENK[yer.id] + '"><span class="gun-no"><small>' + h(t('gun')) + '</small>' + (i + 1) + '</span>' +
       '<div class="gun-ic"><button type="button" class="gun-yer" data-yer="' + yer.id + '"><span class="nokta"></span>' + h(g[1]) + '</button><p>' + h(g[2]) + '</p>' + gece + '</div></li>';
   }).join('');
   $('rota-bolum').innerHTML = '<div class="etiket">ΟΔΟΙΠΟΡΙΑ</div><h2 id="rota-h">' + h(t('rotaBaslik')) + '</h2><p class="soluk">' + h(t('rotaAlt')) + '</p>' + ciplar +
     '<div class="rota-kart" style="--r:' + R.renk + '" role="tabpanel"><div class="rota-bas"><div><h3>' + h(m.ad) + '</h3><p>' + h(m.sure) + ' · ' + h(m.alt) + '</p></div>' +
       '<button type="button" class="btn btn-hayalet" data-eylem="rota-goster">' + h(D.rota === R.id ? t('rotaKapat') : t('haritadaGoster')) + '</button></div>' +
-      '<ol class="gunler">' + gunler + '</ol>' + (ortaklikVar() ? '<p class="not konak-not">' + h(t('otelAcik')) + '</p>' : '') + '</div>';
+      '<ol class="gunler">' + gunler + '</ol>' + aciklama() + '</div>';
 }
 function rotaSVG(f){
   var R = rotaBul(D.rota); if (!R) return '';
@@ -1139,6 +1188,31 @@ function rotaGoster(id){
   rotaBolumCiz(); metinCiz();
   if (R){ if (D.zum !== R.zum) zumla(R.zum); else haritaCiz(); $('harita').scrollIntoView({ behavior:'smooth', block:'center' }); }
   else haritaCiz();
+}
+
+
+/* ==========================================================================
+   REHBER YAZILARI (guides/ klasöründeki İngilizce sayfalar) ve SESLİ REHBER
+   ========================================================================== */
+var REHBERLER = [
+  { adres:'/guides/philosophy-trip-turkey', en:['A philosophy trip through Türkiye','Ten places, four routes and how to plan them.'], tr:['Türkiye\'de bir felsefe gezisi','On mekân, dört rota ve nasıl planlanır.'] },
+  { adres:'/guides/where-to-stay-in-ephesus', en:['Where to stay for Ephesus','Selçuk, Şirince or Kuşadası: which base suits you.'], tr:['Efes için nerede kalınır','Selçuk, Şirince ya da Kuşadası: hangisi sana uyar.'] },
+  { adres:'/guides/ephesus-to-pamukkale-itinerary', en:['Ephesus to Pamukkale in 4 days','Ephesus, Miletus, Aphrodisias and Hierapolis.'], tr:['Efes\'ten Pamukkale\'ye 4 gün','Efes, Milet, Afrodisias ve Hierapolis.'] },
+  { adres:'/guides/where-to-stay-in-pamukkale', en:['Where to stay in Pamukkale','Pamukkale village, Karahayıt or Denizli.'], tr:['Pamukkale\'de nerede kalınır','Pamukkale köyü, Karahayıt ya da Denizli.'] }
+];
+var KULAKLIK_SVG = '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M8 30v-6a16 16 0 0 1 32 0v6"/><rect x="6" y="28" width="9" height="13" rx="3" fill="currentColor" fill-opacity=".18"/><rect x="33" y="28" width="9" height="13" rx="3" fill="currentColor" fill-opacity=".18"/></svg>';
+function sesBolumCiz(){
+  var kayit = O.sesliRehber && O.sesliRehber.kayit;
+  $('ses-bolum').innerHTML = '<div class="ses-kart"><div class="ses-ikon">' + KULAKLIK_SVG + '</div><div class="ses-metin">' +
+    '<div class="etiket">' + h(t('sesEtiket')) + '</div><h2 id="ses-h">' + h(t('sesBaslik')) + '</h2><p>' + h(t('sesAlt')) + '</p>' +
+    '<div class="ses-dugmeler">' + (kayit ? '<a class="btn btn-okra" href="' + h(kayit) + '" target="_blank" rel="noopener">' + h(t('sesKayit')) + '</a>' : '<span class="ses-yakinda">' + h(t('sesYakinda')) + '</span>') +
+    '<a class="btn btn-hayalet" href="/efes">' + h(t('sesDene')) + ' →</a></div></div></div>';
+}
+function rehberBolumCiz(){
+  $('rehber-bolum').innerHTML = '<div class="etiket">ΟΔΗΓΟΣ</div><h2 id="rehber-h">' + h(t('rehberBaslik')) + '</h2>' +
+    '<div class="rehber-izgara">' + REHBERLER.map(function(g){ var m = g[D.dil] || g.en;
+      return '<a class="rehber-kart" href="' + g.adres + '"' + (D.dil === 'tr' ? ' hreflang="en"' : '') + '><b>' + h(m[0]) + '</b><span>' + h(m[1]) + '</span><em>' + h(t('oku')) + ' →</em></a>'; }).join('') + '</div>' +
+    (D.dil === 'tr' ? '<p class="not">' + h(t('rehberDil')) + '</p>' : '');
 }
 
 function bagBolum(yer){
@@ -1182,7 +1256,7 @@ function metinCiz(){
   $('alt').innerHTML = '<p>' + h(t('alt1')) + '</p><p>' + h(t('alt2')) + '</p>';
   document.querySelectorAll('[data-dil]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-dil') === D.dil); });
 }
-function hepsi(odakla){ metinCiz(); haritaCiz(); listeCiz(); panelCiz(odakla); rotaBolumCiz(); konakBolumCiz(); pasaportCiz(); haritayaGuncelle(); }
+function hepsi(odakla){ metinCiz(); haritaCiz(); listeCiz(); panelCiz(odakla); rotaBolumCiz(); konakBolumCiz(); sesBolumCiz(); rehberBolumCiz(); pasaportCiz(); haritayaGuncelle(); }
 
 /* ==========================================================================
    SÖZ KARTI (1080x1350 PNG, paylaşılabilir)

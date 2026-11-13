@@ -1,0 +1,37 @@
+/* Rehber yazıları: haritayla aynı sade dil */
+:root{--zemin:#F6F3EC;--yuzey:#FAF8F3;--ince:#ECE5D8;--koyu:#1F2A36;--soluk:#4A5868;--toprak:#A0561F;--okra:#E3B38A;
+  --ui:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--yazi:'EB Garamond',Georgia,serif;
+  --golge:0 1px 2px rgba(40,30,20,.05),0 18px 40px -24px rgba(40,30,20,.3)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--zemin);color:var(--koyu);font-family:var(--yazi);font-size:19px;line-height:1.6}
+a{color:var(--toprak)}
+.ust{max-width:760px;margin:0 auto;padding:20px 16px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--ui);font-size:14px}
+.ust a{text-decoration:none;font-weight:600;color:var(--koyu)}
+.ust .marka{font-family:'Cinzel',Georgia,serif;letter-spacing:.04em}
+main{max-width:760px;margin:0 auto;padding:12px 16px 56px}
+.etiket{font-family:var(--ui);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--toprak);margin-top:24px}
+h1{font-family:'EB Garamond',Georgia,serif;font-weight:600;font-size:clamp(34px,6vw,48px);line-height:1.1;margin:6px 0 12px}
+h2{font-weight:600;font-size:28px;line-height:1.2;margin:40px 0 8px}
+h3{font-weight:600;font-size:22px;margin:24px 0 4px}
+.giris{font-size:21px;color:#36414D}
+.ozet{background:#fff;border-radius:18px;padding:16px 20px;box-shadow:var(--golge);font-family:var(--ui);font-size:15.5px;line-height:1.55}
+.ozet ul{margin:6px 0 0;padding-left:20px}
+.cta{background:var(--koyu);color:#F4EFE6;border-radius:20px;padding:18px 20px;margin:18px 0;box-shadow:0 18px 36px -24px rgba(20,15,10,.8)}
+.cta small{display:block;font-family:var(--ui);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--okra);font-weight:600}
+.cta b{display:block;font-size:22px;margin:2px 0 10px}
+.cta .dugmeler{display:flex;gap:8px;flex-wrap:wrap}
+.cta a{flex:1;min-width:140px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;background:var(--okra);color:var(--koyu);font-family:var(--ui);font-weight:700;font-size:15px;text-decoration:none}
+.cta a + a{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.cta.tur{background:#fff;color:var(--koyu);box-shadow:var(--golge)}
+.cta.tur small{color:var(--toprak)}
+.cta.tur a{background:var(--koyu);color:#fff}
+.cta.tur a + a{background:var(--yuzey);color:var(--koyu);box-shadow:inset 0 0 0 1px var(--ince)}
+.gun{background:#fff;border-radius:18px;padding:16px 20px;margin:14px 0;box-shadow:var(--golge)}
+.gun h3{margin-top:0}
+.gun p{margin:6px 0}
+blockquote{margin:16px 0;padding:6px 0 6px 18px;border-left:3px solid var(--toprak);font-style:italic;font-size:21px}
+.not{font-family:var(--ui);font-size:13.5px;color:var(--soluk);line-height:1.5}
+.ilgili{display:grid;gap:10px;margin-top:12px}
+.ilgili a{display:block;background:#fff;border-radius:14px;padding:12px 16px;text-decoration:none;color:var(--koyu);box-shadow:var(--golge);font-weight:600}
+footer{max-width:760px;margin:0 auto;padding:0 16px 40px;font-family:var(--ui);font-size:13.5px;color:var(--soluk)}

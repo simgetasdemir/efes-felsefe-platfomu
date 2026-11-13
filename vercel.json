@@ -1,11 +1,44 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/turkiye", "destination": "/", "permanent": true },
-    { "source": "/turkiye/", "destination": "/", "permanent": true }
+    {
+      "source": "/turkiye",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/turkiye/",
+      "destination": "/",
+      "permanent": true
+    }
   ],
   "headers": [
-    { "source": "/(harita-veri|felsefe-veri).js", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }] },
-    { "source": "/sw.js", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }
+    {
+      "source": "/(harita-veri|felsefe-veri).js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/ortaklik.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=600"
+        }
+      ]
+    }
   ]
 }

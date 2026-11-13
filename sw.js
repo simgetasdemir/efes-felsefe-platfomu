@@ -1,6 +1,6 @@
-/* Efes: ören yerinde internet zayıf olabilir. Önce ağdan dener, olmazsa kayıtlı kopyayı açar. */
-var KAYIT = 'efes-v1';
-var TEMEL = ['/', '/manifest.webmanifest', '/ikon-192.png', '/og-kare.png'];
+/* Felsefe Haritası + Efes: ören yerinde internet zayıf olabilir. Önce ağdan dener, olmazsa kayıtlı kopyayı açar. */
+var KAYIT = 'felsefe-v3';
+var TEMEL = ['/', '/efes', '/harita-veri.js', '/felsefe-veri.js', '/manifest.webmanifest', '/harita.webmanifest', '/ikon-192.png', '/og-kare.png'];
 self.addEventListener('install', function(e){
   e.waitUntil(caches.open(KAYIT).then(function(c){ return c.addAll(TEMEL); }));
   self.skipWaiting();
@@ -19,7 +19,10 @@ self.addEventListener('fetch', function(e){
       if (r && (r.ok || r.type === 'opaque')) { var k = r.clone(); caches.open(KAYIT).then(function(c){ c.put(e.request, k); }); }
       return r;
     }).catch(function(){
-      return caches.match(e.request).then(function(m){ return m || (e.request.mode === 'navigate' ? caches.match('/') : undefined); });
+      return caches.match(e.request, { ignoreSearch: true }).then(function(m){
+        if (m) return m;
+        if (e.request.mode === 'navigate') return caches.match(u.pathname.indexOf('/efes') === 0 ? '/efes' : '/');
+      });
     })
   );
 });

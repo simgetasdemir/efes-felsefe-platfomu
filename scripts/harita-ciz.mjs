@@ -41,5 +41,5 @@ const komsu = ulkeler.filter(f => f.id !== '792' && kesisir(kutu(f))).map(f => y
 const out = `/* Otomatik üretildi: scripts/harita-ciz.mjs. Kaynak: Natural Earth (kamu malı). */
 window.HARITA = ${JSON.stringify({ g: G, y: Y, b0: B.b0, e1: B.e1, k: K, s: S, turkiye: yol(tr, 0.35, false), komsu })};
 `;
-fs.writeFileSync(new URL('../turkiye/harita-veri.js', import.meta.url), out);
+fs.writeFileSync(new URL('../harita-veri.js', import.meta.url), out);
 console.log('genişlik', G, 'yükseklik', Y, 'bayt', out.length);

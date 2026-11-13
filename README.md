@@ -7,7 +7,11 @@ Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak için
 
 | Dosya | Ne işe yarar |
 |---|---|
-| `index.html` | Uygulamanın tamamı: ekranlar, metinler, görseller (görseller dosyanın içine gömülü). |
+| `index.html` | Ana sayfa: Türkiye Felsefe Haritası. |
+| `efes.html` | Efes uygulaması (`/efes` adresinde): ekranlar, metinler, görseller. |
+| `harita-veri.js`, `felsefe-veri.js` | Harita çizgileri ve Düşünce sekmesi içerikleri. |
+| `vercel.json` | Kısa adresler (`/efes`), eski `/turkiye/` adresinin ana sayfaya yönlendirilmesi, önbellek ayarları. |
+| `robots.txt`, `og-harita.jpg`, `harita.webmanifest` | Arama motorları, harita paylaşım görseli, haritayı telefona ekleme. |
 | `api/katip.js` | Kâtip’i Anthropic API’ye bağlayan küçük sunucu fonksiyonu. API anahtarı yalnızca burada, sunucuda durur. |
 | `package.json` | Proje bilgisi. Ek paket kurulumu gerekmez. |
 | `og.jpg`, `og-kare.png` | Paylaşım önizleme görseli ve telefon ana ekranı ikonu. |
@@ -76,15 +80,15 @@ Gerçek maliyeti ilk günlerde Anthropic Console’daki **Usage** ekranından iz
 - Kâtip bir yapay zekâdır ve hata yapabilir. Herkese açık yayında, uygunsuz bir cevabı bildirmek için bir iletişim adresi eklemen iyi olur.
 - Kişisel veri toplanmaz; ilerleme yalnızca kullanıcının tarayıcısında durur. Kâtip’e yazılanlar cevap üretmek için Anthropic’e gönderilir. Bunu bir gizlilik notunda belirtmelisin (Play Store için de gerekecek).
 
-## Türkiye Felsefe Haritası (`/turkiye/`)
+## Türkiye Felsefe Haritası (ana sayfa `/`)
 
-- `turkiye/index.html`: Herakleitos'tan Mevlânâ'ya on mekânlık harita. Her mekânda filozof, söz kartı (indirilebilir PNG), yürüyüş rotası, pasaport mührü, çevre otelleri ve kaynaklar var. TR + EN.
+- `index.html`: Herakleitos'tan Mevlânâ'ya on mekânlık harita. Her mekânda filozof, söz kartı (indirilebilir PNG), yürüyüş rotası, pasaport mührü, çevre otelleri ve kaynaklar var. TR + EN.
 - Mekân metinleri aynı dosyadaki `YERLER` listesindedir. Kaynak dosyası: proje klasöründeki `efes/turkiye-felsefe-mekanlari.md`. Sitedeki tüm sözler kaynakta doğrulandı; `dogrulandi:false` yapılan bir söz sayfada "kontrol ediliyor" diye etiketlenir. Birincil metin bağlantıları `birincil` alanındadır.
 - `DERIN`: her mekânın sesli anlatımı (Dinle, cihazın yapay sesiyle) ve düşünme sorusu (Düşün). Notlar yalnızca kullanıcının tarayıcısında saklanır.
 - `felsefe-veri.js`: her mekânın Düşünce sekmesi (temel fikirler, hayat çizgisi, bilmediklerimiz, mirası). Stanford Encyclopedia of Philosophy maddelerinin kendi sözlerimizle özetidir; her fikir ilgili SEP bölümüne bağlanır. SEP maddesi olmayan Diogenes için IEP, Mevlânâ için SEP'in İslam mistisizmi maddesi ve Britannica kullanıldı.
 - Haritadaki dağ sıraları, ırmaklar ve göller (`SIRALAR`, `IRMAKLAR`, `GOLLER`) elle yerleştirilmiş üsluplu çizimlerdir; atlas doğruluğunda değildir.
 - `BAGLAR`: filozoflar arası hoca-öğrenci (düz çizgi) ve etki (kesikli çizgi) ilişkileri. Yeni bir bağ eklemek için listeye bir satır yeterli.
-- Harita çizgisi Natural Earth (kamu malı) verisinden `scripts/harita-ciz.mjs` ile bir kez üretildi (`turkiye/harita-veri.js`). Tüm amblem ve mühür çizimleri bu site için özgün SVG'dir.
+- Harita çizgisi Natural Earth (kamu malı) verisinden `scripts/harita-ciz.mjs` ile bir kez üretildi (`harita-veri.js`). Tüm amblem ve mühür çizimleri bu site için özgün SVG'dir.
 
 ### Otel bağlantıları (Hotels.com)
 
@@ -92,6 +96,22 @@ Hotels.com, Expedia Group'un **Travel Creator Program** ortaklık programındad�
 
 1. https://creator.expediagroup.com adresinden ücretsiz başvur (sitenin adresini ister).
 2. Onaydan sonra panelde **Links → Create link** bölümüne, sitedeki "Otelleri gör" düğmesinin açtığı Hotels.com arama adresini yapıştır.
-3. Programın verdiği izlenebilir bağlantıyı `turkiye/index.html` en üstteki `OTEL.yerler.<mekân>.baglanti` alanına yaz.
+3. Programın verdiği izlenebilir bağlantıyı `index.html` en üstteki `OTEL.yerler.<mekân>.baglanti` alanına yaz.
 
 `baglanti` boş kaldıkça düğme düz Hotels.com aramasına gider (komisyon yok). İlk bağlantı eklendiğinde sayfa ortaklık açıklamasını kendiliğinden gösterir.
+
+## Alan adını bağlama (Vercel)
+
+**En kolay yol: alan adını Vercel'den almak.** Vercel'de proje → **Settings → Domains → Buy**. Alınan ad projeye kendiliğinden bağlanır, DNS ayarı gerekmez, HTTPS sertifikası otomatik gelir.
+
+**Başka yerden (Cloudflare, Namecheap) aldıysan:**
+
+1. Vercel'de proje → **Settings → Domains → Add**, alan adını yaz (ör. `ornek.com`). `www.ornek.com` için de ekle; birini diğerine yönlendirmeyi Vercel önerir.
+2. Vercel o ekranda girilecek kayıtları gösterir. Genelde:
+   - kök ad (`@`) için bir **A** kaydı, Vercel'in gösterdiği IP adresine,
+   - `www` için bir **CNAME** kaydı, Vercel'in gösterdiği hedefe.
+   Değerleri o ekrandan kopyala; Vercel bunları zaman zaman değiştirir.
+3. Bu kayıtları alan adını aldığın yerin DNS ayarlarına gir. Cloudflare'de bu iki kaydın bulutunu (proxy) **kapalı (DNS only)** tut.
+4. Birkaç dakika ile birkaç saat içinde Vercel'de ad yeşil "Valid Configuration" olur.
+
+Alan adı belli olunca `index.html` ve `efes.html` içine `canonical` bağlantısı, paylaşım görsellerine tam adres ve bir `sitemap.xml` eklenmeli.

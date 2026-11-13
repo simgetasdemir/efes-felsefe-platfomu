@@ -226,6 +226,71 @@ header.ust > div:first-child{position:relative;max-width:780px}
 .pasaport svg{transition:transform .25s}
 .pasaport button:hover svg{transform:scale(1.06) rotate(-3deg)}
 footer{font-style:italic}
+
+/* konak (otel) kartı: panelin üstünde, davet edici */
+.konak{display:flex;align-items:center;gap:14px;text-decoration:none;color:#FBF6EA;background:#2A2118 var(--doku);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden;box-shadow:inset 6px 0 0 var(--r),0 14px 28px -18px rgba(59,47,34,.8);transition:transform .2s,box-shadow .2s}
+.konak::after{content:"";position:absolute;inset:auto 0 0 0;height:12px;background:var(--meander-okra) repeat-x;background-size:24px 12px;opacity:.35}
+.konak:hover{transform:translateY(-2px);box-shadow:inset 6px 0 0 var(--r),0 18px 34px -16px rgba(59,47,34,.9)}
+.konak-ikon{flex:none;width:56px;height:56px;border-radius:50%;background:var(--r);display:grid;place-items:center;color:#FBF6EA;box-shadow:0 0 0 3px #2A2118,0 0 0 4px var(--okra)}
+.konak-ikon svg{width:34px;height:34px}
+.konak-metin{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;padding-bottom:6px}
+.konak-metin small{font-family:var(--yazit);font-size:11.5px;letter-spacing:.22em;color:var(--okra);text-transform:uppercase}
+.konak-metin b{font-size:19px;line-height:1.2}
+.konak-metin em{font-style:normal;font-size:15px;color:#D9CFC0}
+.konak-ok{flex:none;width:40px;height:40px;border-radius:50%;background:var(--okra);color:#2A2118;display:grid;place-items:center;font-size:20px;font-weight:700;transition:transform .2s}
+.konak:hover .konak-ok{transform:translateX(4px)}
+.konak-not{margin-top:-10px}
+/* sekmeler */
+.sekmeler{display:flex;gap:4px;border-bottom:1px solid #D9CBAE;margin:0 -20px;padding:0 20px;position:sticky;top:0;background:#FBF7EE;z-index:2}
+.sekmeler button{border:0;background:none;padding:12px 10px 10px;font-family:var(--yazit);font-weight:600;font-size:12.5px;letter-spacing:.12em;color:var(--soluk);border-bottom:2.5px solid transparent;margin-bottom:-1px;min-height:44px}
+.sekmeler button[aria-selected="true"]{color:var(--r);border-bottom-color:var(--r)}
+.sekme-ic{display:flex;flex-direction:column;gap:22px}
+.sekme-ic > *{animation:gir .4s cubic-bezier(.2,.7,.2,1) both}
+.sekme-ic > *:nth-child(2){animation-delay:.05s} .sekme-ic > *:nth-child(n+3){animation-delay:.1s}
+/* temel fikirler */
+.fikir-bolum{display:flex;flex-direction:column;gap:10px}
+.fikirler{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.fikirler li{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.55);border:1px solid #E3D6BA;border-radius:8px;padding:12px 14px}
+.fikirler .roma{flex:none;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--r);color:var(--r);display:grid;place-items:center;font-family:var(--yazit);font-weight:700;font-size:13px;margin-top:2px}
+.fikirler b{display:block;font-family:var(--yazit);font-size:15px;letter-spacing:.04em;margin-bottom:2px}
+.fikirler p{font-size:16.5px;line-height:1.5}
+.fikirler a{display:inline-block;margin-top:4px;font-family:var(--yazit);font-size:11.5px;letter-spacing:.14em;color:var(--r);text-decoration:none}
+.fikirler a:hover{text-decoration:underline}
+/* hayat çizgisi */
+.zaman{list-style:none;margin:10px 0 0;padding:0 0 0 14px;border-left:2px solid var(--r);display:flex;flex-direction:column;gap:12px}
+.zaman li{position:relative}
+.zaman li::before{content:"";position:absolute;left:-21px;top:7px;width:10px;height:10px;border-radius:50%;background:#FBF7EE;border:2px solid var(--r)}
+.zaman span{font-family:var(--yazit);font-weight:700;font-size:12.5px;letter-spacing:.1em;color:var(--r)}
+.zaman p{font-size:16px;line-height:1.45}
+.bilinmeyen{display:flex;gap:14px;align-items:flex-start;border:1.5px dashed #CDBF9F;border-radius:8px;padding:12px 14px}
+.bilinmeyen-ikon{flex:none;width:34px;height:34px;border-radius:50%;background:#3B2F22;color:var(--okra);display:grid;place-items:center;font-family:var(--yazit);font-weight:700;font-size:18px}
+.bilinmeyen p{font-size:16px;line-height:1.5;margin-top:2px}
+.miras p{font-size:18px;font-style:italic;line-height:1.45;margin-top:4px;padding-left:14px;border-left:3px double var(--r)}
+.atiflar{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:15.5px}
+
+/* rölyef */
+.harita .gol{fill:#C7DAE4;stroke:#4E7A95;stroke-width:.9;vector-effect:non-scaling-stroke}
+.harita .irmak{fill:none;stroke:#4E7A95;stroke-linecap:round;opacity:.85}
+.harita .irmak-ad{font-family:'EB Garamond',Georgia,serif;font-style:italic;font-size:8.5px;fill:#3F6A85;letter-spacing:.06em}
+.harita .dag-cizgi{fill:#EADBB8;stroke:#6B5A3E;stroke-width:.75;stroke-linejoin:round}
+.harita .dag-golge{fill:none;stroke:#6B5A3E;stroke-width:.45;opacity:.8}
+.harita .kar{fill:#FBF6EA;stroke:#6B5A3E;stroke-width:.5}
+.harita .sira-ad{font-family:var(--yazit);font-size:7.5px;letter-spacing:.42em;fill:#7A6545;opacity:.9}
+.harita .doruk-ad{font-family:'EB Garamond',Georgia,serif;font-style:italic;font-size:8px;fill:#5A4A32}
+.harita .kent{fill:#FBF6EA;stroke:#3B2F22;stroke-width:1}
+.harita .kent-ad{font-family:'EB Garamond',Georgia,serif;font-style:italic;font-size:9.5px;fill:#3B2F22;paint-order:stroke;stroke:#F1E5C8;stroke-width:2.5px}
+.harita .olcek path{stroke:#3B2F22;stroke-width:1;fill:none}
+.harita .olcek rect{fill:#3B2F22}
+.harita .olcek text{font-family:var(--yazit);font-size:7.5px;fill:#3B2F22;letter-spacing:.08em}
+.harita .kartus path{fill:#F6EEDB;stroke:#6B5A3E;stroke-width:1}
+.harita .kartus .kartus-ic{fill:none;stroke:#A0561F;stroke-width:.6;stroke-dasharray:2 2}
+.harita .kartus .kartus-rulo{fill:none;stroke:#6B5A3E;stroke-width:1.2}
+.harita .kartus-ust{font-family:var(--yazit);font-weight:700;font-size:14px;letter-spacing:.32em;fill:#3B2F22}
+.harita .kartus-alt{font-family:'EB Garamond',Georgia,serif;font-style:italic;font-size:10.5px;fill:#A0561F}
+.harita .gemi path{fill:none;stroke:#3B2F22;stroke-width:.9;stroke-linecap:round}
+.harita .gemi path:first-child{fill:#7A4E2A}
+.harita .gemi .yelken{fill:#F6EEDB}
+.harita .gemi .dalga-k{stroke:#4E7A95}
 </style>
 </head>
 <body>
@@ -261,6 +326,7 @@ footer{font-style:italic}
 <div class="bildirim" id="bildirim" role="status"></div>
 
 <script src="harita-veri.js"></script>
+<script src="felsefe-veri.js"></script>
 <script>
 /* ==========================================================================
    OTEL BAĞLANTILARI: tek ayar yeri
@@ -460,19 +526,19 @@ var M = {
  tr:{ etiket:'ΦΙΛΟΣΟΦΙΑ · Anadolu', baslik:'Türkiye Felsefe Haritası', giris:'Herakleitos\'tan Mevlânâ\'ya, felsefenin bu topraklarda doğduğu ve yaşadığı on yer. Bir yere dokun: rotası, sözü ve pasaport mührü seni bekliyor.',
    tum:'Tüm Türkiye', ege:'Ege\'ye yakınlaş', egeNot:'Ege kıyısında yedi durak var; yakınlaşarak seç.', kim:'Filozof', donem:'Dönem', neden:'Neden burada?', soz:'Söz kartı', eser:'Eser', dogru:'Kaynakta doğrulandı', bekliyor:'Çeviri birincil kaynakta kontrol ediliyor',
    kartYap:'Kartı indir', rota:'Yürüyüş rotası', muhur:'Mühür al', muhurlu:'Mühürlendi', muhurNot:'Bu yeri gezdiysen pasaportuna mühür bas.', muhurBildir:'Mühür pasaportuna basıldı.',
-   oteller:'Çevrede kal', otelNot:'Bu yere yakın otelleri Hotels.com\'da gör.', otelBtn:'Otelleri gör', otelAcik:'Bu bağlantılardan yapılan rezervasyonlardan site komisyon alabilir; sana ek ücret yansımaz.',
+   oteller:'Gezini burada uzat', otelNot:'Bu yere yakın otelleri Hotels.com\'da gör.', otelBtn:'Otelleri gör', otelAcik:'Bu bağlantılardan yapılan rezervasyonlardan site komisyon alabilir; sana ek ücret yansımaz.',
    rehber:'Efes gezi rehberini aç', rehberNot:'Efes için sesli anlatımlı tam gezi rehberi hazır.', kaynaklar:'Kaynaklar', pasaport:'Felsefe Pasaportu', pasaportAlt:'Gezdiğin her yer için bir mühür.',
    yakinda:'Yakında: Kolophon (Ksenofanes), Priene, Harran, Hacıbektaş, Nusaybin ve İstanbul.', alt1:'Çizimler bu site için özgün olarak yapıldı. Harita verisi: Natural Earth (kamu malı).', alt2:'Bilgiler Stanford Encyclopedia of Philosophy, Internet Encyclopedia of Philosophy, Britannica ve UNESCO sayfalarına dayanır.', sec:'Haritadan bir yer seç.', kartAlt:'Türkiye Felsefe Haritası',
    dinle:'Dinle', durdur:'Durdur', dusun:'Düşün', notYer:'Bir cümle yaz. Yalnızca bu cihazda saklanır.', kaydet:'Kaydet', kaydedildi:'Notun kaydedildi.', sesYok:'Bu cihaz sesli okumayı desteklemiyor; metni okuyabilirsin.',
-   baglar:'Bağlantılar', baglarGoster:'Bağlantılar', hoca:'Hoca ve öğrenci', etki:'Etki', baglarNot:'Düz çizgi hoca ile öğrenciyi, kesikli çizgi etkiyi gösterir.', baglarYok:'Bu yerin bağları haritanın dışına uzanıyor: Belh, Tebriz ve İslam düşüncesinin geniş dünyası.', birincil:'Birincil kaynak', ceviri:'Türkçesi bu siteye ait.' },
+   baglar:'Bağlantılar', baglarGoster:'Bağlantılar', hoca:'Hoca ve öğrenci', etki:'Etki', baglarNot:'Düz çizgi hoca ile öğrenciyi, kesikli çizgi etkiyi gösterir.', baglarYok:'Bu yerin bağları haritanın dışına uzanıyor: Belh, Tebriz ve İslam düşüncesinin geniş dünyası.', sDusunce:'Düşünce', sGezi:'Gezi', sBaglar:'Bağlar ve kaynaklar', fikirler:'Temel fikirler', hayat:'Hayat çizgisi', bilinmeyen:'Bilmediklerimiz', miras:'Mirası', konakBaslik:'{yer} ve çevresindeki oteller', ozetNot:'Düşünce bölümü SEP maddelerinin bu site için yazılmış özetidir; ayrıntı ve tartışmalar için maddelerin kendisine bakın.', birincil:'Birincil kaynak', ceviri:'Türkçesi bu siteye ait.' },
  en:{ etiket:'ΦΙΛΟΣΟΦΙΑ · Anatolia', baslik:'Philosophy Map of Türkiye', giris:'From Heraclitus to Rumi: ten places where philosophy was born and lived in this land. Tap a place for its route, its words and a passport stamp.',
    tum:'All of Türkiye', ege:'Zoom to the Aegean', egeNot:'Seven stops lie on the Aegean coast; zoom in to choose.', kim:'Philosopher', donem:'Period', neden:'Why here?', soz:'Quote card', eser:'Work', dogru:'Checked against sources', bekliyor:'Translation being checked against the original',
    kartYap:'Download card', rota:'Walking route', muhur:'Collect stamp', muhurlu:'Stamped', muhurNot:'If you have visited, stamp your passport.', muhurBildir:'Stamp added to your passport.',
-   oteller:'Stay nearby', otelNot:'See hotels near this place on Hotels.com.', otelBtn:'See hotels', otelAcik:'This site may earn a commission on bookings made through these links, at no extra cost to you.',
+   oteller:'Stay a little longer', otelNot:'See hotels near this place on Hotels.com.', otelBtn:'See hotels', otelAcik:'This site may earn a commission on bookings made through these links, at no extra cost to you.',
    rehber:'Open the Ephesus tour guide', rehberNot:'A full audio tour guide is ready for Ephesus.', kaynaklar:'Sources', pasaport:'Philosophy Passport', pasaportAlt:'One stamp for every place you visit.',
    yakinda:'Coming soon: Colophon (Xenophanes), Priene, Harran, Hacıbektaş, Nusaybin and Istanbul.', alt1:'All illustrations are original to this site. Map data: Natural Earth (public domain).', alt2:'Facts are based on the Stanford Encyclopedia of Philosophy, the Internet Encyclopedia of Philosophy, Britannica and UNESCO.', sec:'Choose a place on the map.', kartAlt:'Philosophy Map of Türkiye',
    dinle:'Listen', durdur:'Stop', dusun:'Think', notYer:'Write one sentence. It stays on this device only.', kaydet:'Save', kaydedildi:'Your note was saved.', sesYok:'This device cannot read aloud; you can read the text instead.',
-   baglar:'Connections', baglarGoster:'Connections', hoca:'Teacher and pupil', etki:'Influence', baglarNot:'Solid lines show teacher and pupil, dashed lines show influence.', baglarYok:'This place’s connections reach beyond the map: Balkh, Tabriz and the wide world of Islamic thought.', birincil:'Primary source', ceviri:'English rendering is this site’s own.' }
+   baglar:'Connections', baglarGoster:'Connections', hoca:'Teacher and pupil', etki:'Influence', baglarNot:'Solid lines show teacher and pupil, dashed lines show influence.', baglarYok:'This place’s connections reach beyond the map: Balkh, Tabriz and the wide world of Islamic thought.', sDusunce:'Thought', sGezi:'Visit', sBaglar:'Links & sources', fikirler:'Key ideas', hayat:'Timeline', bilinmeyen:'What we don’t know', miras:'Legacy', konakBaslik:'Hotels in and around {yer}', ozetNot:'The Thought section summarises SEP entries in this site’s own words; see the entries themselves for detail and debate.', birincil:'Primary source', ceviri:'English rendering is this site’s own.' }
 };
 
 /* ==========================================================================
@@ -480,7 +546,7 @@ var M = {
    ========================================================================== */
 function oku(k, v){ try { var x = JSON.parse(localStorage.getItem(k)); return x == null ? v : x; } catch(e){ return v; } }
 function yaz(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
-var D = { dil: oku('fh-dil', (navigator.language || 'tr').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en'), muhur: oku('fh-muhur', {}), secili: null, zum: 'tum', bag: oku('fh-bag', true), notlar: oku('fh-not', {}) };
+var D = { dil: oku('fh-dil', (navigator.language || 'tr').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en'), muhur: oku('fh-muhur', {}), secili: null, zum: 'tum', bag: oku('fh-bag', true), sekme: oku('fh-sekme', 'dusunce'), notlar: oku('fh-not', {}) };
 function t(k){ return M[D.dil][k]; }
 function y(yer){ return yer[D.dil]; }
 function $(id){ return document.getElementById(id); }
@@ -497,6 +563,96 @@ var EGE = (function(){ var ust = izd(27.9, 39.85), alt = izd(27.9, 37.2), yuk = 
 var EGE_KUTU = (function(){ var a = izd(25.9, 39.75), b = izd(29.6, 37.3); return [a[0], a[1], b[0] - a[0], b[1] - a[1]]; })();
 var GORUNUM = { tum: [0, 0, H.g, H.y], ege: EGE };
 function egede(yer){ return yer.lon < 30 && yer.lat > 37.2 && yer.lat < 39.85; }
+
+/* ==========================================================================
+   RÖLYEF: elle yerleştirilmiş, üsluplaştırılmış dağ sıraları, ırmaklar ve göller.
+   Koordinatlar yaklaşıktır; amaç bir atlas değil, eski bir gravür haritanın havası.
+   ========================================================================== */
+var SIRALAR = [
+ { ad:{ tr:'TOROS DAĞLARI', en:'TAURUS MOUNTAINS' }, n:[[29.4,37.15],[30.3,37.25],[31.2,37.35],[32.1,37.2],[33.0,37.05],[33.9,37.2],[34.8,37.45],[35.7,37.75],[36.5,38.0]] },
+ { ad:{ tr:'GÜNEYDOĞU TOROSLARI', en:'SOUTHEASTERN TAURUS' }, n:[[37.6,38.1],[38.6,38.3],[39.7,38.35],[40.8,38.25],[41.9,38.0],[43.0,37.75],[43.9,37.6]] },
+ { ad:{ tr:'KUZEY ANADOLU DAĞLARI', en:'PONTIC MOUNTAINS' }, n:[[30.9,40.55],[32.0,40.75],[33.2,40.9],[34.4,40.95],[35.6,40.55],[36.7,40.35],[37.9,40.35],[39.1,40.35],[40.3,40.45],[41.4,40.7]] },
+ { n:[[41.2,39.6],[42.1,39.35],[42.9,39.25],[43.5,39.05]] },
+ { n:[[38.6,39.4],[39.6,39.5],[40.4,39.35]] },
+ { n:[[28.8,39.25],[29.6,39.1],[30.3,38.9]] }
+];
+var DORUKLAR = [ { ad:'Ağrı', en:'Ararat', n:[44.3,39.7], b:2.2 }, { ad:'Erciyes', en:'Erciyes', n:[35.45,38.53], b:1.6 }, { ad:'Uludağ', en:'Uludağ', n:[29.2,40.07], b:1.3 } ];
+var IRMAKLAR = [
+ { ad:{ tr:'Kızılırmak', en:'Kızılırmak' }, n:[[38.4,39.85],[37.4,39.6],[36.2,39.15],[35.3,38.85],[34.4,39.05],[33.7,39.6],[33.7,40.35],[34.4,40.85],[35.2,41.2],[35.95,41.72]] },
+ { ad:{ tr:'Fırat', en:'Euphrates' }, n:[[41.3,39.95],[40.2,39.6],[39.3,39.15],[38.8,38.75],[38.55,38.2],[38.2,37.6],[38.0,37.05],[38.05,36.6]] },
+ { ad:{ tr:'Dicle', en:'Tigris' }, n:[[39.4,38.5],[40.2,37.92],[40.9,37.85],[41.5,37.6],[42.2,37.3],[42.45,37.1]] },
+ { ad:{ tr:'Sakarya', en:'Sakarya' }, n:[[31.6,39.1],[30.8,39.35],[30.3,39.8],[30.35,40.4],[30.45,41.12]] },
+ { ad:{ tr:'B. Menderes', en:'Maeander' }, n:[[30.0,38.2],[29.3,37.95],[28.6,37.9],[27.85,37.85],[27.5,37.65],[27.25,37.55]] },
+ { ad:{ tr:'Gediz', en:'Hermus' }, n:[[29.5,39.0],[28.6,38.55],[27.9,38.6],[27.4,38.62],[26.85,38.6]] },
+ { ad:{ tr:'Yeşilırmak', en:'Yeşilırmak' }, n:[[38.6,40.1],[37.4,40.25],[36.6,40.3],[36.2,40.75],[36.6,41.35]] }
+];
+var GOLLER = [ { ad:'Van', n:[[42.35,38.95],[42.9,38.95],[43.5,38.75],[43.4,38.45],[42.95,38.35],[42.6,38.55],[42.2,38.6]] }, { ad:'Tuz', n:[[33.3,39.05],[33.55,38.95],[33.6,38.6],[33.45,38.45],[33.25,38.65]] }, { ad:'Beyşehir', n:[[31.4,37.85],[31.6,37.8],[31.6,37.6],[31.45,37.55],[31.35,37.7]] } ];
+var KENTLER = [ { ad:'İstanbul', n:[28.97,41.01] }, { ad:'Ankara', n:[32.86,39.93] }, { ad:'İzmir', n:[27.14,38.42] } ];
+
+/* Noktalardan yumuşak bir yol (Catmull-Rom → Bézier). */
+function egri(noktalar, kapali){
+  var p = noktalar.map(function(n){ return izd(n[0], n[1]); });
+  if (kapali) p = p.concat(p.slice(0, 3));
+  var d = 'M' + p[0][0].toFixed(1) + ' ' + p[0][1].toFixed(1);
+  for (var i = 0; i < p.length - 1; i++){
+    var a = p[i - 1] || p[i], b = p[i], c = p[i + 1], e = p[i + 2] || c;
+    d += 'C' + (b[0] + (c[0] - a[0]) / 6).toFixed(1) + ' ' + (b[1] + (c[1] - a[1]) / 6).toFixed(1) + ' ' + (c[0] - (e[0] - b[0]) / 6).toFixed(1) + ' ' + (c[1] - (e[1] - b[1]) / 6).toFixed(1) + ' ' + c[0].toFixed(1) + ' ' + c[1].toFixed(1);
+  }
+  return d + (kapali ? 'Z' : '');
+}
+/* Tek bir gravür dağı: iki yamaç, gölgeli yamaçta kısa tarama çizgileri. */
+function dag(x, y, s, tohum){
+  var h2 = s * (1 + ((tohum * 37) % 7) / 14), z = x + ((tohum * 13) % 5 - 2) * s * 0.06;
+  var d = '<path class="dag-cizgi" d="M' + (x - s) + ' ' + y + 'Q' + (z - s * 0.4) + ' ' + (y - h2 * 0.55) + ' ' + z + ' ' + (y - h2) + 'Q' + (z + s * 0.45) + ' ' + (y - h2 * 0.5) + ' ' + (x + s) + ' ' + y + '"/>';
+  var g = '';
+  for (var k = 1; k <= 3; k++){ var t2 = k / 4, gx = z + (x + s - z) * t2, gy = y - h2 + h2 * t2; g += 'M' + gx.toFixed(1) + ' ' + (gy + 1).toFixed(1) + 'L' + (gx - s * 0.18).toFixed(1) + ' ' + (y - 0.5).toFixed(1); }
+  return d + '<path class="dag-golge" d="' + g + '"/>';
+}
+function siraDaglari(n, s, tohum0){
+  var out = '', adim = s * 1.55;
+  for (var i = 0; i < n.length - 1; i++){
+    var A = izd(n[i][0], n[i][1]), B = izd(n[i + 1][0], n[i + 1][1]), L = Math.hypot(B[0] - A[0], B[1] - A[1]), k = Math.max(1, Math.round(L / adim));
+    for (var j = 0; j < k; j++){
+      var t2 = j / k, x = A[0] + (B[0] - A[0]) * t2, y = A[1] + (B[1] - A[1]) * t2, tt = tohum0 + i * 7 + j;
+      out += dag(x + ((tt * 7) % 5 - 2) * 0.6, y + ((tt * 11) % 5 - 2) * 0.9, s * (0.8 + ((tt * 17) % 5) / 12), tt);
+      if (tt % 3 === 0) out += dag(x + s * 0.7, y + s * 0.9, s * 0.6, tt + 1);
+    }
+  }
+  return out;
+}
+function rolyef(f){
+  var tum = D.zum === 'tum', out = '<g class="rolyef" pointer-events="none">';
+  /* göller */
+  GOLLER.forEach(function(g){ out += '<path class="gol" d="' + egri(g.n, true) + '"/>'; });
+  /* ırmaklar (ad yazısı yol boyunca) */
+  IRMAKLAR.forEach(function(ir, i){
+    var id = 'irmak-' + i;
+    out += '<path class="irmak" id="' + id + '" d="' + egri(ir.n) + '" style="stroke-width:' + (1.3 * f) + 'px"/>';
+    if (tum && ir.n.length > 4) out += '<text class="irmak-ad" dy="-3"><textPath href="#' + id + '" startOffset="30%">' + h(ir.ad[D.dil]) + '</textPath></text>';
+  });
+  if (tum){
+    SIRALAR.forEach(function(sr, i){
+      out += siraDaglari(sr.n, 6.2, i * 31);
+      if (sr.ad){ var id = 'sira-' + i; out += '<path id="' + id + '" d="' + egri(sr.n.map(function(n){ return [n[0], n[1] - 0.33]; })) + '" fill="none"/><text class="sira-ad"><textPath href="#' + id + '" startOffset="50%" text-anchor="middle">' + h(sr.ad[D.dil]) + '</textPath></text>'; }
+    });
+    DORUKLAR.forEach(function(d, i){ var P = izd(d.n[0], d.n[1]); out += dag(P[0], P[1], 6 * d.b, 50 + i) + '<path class="kar" d="M' + (P[0] - 2.2 * d.b) + ' ' + (P[1] - 6 * d.b * 0.95) + 'L' + P[0] + ' ' + (P[1] - 6 * d.b * 1.18) + 'L' + (P[0] + 2.4 * d.b) + ' ' + (P[1] - 6 * d.b * 0.92) + '"/>' + '<text class="doruk-ad" x="' + P[0] + '" y="' + (P[1] + 9) + '" text-anchor="middle">' + h(D.dil === 'tr' ? d.ad : d.en) + '</text>'; });
+    KENTLER.forEach(function(k){ var P = izd(k.n[0], k.n[1]); out += '<circle class="kent" cx="' + P[0] + '" cy="' + P[1] + '" r="2.4"/><text class="kent-ad" x="' + (P[0] + 4.5) + '" y="' + (P[1] - 3.5) + '">' + h(k.ad) + '</text>'; });
+  }
+  return out + '</g>';
+}
+/* Kartuş, ölçek ve bir gemi: yalnızca tüm Türkiye görünümünde. */
+function suslemeler(){
+  var olc = 200 / 111 * H.s, x0 = 600, y0 = 462;
+  var olcek = '<g class="olcek" aria-hidden="true"><path d="M' + x0 + ' ' + y0 + 'h' + olc + '"/>' + [0, .5, 1].map(function(k){ return '<path d="M' + (x0 + olc * k) + ' ' + (y0 - 4) + 'v8"/>'; }).join('') +
+    '<rect x="' + x0 + '" y="' + (y0 - 2) + '" width="' + (olc / 2) + '" height="4"/><text x="' + x0 + '" y="' + (y0 - 7) + '">0</text><text x="' + (x0 + olc / 2) + '" y="' + (y0 - 7) + '" text-anchor="middle">100</text><text x="' + (x0 + olc) + '" y="' + (y0 - 7) + '" text-anchor="end">200 km</text></g>';
+  var kx = 900, ky = 384, kartus = '<g class="kartus" aria-hidden="true"><path d="M' + (kx - 78) + ' ' + (ky - 26) + 'h156q10 0 10 10v32q0 10-10 10h-156q-10 0-10-10v-32q0-10 10-10z"/>' +
+    '<path class="kartus-ic" d="M' + (kx - 72) + ' ' + (ky - 20) + 'h144v40h-144z"/>' +
+    '<path class="kartus-rulo" d="M' + (kx - 88) + ' ' + (ky - 16) + 'q-10 16 0 32M' + (kx + 88) + ' ' + (ky - 16) + 'q10 16 0 32"/>' +
+    '<text x="' + kx + '" y="' + (ky - 3) + '" text-anchor="middle" class="kartus-ust">' + (D.dil === 'tr' ? 'ANADOLU' : 'ANATOLIA') + '</text><text x="' + kx + '" y="' + (ky + 13) + '" text-anchor="middle" class="kartus-alt">' + (D.dil === 'tr' ? 'felsefenin izinde' : 'in the steps of philosophy') + '</text></g>';
+  var gx = 340, gy = 432, gemi = '<g class="gemi" aria-hidden="true"><path d="M' + (gx - 22) + ' ' + gy + 'q22 10 44 0l-4 6h-36z"/><path d="M' + gx + ' ' + gy + 'v-26"/><path class="yelken" d="M' + (gx - 12) + ' ' + (gy - 24) + 'q12 5 24 0v15q-12 4-24 0z"/>' +
+    [-14, -7, 0, 7, 14].map(function(o){ return '<path d="M' + (gx + o) + ' ' + (gy + 3) + 'l-4 8"/>'; }).join('') + '<path class="dalga-k" d="M' + (gx - 34) + ' ' + (gy + 12) + 'q5-4 10 0t10 0t10 0t10 0t10 0t10 0t10 0"/></g>';
+  return olcek + kartus + gemi;
+}
 
 /* Pusula: özgün sekiz kollu yıldız; kuzey ucunda K (EN: N). */
 function pusula(cx, cy, R){
@@ -540,7 +696,7 @@ function haritaCiz(){
   var kume = dar ? (function(){ var c = [EGE_KUTU[0] + EGE_KUTU[2] / 2, EGE_KUTU[1] + EGE_KUTU[3] / 2], R = 17 * f; return '<g class="pin" id="ege-kume" role="button" tabindex="0" aria-label="' + h(t('ege')) + '"><circle class="halka" cx="' + c[0] + '" cy="' + c[1] + '" r="' + R + '" stroke-width="' + (2.5 * f) + '" style="fill:#3B2F22"/><circle class="ic-halka" cx="' + c[0] + '" cy="' + c[1] + '" r="' + (R * .76) + '" stroke-width="' + (0.8 * f) + '"/><text x="' + c[0] + '" y="' + c[1] + '" font-size="' + (12 * f) + '">+7</text></g>'; })() : '';
   var egeKutu = D.zum === 'tum' ? '<rect class="ege-kutu" id="ege-kutu" x="' + EGE_KUTU[0] + '" y="' + EGE_KUTU[1] + '" width="' + EGE_KUTU[2] + '" height="' + EGE_KUTU[3] + '" rx="4"/>' +
     '<text class="ege-yazi" x="' + (EGE_KUTU[0] + 6) + '" y="' + (EGE_KUTU[1] + EGE_KUTU[3] + 16) + '" font-size="14">' + h(D.dil === 'tr' ? 'Ege: 7 durak' : 'Aegean: 7 stops') + '</text>' : '';
-  var denizler = D.zum === 'tum' ? '<text class="deniz-ad" x="640" y="64">' + (D.dil === 'tr' ? 'KARADENİZ' : 'BLACK SEA') + '</text><text class="deniz-ad" x="120" y="464">' + (D.dil === 'tr' ? 'AKDENİZ' : 'MEDITERRANEAN') + '</text><text class="deniz-ad" x="20" y="360" transform="rotate(-90 20 360)">' + (D.dil === 'tr' ? 'EGE' : 'AEGEAN') + '</text>' + pusula(318, 418, 30) :
+  var denizler = D.zum === 'tum' ? '<text class="deniz-ad" x="230" y="38">' + (D.dil === 'tr' ? 'KARADENİZ' : 'BLACK SEA') + '</text><text class="deniz-ad" x="120" y="464">' + (D.dil === 'tr' ? 'AKDENİZ' : 'MEDITERRANEAN') + '</text><text class="deniz-ad" x="20" y="360" transform="rotate(-90 20 360)">' + (D.dil === 'tr' ? 'EGE' : 'AEGEAN') + '</text>' + pusula(735, 44, 24) :
     '<text class="deniz-ad" x="' + (v[0] + 18 * f) + '" y="' + (v[1] + v[3] * 0.62) + '" style="font-size:' + (12 * f) + 'px" transform="rotate(-90 ' + (v[0] + 18 * f) + ' ' + (v[1] + v[3] * 0.62) + ')">' + (D.dil === 'tr' ? 'EGE DENİZİ' : 'AEGEAN SEA') + '</text>';
   $('harita').innerHTML = '<svg viewBox="' + v.join(' ') + '" role="img" aria-label="' + h(t('baslik')) + '">' +
     '<defs><pattern id="tarama" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(38) scale(' + f + ')"><path d="M0 0V5" stroke="#B59A66" stroke-width=".55" opacity=".5"/></pattern>' +
@@ -551,6 +707,7 @@ function haritaCiz(){
     '<path class="komsu" d="' + H.komsu + '"/>' +
     '<path class="kara" d="' + H.turkiye + '"/>' +
     '<path d="' + H.turkiye + '" fill="url(#tarama)" pointer-events="none"/>' +
+    rolyef(f) + (D.zum === 'tum' ? suslemeler() : '') +
     '<rect x="' + v[0] + '" y="' + v[1] + '" width="' + v[2] + '" height="' + v[3] + '" filter="url(#kagit)" pointer-events="none"/>' +
     denizler + egeKutu + (D.bag ? baglarSVG(f, r) : '') + pinler + kume + '</svg>';
   $('z-bag').setAttribute('aria-pressed', !!D.bag); $('z-tum').setAttribute('aria-pressed', D.zum === 'tum'); $('z-ege').setAttribute('aria-pressed', D.zum === 'ege');
@@ -614,6 +771,34 @@ function muhurSVG(yer, basili){
 /* ==========================================================================
    AYRINTI PANELİ
    ========================================================================== */
+var KONAK_SVG = '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 30 32 11l24 19"/><path d="M14 26v28h36V26"/><path d="M26 54V41a6 6 0 0 1 12 0v13"/><path d="M41 31h6v7h-6z"/><path d="M18 31h5v7h-5z"/><path d="M46 8a5 5 0 1 0 6 6 4 4 0 0 1-6-6z" fill="currentColor"/></svg>';
+function konakKart(yer){
+  if (!OTEL.goster || !OTEL.yerler[yer.id]) return '';
+  var yerAd = OTEL.yerler[yer.id].arama.split(',')[0];
+  return '<a class="konak" href="' + h(otelAdresi(yer.id)) + '" target="_blank" rel="sponsored noopener" data-eylem="otel">' +
+    '<span class="konak-ikon">' + KONAK_SVG + '</span>' +
+    '<span class="konak-metin"><small>' + h(t('oteller')) + '</small><b>' + h(t('konakBaslik').replace('{yer}', yerAd)) + '</b><em>' + h(t('otelBtn')) + ' · Hotels.com</em></span>' +
+    '<span class="konak-ok" aria-hidden="true">→</span></a>' +
+    (ortaklikVar() ? '<p class="not konak-not">' + h(t('otelAcik')) + '</p>' : '');
+}
+function felsefeBolum(yer){
+  var F = window.FELSEFE && FELSEFE[yer.id]; if (!F) return '';
+  var d = F[D.dil], roma = ['I', 'II', 'III', 'IV', 'V'];
+  return '<section class="fikir-bolum"><div class="etiket">' + h(t('fikirler')) + '</div>' +
+      '<ol class="fikirler">' + d.fikirler.map(function(k, i){
+        return '<li><span class="roma">' + roma[i] + '</span><div><b>' + h(k[0]) + '</b><p>' + h(k[1]) + '</p><a href="' + k[2] + '" target="_blank" rel="noopener">' + h(k[2].indexOf('plato.stanford.edu') > -1 ? 'SEP ' : 'IEP ') + h(k[3]) + ' ↗</a></div></li>';
+      }).join('') + '</ol>' +
+      (F.not ? '<p class="not">' + h(F.not[D.dil]) + '</p>' : '') + '</section>' +
+    '<section><div class="etiket">' + h(t('hayat')) + '</div><ol class="zaman">' + d.hayat.map(function(z){ return '<li><span>' + h(z[0]) + '</span><p>' + h(z[1]) + '</p></li>'; }).join('') + '</ol></section>' +
+    '<section class="bilinmeyen"><div class="bilinmeyen-ikon" aria-hidden="true">?</div><div><div class="etiket">' + h(t('bilinmeyen')) + '</div><p>' + h(d.bilinmeyen) + '</p></div></section>' +
+    '<section class="miras"><div class="etiket">' + h(t('miras')) + '</div><p>' + h(d.miras) + '</p></section>';
+}
+function kaynakBolum(yer){
+  var F = window.FELSEFE && FELSEFE[yer.id], s = yer.soz;
+  var atif = F ? F.kaynak.map(function(k){ return '<li><a href="' + k[2] + '" target="_blank" rel="noopener">' + h(k[0]) + ', “' + h(k[1]) + '”</a> <span class="soluk">' + h(k[3]) + '</span></li>'; }).join('') : '';
+  var diger = (s.birincil ? [[t('birincil') + ': ' + s.birincil[0], s.birincil[1]]] : []).concat(yer.kaynaklar).map(function(k){ return '<li><a href="' + k[1] + '" target="_blank" rel="noopener">' + h(k[0]) + '</a></li>'; }).join('');
+  return '<section><div class="etiket" style="margin-bottom:8px">' + h(t('kaynaklar')) + '</div><ul class="atiflar">' + atif + diger + '</ul><p class="not" style="margin-top:8px">' + h(t('ozetNot')) + '</p></section>';
+}
 function panelCiz(odakla){
   var yer = bul(D.secili), p = $('panel');
   if (!yer){
@@ -624,34 +809,42 @@ function panelCiz(odakla){
   }
   var m = y(yer), s = yer.soz, muhurlu = !!D.muhur[yer.id], i = YERLER.indexOf(yer), dr = DERIN[yer.id][D.dil];
   var kaynak = (D.dil === 'en' && s.kaynakEn) ? s.kaynakEn : s.kaynak;
-  var otel = OTEL.goster && OTEL.yerler[yer.id] ?
-    '<div class="otel"><div class="etiket">' + h(t('oteller')) + '</div><p>' + h(t('otelNot')) + ' <span class="soluk">(' + h(OTEL.yerler[yer.id].arama) + ')</span></p>' +
-    '<a class="btn btn-ege" href="' + h(otelAdresi(yer.id)) + '" target="_blank" rel="sponsored noopener">' + h(t('otelBtn')) + ' →</a>' +
-    (ortaklikVar() ? '<p class="not">' + h(t('otelAcik')) + '</p>' : '') + '</div>' : '';
+  var sekme = D.sekme || 'dusunce';
+  var sekmeler = '<div class="sekmeler" role="tablist">' + [['dusunce', t('sDusunce')], ['gezi', t('sGezi')], ['baglar', t('sBaglar')]].map(function(sk){
+    return '<button type="button" role="tab" data-sekme="' + sk[0] + '" aria-selected="' + (sekme === sk[0]) + '">' + h(sk[1]) + '</button>'; }).join('') + '</div>';
+  var icerik;
+  if (sekme === 'gezi'){
+    icerik =
+      (yer.rehber ? '<a class="btn btn-koyu" href="' + yer.rehber + '">' + h(t('rehber')) + ' →</a>' : '') +
+      '<section><div class="etiket" style="margin-bottom:10px">' + h(t('rota')) + '</div><ol class="rota">' + m.rota.map(function(r){ return '<li><b>' + h(r[0]) + '</b><span>' + h(r[1]) + '</span></li>'; }).join('') + '</ol></section>' +
+      '<div class="muhur-kutu">' + muhurSVG(yer, muhurlu) + '<div style="display:flex;flex-direction:column;gap:8px"><p class="not">' + h(muhurlu ? t('muhurlu') + ' · ' + D.muhur[yer.id] : t('muhurNot')) + '</p>' +
+        (muhurlu ? '' : '<button type="button" class="btn btn-okra" data-eylem="muhur">' + h(t('muhur')) + '</button>') + '</div></div>' +
+      konakKart(yer);
+  } else if (sekme === 'baglar'){
+    icerik = bagBolum(yer) + kaynakBolum(yer);
+  } else {
+    icerik =
+      '<div class="soz"><div class="etiket" style="color:var(--okra)">' + h(s.eser ? t('eser') : t('soz')) + '</div>' +
+        '<blockquote>' + (s.eser ? '' : '“') + h(s[D.dil]) + (s.eser ? '' : '”') + '</blockquote>' +
+        (s.ozgun ? '<p class="ozgun" lang="fa">' + h(s.ozgun) + '</p>' : '') +
+        '<p class="kaynak">' + h(kaynak) + (s.birincil ? ' · ' + h(t('ceviri')) : '') + '</p>' +
+        '<span class="rozet' + (s.dogrulandi ? ' dogru' : '') + '">' + h(s.dogrulandi ? t('dogru') : t('bekliyor')) + '</span>' +
+        '<div class="soz-eylem"><button type="button" class="btn btn-hayalet" data-eylem="kart">' + h(t('kartYap')) + '</button></div></div>' +
+      felsefeBolum(yer) +
+      '<section><div class="etiket" style="margin-bottom:8px">' + h(t('dinle')) + '</div><p class="dinle-metin">' + h(dr.dinle) + '</p>' +
+        '<div style="margin-top:10px"><button type="button" class="btn btn-okra" data-eylem="ses" id="ses-btn">' + h(sesCalisiyor ? t('durdur') : t('dinle')) + '</button></div>' +
+        ('speechSynthesis' in window ? '' : '<p class="not">' + h(t('sesYok')) + '</p>') + '</section>' +
+      '<div class="dusun"><div class="etiket">' + h(t('dusun')) + '</div><p class="soru">' + h(dr.soru) + '</p>' +
+        '<label class="gizli" for="not-alan">' + h(t('notYer')) + '</label><textarea id="not-alan" placeholder="' + h(t('notYer')) + '">' + h(D.notlar[yer.id] || '') + '</textarea>' +
+        '<div><button type="button" class="btn btn-hayalet" data-eylem="not">' + h(t('kaydet')) + '</button></div></div>';
+  }
   p.style.setProperty('--r', RENK[yer.id]);
   p.innerHTML =
     '<div class="panel-bant" aria-hidden="true"></div>' +
     '<div class="panel-bas"><div class="amblem">' + amblemSVG(yer.id) + '</div><div><div class="etiket">' + (i + 1) + ' · ' + h(yer.yunan) + '</div><h2>' + h(m.ad) + '</h2><div class="bilgi-satir"><span>' + h(m.il) + '</span><span>' + h(m.donem) + '</span></div></div></div>' +
     '<div><h3>' + h(m.kim) + '</h3><p class="soluk neden" style="margin-top:4px">' + h(m.neden) + '</p></div>' +
-    (yer.rehber ? '<a class="btn btn-koyu" href="' + yer.rehber + '">' + h(t('rehber')) + ' →</a>' : '') +
-    '<div class="soz"><div class="etiket" style="color:var(--okra)">' + h(s.eser ? t('eser') : t('soz')) + '</div>' +
-      '<blockquote>' + (s.eser ? '' : '“') + h(s[D.dil]) + (s.eser ? '' : '”') + '</blockquote>' +
-      (s.ozgun ? '<p class="ozgun" lang="fa">' + h(s.ozgun) + '</p>' : '') +
-      '<p class="kaynak">' + h(kaynak) + (s.birincil ? ' · ' + h(t('ceviri')) : '') + '</p>' +
-      '<span class="rozet' + (s.dogrulandi ? ' dogru' : '') + '">' + h(s.dogrulandi ? t('dogru') : t('bekliyor')) + '</span>' +
-      '<div class="soz-eylem"><button type="button" class="btn btn-hayalet" data-eylem="kart">' + h(t('kartYap')) + '</button></div></div>' +
-    '<div><div class="etiket" style="margin-bottom:8px">' + h(t('dinle')) + '</div><p class="dinle-metin">' + h(dr.dinle) + '</p>' +
-      '<div style="margin-top:10px"><button type="button" class="btn btn-okra" data-eylem="ses" id="ses-btn">' + h(sesCalisiyor ? t('durdur') : t('dinle')) + '</button></div>' +
-      ('speechSynthesis' in window ? '' : '<p class="not">' + h(t('sesYok')) + '</p>') + '</div>' +
-    '<div class="dusun"><div class="etiket">' + h(t('dusun')) + '</div><p class="soru">' + h(dr.soru) + '</p>' +
-      '<label class="gizli" for="not-alan">' + h(t('notYer')) + '</label><textarea id="not-alan" placeholder="' + h(t('notYer')) + '">' + h(D.notlar[yer.id] || '') + '</textarea>' +
-      '<div><button type="button" class="btn btn-hayalet" data-eylem="not">' + h(t('kaydet')) + '</button></div></div>' +
-    '<div><div class="etiket" style="margin-bottom:10px">' + h(t('rota')) + '</div><ol class="rota">' + m.rota.map(function(r){ return '<li><b>' + h(r[0]) + '</b><span>' + h(r[1]) + '</span></li>'; }).join('') + '</ol></div>' +
-    '<div class="muhur-kutu">' + muhurSVG(yer, muhurlu) + '<div style="display:flex;flex-direction:column;gap:8px"><p class="not">' + h(muhurlu ? t('muhurlu') + ' · ' + D.muhur[yer.id] : t('muhurNot')) + '</p>' +
-      (muhurlu ? '' : '<button type="button" class="btn btn-okra" data-eylem="muhur">' + h(t('muhur')) + '</button>') + '</div></div>' +
-    bagBolum(yer) +
-    otel +
-    '<div><div class="etiket" style="margin-bottom:6px">' + h(t('kaynaklar')) + '</div><div class="kaynaklar">' + (s.birincil ? [[t('birincil') + ': ' + s.birincil[0], s.birincil[1]]] : []).concat(yer.kaynaklar).map(function(k){ return '<a href="' + k[1] + '" target="_blank" rel="noopener">' + h(k[0]) + '</a>'; }).join('') + '</div></div>';
+    (sekme === 'gezi' ? '' : konakKart(yer)) +
+    sekmeler + '<div class="sekme-ic" role="tabpanel">' + icerik + '</div>';
   if (odakla && window.matchMedia('(max-width:900px)').matches) p.scrollIntoView({ behavior:'smooth', block:'start' });
 }
 
@@ -750,14 +943,16 @@ function sec(id, odakla){
   if (yer && D.zum === 'tum' && egede(yer) && odakla !== 'harita') zumla('ege'); else haritaCiz();
 }
 document.addEventListener('click', function(e){
-  var el = e.target.closest('[data-yer],[data-dil],[data-eylem],#z-tum,#z-ege,#z-bag,#ege-kutu,#ege-kume');
+  var el = e.target.closest('[data-sekme],[data-yer],[data-dil],[data-eylem],#z-tum,#z-ege,#z-bag,#ege-kutu,#ege-kume');
   if (!el) return;
+  if (el.hasAttribute('data-sekme')){ sesDurdur(); D.sekme = el.getAttribute('data-sekme'); yaz('fh-sekme', D.sekme); panelCiz(); var sb = document.querySelector('.sekmeler'); if (sb && sb.getBoundingClientRect().top < 0) sb.scrollIntoView({ block:'start' }); return; }
   if (el.id === 'z-bag'){ D.bag = !D.bag; yaz('fh-bag', D.bag); haritaCiz(); metinCiz(); return; }
   if (el.id === 'z-tum'){ zumla('tum'); return; }
   if (el.id === 'z-ege' || el.id === 'ege-kutu' || el.id === 'ege-kume'){ zumla('ege'); return; }
   if (el.hasAttribute('data-dil')){ sesDurdur(); D.dil = el.getAttribute('data-dil'); yaz('fh-dil', D.dil); hepsi(); return; }
   if (el.hasAttribute('data-yer')){ sesDurdur(); sec(el.getAttribute('data-yer'), el.closest('#harita') ? 'harita' : true); return; }
   var ey = el.getAttribute('data-eylem');
+  if (ey === 'otel') return;
   if (ey === 'muhur'){ D.muhur[D.secili] = new Date().toLocaleDateString(D.dil === 'tr' ? 'tr-TR' : 'en-GB'); yaz('fh-muhur', D.muhur); bildir(t('muhurBildir')); hepsi(); }
   else if (ey === 'kart') kartYap();
   else if (ey === 'ses') seslendir();

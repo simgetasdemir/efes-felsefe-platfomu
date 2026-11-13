@@ -23,7 +23,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C2A3A'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23E3B38A'%3EΦ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <style>
 /* Efes platformuyla aynı dil: mermer, Ege mavisi, pişmiş toprak, okra. Harita solda, ayrıntı sağda; telefonda alt alta. */
 :root{
@@ -399,6 +399,113 @@ footer{font-style:italic}
 .harita .rota-cizgi .ust{stroke:var(--r);animation:akis 1.4s linear infinite}
 .harita .rota-cizgi circle{fill:none;stroke:var(--r);opacity:.55;pointer-events:none}
 @media (prefers-reduced-motion:reduce){ .harita .rota-cizgi .ust{animation:none} }
+
+/* ==========================================================================
+   SADE GÖRÜNÜM: az çizgi, az doku, tek arayüz yazı tipi; derinlik gölgeyle
+   ========================================================================== */
+:root{--doku:none;--yazit:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--zemin:#F6F3EC;--yuzey:#FAF8F3;--ince:#ECE5D8;--koyu:#1F2A36;
+  --golge:0 1px 2px rgba(40,30,20,.05),0 18px 40px -24px rgba(40,30,20,.3)}
+body{background:var(--zemin)}
+header.ust::before,.ust-meander{display:none}
+header.ust{padding-bottom:18px}
+h1{font-family:'Cinzel',Georgia,serif;letter-spacing:.01em}
+h2,h3{font-family:'EB Garamond',Georgia,serif;font-weight:600;letter-spacing:0}
+h2{font-size:30px;line-height:1.15}
+.etiket{font-size:11.5px;letter-spacing:.16em;font-weight:600}
+.btn{letter-spacing:0;font-size:15px;border-radius:12px;font-weight:600}
+.btn-hayalet{border:1px solid var(--ince)}
+.cip{letter-spacing:0;font-size:14px;border-radius:999px;background:#fff;border:1px solid var(--ince);font-weight:500}
+.cip[aria-pressed="true"]{background:var(--koyu);border-color:var(--koyu);color:#fff}
+.ust-link{letter-spacing:.02em;font-size:14px;text-transform:none}
+.dil{border:1px solid var(--ince);background:#fff;border-radius:999px}
+.dil button[aria-pressed="true"]{background:var(--koyu);border-radius:999px}
+
+/* Harita: kabartma kara, yumuşak gölge, ayakta duran işaretler */
+.harita{border-radius:22px;box-shadow:var(--golge);background:#DCEAF1;transition:transform .3s ease-out;will-change:transform}
+.harita .kara{fill:url(#kara-g);stroke:#A88A5C;stroke-width:.8}
+.harita .golge{fill:#2D4A60;opacity:.4}
+.harita .komsu{fill:#EEF0EA;stroke:#D2D6CE;stroke-width:.6;stroke-dasharray:none;opacity:.85}
+.harita .deniz-ad{font-size:11px;letter-spacing:.45em;fill:#7894A8;opacity:1}
+.harita .irmak{stroke:#93B5CA;opacity:.75}
+.harita .gol{fill:#CFE2EC;stroke:#A2C1D3}
+.harita .kent{fill:#fff;stroke:#8A7A63}
+.harita .kent-ad{font-family:var(--yazit);font-style:normal;font-size:9px;fill:#7A6A55;stroke:#F8F0DF}
+.harita .ege-kutu{stroke-dasharray:4 4}
+.harita .ege-yazi{font-family:var(--yazit);font-style:normal}
+.pin .taban{fill:rgba(35,28,18,.3)}
+.pin .sap{stroke:#4A3C2C;stroke-linecap:round}
+.pin .halka{stroke:#fff}
+.pin .isik{pointer-events:none}
+.pin .ad{font-weight:600;letter-spacing:.01em;fill:var(--koyu);stroke:#FBF5E8}
+.pin.secili .halka,.pin:hover .halka{filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+.pin .ic-halka,.pin .yorunge{display:none}
+
+/* Yer listesi: hafif */
+.yer-btn{background:transparent;border:0;box-shadow:none;border-radius:14px;min-height:56px}
+.yer-btn:hover{background:#fff;transform:none;box-shadow:none}
+.yer-btn[aria-current="true"]{background:#fff;box-shadow:var(--golge)}
+.yer-btn .no{box-shadow:none;width:28px;height:28px;font-size:13px}
+.yer-btn.muhurlu .no{box-shadow:0 0 0 2px #fff,0 0 0 3px var(--altin)}
+
+/* Panel */
+.panel{background:#fff;border:0;border-radius:22px;box-shadow:var(--golge);padding:0 22px 22px}
+.panel-bant{height:6px;background:var(--r);margin:0 -22px}
+.panel-bas{margin-top:22px}
+.panel-bas > div:last-child{padding-top:0}
+.amblem{width:72px;height:72px;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.38),rgba(255,255,255,0) 55%),var(--r);box-shadow:0 0 0 3px #fff,0 0 0 4px var(--r),0 12px 20px -10px rgba(0,0,0,.45)}
+.amblem svg{width:44px;height:44px}
+.panel .neden::first-letter{float:none;font-size:inherit;padding:0;font-family:inherit;color:inherit;line-height:inherit}
+.sekmeler{background:#fff;border-bottom:1px solid var(--ince);margin:0 -22px;padding:0 22px}
+.sekmeler button{letter-spacing:.02em;font-size:14px;text-transform:none}
+.soz{border-radius:18px;background:#16202B}
+.soz::before{display:none}
+.konak{background:var(--koyu);border-radius:18px;box-shadow:0 16px 30px -18px rgba(20,15,10,.75)}
+.konak::after{display:none}
+.konak-ikon{box-shadow:0 0 0 3px var(--koyu),0 0 0 4px rgba(255,255,255,.25)}
+.dusun,.muhur-kutu,.bag-liste button{background:var(--yuzey)}
+.fikirler li{background:var(--yuzey);border:0;border-radius:14px}
+.fikirler b{letter-spacing:0;font-size:15px}
+.fikirler a{letter-spacing:.06em}
+.zaman span{letter-spacing:.04em}
+.bilinmeyen{border:0;background:var(--yuzey);border-radius:14px}
+.miras p{border-left:3px solid var(--r)}
+.sanat li{background:var(--yuzey);border:0;border-left:3px solid var(--r);border-radius:12px}
+.sanat b{letter-spacing:0}
+details.katman{border-top:1px solid var(--ince);padding-top:4px}
+details.katman > summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--yazit);font-size:12px;letter-spacing:.14em;font-weight:600;text-transform:uppercase;color:var(--r);min-height:44px}
+details.katman > summary::-webkit-details-marker{display:none}
+details.katman > summary::after{content:"+";font-size:22px;font-weight:400;letter-spacing:0;color:var(--soluk);line-height:1}
+details.katman[open] > summary::after{content:"–"}
+details.katman > :not(summary){margin-top:6px;margin-bottom:10px}
+
+/* Karşılama */
+.yol{background:var(--yuzey);border:0;border-radius:14px}
+.yol:hover{box-shadow:none;background:#F3EFE6}
+.yol b{letter-spacing:0;font-size:15.5px}
+.yol .ik{box-shadow:0 6px 12px -6px rgba(0,0,0,.45);background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.35),rgba(255,255,255,0) 55%),var(--k)}
+.nasil li{background:var(--yuzey)}
+.nasil b{letter-spacing:0}
+
+/* Rotalar, oteller, pasaport */
+.rota-cip{background:#fff;border:1px solid var(--ince);border-radius:14px;box-shadow:none}
+.rota-cip b{letter-spacing:0}
+.rota-cip[aria-selected="true"]{background:var(--r);border-color:var(--r)}
+.rota-kart{background:#fff;border:0;border-radius:22px;box-shadow:var(--golge)}
+.rota-kart::before{height:6px;margin-bottom:20px;background:var(--r)}
+.rota-bas h3{font-family:'EB Garamond',Georgia,serif;font-size:28px;letter-spacing:0}
+.gunler li{background:var(--yuzey);border:0;border-radius:16px}
+.gun-no{box-shadow:0 0 0 2px #fff,0 0 0 3px var(--d),0 8px 14px -8px rgba(0,0,0,.45);background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.35),rgba(255,255,255,0) 55%),var(--d)}
+.gun-yer{letter-spacing:0;font-size:17px;text-decoration:none}
+.gece{background:var(--koyu);border-radius:14px;box-shadow:0 12px 22px -16px rgba(20,15,10,.8)}
+.gece .ay{background:rgba(255,255,255,.08)}
+.konak-mini{background:#fff;color:var(--koyu);box-shadow:var(--golge);border-radius:16px}
+.konak-mini small{color:var(--soluk)}
+.konak-mini .no{box-shadow:none;color:#fff}
+.konak-mini .ok{background:var(--koyu);color:#fff}
+.pasaport{background:#fff;background-image:none;border:0;border-radius:22px;box-shadow:var(--golge)}
+.pasaport::before{display:none}
+.pasaport button span{letter-spacing:.02em;font-size:13px}
+footer{font-style:normal}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Türkiye Felsefe Haritası", "alternateName": "Philosophy Map of Türkiye", "inLanguage": ["tr", "en"], "description": "Herakleitos'tan Mevlânâ'ya, Anadolu'da felsefenin doğduğu on yer.", "mainEntity": {"@type": "ItemList", "name": "Felsefe durakları", "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "TouristAttraction", "name": "Efes", "address": {"@type": "PostalAddress", "addressLocality": "Selçuk, İzmir", "addressCountry": "TR"}, "description": "Filozof: Herakleitos"}}, {"@type": "ListItem", "position": 2, "item": {"@type": "TouristAttraction", "name": "Milet", "address": {"@type": "PostalAddress", "addressLocality": "Didim, Aydın", "addressCountry": "TR"}, "description": "Filozof: Thales, Anaksimandros, Anaksimenes"}}, {"@type": "ListItem", "position": 3, "item": {"@type": "TouristAttraction", "name": "Klazomenai", "address": {"@type": "PostalAddress", "addressLocality": "Urla, İzmir", "addressCountry": "TR"}, "description": "Filozof: Anaksagoras"}}, {"@type": "ListItem", "position": 4, "item": {"@type": "TouristAttraction", "name": "Assos", "address": {"@type": "PostalAddress", "addressLocality": "Ayvacık, Çanakkale", "addressCountry": "TR"}, "description": "Filozof: Aristoteles, Kleanthes"}}, {"@type": "ListItem", "position": 5, "item": {"@type": "TouristAttraction", "name": "Bergama", "address": {"@type": "PostalAddress", "addressLocality": "Bergama, İzmir", "addressCountry": "TR"}, "description": "Filozof: Galenos"}}, {"@type": "ListItem", "position": 6, "item": {"@type": "TouristAttraction", "name": "Hierapolis", "address": {"@type": "PostalAddress", "addressLocality": "Pamukkale, Denizli", "addressCountry": "TR"}, "description": "Filozof: Epiktetos"}}, {"@type": "ListItem", "position": 7, "item": {"@type": "TouristAttraction", "name": "Afrodisias", "address": {"@type": "PostalAddress", "addressLocality": "Karacasu, Aydın", "addressCountry": "TR"}, "description": "Filozof: Afrodisiaslı Aleksandros"}}, {"@type": "ListItem", "position": 8, "item": {"@type": "TouristAttraction", "name": "Sinop", "address": {"@type": "PostalAddress", "addressLocality": "Sinop", "addressCountry": "TR"}, "description": "Filozof: Diogenes"}}, {"@type": "ListItem", "position": 9, "item": {"@type": "TouristAttraction", "name": "Soli ve Tarsus", "address": {"@type": "PostalAddress", "addressLocality": "Mersin", "addressCountry": "TR"}, "description": "Filozof: Khrysippos, Tarsuslu Antipatros"}}, {"@type": "ListItem", "position": 10, "item": {"@type": "TouristAttraction", "name": "Konya", "address": {"@type": "PostalAddress", "addressLocality": "Konya", "addressCountry": "TR"}, "description": "Filozof: Mevlânâ Celâleddîn Rûmî"}}]}}</script>
 </head>
@@ -728,7 +835,7 @@ var M = {
    ========================================================================== */
 function oku(k, v){ try { var x = JSON.parse(localStorage.getItem(k)); return x == null ? v : x; } catch(e){ return v; } }
 function yaz(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
-var D = { dil: oku('fh-dil', (navigator.language || 'tr').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en'), muhur: oku('fh-muhur', {}), secili: null, zum: 'tum', bag: oku('fh-bag', true), sekme: oku('fh-sekme', 'dusunce'), notlar: oku('fh-not', {}), rotaSec: 'ege', rota: null };
+var D = { dil: oku('fh-dil', (navigator.language || 'tr').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en'), muhur: oku('fh-muhur', {}), secili: null, zum: 'tum', bag: oku('fh-bag', false), sekme: oku('fh-sekme', 'dusunce'), notlar: oku('fh-not', {}), rotaSec: 'ege', rota: null };
 function t(k){ return M[D.dil][k]; }
 function y(yer){ return yer[D.dil]; }
 function $(id){ return document.getElementById(id); }
@@ -747,18 +854,8 @@ var GORUNUM = { tum: [0, 0, H.g, H.y], ege: EGE };
 function egede(yer){ return yer.lon < 30 && yer.lat > 37.2 && yer.lat < 39.85; }
 
 /* ==========================================================================
-   RÖLYEF: elle yerleştirilmiş, üsluplaştırılmış dağ sıraları, ırmaklar ve göller.
-   Koordinatlar yaklaşıktır; amaç bir atlas değil, eski bir gravür haritanın havası.
+   ARAZİ: göller, ırmaklar ve üç büyük kent; koordinatlar yaklaşıktır.
    ========================================================================== */
-var SIRALAR = [
- { ad:{ tr:'TOROS DAĞLARI', en:'TAURUS MOUNTAINS' }, n:[[29.4,37.15],[30.3,37.25],[31.2,37.35],[32.1,37.2],[33.0,37.05],[33.9,37.2],[34.8,37.45],[35.7,37.75],[36.5,38.0]] },
- { ad:{ tr:'GÜNEYDOĞU TOROSLARI', en:'SOUTHEASTERN TAURUS' }, n:[[37.6,38.1],[38.6,38.3],[39.7,38.35],[40.8,38.25],[41.9,38.0],[43.0,37.75],[43.9,37.6]] },
- { ad:{ tr:'KUZEY ANADOLU DAĞLARI', en:'PONTIC MOUNTAINS' }, n:[[30.9,40.55],[32.0,40.75],[33.2,40.9],[34.4,40.95],[35.6,40.55],[36.7,40.35],[37.9,40.35],[39.1,40.35],[40.3,40.45],[41.4,40.7]] },
- { n:[[41.2,39.6],[42.1,39.35],[42.9,39.25],[43.5,39.05]] },
- { n:[[38.6,39.4],[39.6,39.5],[40.4,39.35]] },
- { n:[[28.8,39.25],[29.6,39.1],[30.3,38.9]] }
-];
-var DORUKLAR = [ { ad:'Ağrı', en:'Ararat', n:[44.3,39.7], b:2.2 }, { ad:'Erciyes', en:'Erciyes', n:[35.45,38.53], b:1.6 }, { ad:'Uludağ', en:'Uludağ', n:[29.2,40.07], b:1.3 } ];
 var IRMAKLAR = [
  { ad:{ tr:'Kızılırmak', en:'Kızılırmak' }, n:[[38.4,39.85],[37.4,39.6],[36.2,39.15],[35.3,38.85],[34.4,39.05],[33.7,39.6],[33.7,40.35],[34.4,40.85],[35.2,41.2],[35.95,41.72]] },
  { ad:{ tr:'Fırat', en:'Euphrates' }, n:[[41.3,39.95],[40.2,39.6],[39.3,39.15],[38.8,38.75],[38.55,38.2],[38.2,37.6],[38.0,37.05],[38.05,36.6]] },
@@ -771,7 +868,6 @@ var IRMAKLAR = [
 var GOLLER = [ { ad:'Van', n:[[42.35,38.95],[42.9,38.95],[43.5,38.75],[43.4,38.45],[42.95,38.35],[42.6,38.55],[42.2,38.6]] }, { ad:'Tuz', n:[[33.3,39.05],[33.55,38.95],[33.6,38.6],[33.45,38.45],[33.25,38.65]] }, { ad:'Beyşehir', n:[[31.4,37.85],[31.6,37.8],[31.6,37.6],[31.45,37.55],[31.35,37.7]] } ];
 var KENTLER = [ { ad:'İstanbul', n:[28.97,41.01] }, { ad:'Ankara', n:[32.86,39.93] }, { ad:'İzmir', n:[27.14,38.42] } ];
 
-/* Noktalardan yumuşak bir yol (Catmull-Rom → Bézier). */
 function egri(noktalar, kapali){
   var p = noktalar.map(function(n){ return izd(n[0], n[1]); });
   if (kapali) p = p.concat(p.slice(0, 3));
@@ -783,78 +879,12 @@ function egri(noktalar, kapali){
   return d + (kapali ? 'Z' : '');
 }
 /* Tek bir gravür dağı: iki yamaç, gölgeli yamaçta kısa tarama çizgileri. */
-function dag(x, y, s, tohum){
-  var h2 = s * (1 + ((tohum * 37) % 7) / 14), z = x + ((tohum * 13) % 5 - 2) * s * 0.06;
-  var d = '<path class="dag-cizgi" d="M' + (x - s) + ' ' + y + 'Q' + (z - s * 0.4) + ' ' + (y - h2 * 0.55) + ' ' + z + ' ' + (y - h2) + 'Q' + (z + s * 0.45) + ' ' + (y - h2 * 0.5) + ' ' + (x + s) + ' ' + y + '"/>';
-  var g = '';
-  for (var k = 1; k <= 3; k++){ var t2 = k / 4, gx = z + (x + s - z) * t2, gy = y - h2 + h2 * t2; g += 'M' + gx.toFixed(1) + ' ' + (gy + 1).toFixed(1) + 'L' + (gx - s * 0.18).toFixed(1) + ' ' + (y - 0.5).toFixed(1); }
-  return d + '<path class="dag-golge" d="' + g + '"/>';
-}
-function siraDaglari(n, s, tohum0){
-  var out = '', adim = s * 1.55;
-  for (var i = 0; i < n.length - 1; i++){
-    var A = izd(n[i][0], n[i][1]), B = izd(n[i + 1][0], n[i + 1][1]), L = Math.hypot(B[0] - A[0], B[1] - A[1]), k = Math.max(1, Math.round(L / adim));
-    for (var j = 0; j < k; j++){
-      var t2 = j / k, x = A[0] + (B[0] - A[0]) * t2, y = A[1] + (B[1] - A[1]) * t2, tt = tohum0 + i * 7 + j;
-      out += dag(x + ((tt * 7) % 5 - 2) * 0.6, y + ((tt * 11) % 5 - 2) * 0.9, s * (0.8 + ((tt * 17) % 5) / 12), tt);
-      if (tt % 3 === 0) out += dag(x + s * 0.7, y + s * 0.9, s * 0.6, tt + 1);
-    }
-  }
-  return out;
-}
 function rolyef(f){
-  var tum = D.zum === 'tum', out = '<g class="rolyef" pointer-events="none">';
-  /* göller */
+  var out = '<g class="rolyef" pointer-events="none">';
   GOLLER.forEach(function(g){ out += '<path class="gol" d="' + egri(g.n, true) + '"/>'; });
-  /* ırmaklar (ad yazısı yol boyunca) */
-  IRMAKLAR.forEach(function(ir, i){
-    var id = 'irmak-' + i;
-    out += '<path class="irmak" id="' + id + '" d="' + egri(ir.n) + '" style="stroke-width:' + (1.3 * f) + 'px"/>';
-    if (tum && ir.n.length > 4) out += '<text class="irmak-ad" dy="-3"><textPath href="#' + id + '" startOffset="30%">' + h(ir.ad[D.dil]) + '</textPath></text>';
-  });
-  if (tum){
-    SIRALAR.forEach(function(sr, i){
-      out += siraDaglari(sr.n, 6.2, i * 31);
-      if (sr.ad){ var id = 'sira-' + i; out += '<path id="' + id + '" d="' + egri(sr.n.map(function(n){ return [n[0], n[1] - 0.33]; })) + '" fill="none"/><text class="sira-ad"><textPath href="#' + id + '" startOffset="50%" text-anchor="middle">' + h(sr.ad[D.dil]) + '</textPath></text>'; }
-    });
-    DORUKLAR.forEach(function(d, i){ var P = izd(d.n[0], d.n[1]); out += dag(P[0], P[1], 6 * d.b, 50 + i) + '<path class="kar" d="M' + (P[0] - 2.2 * d.b) + ' ' + (P[1] - 6 * d.b * 0.95) + 'L' + P[0] + ' ' + (P[1] - 6 * d.b * 1.18) + 'L' + (P[0] + 2.4 * d.b) + ' ' + (P[1] - 6 * d.b * 0.92) + '"/>' + '<text class="doruk-ad" x="' + P[0] + '" y="' + (P[1] + 9) + '" text-anchor="middle">' + h(D.dil === 'tr' ? d.ad : d.en) + '</text>'; });
-    KENTLER.forEach(function(k){ var P = izd(k.n[0], k.n[1]); out += '<circle class="kent" cx="' + P[0] + '" cy="' + P[1] + '" r="2.4"/><text class="kent-ad" x="' + (P[0] + 4.5) + '" y="' + (P[1] - 3.5) + '">' + h(k.ad) + '</text>'; });
-  }
+  IRMAKLAR.forEach(function(ir){ out += '<path class="irmak" d="' + egri(ir.n) + '" style="stroke-width:' + (1.2 * f) + 'px"/>'; });
+  if (D.zum === 'tum') KENTLER.forEach(function(k){ var P = izd(k.n[0], k.n[1]); out += '<circle class="kent" cx="' + P[0] + '" cy="' + P[1] + '" r="2.2"/><text class="kent-ad" x="' + (P[0] + 4.5) + '" y="' + (P[1] - 3.5) + '">' + h(k.ad) + '</text>'; });
   return out + '</g>';
-}
-/* Kartuş, ölçek ve bir gemi: yalnızca tüm Türkiye görünümünde. */
-function suslemeler(){
-  var olc = 200 / 111 * H.s, x0 = 600, y0 = 462;
-  var olcek = '<g class="olcek" aria-hidden="true"><path d="M' + x0 + ' ' + y0 + 'h' + olc + '"/>' + [0, .5, 1].map(function(k){ return '<path d="M' + (x0 + olc * k) + ' ' + (y0 - 4) + 'v8"/>'; }).join('') +
-    '<rect x="' + x0 + '" y="' + (y0 - 2) + '" width="' + (olc / 2) + '" height="4"/><text x="' + x0 + '" y="' + (y0 - 7) + '">0</text><text x="' + (x0 + olc / 2) + '" y="' + (y0 - 7) + '" text-anchor="middle">100</text><text x="' + (x0 + olc) + '" y="' + (y0 - 7) + '" text-anchor="end">200 km</text></g>';
-  var kx = 900, ky = 384, kartus = '<g class="kartus" aria-hidden="true"><path d="M' + (kx - 78) + ' ' + (ky - 26) + 'h156q10 0 10 10v32q0 10-10 10h-156q-10 0-10-10v-32q0-10 10-10z"/>' +
-    '<path class="kartus-ic" d="M' + (kx - 72) + ' ' + (ky - 20) + 'h144v40h-144z"/>' +
-    '<path class="kartus-rulo" d="M' + (kx - 88) + ' ' + (ky - 16) + 'q-10 16 0 32M' + (kx + 88) + ' ' + (ky - 16) + 'q10 16 0 32"/>' +
-    '<text x="' + kx + '" y="' + (ky - 3) + '" text-anchor="middle" class="kartus-ust">' + (D.dil === 'tr' ? 'ANADOLU' : 'ANATOLIA') + '</text><text x="' + kx + '" y="' + (ky + 13) + '" text-anchor="middle" class="kartus-alt">' + (D.dil === 'tr' ? 'felsefenin izinde' : 'in the steps of philosophy') + '</text></g>';
-  var gx = 340, gy = 432, gemi = '<g class="gemi" aria-hidden="true"><path d="M' + (gx - 22) + ' ' + gy + 'q22 10 44 0l-4 6h-36z"/><path d="M' + gx + ' ' + gy + 'v-26"/><path class="yelken" d="M' + (gx - 12) + ' ' + (gy - 24) + 'q12 5 24 0v15q-12 4-24 0z"/>' +
-    [-14, -7, 0, 7, 14].map(function(o){ return '<path d="M' + (gx + o) + ' ' + (gy + 3) + 'l-4 8"/>'; }).join('') + '<path class="dalga-k" d="M' + (gx - 34) + ' ' + (gy + 12) + 'q5-4 10 0t10 0t10 0t10 0t10 0t10 0t10 0"/></g>';
-  return olcek + kartus + gemi;
-}
-
-/* Pusula: özgün sekiz kollu yıldız; kuzey ucunda K (EN: N). */
-function pusula(cx, cy, R){
-  var kol = '', aci = [0, 90, 180, 270, 45, 135, 225, 315];
-  aci.forEach(function(d, i){
-    var uz = i < 4 ? R : R * 0.55, en = i < 4 ? R * 0.16 : R * 0.12, a = (d - 90) * Math.PI / 180;
-    var uc = [cx + Math.cos(a) * uz, cy + Math.sin(a) * uz], sol = [cx + Math.cos(a - Math.PI / 2) * en, cy + Math.sin(a - Math.PI / 2) * en], sag = [cx + Math.cos(a + Math.PI / 2) * en, cy + Math.sin(a + Math.PI / 2) * en];
-    kol += '<path d="M' + cx + ' ' + cy + 'L' + uc.join(' ') + 'L' + sol.join(' ') + 'Z" fill="#6B5A3E"/><path d="M' + cx + ' ' + cy + 'L' + uc.join(' ') + 'L' + sag.join(' ') + 'Z" fill="#F1E5C8" stroke="#6B5A3E" stroke-width=".6"/>';
-  });
-  return '<g aria-hidden="true" opacity=".9"><circle cx="' + cx + '" cy="' + cy + '" r="' + (R * 0.78) + '" fill="none" stroke="#6B5A3E" stroke-width=".7"/><circle cx="' + cx + '" cy="' + cy + '" r="' + (R * 0.72) + '" fill="none" stroke="#6B5A3E" stroke-width=".4" stroke-dasharray="1.5 2.5"/>' + kol +
-    '<circle cx="' + cx + '" cy="' + cy + '" r="' + (R * 0.07) + '" fill="#A0561F"/><text x="' + cx + '" y="' + (cy - R - 6) + '" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="700" font-size="' + (R * 0.34) + '" fill="#6B5A3E">' + (D.dil === 'tr' ? 'K' : 'N') + '</text></g>';
-}
-/* Gravür tekniği: kıyıyı izleyen eş merkezli su çizgileri (her halka: mürekkep çizgi + üstünde deniz rengi). */
-function suCizgileri(f){
-  var d = H.turkiye + H.komsu, s = '';
-  [[30, .16], [21, .22], [13, .3], [6, .42]].forEach(function(h2){
-    s += '<path d="' + d + '" fill="none" stroke="#4E7A95" stroke-opacity="' + h2[1] + '" stroke-width="' + (h2[0] * f) + '" stroke-linejoin="round"/>' +
-         '<path d="' + d + '" fill="none" stroke="#D5E3EA" stroke-width="' + ((h2[0] - 1.6) * f) + '" stroke-linejoin="round"/>';
-  });
-  return s;
 }
 function haritaCiz(){
   /* f: bir ekran pikselinin harita birimindeki karşılığı; işaretler her yakınlıkta aynı boyda görünsün */
@@ -866,31 +896,36 @@ function haritaCiz(){
     var p = izd(yer.lon, yer.lat), sec = D.secili === yer.id, m = D.muhur[yer.id], rk = RENK[yer.id];
     var etiketGoster = D.zum === 'ege' ? egede(yer) : !egede(yer);
     var rr = sec ? r * 1.25 : r;
+    var H3 = (sec ? 20 : 15) * f, tx = p[0], ty = Math.max(p[1] - H3, v[1] + rr + 3 * f);
     return '<g class="pin' + (sec ? ' secili' : '') + (m ? ' muhurlu' : '') + '" data-yer="' + yer.id + '" role="button" tabindex="0" aria-label="' + h((i + 1) + '. ' + y(yer).ad + ', ' + y(yer).kim) + '">' +
+      '<ellipse class="taban" cx="' + p[0] + '" cy="' + p[1] + '" rx="' + (rr * 0.75) + '" ry="' + (rr * 0.28) + '"/>' +
       '<circle class="nabiz" cx="' + p[0] + '" cy="' + p[1] + '" r="' + rr + '" stroke-width="' + (1.5 * f) + '"/>' +
-      '<circle class="yorunge" cx="' + p[0] + '" cy="' + p[1] + '" r="' + (rr + 6 * f) + '" stroke-width="' + (1.4 * f) + '" stroke-dasharray="' + (3 * f) + ' ' + (3 * f) + '"/>' +
-      '<circle class="halka" cx="' + p[0] + '" cy="' + p[1] + '" r="' + rr + '" stroke-width="' + ((m ? 3 : 2.2) * f) + '" style="fill:' + rk + '"/>' +
-      '<circle class="ic-halka" cx="' + p[0] + '" cy="' + p[1] + '" r="' + (rr * 0.74) + '" stroke-width="' + (0.8 * f) + '"/>' +
-      '<text x="' + p[0] + '" y="' + (p[1] + 0.6 * f) + '" font-size="' + ((sec ? 13 : 11) * f) + '">' + (i + 1) + '</text>' +
-      (etiketGoster ? '<text class="ad" x="' + (p[0] + rr + 6 * f) + '" y="' + p[1] + '" dy="0.36em" font-size="' + yaz + '" stroke-width="' + (4 * f) + '" paint-order="stroke">' + h(y(yer).ad.toLocaleUpperCase(D.dil === 'tr' ? 'tr' : 'en')) + '</text>' : '') +
+      '<path class="sap" d="M' + p[0] + ' ' + p[1] + 'V' + ty + '" stroke-width="' + (1.8 * f) + '"/>' +
+      '<circle class="halka" cx="' + tx + '" cy="' + ty + '" r="' + rr + '" stroke-width="' + ((m ? 2.4 : 1.6) * f) + '" style="fill:' + rk + '"/>' +
+      '<circle class="isik" cx="' + tx + '" cy="' + ty + '" r="' + rr + '" fill="url(#pin-isik)"/>' +
+      '<text x="' + tx + '" y="' + (ty + 0.6 * f) + '" font-size="' + ((sec ? 12.5 : 10.5) * f) + '">' + (i + 1) + '</text>' +
+      (etiketGoster ? '<text class="ad" x="' + (tx + rr + 5 * f) + '" y="' + ty + '" dy="0.36em" font-size="' + yaz + '" stroke-width="' + (4 * f) + '" paint-order="stroke">' + h(y(yer).ad) + '</text>' : '') +
       '</g>';
   }).join('');
   var kume = dar ? (function(){ var c = [EGE_KUTU[0] + EGE_KUTU[2] / 2, EGE_KUTU[1] + EGE_KUTU[3] / 2], R = 17 * f; return '<g class="pin" id="ege-kume" role="button" tabindex="0" aria-label="' + h(t('ege')) + '"><circle class="halka" cx="' + c[0] + '" cy="' + c[1] + '" r="' + R + '" stroke-width="' + (2.5 * f) + '" style="fill:#3B2F22"/><circle class="ic-halka" cx="' + c[0] + '" cy="' + c[1] + '" r="' + (R * .76) + '" stroke-width="' + (0.8 * f) + '"/><text x="' + c[0] + '" y="' + c[1] + '" font-size="' + (12 * f) + '">+7</text></g>'; })() : '';
   var egeKutu = D.zum === 'tum' ? '<rect class="ege-kutu" id="ege-kutu" x="' + EGE_KUTU[0] + '" y="' + EGE_KUTU[1] + '" width="' + EGE_KUTU[2] + '" height="' + EGE_KUTU[3] + '" rx="4"/>' +
     '<text class="ege-yazi" x="' + (EGE_KUTU[0] + 6) + '" y="' + (EGE_KUTU[1] + EGE_KUTU[3] + 16) + '" font-size="14">' + h(D.dil === 'tr' ? 'Ege: 7 durak' : 'Aegean: 7 stops') + '</text>' : '';
-  var denizler = D.zum === 'tum' ? '<text class="deniz-ad" x="230" y="38">' + (D.dil === 'tr' ? 'KARADENİZ' : 'BLACK SEA') + '</text><text class="deniz-ad" x="120" y="464">' + (D.dil === 'tr' ? 'AKDENİZ' : 'MEDITERRANEAN') + '</text><text class="deniz-ad" x="20" y="360" transform="rotate(-90 20 360)">' + (D.dil === 'tr' ? 'EGE' : 'AEGEAN') + '</text>' + pusula(735, 44, 24) :
+  var denizler = D.zum === 'tum' ? '<text class="deniz-ad" x="230" y="38">' + (D.dil === 'tr' ? 'KARADENİZ' : 'BLACK SEA') + '</text><text class="deniz-ad" x="120" y="464">' + (D.dil === 'tr' ? 'AKDENİZ' : 'MEDITERRANEAN') + '</text><text class="deniz-ad" x="20" y="360" transform="rotate(-90 20 360)">' + (D.dil === 'tr' ? 'EGE' : 'AEGEAN') + '</text>' :
     '<text class="deniz-ad" x="' + (v[0] + 18 * f) + '" y="' + (v[1] + v[3] * 0.62) + '" style="font-size:' + (12 * f) + 'px" transform="rotate(-90 ' + (v[0] + 18 * f) + ' ' + (v[1] + v[3] * 0.62) + ')">' + (D.dil === 'tr' ? 'EGE DENİZİ' : 'AEGEAN SEA') + '</text>';
+  var kal = 7 * f, katman = '';
+  for (var kk = 6; kk >= 1; kk--) katman += '<use href="#tr-kara" class="yan" transform="translate(0 ' + (kal * kk / 6) + ')" style="fill:' + ['#B79466', '#BF9D70', '#C6A57A', '#CDAE85', '#D4B68F', '#DABE99'][6 - kk] + '"/>';
   $('harita').innerHTML = '<svg viewBox="' + v.join(' ') + '" role="group" aria-label="' + h(t('baslik')) + '">' +
-    '<defs><pattern id="tarama" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(38) scale(' + f + ')"><path d="M0 0V5" stroke="#B59A66" stroke-width=".55" opacity=".5"/></pattern>' +
-      '<radialGradient id="deniz-isik" cx="40%" cy="45%" r="70%"><stop offset="0" stop-color="#E2ECF0"/><stop offset="1" stop-color="#C7D9E3"/></radialGradient>' +
-      '<filter id="kagit" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="' + (0.9 / f) + '" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 .4 0 0 0 0 .3 0 0 0 0 .15 0 0 0 .16 0"/></filter></defs>' +
-    '<rect x="-400" y="-200" width="' + (H.g + 800) + '" height="' + (H.y + 400) + '" fill="#D5E3EA"/>' +
-    suCizgileri(f) +
+    '<defs><path id="tr-kara" d="' + H.turkiye + '"/>' +
+      '<linearGradient id="deniz-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E4EFF4"/><stop offset="1" stop-color="#C9DDE8"/></linearGradient>' +
+      '<linearGradient id="kara-g" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#FBF5E8"/><stop offset="1" stop-color="#EEDFC2"/></linearGradient>' +
+      '<radialGradient id="pin-isik" cx="35%" cy="30%" r="65%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></radialGradient>' +
+      '<filter id="kara-golge" x="-10%" y="-10%" width="120%" height="140%"><feGaussianBlur stdDeviation="' + (7 * f) + '"/></filter></defs>' +
+    '<rect x="-400" y="-200" width="' + (H.g + 800) + '" height="' + (H.y + 400) + '" fill="url(#deniz-g)"/>' +
     '<path class="komsu" d="' + H.komsu + '"/>' +
-    '<path class="kara" d="' + H.turkiye + '"/>' +
-    '<path d="' + H.turkiye + '" fill="url(#tarama)" pointer-events="none"/>' +
-    rolyef(f) + (D.zum === 'tum' ? suslemeler() : '') +
-    '<rect x="' + v[0] + '" y="' + v[1] + '" width="' + v[2] + '" height="' + v[3] + '" filter="url(#kagit)" pointer-events="none"/>' +
+    '<use href="#tr-kara" class="golge" transform="translate(' + (6 * f) + ' ' + (16 * f) + ')" filter="url(#kara-golge)"/>' +
+    katman +
+    '<use href="#tr-kara" class="kara"/>' +
+    rolyef(f) +
     denizler + egeKutu + (D.bag && !D.rota ? baglarSVG(f, r) : '') + rotaSVG(f) + pinler + kume + '</svg>';
   $('z-bag').setAttribute('aria-pressed', !!D.bag); $('z-tum').setAttribute('aria-pressed', D.zum === 'tum'); $('z-ege').setAttribute('aria-pressed', D.zum === 'ege');
 }
@@ -971,9 +1006,9 @@ function felsefeBolum(yer){
         return '<li><span class="roma">' + roma[i] + '</span><div><b>' + h(k[0]) + '</b><p>' + h(k[1]) + '</p><a href="' + k[2] + '" target="_blank" rel="noopener">' + h(k[2].indexOf('plato.stanford.edu') > -1 ? 'SEP ' : 'IEP ') + h(k[3]) + ' ↗</a></div></li>';
       }).join('') + '</ol>' +
       (F.not ? '<p class="not">' + h(F.not[D.dil]) + '</p>' : '') + '</section>' +
-    '<section><div class="etiket">' + h(t('hayat')) + '</div><ol class="zaman">' + d.hayat.map(function(z){ return '<li><span>' + h(z[0]) + '</span><p>' + h(z[1]) + '</p></li>'; }).join('') + '</ol></section>' +
-    '<section class="bilinmeyen"><div class="bilinmeyen-ikon" aria-hidden="true">?</div><div><div class="etiket">' + h(t('bilinmeyen')) + '</div><p>' + h(d.bilinmeyen) + '</p></div></section>' +
-    '<section class="miras"><div class="etiket">' + h(t('miras')) + '</div><p>' + h(d.miras) + '</p></section>';
+    '<details class="katman"><summary>' + h(t('hayat')) + '</summary><ol class="zaman">' + d.hayat.map(function(z){ return '<li><span>' + h(z[0]) + '</span><p>' + h(z[1]) + '</p></li>'; }).join('') + '</ol></details>' +
+    '<details class="katman"><summary>' + h(t('bilinmeyen')) + '</summary><div class="bilinmeyen"><div class="bilinmeyen-ikon" aria-hidden="true">?</div><p>' + h(d.bilinmeyen) + '</p></div></details>' +
+    '<details class="katman"><summary>' + h(t('miras')) + '</summary><div class="miras"><p>' + h(d.miras) + '</p></div></details>';
 }
 function kaynakBolum(yer){
   var F = window.FELSEFE && FELSEFE[yer.id], s = yer.soz;
@@ -1009,12 +1044,12 @@ function panelCiz(odakla){
         '<span class="rozet' + (s.dogrulandi ? ' dogru' : '') + '">' + h(s.dogrulandi ? t('dogru') : t('bekliyor')) + '</span>' +
         '<div class="soz-eylem"><button type="button" class="btn btn-hayalet" data-eylem="kart">' + h(t('kartYap')) + '</button></div></div>' +
       felsefeBolum(yer) +
-      '<section><div class="etiket" style="margin-bottom:8px">' + h(t('dinle')) + '</div><p class="dinle-metin">' + h(dr.dinle) + '</p>' +
+      '<details class="katman"><summary>' + h(t('dinle')) + '</summary><p class="dinle-metin">' + h(dr.dinle) + '</p>' +
         '<div style="margin-top:10px"><button type="button" class="btn btn-okra" data-eylem="ses" id="ses-btn">' + h(sesCalisiyor ? t('durdur') : t('dinle')) + '</button></div>' +
-        ('speechSynthesis' in window ? '' : '<p class="not">' + h(t('sesYok')) + '</p>') + '</section>' +
-      '<div class="dusun"><div class="etiket">' + h(t('dusun')) + '</div><p class="soru">' + h(dr.soru) + '</p>' +
+        ('speechSynthesis' in window ? '' : '<p class="not">' + h(t('sesYok')) + '</p>') + '</details>' +
+      '<details class="katman"' + (D.notlar[yer.id] ? ' open' : '') + '><summary>' + h(t('dusun')) + '</summary><div class="dusun"><p class="soru">' + h(dr.soru) + '</p>' +
         '<label class="gizli" for="not-alan">' + h(t('notYer')) + '</label><textarea id="not-alan" placeholder="' + h(t('notYer')) + '">' + h(D.notlar[yer.id] || '') + '</textarea>' +
-        '<div><button type="button" class="btn btn-hayalet" data-eylem="not">' + h(t('kaydet')) + '</button></div></div>';
+        '<div><button type="button" class="btn btn-hayalet" data-eylem="not">' + h(t('kaydet')) + '</button></div></div></details>';
   }
   p.style.setProperty('--r', RENK[yer.id]);
   p.innerHTML =
@@ -1228,6 +1263,14 @@ document.addEventListener('keydown', function(e){
   if ((e.key === 'Enter' || e.key === ' ') && e.target.id === 'ege-kume'){ e.preventDefault(); zumla('ege'); return; }
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('g.pin')){ e.preventDefault(); sec(e.target.getAttribute('data-yer'), 'harita'); }
 });
+/* Masaüstünde haritaya hafif üç boyutlu eğim: fareyle birlikte birkaç derece döner */
+(function(){
+  var hk = $('harita');
+  if (!window.matchMedia || !matchMedia('(hover:hover) and (pointer:fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  hk.addEventListener('mousemove', function(e){ var b = hk.getBoundingClientRect(), x = (e.clientX - b.left) / b.width - .5, yy = (e.clientY - b.top) / b.height - .5;
+    hk.style.transform = 'perspective(1600px) rotateX(' + (-yy * 4).toFixed(2) + 'deg) rotateY(' + (x * 5).toFixed(2) + 'deg)'; });
+  hk.addEventListener('mouseleave', function(){ hk.style.transform = ''; });
+})();
 /* Telefonda: harita ekrandan çıkınca "Harita" düğmesi */
 var haritaGorunur = true;
 function haritayaGuncelle(){ var b = $('haritaya'); if (b) b.hidden = haritaGorunur || !D.secili; }

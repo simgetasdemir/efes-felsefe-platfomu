@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Türkiye Felsefe Haritası</title>
+<meta name="description" content="Anadolu'da felsefenin doğduğu ve yaşadığı on yer: Efes'ten Konya'ya rota, söz kartları ve felsefe pasaportu.">
+<meta name="theme-color" content="#1C2A3A">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Türkiye Felsefe Haritası">
+<meta property="og:description" content="Herakleitos'tan Mevlânâ'ya, Anadolu'da felsefenin izinde on durak.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C2A3A'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23E3B38A'%3EΦ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Efes platformuyla aynı dil: mermer, Ege mavisi, pişmiş toprak, okra. Harita solda, ayrıntı sağda; telefonda alt alta. */
+:root{
+  --mermer:#F4F1EA; --tas:#E9E2D3; --cizgi:#D8CFBC; --murekkep:#1C2A3A; --soluk:#4A5868;
+  --ege:#1F5C8A; --ege-acik:#9EC3DE; --deniz:#DCE7EE; --deniz-cizgi:#C3D5E1; --toprak:#A0561F; --okra:#E3B38A;
+  --gece:#14202C; --gece-yuzey:#24344A; --gece-soluk:#C3CEDA;
+  --kara:#EFE7D6; --kara-cizgi:#B9A88A; --komsu:#E6E3DA;
+  --yazi:'EB Garamond','Garamond','Iowan Old Style',Georgia,serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--mermer);color:var(--murekkep)}
+body{font-family:var(--yazi);font-size:18px;line-height:1.55}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--ege)}
+:focus-visible{outline:2px solid var(--toprak);outline-offset:2px}
+.gizli{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.etiket{font-size:14px;letter-spacing:.22em;font-weight:600;color:var(--toprak);text-transform:uppercase}
+h1{font-weight:600;font-size:clamp(32px,5vw,48px);line-height:1.05;margin:4px 0 6px;text-wrap:balance}
+h2{font-weight:600;font-size:28px;line-height:1.1;margin:0}
+h3{font-weight:600;font-size:20px;margin:0}
+p{margin:0}
+.soluk{color:var(--soluk)}
+.not{font-size:15px;color:var(--soluk)}
+
+header.ust{max-width:1240px;margin:0 auto;padding:28px 16px 10px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.dil{display:flex;border:1.5px solid var(--cizgi);border-radius:12px;overflow:hidden;flex:none}
+.dil button{border:0;background:transparent;padding:6px 12px;font-weight:600;font-size:15px;min-height:40px}
+.dil button[aria-pressed="true"]{background:var(--murekkep);color:var(--mermer)}
+
+main{max-width:1240px;margin:0 auto;padding:0 16px 48px;display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:24px;align-items:start}
+@media (max-width:900px){ main{grid-template-columns:minmax(0,1fr)} }
+
+/* harita */
+.harita-kutu{position:sticky;top:12px;display:flex;flex-direction:column;gap:12px}
+@media (max-width:900px){ .harita-kutu{position:static} }
+.harita{position:relative;background:var(--deniz);border-radius:22px;overflow:hidden;border:1px solid var(--deniz-cizgi)}
+.harita svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.harita .kara{fill:var(--kara);stroke:var(--kara-cizgi);stroke-width:1.2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.harita .komsu{fill:var(--komsu);stroke:#CFC9BB;stroke-width:.8;vector-effect:non-scaling-stroke}
+.harita .dalga{fill:none;stroke:var(--deniz-cizgi);stroke-width:1;stroke-linecap:round}
+.harita .deniz-ad{font-style:italic;fill:#6E8BA2;letter-spacing:.3em;font-size:14px}
+.pin{cursor:pointer}
+.pin .halka{fill:var(--toprak);stroke:#fff}
+.pin text{fill:#fff;font-weight:700;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.pin .ad{fill:var(--murekkep);font-weight:600;text-anchor:start;paint-order:stroke;stroke:var(--kara);stroke-linejoin:round}
+.pin.muhurlu .halka{fill:var(--ege)}
+.pin.secili .halka{fill:var(--murekkep)}
+.pin .nabiz{fill:none;stroke:var(--toprak);opacity:0}
+.pin.secili .nabiz{animation:nabiz 1.8s ease-out infinite}
+@keyframes nabiz{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.4)}}
+.pin .nabiz{transform-box:fill-box;transform-origin:center}
+@media (prefers-reduced-motion:reduce){ .pin.secili .nabiz{animation:none} }
+.ege-kutu{fill:rgba(31,92,138,.06);stroke:var(--ege);stroke-dasharray:4 4;cursor:pointer;vector-effect:non-scaling-stroke}
+.harita-araclar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.cip{min-height:44px;border-radius:14px;border:1.5px solid var(--cizgi);background:#fff;padding:0 14px;font-weight:600;font-size:16px}
+.cip[aria-pressed="true"]{background:var(--ege);border-color:var(--ege);color:#fff}
+
+/* liste */
+.liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.yer-btn{display:flex;gap:12px;align-items:center;text-align:left;background:#fff;border:1.5px solid transparent;border-radius:16px;padding:10px 12px;min-height:64px}
+.yer-btn[aria-current="true"]{border-color:var(--murekkep)}
+.yer-btn .no{flex:none;width:30px;height:30px;border-radius:50%;background:var(--toprak);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px}
+.yer-btn.muhurlu .no{background:var(--ege)}
+.yer-btn b{display:block;font-size:17px;line-height:1.2}
+.yer-btn small{display:block;font-size:14.5px;color:var(--soluk);line-height:1.25}
+
+/* ayrıntı paneli */
+.panel{background:#fff;border-radius:22px;padding:22px 20px;display:flex;flex-direction:column;gap:18px;border:1px solid var(--cizgi)}
+.panel-bas{display:flex;gap:14px;align-items:center}
+.amblem{flex:none;width:76px;height:76px;border-radius:50%;background:var(--mermer);display:grid;place-items:center;color:var(--toprak)}
+.amblem svg{width:52px;height:52px}
+.bilgi-satir{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:15.5px;color:var(--soluk)}
+.soz{background:var(--gece);color:var(--mermer);border-radius:18px;padding:20px 20px 16px;display:flex;flex-direction:column;gap:10px}
+.soz blockquote{margin:0;font-size:23px;line-height:1.3;font-style:italic;text-wrap:pretty}
+.soz .kaynak{font-size:15px;color:var(--gece-soluk)}
+.soz .rozet{align-self:flex-start;font-size:13px;letter-spacing:.06em;border-radius:999px;padding:2px 10px;background:rgba(227,179,138,.18);color:var(--okra)}
+.soz .rozet.dogru{background:rgba(143,209,168,.16);color:#8FD1A8}
+.soz-eylem{display:flex;gap:8px;flex-wrap:wrap}
+.btn{min-height:48px;padding:0 18px;border-radius:14px;border:0;font-weight:600;font-size:17px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-ege{background:var(--ege);color:#fff}
+.btn-okra{background:var(--okra);color:var(--gece)}
+.btn-koyu{background:var(--murekkep);color:var(--mermer)}
+.btn-hayalet{background:transparent;border:1.5px solid var(--cizgi);color:var(--murekkep)}
+.soz .btn-hayalet{border-color:#36495F;color:var(--mermer)}
+.rota{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:d}
+.rota li{position:relative;padding:0 0 14px 34px;counter-increment:d}
+.rota li::before{content:counter(d);position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--toprak);color:var(--toprak);font-size:13px;font-weight:700;display:grid;place-items:center}
+.rota li::after{content:"";position:absolute;left:11px;top:26px;bottom:2px;border-left:1.5px dashed var(--cizgi)}
+.rota li:last-child::after{display:none}
+.rota b{display:block;font-size:17px}
+.rota span{font-size:15.5px;color:var(--soluk)}
+.muhur-kutu{display:flex;gap:14px;align-items:center;background:var(--mermer);border-radius:18px;padding:12px 14px}
+.muhur-kutu svg{flex:none;width:84px;height:84px}
+.otel{border:1.5px solid var(--cizgi);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.kaynaklar{font-size:15px;display:flex;flex-wrap:wrap;gap:4px 14px}
+
+/* pasaport */
+.pasaport-bolum{max-width:1240px;margin:0 auto;padding:8px 16px 56px}
+.pasaport{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:16px;background:#fff;border:1px solid var(--cizgi);border-radius:22px;padding:20px;margin-top:12px}
+.pasaport button{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:14.5px;color:var(--soluk)}
+.pasaport svg{width:104px;height:104px}
+.pasaport button:nth-child(3n) .basili{transform:rotate(6deg)}
+.pasaport button:nth-child(3n+1) .basili{transform:rotate(-5deg)}
+.yakinda{margin-top:18px;font-size:15.5px;color:var(--soluk)}
+footer{max-width:1240px;margin:0 auto;padding:0 16px 40px;font-size:14.5px;color:var(--soluk);display:flex;flex-direction:column;gap:6px}
+.bildirim{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--murekkep);color:var(--mermer);border-radius:14px;padding:10px 16px;font-size:16px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9}
+.bildirim.acik{opacity:1}
+</style>
+</head>
+<body>
+<header class="ust">
+  <div>
+    <div class="etiket" id="ust-etiket"></div>
+    <h1 id="baslik"></h1>
+    <p class="soluk" id="giris"></p>
+  </div>
+  <div class="dil" role="group" aria-label="Dil / Language">
+    <button type="button" data-dil="tr">TR</button><button type="button" data-dil="en">EN</button>
+  </div>
+</header>
+
+<main>
+  <div class="harita-kutu">
+    <div class="harita" id="harita"></div>
+    <div class="harita-araclar">
+      <button type="button" class="cip" id="z-tum"></button>
+      <button type="button" class="cip" id="z-ege"></button>
+      <span class="not" id="harita-not"></span>
+    </div>
+    <div class="liste" id="liste"></div>
+  </div>
+  <section class="panel" id="panel" aria-live="polite" tabindex="-1"></section>
+</main>
+
+<section class="pasaport-bolum" id="pasaport-bolum"></section>
+
+<footer id="alt"></footer>
+<div class="bildirim" id="bildirim" role="status"></div>
+
+<script src="harita-veri.js"></script>
+<script>
+/* ==========================================================================
+   OTEL BAĞLANTILARI: tek ayar yeri
+   --------------------------------------------------------------------------
+   Hotels.com, Expedia Group'un "Travel Creator Program" ortaklık programındadır.
+   1) creator.expediagroup.com adresinden ücretsiz katıl.
+   2) Panelde Links > Create link bölümüne, aşağıdaki her yerin "arama" adresini
+      (sayfanın ürettiği Hotels.com arama bağlantısını) yapıştır.
+   3) Programın verdiği izlenebilir bağlantıyı o yerin "baglanti" alanına yaz.
+   "baglanti" boş kaldıkça düğme düz Hotels.com aramasına gider (komisyon yok).
+   En az bir bağlantı dolunca sayfa otomatik olarak ortaklık açıklamasını gösterir.
+   ========================================================================== */
+var OTEL = {
+  goster: true,
+  yerler: {
+    efes:       { arama: 'Selçuk, İzmir',        baglanti: '' },
+    milet:      { arama: 'Didim, Aydın',          baglanti: '' },
+    klazomenai: { arama: 'Urla, İzmir',           baglanti: '' },
+    assos:      { arama: 'Behramkale, Ayvacık',   baglanti: '' },
+    bergama:    { arama: 'Bergama, İzmir',        baglanti: '' },
+    hierapolis: { arama: 'Pamukkale, Denizli',    baglanti: '' },
+    afrodisias: { arama: 'Karacasu, Aydın',       baglanti: '' },
+    sinop:      { arama: 'Sinop',                 baglanti: '' },
+    soli:       { arama: 'Mersin',                baglanti: '' },
+    konya:      { arama: 'Konya',                 baglanti: '' }
+  }
+};
+function otelAdresi(id){
+  var o = OTEL.yerler[id]; if (!o) return '';
+  return o.baglanti || ('https://www.hotels.com/Hotel-Search?destination=' + encodeURIComponent(o.arama));
+}
+function ortaklikVar(){ for (var k in OTEL.yerler) if (OTEL.yerler[k].baglanti) return true; return false; }
+
+/* ==========================================================================
+   AMBLEMLER: her yer için özgün çizgi çizimi (64x64, currentColor)
+   ========================================================================== */
+var AMBLEM = {
+  efes: '<path d="M8 22c6-5 10 5 16 0s10 5 16 0 10 5 16 0M8 34c6-5 10 5 16 0s10 5 16 0 10 5 16 0M8 46c6-5 10 5 16 0s10 5 16 0 10 5 16 0"/>',
+  milet: '<circle cx="32" cy="26" r="13"/><path d="M38 15a13 13 0 0 1 0 22 11 11 0 0 0 0-22z" fill="currentColor"/><path d="M6 46h52M12 53c5-3 9 3 14 0s9 3 14 0 9 3 14 0"/>',
+  klazomenai: '<path d="M14 52C24 40 36 26 52 12"/><path d="M22 42c-7 1-11-3-11-8 6-1 10 3 11 8zM30 33c1-7 6-10 11-9-1 6-5 9-11 9zM34 28c-6-3-7-8-5-12 6 2 7 7 5 12zM42 20c1-6 6-9 10-8-1 5-5 8-10 8z"/><circle cx="26" cy="47" r="3.2" fill="currentColor"/><circle cx="37" cy="38" r="3.2" fill="currentColor"/>',
+  assos: '<path d="M8 24 32 10l24 14z"/><path d="M8 24h48M10 52h44M8 57h48"/><path d="M15 28v24M24 28v24M33 28v24M42 28v24M50 28v24"/>',
+  bergama: '<path d="M16 12h30a6 6 0 0 1 0 12H22"/><path d="M16 12a6 6 0 0 0 0 12h4v24a6 6 0 0 0 6 6h24a6 6 0 0 0 0-12H26"/><path d="M28 30h18M28 36h14"/>',
+  hierapolis: '<path d="M6 20h20c0 4 4 6 8 6h24M6 32h12c0 4 4 6 8 6h32M6 44h6c0 4 4 6 8 6h38"/><path d="M30 26c0 3-2 4-2 6M46 38c0 3-2 4-2 6" stroke-dasharray="2 3"/>',
+  afrodisias: '<path d="M8 14h48M10 20h44"/><path d="M14 20v36M22 20v36M42 20v36M50 20v36"/><path d="M24 56V40a8 8 0 0 1 16 0v16"/><path d="M8 56h48"/>',
+  sinop: '<path d="M22 22h20l-3 26H25z"/><path d="M26 22c0-6 2-10 6-10s6 4 6 10M32 12V7M20 48h24M28 48l-2 8h12l-2-8"/><path d="M32 30c3 3 3 7 0 10-3-3-3-7 0-10z" fill="currentColor"/>',
+  soli: '<path d="M6 18h52M8 23h48"/><path d="M11 23v29M19 23v29M27 23v29M35 23v29M43 23v29M51 23v29"/><path d="M6 52h52M6 57h52"/>',
+  konya: '<path d="M12 52 50 14"/><path d="M48 12l5 5"/><circle cx="21" cy="43" r="1.8" fill="currentColor"/><circle cx="27" cy="37" r="1.8" fill="currentColor"/><circle cx="33" cy="31" r="1.8" fill="currentColor"/><circle cx="39" cy="25" r="1.8" fill="currentColor"/><path d="M36 54a18 18 0 0 0 18-18M44 56a24 24 0 0 0 12-12" opacity=".6"/>'
+};
+function amblemSVG(id, renk){
+  return '<svg viewBox="0 0 64 64" fill="none" stroke="' + (renk || 'currentColor') + '" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:' + (renk || 'currentColor') + '">' + AMBLEM[id] + '</svg>';
+}
+
+/* ==========================================================================
+   MEKÂNLAR. Kaynak: /mnt/project-files/efes/turkiye-felsefe-mekanlari.md
+   soz.dogrulandi=false olanlar birincil kaynaktan teyit bekliyor.
+   ========================================================================== */
+var YERLER = [
+ { id:'efes', lat:37.94, lon:27.34, yunan:'ΕΦΕΣΟΣ',
+   tr:{ ad:'Efes', il:'Selçuk, İzmir', kim:'Herakleitos', donem:'MÖ 6.–5. yy',
+     neden:'Değişim ve logos düşüncesi burada doğdu. Herakleitos her şeyin akış içinde olduğunu, ama bu akışın bir ölçüye, bir "logos"a göre aktığını söyledi.',
+     rota:[['Kuretler Caddesi','"Yukarı giden yol ile aşağı inen yol bir ve aynıdır."'],['Celsus Kütüphanesi','Bilmek ile anlamak arasındaki fark.'],['Liman Caddesi','Denizini kaybeden kent: Herakleitos\'un ırmağı.']] },
+   en:{ ad:'Ephesus', il:'Selçuk, İzmir', kim:'Heraclitus', donem:'6th–5th c. BC',
+     neden:'The philosophy of change and logos was born here. Heraclitus held that everything flows, but that the flow follows a measure, a "logos".',
+     rota:[['Curetes Street','"The road up and the road down are one and the same."'],['Library of Celsus','The difference between knowing and understanding.'],['Harbour Street','The city that lost its sea: Heraclitus\' river.']] },
+   soz:{ tr:'Aynı ırmaklara girenlerin üzerine hep başka başka sular akar.', en:'Upon those who step into the same rivers, different and again different waters flow.', kaynak:'Herakleitos, DK B12', dogrulandi:true },
+   rehber:'/', kaynaklar:[['SEP: Heraclitus','https://plato.stanford.edu/entries/heraclitus/'],['UNESCO: Ephesus','https://whc.unesco.org/en/list/1018/']] },
+ { id:'milet', lat:37.53, lon:27.28, mh:'Thales', yunan:'ΜΙΛΗΤΟΣ',
+   tr:{ ad:'Milet', il:'Didim, Aydın', kim:'Thales, Anaksimandros, Anaksimenes', donem:'MÖ 6. yy',
+     neden:'Batı felsefesinin ilk okulu. Thales evrenin ilk maddesini aradı; Anaksimandros her şeyin kaynağına "apeiron", yani sınırsız dedi.',
+     rota:[['Tiyatro','Limana bakan büyük tiyatronun en üst sırası.'],['Faustina Hamamları','Roma döneminde kentin günlük hayatı.'],['Liman aslanları','Denizin çekildiği eski limanın bekçileri.'],['Didim, Apollon Tapınağı','İsteğe bağlı: kehanet ile akıl arasındaki çizgi.']] },
+   en:{ ad:'Miletus', il:'Didim, Aydın', kim:'Thales, Anaximander, Anaximenes', donem:'6th c. BC',
+     neden:'The first school of Western philosophy. Thales looked for the first stuff of the world; Anaximander called the source of all things the "apeiron", the boundless.',
+     rota:[['Theatre','The top row of the great theatre that faced the harbour.'],['Baths of Faustina','Everyday life of the Roman city.'],['Harbour lions','Guardians of a harbour the sea has left.'],['Didyma, Temple of Apollo','Optional: the line between oracle and reason.']] },
+   soz:{ tr:'Her şey tanrılarla doludur.', en:'All things are full of gods.', kaynak:'Aristoteles\'in aktarımıyla, Ruh Üzerine 411a7–8', kaynakEn:'As reported by Aristotle, On the Soul 411a7–8', dogrulandi:true },
+   kaynaklar:[['IEP: Thales','https://iep.utm.edu/thales/'],['IEP: Anaximander','https://iep.utm.edu/anaximan/'],['SEP: Presocratic Philosophy','https://plato.stanford.edu/entries/presocratics/']] },
+ { id:'klazomenai', lat:38.36, lon:26.77, yunan:'ΚΛΑΖΟΜΕΝΑΙ',
+   tr:{ ad:'Klazomenai', il:'Urla, İzmir', kim:'Anaksagoras', donem:'MÖ 500–428',
+     neden:'Felsefeyi Atina\'ya taşıyan ilk filozof. Evreni düzenleyen bir "nous", yani akıl olduğunu öne sürdü.',
+     rota:[['Antik zeytinyağı işliği','Antik çağda zeytinin yağa dönüştüğü atölye.'],['Ören yeri','Anaksagoras\'ın büyüdüğü kentin kalıntıları.'],['Urla İskelesi','Akşam, denize bakarak: her şeyde her şeyden bir pay var mı?']] },
+   en:{ ad:'Clazomenae', il:'Urla, İzmir', kim:'Anaxagoras', donem:'500–428 BC',
+     neden:'The first philosopher to bring philosophy to Athens. He argued that a "nous", a mind, set the cosmos in order.',
+     rota:[['Ancient olive oil workshop','Where olives became oil in antiquity.'],['Archaeological site','Remains of the city where Anaxagoras grew up.'],['Urla pier','In the evening, facing the sea: is there a share of everything in everything?']] },
+   soz:{ tr:'Hiçbir şey ötekinden bütünüyle ayrılmış değildir.', en:'Nothing is completely separated off from anything else.', kaynak:'Anaksagoras, DK B12 içinden', kaynakEn:'Anaxagoras, from DK B12', dogrulandi:true },
+   kaynaklar:[['SEP: Anaxagoras','https://plato.stanford.edu/entries/anaxagoras/']] },
+ { id:'assos', lat:39.49, lon:26.34, yunan:'ΑΣΣΟΣ',
+   tr:{ ad:'Assos', il:'Ayvacık, Çanakkale', kim:'Aristoteles, Kleanthes', donem:'MÖ 4.–3. yy',
+     neden:'Aristoteles, Platon\'un ölümünden (MÖ 347) sonra Assos\'a gelip yaklaşık üç yıl kaldı. Stoa okulunun ikinci başkanı Kleanthes de Assoslu.',
+     rota:[['Athena Tapınağı','Midilli\'ye bakan tepe; Aristoteles\'in gördüğü manzara.'],['Agora','Düşüncenin konuşularak sınandığı meydan.'],['Surlar','Günbatımı durağı.']] },
+   en:{ ad:'Assos', il:'Ayvacık, Çanakkale', kim:'Aristotle, Cleanthes', donem:'4th–3rd c. BC',
+     neden:'After Plato\'s death (347 BC) Aristotle came to Assos and stayed about three years. Cleanthes, second head of the Stoic school, was also from Assos.',
+     rota:[['Temple of Athena','The hilltop facing Lesbos; the view Aristotle saw.'],['Agora','The square where ideas were tested in conversation.'],['City walls','The sunset stop.']] },
+   soz:{ tr:'Bütün insanlar doğaları gereği bilmek ister.', en:'All human beings by nature desire to know.', kaynak:'Aristoteles, Metafizik I.1, 980a21', kaynakEn:'Aristotle, Metaphysics I.1, 980a21', dogrulandi:false },
+   kaynaklar:[['SEP: Aristotle','https://plato.stanford.edu/entries/aristotle/'],['SEP: Stoicism','https://plato.stanford.edu/entries/stoicism/']] },
+ { id:'bergama', lat:39.13, lon:27.18, yunan:'ΠΕΡΓΑΜΟΝ',
+   tr:{ ad:'Bergama', il:'Bergama, İzmir', kim:'Galenos', donem:'MS 2. yy',
+     neden:'Antik dünyanın en büyük kütüphanelerinden biri burada. Hem hekim hem filozof olan Galenos (129–y. 200) da bu kentte doğdu.',
+     rota:[['Akropol ve kütüphane','Kitapların saklandığı tepe.'],['Tiyatro','Dünyanın en dik antik tiyatrolarından biri.'],['Asklepion','Antik sağlık merkezi: beden ile ruhun bakımı.']] },
+   en:{ ad:'Pergamon', il:'Bergama, İzmir', kim:'Galen', donem:'2nd c. AD',
+     neden:'Home to one of the greatest libraries of the ancient world, and birthplace of Galen (129–c. 200), physician and philosopher.',
+     rota:[['Acropolis and library','The hill where the books were kept.'],['Theatre','One of the steepest theatres of antiquity.'],['Asclepion','The ancient healing centre: care of body and soul.']] },
+   soz:{ tr:'En İyi Hekim Aynı Zamanda Filozoftur', en:'The Best Physician Is Also a Philosopher', kaynak:'Galenos\'un bir eserinin adı (Quod optimus medicus sit idem philosophus)', kaynakEn:'Title of a work by Galen (Quod optimus medicus sit idem philosophus)', eser:true, dogrulandi:true },
+   kaynaklar:[['SEP: Galen','https://plato.stanford.edu/entries/galen/'],['IEP: Galen','https://iep.utm.edu/galen/'],['UNESCO: Pergamon','https://whc.unesco.org/en/list/1457/']] },
+ { id:'hierapolis', lat:37.93, lon:29.13, yunan:'ΙΕΡΑΠΟΛΙΣ',
+   tr:{ ad:'Hierapolis', il:'Pamukkale, Denizli', kim:'Epiktetos', donem:'MS 1.–2. yy',
+     neden:'Köle olarak doğup Stoa\'nın en çok okunan öğretmenlerinden biri olan Epiktetos 50\'li yıllarda burada doğdu.',
+     rota:[['Travertenler','Suyun taşı nasıl biçimlendirdiğine bak.'],['Tiyatro','Kalabalığın içinde kendi aklını korumak.'],['Nekropol','Stoacıların ölüm üzerine düşüncesi.']] },
+   en:{ ad:'Hierapolis', il:'Pamukkale, Denizli', kim:'Epictetus', donem:'1st–2nd c. AD',
+     neden:'Epictetus, born a slave and later one of the most widely read Stoic teachers, was born here in the 50s AD.',
+     rota:[['Travertines','See how water shapes stone.'],['Theatre','Keeping your own mind in a crowd.'],['Necropolis','The Stoics on death.']] },
+   soz:{ tr:'Bazı şeyler bizim elimizdedir, bazıları değildir.', en:'Some things are within our power, while others are not.', kaynak:'Epiktetos, Encheiridion 1', kaynakEn:'Epictetus, Enchiridion 1', dogrulandi:false },
+   kaynaklar:[['SEP: Epictetus','https://plato.stanford.edu/entries/epictetus/'],['UNESCO: Hierapolis-Pamukkale','https://whc.unesco.org/en/list/485/']] },
+ { id:'afrodisias', lat:37.71, lon:28.72, mh:'Aleksandros', yunan:'ΑΦΡΟΔΙΣΙΑΣ',
+   tr:{ ad:'Afrodisias', il:'Karacasu, Aydın', kim:'Afrodisiaslı Aleksandros', donem:'MS 2.–3. yy',
+     neden:'Aristoteles\'in antik çağdaki en etkili yorumcusu. 2001\'de burada bulunan bir yazıt onu "Atina\'daki felsefe okullarının başlarından biri" olarak anıyor.',
+     rota:[['Tetrapylon','Kente giriş kapısı.'],['Stadyum','Antik dünyanın en iyi korunmuş stadyumlarından biri.'],['Müze','Kentin portre heykelleri.']] },
+   en:{ ad:'Aphrodisias', il:'Karacasu, Aydın', kim:'Alexander of Aphrodisias', donem:'2nd–3rd c. AD',
+     neden:'The most influential ancient commentator on Aristotle. An inscription found here in 2001 calls him one of the heads of the philosophical schools in Athens.',
+     rota:[['Tetrapylon','The gateway to the city.'],['Stadium','One of the best preserved stadiums of antiquity.'],['Museum','The city\'s portrait sculptures.']] },
+   soz:{ tr:'Kader Üzerine', en:'On Fate', kaynak:'Aleksandros\'un eseri (De fato): her şey önceden belirlenmişse sorumluluk nerede kalır?', kaynakEn:'Alexander\'s treatise (De fato): if everything is fixed in advance, where is responsibility?', eser:true, dogrulandi:true },
+   kaynaklar:[['SEP: Alexander of Aphrodisias','https://plato.stanford.edu/entries/alexander-aphrodisias/'],['UNESCO: Aphrodisias','https://whc.unesco.org/en/list/1519/']] },
+ { id:'sinop', lat:42.03, lon:35.15, yunan:'ΣΙΝΩΠΗ',
+   tr:{ ad:'Sinop', il:'Sinop', kim:'Diogenes', donem:'MÖ 4. yy',
+     neden:'Kinik felsefenin simgesi Diogenes (y. MÖ 404–323) Sinoplu bir yurttaştı; kentten kaçtı ya da sürgün edildi.',
+     rota:[['Diogenes heykeli','Fenerli filozofla karşılaş.'],['Sinop Müzesi','Antik kentin izleri.'],['Tarihi cezaevi ve kale','Özgürlük üzerine bir durak.']] },
+   en:{ ad:'Sinope', il:'Sinop', kim:'Diogenes', donem:'4th c. BC',
+     neden:'Diogenes (c. 404–323 BC), emblem of Cynic philosophy, was a citizen of Sinope who fled or was exiled from the city.',
+     rota:[['Statue of Diogenes','Meet the philosopher with the lamp.'],['Sinop Museum','Traces of the ancient city.'],['Historic prison and fortress','A stop on freedom.']] },
+   soz:{ tr:'Ben dünya yurttaşıyım.', en:'I am a citizen of the world.', kaynak:'Diogenes Laertios, Ünlü Filozofların Yaşamları VI.63', kaynakEn:'Diogenes Laertius, Lives of Eminent Philosophers VI.63', dogrulandi:false },
+   kaynaklar:[['IEP: Diogenes of Sinope','https://iep.utm.edu/diogenes-of-sinope/']] },
+ { id:'soli', lat:36.80, lon:34.70, mh:'Khrysippos', yunan:'ΣΟΛΟΙ · ΤΑΡΣΟΣ',
+   tr:{ ad:'Soli ve Tarsus', il:'Mersin', kim:'Khrysippos, Tarsuslu Antipatros', donem:'MÖ 3.–1. yy',
+     neden:'Stoa\'nın sistemini kuran Khrysippos (y. MÖ 280–207) bugünkü Mersin yakınındaki Soli\'de doğdu. Tarsus da Antipatros gibi Stoacıların kenti.',
+     rota:[['Soli Pompeiopolis','Sütunlu caddede yürü.'],['Tarsus tarihi kent merkezi','Stoacıların kentinde bir akşam.']] },
+   en:{ ad:'Soli and Tarsus', il:'Mersin', kim:'Chrysippus, Antipater of Tarsus', donem:'3rd–1st c. BC',
+     neden:'Chrysippus (c. 280–207 BC), who built the Stoic system, was born in Soli near today\'s Mersin. Tarsus was the city of Stoics such as Antipater.',
+     rota:[['Soli Pompeiopolis','Walk the colonnaded street.'],['Historic Tarsus','An evening in a city of Stoics.']] },
+   soz:{ tr:'Stoa\'nın ikinci kurucusu', en:'The second founder of the Stoa', kaynak:'Khrysippos için kullanılan sıfat; yazdığı yüzlerce eserden yalnızca parçalar kaldı.', kaynakEn:'How Chrysippus is often described; only fragments survive of his hundreds of works.', eser:true, dogrulandi:true },
+   kaynaklar:[['IEP: Chrysippus','https://iep.utm.edu/chrysippus/'],['SEP: Stoicism','https://plato.stanford.edu/entries/stoicism/']] },
+ { id:'konya', lat:37.87, lon:32.48, mh:'Mevlânâ', yunan:'قونیه · KONYA',
+   tr:{ ad:'Konya', il:'Konya', kim:'Mevlânâ Celâleddîn Rûmî', donem:'13. yy',
+     neden:'Mevlânâ 1207\'de Belh\'te doğdu, 1273\'te Konya\'da öldü. Ölümünden sonra öğrencileri Mevlevîlik yolunu örgütledi; haritaya tasavvuf düşüncesini katıyor.',
+     rota:[['Mevlânâ Müzesi','Yeşil Kubbe\'nin altındaki türbe.'],['Şems-i Tebrîzî Türbesi','Bir karşılaşmanın bir hayatı nasıl değiştirdiği.'],['Mevlânâ Kültür Merkezi','Sema törenini izle (programı önceden kontrol et).']] },
+   en:{ ad:'Konya', il:'Konya', kim:'Jalāl al-Dīn Rūmī', donem:'13th c.',
+     neden:'Rumi was born in Balkh in 1207 and died in Konya in 1273. After his death his disciples organised the Mevlevi order; Konya adds Sufi thought to the map.',
+     rota:[['Mevlana Museum','The tomb beneath the Green Dome.'],['Tomb of Shams of Tabriz','How one encounter changed a life.'],['Mevlana Cultural Centre','Watch the sema ceremony (check the schedule first).']] },
+   soz:{ tr:'Dinle bu ney nasıl şikâyet ediyor, ayrılıkları nasıl anlatıyor.', en:'Listen to the reed, how it complains, how it tells of separations.', kaynak:'Mevlânâ, Mesnevî I, 1. beyit', kaynakEn:'Rumi, Masnavi I, line 1', dogrulandi:false },
+   kaynaklar:[['Britannica: Rumi','https://www.britannica.com/biography/Rumi']] }
+];
+
+/* ==========================================================================
+   METİNLER
+   ========================================================================== */
+var M = {
+ tr:{ etiket:'ΦΙΛΟΣΟΦΙΑ · Anadolu', baslik:'Türkiye Felsefe Haritası', giris:'Herakleitos\'tan Mevlânâ\'ya, felsefenin bu topraklarda doğduğu ve yaşadığı on yer. Bir yere dokun: rotası, sözü ve pasaport mührü seni bekliyor.',
+   tum:'Tüm Türkiye', ege:'Ege\'ye yakınlaş', egeNot:'Ege kıyısında yedi durak var; yakınlaşarak seç.', kim:'Filozof', donem:'Dönem', neden:'Neden burada?', soz:'Söz kartı', eser:'Eser', dogru:'Kaynakta doğrulandı', bekliyor:'Çeviri birincil kaynakta kontrol ediliyor',
+   kartYap:'Kartı indir', rota:'Yürüyüş rotası', muhur:'Mühür al', muhurlu:'Mühürlendi', muhurNot:'Bu yeri gezdiysen pasaportuna mühür bas.', muhurBildir:'Mühür pasaportuna basıldı.',
+   oteller:'Çevrede kal', otelNot:'Bu yere yakın otelleri Hotels.com\'da gör.', otelBtn:'Otelleri gör', otelAcik:'Bu bağlantılardan yapılan rezervasyonlardan site komisyon alabilir; sana ek ücret yansımaz.',
+   rehber:'Efes gezi rehberini aç', rehberNot:'Efes için sesli anlatımlı tam gezi rehberi hazır.', kaynaklar:'Kaynaklar', pasaport:'Felsefe Pasaportu', pasaportAlt:'Gezdiğin her yer için bir mühür.',
+   yakinda:'Yakında: Kolophon (Ksenofanes), Priene, Harran, Hacıbektaş, Nusaybin ve İstanbul.', alt1:'Çizimler bu site için özgün olarak yapıldı. Harita verisi: Natural Earth (kamu malı).', alt2:'Bilgiler Stanford Encyclopedia of Philosophy, Internet Encyclopedia of Philosophy, Britannica ve UNESCO sayfalarına dayanır.', sec:'Haritadan bir yer seç.', kartAlt:'Türkiye Felsefe Haritası' },
+ en:{ etiket:'ΦΙΛΟΣΟΦΙΑ · Anatolia', baslik:'Philosophy Map of Türkiye', giris:'From Heraclitus to Rumi: ten places where philosophy was born and lived in this land. Tap a place for its route, its words and a passport stamp.',
+   tum:'All of Türkiye', ege:'Zoom to the Aegean', egeNot:'Seven stops lie on the Aegean coast; zoom in to choose.', kim:'Philosopher', donem:'Period', neden:'Why here?', soz:'Quote card', eser:'Work', dogru:'Checked against sources', bekliyor:'Translation being checked against the original',
+   kartYap:'Download card', rota:'Walking route', muhur:'Collect stamp', muhurlu:'Stamped', muhurNot:'If you have visited, stamp your passport.', muhurBildir:'Stamp added to your passport.',
+   oteller:'Stay nearby', otelNot:'See hotels near this place on Hotels.com.', otelBtn:'See hotels', otelAcik:'This site may earn a commission on bookings made through these links, at no extra cost to you.',
+   rehber:'Open the Ephesus tour guide', rehberNot:'A full audio tour guide is ready for Ephesus.', kaynaklar:'Sources', pasaport:'Philosophy Passport', pasaportAlt:'One stamp for every place you visit.',
+   yakinda:'Coming soon: Colophon (Xenophanes), Priene, Harran, Hacıbektaş, Nusaybin and Istanbul.', alt1:'All illustrations are original to this site. Map data: Natural Earth (public domain).', alt2:'Facts are based on the Stanford Encyclopedia of Philosophy, the Internet Encyclopedia of Philosophy, Britannica and UNESCO.', sec:'Choose a place on the map.', kartAlt:'Philosophy Map of Türkiye' }
+};
+
+/* ==========================================================================
+   DURUM
+   ========================================================================== */
+function oku(k, v){ try { var x = JSON.parse(localStorage.getItem(k)); return x == null ? v : x; } catch(e){ return v; } }
+function yaz(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+var D = { dil: oku('fh-dil', (navigator.language || 'tr').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en'), muhur: oku('fh-muhur', {}), secili: null, zum: 'tum' };
+function t(k){ return M[D.dil][k]; }
+function y(yer){ return yer[D.dil]; }
+function $(id){ return document.getElementById(id); }
+function h(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function bul(id){ for (var i = 0; i < YERLER.length; i++) if (YERLER[i].id === id) return YERLER[i]; return null; }
+function bildir(m){ var b = $('bildirim'); b.textContent = m; b.classList.add('acik'); clearTimeout(bildir.z); bildir.z = setTimeout(function(){ b.classList.remove('acik'); }, 2200); }
+
+/* ==========================================================================
+   HARİTA
+   ========================================================================== */
+var H = window.HARITA;
+function izd(lon, lat){ return [(lon - H.b0) * H.k * H.s, (H.e1 - lat) * H.s]; }
+var EGE = (function(){ var a = izd(25.7, 39.75), b = izd(30.1, 37.3); return [a[0], a[1], b[0] - a[0], b[1] - a[1]]; })();
+var GORUNUM = { tum: [0, 0, H.g, H.y], ege: EGE };
+function egede(yer){ return yer.lon < 30 && yer.lat > 37.3 && yer.lat < 39.75; }
+
+function dalgalar(){
+  var s = '', yer = [[70,420],[150,360],[60,300],[380,440],[520,455],[700,430],[460,30],[620,60],[300,70]];
+  yer.forEach(function(p){ s += '<path class="dalga" d="M' + p[0] + ' ' + p[1] + 'q6-5 12 0t12 0t12 0"/>'; });
+  return s;
+}
+function haritaCiz(){
+  /* f: bir ekran pikselinin harita birimindeki karşılığı; işaretler her yakınlıkta aynı boyda görünsün */
+  var v = GORUNUM[D.zum], gen = $('harita').clientWidth || 760, f = v[2] / gen;
+  var r = 12 * f, yaz = 15 * f;
+  var dar = gen < 600 && D.zum === 'tum';   /* telefonda Ege pinleri üst üste biner: tek bir küme rozeti göster */
+  var pinler = YERLER.map(function(yer, i){
+    if (dar && egede(yer)) return '';
+    var p = izd(yer.lon, yer.lat), sec = D.secili === yer.id, m = D.muhur[yer.id];
+    var etiketGoster = D.zum === 'ege' ? egede(yer) : !egede(yer);
+    return '<g class="pin' + (sec ? ' secili' : '') + (m ? ' muhurlu' : '') + '" data-yer="' + yer.id + '" role="button" tabindex="0" aria-label="' + h((i + 1) + '. ' + y(yer).ad + ', ' + y(yer).kim) + '">' +
+      '<circle class="nabiz" cx="' + p[0] + '" cy="' + p[1] + '" r="' + r + '" stroke-width="' + (2 * f) + '"/>' +
+      '<circle class="halka" cx="' + p[0] + '" cy="' + p[1] + '" r="' + r + '" stroke-width="' + (2.5 * f) + '"/>' +
+      '<text x="' + p[0] + '" y="' + (p[1] + 0.5 * f) + '" font-size="' + (12.5 * f) + '">' + (i + 1) + '</text>' +
+      (etiketGoster ? '<text class="ad" x="' + (p[0] + r + 5 * f) + '" y="' + p[1] + '" dy="0.35em" font-size="' + yaz + '" stroke-width="' + (4 * f) + '">' + h(y(yer).ad) + '</text>' : '') +
+      '</g>';
+  }).join('');
+  var kume = dar ? (function(){ var c = [EGE[0] + EGE[2] / 2, EGE[1] + EGE[3] / 2], R = 17 * f; return '<g class="pin" id="ege-kume" role="button" tabindex="0" aria-label="' + h(t('ege')) + '"><circle class="halka" cx="' + c[0] + '" cy="' + c[1] + '" r="' + R + '" stroke-width="' + (2.5 * f) + '" style="fill:var(--ege)"/><text x="' + c[0] + '" y="' + c[1] + '" font-size="' + (14 * f) + '">+7</text></g>'; })() : '';
+  var egeKutu = D.zum === 'tum' ? '<rect class="ege-kutu" id="ege-kutu" x="' + EGE[0] + '" y="' + EGE[1] + '" width="' + EGE[2] + '" height="' + EGE[3] + '" rx="10"/>' +
+    '<text x="' + (EGE[0] + 8) + '" y="' + (EGE[1] + EGE[3] + 18) + '" font-size="14" fill="#1F5C8A" font-style="italic">' + h(D.dil === 'tr' ? 'Ege: 7 durak' : 'Aegean: 7 stops') + '</text>' : '';
+  var denizler = D.zum === 'tum' ? '<text class="deniz-ad" x="610" y="48">' + (D.dil === 'tr' ? 'KARADENİZ' : 'BLACK SEA') + '</text><text class="deniz-ad" x="330" y="462">' + (D.dil === 'tr' ? 'AKDENİZ' : 'MEDITERRANEAN') + '</text><text class="deniz-ad" x="22" y="370" transform="rotate(-90 22 370)">' + (D.dil === 'tr' ? 'EGE' : 'AEGEAN') + '</text>' : '';
+  $('harita').innerHTML = '<svg viewBox="' + v.join(' ') + '" role="img" aria-label="' + h(t('baslik')) + '">' +
+    '<rect x="-50" y="-50" width="' + (H.g + 100) + '" height="' + (H.y + 100) + '" fill="#DCE7EE"/>' + (D.zum === 'tum' ? dalgalar() : '') +
+    '<path class="komsu" d="' + H.komsu + '"/>' +
+    '<path class="kara" d="' + H.turkiye + '"/>' +
+    denizler + egeKutu + pinler + kume + '</svg>';
+  $('z-tum').setAttribute('aria-pressed', D.zum === 'tum'); $('z-ege').setAttribute('aria-pressed', D.zum === 'ege');
+}
+
+function listeCiz(){
+  $('liste').innerHTML = YERLER.map(function(yer, i){
+    return '<button type="button" class="yer-btn' + (D.muhur[yer.id] ? ' muhurlu' : '') + '" data-yer="' + yer.id + '" aria-current="' + (D.secili === yer.id) + '"><span class="no">' + (i + 1) + '</span><span><b>' + h(y(yer).ad) + '</b><small>' + h(y(yer).kim) + '</small></span></button>';
+  }).join('');
+}
+
+/* ==========================================================================
+   MÜHÜR (özgün, yuvarlak damga)
+   ========================================================================== */
+function muhurSVG(yer, basili){
+  var renk = basili ? '#A0561F' : '#C9BFAE', yid = 'yy-' + yer.id + (basili ? 'b' : 'g');
+  return '<svg viewBox="0 0 120 120" class="' + (basili ? 'basili' : '') + '" aria-hidden="true">' +
+    '<defs><path id="' + yid + '" d="M60 60m-43 0a43 43 0 1 1 86 0a43 43 0 1 1-86 0"/></defs>' +
+    '<circle cx="60" cy="60" r="56" fill="none" stroke="' + renk + '" stroke-width="3"' + (basili ? '' : ' stroke-dasharray="5 5"') + '/>' +
+    '<circle cx="60" cy="60" r="35" fill="none" stroke="' + renk + '" stroke-width="1.5"/>' +
+    '<text font-size="11.5" letter-spacing="2.5" fill="' + renk + '" font-family="EB Garamond,Georgia,serif" font-weight="700"><textPath href="#' + yid + '" startOffset="50%" text-anchor="middle">' + h(yer.yunan) + ' · ' + h((yer.mh || yer.tr.kim.split(',')[0]).toLocaleUpperCase('tr')) + '</textPath></text>' +
+    '<g transform="translate(38 38) scale(.69)">' + amblemSVG(yer.id, renk).replace('<svg ', '<svg width="64" height="64" ') + '</g>' +
+    '</svg>';
+}
+
+/* ==========================================================================
+   AYRINTI PANELİ
+   ========================================================================== */
+function panelCiz(odakla){
+  var yer = bul(D.secili), p = $('panel');
+  if (!yer){
+    p.innerHTML = '<div class="etiket">' + h(t('pasaport')) + '</div><h2>' + h(t('sec')) + '</h2><p class="soluk">' + h(t('giris')) + '</p>' +
+      '<div class="muhur-kutu">' + muhurSVG(YERLER[0], true) + '<p class="not">' + h(t('pasaportAlt')) + '</p></div>';
+    return;
+  }
+  var m = y(yer), s = yer.soz, muhurlu = !!D.muhur[yer.id], i = YERLER.indexOf(yer);
+  var kaynak = (D.dil === 'en' && s.kaynakEn) ? s.kaynakEn : s.kaynak;
+  var otel = OTEL.goster && OTEL.yerler[yer.id] ?
+    '<div class="otel"><div class="etiket">' + h(t('oteller')) + '</div><p>' + h(t('otelNot')) + ' <span class="soluk">(' + h(OTEL.yerler[yer.id].arama) + ')</span></p>' +
+    '<a class="btn btn-ege" href="' + h(otelAdresi(yer.id)) + '" target="_blank" rel="sponsored noopener">' + h(t('otelBtn')) + ' →</a>' +
+    (ortaklikVar() ? '<p class="not">' + h(t('otelAcik')) + '</p>' : '') + '</div>' : '';
+  p.innerHTML =
+    '<div class="panel-bas"><div class="amblem">' + amblemSVG(yer.id) + '</div><div><div class="etiket">' + (i + 1) + ' · ' + h(yer.yunan) + '</div><h2>' + h(m.ad) + '</h2><div class="bilgi-satir"><span>' + h(m.il) + '</span><span>' + h(m.donem) + '</span></div></div></div>' +
+    '<div><h3>' + h(m.kim) + '</h3><p class="soluk" style="margin-top:4px">' + h(m.neden) + '</p></div>' +
+    (yer.rehber ? '<a class="btn btn-koyu" href="' + yer.rehber + '">' + h(t('rehber')) + ' →</a>' : '') +
+    '<div class="soz"><div class="etiket" style="color:var(--okra)">' + h(s.eser ? t('eser') : t('soz')) + '</div>' +
+      '<blockquote>' + (s.eser ? '' : '“') + h(s[D.dil]) + (s.eser ? '' : '”') + '</blockquote>' +
+      '<p class="kaynak">' + h(kaynak) + '</p>' +
+      '<span class="rozet' + (s.dogrulandi ? ' dogru' : '') + '">' + h(s.dogrulandi ? t('dogru') : t('bekliyor')) + '</span>' +
+      '<div class="soz-eylem"><button type="button" class="btn btn-hayalet" data-eylem="kart">' + h(t('kartYap')) + '</button></div></div>' +
+    '<div><div class="etiket" style="margin-bottom:10px">' + h(t('rota')) + '</div><ol class="rota">' + m.rota.map(function(r){ return '<li><b>' + h(r[0]) + '</b><span>' + h(r[1]) + '</span></li>'; }).join('') + '</ol></div>' +
+    '<div class="muhur-kutu">' + muhurSVG(yer, muhurlu) + '<div style="display:flex;flex-direction:column;gap:8px"><p class="not">' + h(muhurlu ? t('muhurlu') + ' · ' + D.muhur[yer.id] : t('muhurNot')) + '</p>' +
+      (muhurlu ? '' : '<button type="button" class="btn btn-okra" data-eylem="muhur">' + h(t('muhur')) + '</button>') + '</div></div>' +
+    otel +
+    '<div><div class="etiket" style="margin-bottom:6px">' + h(t('kaynaklar')) + '</div><div class="kaynaklar">' + yer.kaynaklar.map(function(k){ return '<a href="' + k[1] + '" target="_blank" rel="noopener">' + h(k[0]) + '</a>'; }).join('') + '</div></div>';
+  if (odakla && window.matchMedia('(max-width:900px)').matches) p.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function pasaportCiz(){
+  var n = YERLER.filter(function(yer){ return D.muhur[yer.id]; }).length;
+  $('pasaport-bolum').innerHTML = '<div class="etiket">ΔΙΑΒΑΤΗΡΙΟΝ</div><h2>' + h(t('pasaport')) + ' · ' + n + ' / ' + YERLER.length + '</h2><p class="soluk">' + h(t('pasaportAlt')) + '</p>' +
+    '<div class="pasaport">' + YERLER.map(function(yer){ return '<button type="button" data-yer="' + yer.id + '">' + muhurSVG(yer, !!D.muhur[yer.id]) + '<span>' + h(y(yer).ad) + '</span></button>'; }).join('') + '</div>' +
+    '<p class="yakinda">' + h(t('yakinda')) + '</p>';
+}
+
+function metinCiz(){
+  document.documentElement.lang = D.dil;
+  document.title = t('baslik');
+  $('ust-etiket').textContent = t('etiket'); $('baslik').textContent = t('baslik'); $('giris').textContent = t('giris');
+  $('z-tum').textContent = t('tum'); $('z-ege').textContent = t('ege'); $('harita-not').textContent = D.zum === 'tum' ? t('egeNot') : '';
+  $('alt').innerHTML = '<p>' + h(t('alt1')) + '</p><p>' + h(t('alt2')) + '</p>';
+  document.querySelectorAll('[data-dil]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-dil') === D.dil); });
+}
+function hepsi(odakla){ metinCiz(); haritaCiz(); listeCiz(); panelCiz(odakla); pasaportCiz(); }
+
+/* ==========================================================================
+   SÖZ KARTI (1080x1350 PNG, paylaşılabilir)
+   ========================================================================== */
+function satirlara(ctx, metin, gen){
+  var kel = metin.split(' '), sat = [], s = '';
+  kel.forEach(function(k){ var d = s ? s + ' ' + k : k; if (ctx.measureText(d).width > gen && s){ sat.push(s); s = k; } else s = d; });
+  if (s) sat.push(s); return sat;
+}
+function amblemResmi(id){
+  return new Promise(function(ok){
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="256" height="256" fill="none" stroke="#E3B38A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" color="#E3B38A">' + AMBLEM[id] + '</svg>';
+    var img = new Image(); img.onload = function(){ ok(img); }; img.onerror = function(){ ok(null); };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  });
+}
+async function kartYap(){
+  var yer = bul(D.secili); if (!yer) return;
+  try { await document.fonts.ready; } catch(e){}
+  var c = document.createElement('canvas'); c.width = 1080; c.height = 1350;
+  var x = c.getContext('2d'), s = yer.soz, F = '"EB Garamond", Georgia, serif';
+  x.fillStyle = '#14202C'; x.fillRect(0, 0, 1080, 1350);
+  x.strokeStyle = '#36495F'; x.lineWidth = 3; x.strokeRect(48, 48, 984, 1254);
+  var img = await amblemResmi(yer.id); if (img) x.drawImage(img, 412, 120, 256, 256);
+  x.fillStyle = '#E3B38A'; x.textAlign = 'center'; x.font = '600 34px ' + F;
+  x.fillText(yer.yunan.split('').join(' '), 540, 440);
+  x.fillStyle = '#F4F1EA'; x.font = (s.eser ? '600 ' : 'italic 500 ') + '64px ' + F;
+  var metin = s.eser ? s[D.dil] : '“' + s[D.dil] + '”', sat = satirlara(x, metin, 860), yuk = 82, y0 = 700 - (sat.length - 1) * yuk / 2;
+  sat.forEach(function(l, i){ x.fillText(l, 540, y0 + i * yuk); });
+  x.fillStyle = '#C3CEDA'; x.font = '400 32px ' + F;
+  satirlara(x, (D.dil === 'en' && s.kaynakEn) ? s.kaynakEn : s.kaynak, 860).forEach(function(l, i){ x.fillText(l, 540, y0 + sat.length * yuk + 30 + i * 42); });
+  x.fillStyle = '#E3B38A'; x.font = '600 30px ' + F; x.fillText(t('kartAlt') + ' · ' + y(yer).ad, 540, 1240);
+  c.toBlob(async function(b){
+    var ad = 'felsefe-' + yer.id + '.png';
+    try { var dosya = new File([b], ad, { type:'image/png' }); if (navigator.canShare && navigator.canShare({ files:[dosya] })){ await navigator.share({ files:[dosya], title:t('baslik') }); return; } } catch(e){ if (e && e.name === 'AbortError') return; }
+    var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = ad; document.body.appendChild(a); a.click(); a.remove();
+  }, 'image/png');
+}
+
+/* ==========================================================================
+   OLAYLAR
+   ========================================================================== */
+function sec(id, odakla){
+  D.secili = id;
+  var yer = bul(id);
+  if (yer && D.zum === 'tum' && egede(yer) && odakla !== 'harita') D.zum = 'ege';
+  try { history.replaceState(null, '', id ? '#' + id : location.pathname); } catch(e){}
+  haritaCiz(); listeCiz(); panelCiz(!!odakla); metinCiz();
+}
+document.addEventListener('click', function(e){
+  var el = e.target.closest('[data-yer],[data-dil],[data-eylem],#z-tum,#z-ege,#ege-kutu,#ege-kume');
+  if (!el) return;
+  if (el.id === 'z-tum'){ D.zum = 'tum'; haritaCiz(); metinCiz(); return; }
+  if (el.id === 'z-ege' || el.id === 'ege-kutu' || el.id === 'ege-kume'){ D.zum = 'ege'; haritaCiz(); metinCiz(); return; }
+  if (el.hasAttribute('data-dil')){ D.dil = el.getAttribute('data-dil'); yaz('fh-dil', D.dil); hepsi(); return; }
+  if (el.hasAttribute('data-yer')){ sec(el.getAttribute('data-yer'), el.closest('#harita') ? 'harita' : true); return; }
+  var ey = el.getAttribute('data-eylem');
+  if (ey === 'muhur'){ D.muhur[D.secili] = new Date().toLocaleDateString(D.dil === 'tr' ? 'tr-TR' : 'en-GB'); yaz('fh-muhur', D.muhur); bildir(t('muhurBildir')); hepsi(); }
+  else if (ey === 'kart') kartYap();
+});
+document.addEventListener('keydown', function(e){
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.id === 'ege-kume'){ e.preventDefault(); D.zum = 'ege'; haritaCiz(); metinCiz(); return; }
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('g.pin')){ e.preventDefault(); sec(e.target.getAttribute('data-yer'), 'harita'); }
+});
+window.addEventListener('resize', function(){ clearTimeout(haritaCiz.z); haritaCiz.z = setTimeout(haritaCiz, 150); });
+window.addEventListener('hashchange', function(){ var id = location.hash.slice(1); if (bul(id) && id !== D.secili) sec(id, true); });
+
+(function(){ var id = location.hash.slice(1); if (bul(id)){ D.secili = id; if (egede(bul(id))) D.zum = 'ege'; } hepsi(); })();
+</script>
+</body>
+</html>

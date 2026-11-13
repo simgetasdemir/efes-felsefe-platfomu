@@ -75,3 +75,19 @@ Gerçek maliyeti ilk günlerde Anthropic Console’daki **Usage** ekranından iz
 - Okuma odalarındaki bağlam ve yorum bölümleri Stanford Encyclopedia of Philosophy maddelerine dayanır ve kaynaklar uygulamada gösterilir. Tarih ve arkeoloji hikâyeleri ise ayrıca bir uzmanca kontrol edilmemiştir.
 - Kâtip bir yapay zekâdır ve hata yapabilir. Herkese açık yayında, uygunsuz bir cevabı bildirmek için bir iletişim adresi eklemen iyi olur.
 - Kişisel veri toplanmaz; ilerleme yalnızca kullanıcının tarayıcısında durur. Kâtip’e yazılanlar cevap üretmek için Anthropic’e gönderilir. Bunu bir gizlilik notunda belirtmelisin (Play Store için de gerekecek).
+
+## Türkiye Felsefe Haritası (`/turkiye/`)
+
+- `turkiye/index.html`: Herakleitos'tan Mevlânâ'ya on mekânlık harita. Her mekânda filozof, söz kartı (indirilebilir PNG), yürüyüş rotası, pasaport mührü, çevre otelleri ve kaynaklar var. TR + EN.
+- Mekân metinleri aynı dosyadaki `YERLER` listesindedir. Kaynak dosyası: proje klasöründeki `efes/turkiye-felsefe-mekanlari.md`. `dogrulandi:false` olan sözler birincil kaynaktan teyit bekliyor ve sayfada öyle etiketleniyor.
+- Harita çizgisi Natural Earth (kamu malı) verisinden `scripts/harita-ciz.mjs` ile bir kez üretildi (`turkiye/harita-veri.js`). Tüm amblem ve mühür çizimleri bu site için özgün SVG'dir.
+
+### Otel bağlantıları (Hotels.com)
+
+Hotels.com, Expedia Group'un **Travel Creator Program** ortaklık programındadır.
+
+1. https://creator.expediagroup.com adresinden ücretsiz başvur (sitenin adresini ister).
+2. Onaydan sonra panelde **Links → Create link** bölümüne, sitedeki "Otelleri gör" düğmesinin açtığı Hotels.com arama adresini yapıştır.
+3. Programın verdiği izlenebilir bağlantıyı `turkiye/index.html` en üstteki `OTEL.yerler.<mekân>.baglanti` alanına yaz.
+
+`baglanti` boş kaldıkça düğme düz Hotels.com aramasına gider (komisyon yok). İlk bağlantı eklendiğinde sayfa ortaklık açıklamasını kendiliğinden gösterir.

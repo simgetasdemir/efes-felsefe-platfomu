@@ -79,7 +79,9 @@ Gerçek maliyeti ilk günlerde Anthropic Console’daki **Usage** ekranından iz
 ## Türkiye Felsefe Haritası (`/turkiye/`)
 
 - `turkiye/index.html`: Herakleitos'tan Mevlânâ'ya on mekânlık harita. Her mekânda filozof, söz kartı (indirilebilir PNG), yürüyüş rotası, pasaport mührü, çevre otelleri ve kaynaklar var. TR + EN.
-- Mekân metinleri aynı dosyadaki `YERLER` listesindedir. Kaynak dosyası: proje klasöründeki `efes/turkiye-felsefe-mekanlari.md`. `dogrulandi:false` olan sözler birincil kaynaktan teyit bekliyor ve sayfada öyle etiketleniyor.
+- Mekân metinleri aynı dosyadaki `YERLER` listesindedir. Kaynak dosyası: proje klasöründeki `efes/turkiye-felsefe-mekanlari.md`. Sitedeki tüm sözler kaynakta doğrulandı; `dogrulandi:false` yapılan bir söz sayfada "kontrol ediliyor" diye etiketlenir. Birincil metin bağlantıları `birincil` alanındadır.
+- `DERIN`: her mekânın sesli anlatımı (Dinle, cihazın yapay sesiyle) ve düşünme sorusu (Düşün). Notlar yalnızca kullanıcının tarayıcısında saklanır.
+- `BAGLAR`: filozoflar arası hoca-öğrenci (düz çizgi) ve etki (kesikli çizgi) ilişkileri. Yeni bir bağ eklemek için listeye bir satır yeterli.
 - Harita çizgisi Natural Earth (kamu malı) verisinden `scripts/harita-ciz.mjs` ile bir kez üretildi (`turkiye/harita-veri.js`). Tüm amblem ve mühür çizimleri bu site için özgün SVG'dir.
 
 ### Otel bağlantıları (Hotels.com)

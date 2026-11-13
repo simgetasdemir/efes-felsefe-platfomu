@@ -65,6 +65,24 @@ main{max-width:1240px;margin:0 auto;padding:0 16px 48px;display:grid;grid-templa
 @keyframes nabiz{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.4)}}
 .pin .nabiz{transform-box:fill-box;transform-origin:center}
 @media (prefers-reduced-motion:reduce){ .pin.secili .nabiz{animation:none} }
+.bag path{fill:none;stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.bag polygon{stroke:none}
+.bag.hoca path{stroke:var(--ege)} .bag.hoca polygon{fill:var(--ege)}
+.bag.etki path{stroke:var(--toprak);stroke-dasharray:5 5} .bag.etki polygon{fill:var(--toprak)}
+.bag{opacity:.7;transition:opacity .2s}
+.bag.ilgili{opacity:1} .bag.ilgili path{stroke-width:2.6}
+.bag.soluk{opacity:.12}
+.bag-liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.bag-liste button{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--mermer);border:0;border-radius:14px;padding:10px 12px}
+.bag-liste .cizgi{flex:none;width:26px;margin-top:12px;border-top:2px solid var(--ege)}
+.bag-liste .etki .cizgi{border-top:2px dashed var(--toprak)}
+.bag-liste b{display:block;font-size:16.5px}
+.bag-liste span{font-size:15px;color:var(--soluk)}
+.dinle-metin{font-size:17px}
+.dusun{background:var(--mermer);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.dusun p.soru{font-size:19px;font-style:italic}
+.dusun textarea{width:100%;min-height:72px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--cizgi);background:#fff;font:inherit;font-size:16px;resize:vertical}
+.soz .ozgun{font-size:17px;color:var(--gece-soluk);direction:rtl;text-align:right}
 .ege-kutu{fill:rgba(31,92,138,.06);stroke:var(--ege);stroke-dasharray:4 4;cursor:pointer;vector-effect:non-scaling-stroke}
 .harita-araclar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .cip{min-height:44px;border-radius:14px;border:1.5px solid var(--cizgi);background:#fff;padding:0 14px;font-weight:600;font-size:16px}
@@ -140,6 +158,7 @@ footer{max-width:1240px;margin:0 auto;padding:0 16px 40px;font-size:14.5px;color
     <div class="harita-araclar">
       <button type="button" class="cip" id="z-tum"></button>
       <button type="button" class="cip" id="z-ege"></button>
+      <button type="button" class="cip" id="z-bag"></button>
       <span class="not" id="harita-not"></span>
     </div>
     <div class="liste" id="liste"></div>
@@ -244,7 +263,7 @@ var YERLER = [
    en:{ ad:'Assos', il:'Ayvacık, Çanakkale', kim:'Aristotle, Cleanthes', donem:'4th–3rd c. BC',
      neden:'After Plato\'s death (347 BC) Aristotle came to Assos and stayed about three years. Cleanthes, second head of the Stoic school, was also from Assos.',
      rota:[['Temple of Athena','The hilltop facing Lesbos; the view Aristotle saw.'],['Agora','The square where ideas were tested in conversation.'],['City walls','The sunset stop.']] },
-   soz:{ tr:'Bütün insanlar doğaları gereği bilmek ister.', en:'All human beings by nature desire to know.', kaynak:'Aristoteles, Metafizik I.1, 980a21', kaynakEn:'Aristotle, Metaphysics I.1, 980a21', dogrulandi:false },
+   soz:{ tr:'Bütün insanlar doğaları gereği bilmek ister.', en:'All human beings by nature desire to know.', kaynak:'Aristoteles, Metafizik I.1, 980a21', kaynakEn:'Aristotle, Metaphysics I.1, 980a21', dogrulandi:true, birincil:['Ross çevirisi (MIT Classics)','https://classics.mit.edu/Aristotle/metaphysics.1.i.html'] },
    kaynaklar:[['SEP: Aristotle','https://plato.stanford.edu/entries/aristotle/'],['SEP: Stoicism','https://plato.stanford.edu/entries/stoicism/']] },
  { id:'bergama', lat:39.13, lon:27.18, yunan:'ΠΕΡΓΑΜΟΝ',
    tr:{ ad:'Bergama', il:'Bergama, İzmir', kim:'Galenos', donem:'MS 2. yy',
@@ -262,7 +281,7 @@ var YERLER = [
    en:{ ad:'Hierapolis', il:'Pamukkale, Denizli', kim:'Epictetus', donem:'1st–2nd c. AD',
      neden:'Epictetus, born a slave and later one of the most widely read Stoic teachers, was born here in the 50s AD.',
      rota:[['Travertines','See how water shapes stone.'],['Theatre','Keeping your own mind in a crowd.'],['Necropolis','The Stoics on death.']] },
-   soz:{ tr:'Bazı şeyler bizim elimizdedir, bazıları değildir.', en:'Some things are within our power, while others are not.', kaynak:'Epiktetos, Encheiridion 1', kaynakEn:'Epictetus, Enchiridion 1', dogrulandi:false },
+   soz:{ tr:'Bazı şeyler bizim elimizdedir, bazıları değildir.', en:'Some things are within our power, and some are not.', kaynak:'Epiktetos, Encheiridion 1', kaynakEn:'Epictetus, Enchiridion 1', dogrulandi:true, birincil:['Higginson çevirisi (Gutenberg)','https://www.gutenberg.org/ebooks/45109'] },
    kaynaklar:[['SEP: Epictetus','https://plato.stanford.edu/entries/epictetus/'],['UNESCO: Hierapolis-Pamukkale','https://whc.unesco.org/en/list/485/']] },
  { id:'afrodisias', lat:37.71, lon:28.72, mh:'Aleksandros', yunan:'ΑΦΡΟΔΙΣΙΑΣ',
    tr:{ ad:'Afrodisias', il:'Karacasu, Aydın', kim:'Afrodisiaslı Aleksandros', donem:'MS 2.–3. yy',
@@ -280,7 +299,7 @@ var YERLER = [
    en:{ ad:'Sinope', il:'Sinop', kim:'Diogenes', donem:'4th c. BC',
      neden:'Diogenes (c. 404–323 BC), emblem of Cynic philosophy, was a citizen of Sinope who fled or was exiled from the city.',
      rota:[['Statue of Diogenes','Meet the philosopher with the lamp.'],['Sinop Museum','Traces of the ancient city.'],['Historic prison and fortress','A stop on freedom.']] },
-   soz:{ tr:'Ben dünya yurttaşıyım.', en:'I am a citizen of the world.', kaynak:'Diogenes Laertios, Ünlü Filozofların Yaşamları VI.63', kaynakEn:'Diogenes Laertius, Lives of Eminent Philosophers VI.63', dogrulandi:false },
+   soz:{ tr:'Ben dünya yurttaşıyım.', en:'I am a citizen of the world.', kaynak:'Diogenes Laertios, Ünlü Filozofların Yaşamları VI.63', kaynakEn:'Diogenes Laertius, Lives of Eminent Philosophers VI.63', dogrulandi:true, birincil:['Hicks çevirisi (Wikisource)','https://en.wikisource.org/wiki/Lives_of_the_Eminent_Philosophers/Book_VI'] },
    kaynaklar:[['IEP: Diogenes of Sinope','https://iep.utm.edu/diogenes-of-sinope/']] },
  { id:'soli', lat:36.80, lon:34.70, mh:'Khrysippos', yunan:'ΣΟΛΟΙ · ΤΑΡΣΟΣ',
    tr:{ ad:'Soli ve Tarsus', il:'Mersin', kim:'Khrysippos, Tarsuslu Antipatros', donem:'MÖ 3.–1. yy',
@@ -298,8 +317,48 @@ var YERLER = [
    en:{ ad:'Konya', il:'Konya', kim:'Jalāl al-Dīn Rūmī', donem:'13th c.',
      neden:'Rumi was born in Balkh in 1207 and died in Konya in 1273. After his death his disciples organised the Mevlevi order; Konya adds Sufi thought to the map.',
      rota:[['Mevlana Museum','The tomb beneath the Green Dome.'],['Tomb of Shams of Tabriz','How one encounter changed a life.'],['Mevlana Cultural Centre','Watch the sema ceremony (check the schedule first).']] },
-   soz:{ tr:'Dinle bu ney nasıl şikâyet ediyor, ayrılıkları nasıl anlatıyor.', en:'Listen to the reed, how it complains, how it tells of separations.', kaynak:'Mevlânâ, Mesnevî I, 1. beyit', kaynakEn:'Rumi, Masnavi I, line 1', dogrulandi:false },
+   soz:{ tr:'Dinle bu ney nasıl şikâyet ediyor, ayrılıkları nasıl anlatıyor.', en:'Listen to this reed, how it complains, how it tells of separations.', kaynak:'Mevlânâ, Mesnevî I, 1. beyit', kaynakEn:'Rumi, Masnavi I, line 1', dogrulandi:true, ozgun:'بشنو این نی چون شکایت می‌کند · از جدایی‌ها حکایت می‌کند', birincil:['Farsça metin (Ganjoor)','https://ganjoor.net/moulavi/masnavi/daftar1/sh1'] },
    kaynaklar:[['Britannica: Rumi','https://www.britannica.com/biography/Rumi']] }
+];
+
+/* ==========================================================================
+   DERİNLİK: her yer için sesli anlatım (Dinle) ve düşünme sorusu (Düşün)
+   ========================================================================== */
+var DERIN = {
+ efes:{ tr:{ dinle:'Herakleitos MÖ 500 dolaylarında Efes’te yaşadı. Kitabından bugün yalnızca başka yazarların aktardığı parçalar kaldı. Bu parçalarda dünya durmadan değişen bir şeydir: ırmak akar, ateş yanar, gündüz geceye döner. Ama Herakleitos’a göre bu değişim gelişigüzel değildir; her şey bir ölçüye, onun deyişiyle bir logos’a göre olur. Efes’te bunu kendi gözünle görebilirsin: bir zamanlar deniz kıyısında olan bu liman kenti, ırmağın taşıdığı alüvyonla karada kaldı.', soru:'Bugünkü sen ile on yıl önceki sen aynı kişi misiniz? Seni sen yapan ne değişmeden kalıyor?' },
+       en:{ dinle:'Heraclitus lived in Ephesus around 500 BC. All that survives of his book are fragments quoted by later writers. In them the world never stands still: the river flows, fire burns, day turns into night. Yet for Heraclitus this change is not random; everything happens according to a measure, what he called the logos. In Ephesus you can see it for yourself: this harbour city once stood on the sea, and the silt carried by the river left it on dry land.', soru:'Are you the same person you were ten years ago? What stays unchanged and makes you you?' } },
+ milet:{ tr:{ dinle:'Milet bir zamanlar Ege’nin en zengin liman kentlerinden biriydi. MÖ 6. yüzyılda burada üç düşünür dünyayı tanrıların öyküleriyle değil, doğanın kendisiyle açıklamaya çalıştı. Aristoteles’e göre Thales her şeyin ilkesini suda gördü. Anaksimandros her şeyin kaynağına sınırsız anlamında apeiron dedi. Anaksimenes bu kaynağı havada aradı. Cevapları bugün tuhaf gelebilir, ama sordukları soru hâlâ bizim sorumuz: Bu kadar çeşitli şeyin altında tek bir ilke var mı?', soru:'Sence her şeyin altında tek bir ilke var mı, yoksa dünya gerçekten çok parçalı mı?' },
+        en:{ dinle:'Miletus was once one of the richest harbour cities of the Aegean. In the 6th century BC three thinkers here tried to explain the world not through stories of the gods but through nature itself. According to Aristotle, Thales took water to be the principle of all things. Anaximander called the source of everything the apeiron, the boundless. Anaximenes looked for it in air. Their answers may sound strange today, but their question is still ours: is there one principle beneath all this variety?', soru:'Do you think there is one principle beneath everything, or is the world truly made of many?' } },
+ klazomenai:{ tr:{ dinle:'Anaksagoras MÖ 500 dolaylarında Klazomenai’de doğdu ve Atina’ya gitti; felsefeyi o kente taşıyan ilk düşünür sayılır. Ona göre her şeyde her şeyden bir pay vardır, evrendeki düzeni ise nous, yani akıl başlatmıştır. Atina’da Güneş’in bir tanrı değil, kızgın bir taş olduğunu söylediği için dinsizlikle suçlandı ve kentten ayrılmak zorunda kaldı.', soru:'Dünyadaki düzen bir aklın işi mi, yoksa kendiliğinden mi ortaya çıkar?' },
+        en:{ dinle:'Anaxagoras was born in Clazomenae around 500 BC and moved to Athens; he is counted as the first philosopher to bring philosophy to that city. He held that there is a share of everything in everything, and that the order of the cosmos was set in motion by nous, mind. In Athens he was charged with impiety for saying that the sun was not a god but a burning stone, and he had to leave the city.', soru:'Is the order of the world the work of a mind, or does it arise by itself?' } },
+ assos:{ tr:{ dinle:'Platon MÖ 347’de öldüğünde Aristoteles Atina’daki Akademi’den ayrıldı ve Assos’a geldi. Burada yaklaşık üç yıl kaldı, sonra karşıdaki Midilli adasına geçti ve orada canlılar üzerine gözlemler yaptı. Assos’un bir başka çocuğu Kleanthes ise Stoa okulunun ikinci başkanı oldu. Anlatılara göre geceleri su taşıyarak geçimini sağlar, gündüzleri felsefe dinlerdi. Athena Tapınağı’nın önünden Midilli’ye bak: Aristoteles’in gördüğü manzara bu.', soru:'Son zamanlarda neyi gerçekten bilmek istedin? O merak seni nereye götürdü?' },
+        en:{ dinle:'When Plato died in 347 BC, Aristotle left the Academy in Athens and came to Assos. He stayed about three years, then crossed to the island of Lesbos opposite, where he studied living things. Another son of Assos, Cleanthes, became the second head of the Stoic school. The story goes that he carried water at night to earn his living and listened to philosophy by day. Look out towards Lesbos from the Temple of Athena: this is the view Aristotle saw.', soru:'What have you truly wanted to know lately? Where did that curiosity lead you?' } },
+ bergama:{ tr:{ dinle:'Bergama krallarının kurduğu kütüphane, antik dünyada İskenderiye’dekiyle yarışırdı. Galenos MS 129’da bu kentte doğdu. Gençliğinde farklı felsefe okullarının hocalarından ders aldı, sonra hekim oldu ve gladyatörleri tedavi etti. Daha sonra Roma’da imparatorların hekimi oldu. Ona göre iyi bir hekim mantık bilmeli, doğayı incelemeli ve ahlaklı olmalıydı; yani aynı zamanda filozof olmalıydı.', soru:'Bedenimizin sağlığı ile ruhumuzun sağlığı birbirinden ayrılabilir mi?' },
+        en:{ dinle:'The library founded by the kings of Pergamon rivalled the one in Alexandria. Galen was born in this city in 129 AD. As a young man he studied with teachers from different philosophical schools, then became a physician and treated gladiators. Later he became physician to emperors in Rome. For Galen a good doctor had to know logic, study nature and live ethically; in other words, he also had to be a philosopher.', soru:'Can the health of the body be separated from the health of the soul?' } },
+ hierapolis:{ tr:{ dinle:'Epiktetos 50’li yıllarda Hierapolis’te köle olarak doğdu. Roma’da özgürlüğüne kavuştu ve Stoa felsefesi öğretmeye başladı. İmparator Domitianus filozofları Roma’dan sürünce Yunanistan’daki Nikopolis’e gitti ve okulunu orada kurdu. Kendisi bir şey yazmadı; derslerini öğrencisi Arrianos not aldı. Öğretisinin özü basittir: elimizde olanla olmayanı ayırmak. Başımıza gelenleri değil, onlar hakkındaki yargılarımızı seçebiliriz.', soru:'Bugün seni üzen bir şeyi düşün. Bunun ne kadarı senin elinde, ne kadarı değil?' },
+        en:{ dinle:'Epictetus was born a slave in Hierapolis in the 50s AD. He was freed in Rome and began to teach Stoic philosophy. When the emperor Domitian banished philosophers from Rome, he went to Nicopolis in Greece and founded his school there. He wrote nothing himself; his student Arrian took notes of his lessons. The heart of his teaching is simple: tell apart what is up to us from what is not. We cannot choose what happens to us, only our judgements about it.', soru:'Think of something that upset you today. How much of it was up to you, and how much was not?' } },
+ afrodisias:{ tr:{ dinle:'Afrodisias heykel atölyeleriyle ünlü bir Roma kentiydi. Aleksandros MS 2. yüzyılın sonu ile 3. yüzyılın başında yaşadı ve Aristoteles’in en etkili yorumcusu oldu. 2001’de burada bulunan bir yazıt, onu Atina’daki felsefe okullarının başlarından biri olarak anar. Kader Üzerine adlı eserinde, her şey önceden belirlenmişse insanın yaptıklarından nasıl sorumlu tutulabileceğini sordu ve Stoacıların kader anlayışına karşı çıktı.', soru:'Her şey önceden belirlenmiş olsaydı, yaptıkların için seni suçlamak adil olur muydu?' },
+        en:{ dinle:'Aphrodisias was a Roman city famous for its sculpture workshops. Alexander lived here in the late 2nd and early 3rd century AD and became the most influential commentator on Aristotle. An inscription found here in 2001 names him as one of the heads of the philosophical schools in Athens. In his treatise On Fate he asked how people could be held responsible if everything were fixed in advance, and argued against the Stoic view of fate.', soru:'If everything were fixed in advance, would it be fair to blame you for what you do?' } },
+ sinop:{ tr:{ dinle:'Diogenes MÖ 404 dolaylarında Sinop’ta doğdu. Kentten kaçtı ya da sürgün edildi ve Atina’ya gitti. Orada bir küpün içinde yaşadığı, gündüz elinde bir lambayla “bir insan arıyorum” diye dolaştığı anlatılır. Toplumun alışkanlıklarıyla alay ederek onları sorguladı ve yalnızca doğaya uygun bir hayatın özgür olduğunu savundu. Bu anlatıların çoğu, yüzyıllar sonra Diogenes Laertios’un topladığı anekdotlardır.', soru:'Sahip olduğun şeylerden hangisi olmadan da mutlu olabilirdin?' },
+        en:{ dinle:'Diogenes was born in Sinope around 404 BC. He fled or was exiled from the city and went to Athens. There, the stories say, he lived in a large jar and walked about in daylight with a lamp, saying he was looking for a human being. He mocked the habits of society in order to question them, and argued that only a life in accordance with nature is free. Most of these stories are anecdotes collected centuries later by Diogenes Laertius.', soru:'Which of the things you own could you be happy without?' } },
+ soli:{ tr:{ dinle:'Khrysippos MÖ 280 dolaylarında Soli’de doğdu. Atina’ya gidip Kleanthes’in öğrencisi oldu ve onun ardından Stoa okulunun başına geçti. Yüzlerce eser yazdığı söylenir, ama hiçbiri bütün olarak günümüze ulaşmadı. Stoa’nın mantığını, doğa anlayışını ve ahlakını bir sistem hâline getirdi; bu yüzden Stoa’nın ikinci kurucusu sayılır. Tarsus da sonraki yüzyıllarda Antipatros gibi Stoacı hocaların yetiştiği bir kent oldu.', soru:'Bir düşünceyi sağlam yapan nedir: güzel söylenmesi mi, tutarlı olması mı?' },
+        en:{ dinle:'Chrysippus was born in Soli around 280 BC. He went to Athens, became a student of Cleanthes and succeeded him as head of the Stoic school. He is said to have written hundreds of works, but none survives whole. He turned Stoic logic, physics and ethics into a system, which is why he is counted as the second founder of the Stoa. In later centuries Tarsus too produced Stoic teachers such as Antipater.', soru:'What makes an idea sound: being well said, or being consistent?' } },
+ konya:{ tr:{ dinle:'Mevlânâ Celâleddîn 1207’de bugünkü Afganistan’daki Belh’te doğdu. Ailesi batıya göç etti ve sonunda Selçuklu başkenti Konya’ya yerleşti. 1244’te gezgin derviş Şems-i Tebrîzî ile karşılaşması hayatını değiştirdi. En büyük eseri Mesnevî, sazlıktan koparılıp ney yapılan bir kamışın ayrılık şikâyetiyle başlar. Mevlânâ 1273’te Konya’da öldü; Mevlevîlik yolunu ondan sonra öğrencileri örgütledi.', soru:'Bir ayrılık sana neyi öğretti? Özlem bir kayıp mı, yoksa bir yol mu?' },
+        en:{ dinle:'Jalal al-Din Rumi was born in 1207 in Balkh, in today’s Afghanistan. His family moved west and finally settled in Konya, the Seljuk capital. In 1244 his meeting with the wandering dervish Shams of Tabriz changed his life. His great work, the Masnavi, opens with the lament of a reed cut from its reed bed and made into a flute. Rumi died in Konya in 1273; his disciples organised the Mevlevi order after him.', soru:'What has a separation taught you? Is longing a loss, or a path?' } }
+};
+
+/* ==========================================================================
+   BAĞLAR: filozoflar arası hoca-öğrenci (hoca) ve etki (etki) ilişkileri
+   ========================================================================== */
+var BAGLAR = [
+ { a:'milet', b:'klazomenai', tur:'hoca', tr:'Antik geleneğe göre Anaksagoras, Anaksimenes’in öğrencisiydi.', en:'Ancient tradition makes Anaxagoras a pupil of Anaximenes.' },
+ { a:'assos', b:'soli', tur:'hoca', tr:'Khrysippos, Assoslu Kleanthes’in öğrencisi ve Stoa’daki halefiydi.', en:'Chrysippus was the pupil of Cleanthes of Assos and his successor at the Stoa.' },
+ { a:'efes', b:'assos', tur:'etki', tr:'Stoacılar ateş ve logos fikrini Herakleitos’tan aldı; Kleanthes onun üzerine yorumlar yazdı.', en:'The Stoics took fire and logos from Heraclitus; Cleanthes wrote interpretations of him.' },
+ { a:'sinop', b:'assos', tur:'etki', tr:'Kiniklik, Krates ve Zenon aracılığıyla Stoa’yı besledi; Kleanthes bu çizgide yetişti.', en:'Cynicism fed into the Stoa through Crates and Zeno; Cleanthes grew up in this line.' },
+ { a:'sinop', b:'hierapolis', tur:'etki', tr:'Epiktetos, Diogenes’i özgür insanın örneği olarak gösterir.', en:'Epictetus holds up Diogenes as the model of a free person.' },
+ { a:'soli', b:'hierapolis', tur:'etki', tr:'Epiktetos’un öğretisi Khrysippos’un kurduğu Stoa sistemine dayanır.', en:'Epictetus’ teaching rests on the Stoic system built by Chrysippus.' },
+ { a:'assos', b:'afrodisias', tur:'etki', tr:'Aleksandros, Aristoteles’in antik çağdaki en etkili yorumcusu oldu.', en:'Alexander became the most influential ancient commentator on Aristotle.' },
+ { a:'assos', b:'bergama', tur:'etki', tr:'Galenos, Aristoteles’in mantığını ve doğa araştırmalarını hekimliğe taşıdı.', en:'Galen brought Aristotle’s logic and study of nature into medicine.' }
 ];
 
 /* ==========================================================================
@@ -311,13 +370,17 @@ var M = {
    kartYap:'Kartı indir', rota:'Yürüyüş rotası', muhur:'Mühür al', muhurlu:'Mühürlendi', muhurNot:'Bu yeri gezdiysen pasaportuna mühür bas.', muhurBildir:'Mühür pasaportuna basıldı.',
    oteller:'Çevrede kal', otelNot:'Bu yere yakın otelleri Hotels.com\'da gör.', otelBtn:'Otelleri gör', otelAcik:'Bu bağlantılardan yapılan rezervasyonlardan site komisyon alabilir; sana ek ücret yansımaz.',
    rehber:'Efes gezi rehberini aç', rehberNot:'Efes için sesli anlatımlı tam gezi rehberi hazır.', kaynaklar:'Kaynaklar', pasaport:'Felsefe Pasaportu', pasaportAlt:'Gezdiğin her yer için bir mühür.',
-   yakinda:'Yakında: Kolophon (Ksenofanes), Priene, Harran, Hacıbektaş, Nusaybin ve İstanbul.', alt1:'Çizimler bu site için özgün olarak yapıldı. Harita verisi: Natural Earth (kamu malı).', alt2:'Bilgiler Stanford Encyclopedia of Philosophy, Internet Encyclopedia of Philosophy, Britannica ve UNESCO sayfalarına dayanır.', sec:'Haritadan bir yer seç.', kartAlt:'Türkiye Felsefe Haritası' },
+   yakinda:'Yakında: Kolophon (Ksenofanes), Priene, Harran, Hacıbektaş, Nusaybin ve İstanbul.', alt1:'Çizimler bu site için özgün olarak yapıldı. Harita verisi: Natural Earth (kamu malı).', alt2:'Bilgiler Stanford Encyclopedia of Philosophy, Internet Encyclopedia of Philosophy, Britannica ve UNESCO sayfalarına dayanır.', sec:'Haritadan bir yer seç.', kartAlt:'Türkiye Felsefe Haritası',
+   dinle:'Dinle', durdur:'Durdur', dusun:'Düşün', notYer:'Bir cümle yaz. Yalnızca bu cihazda saklanır.', kaydet:'Kaydet', kaydedildi:'Notun kaydedildi.', sesYok:'Bu cihaz sesli okumayı desteklemiyor; metni okuyabilirsin.',
+   baglar:'Bağlantılar', baglarGoster:'Bağlantılar', hoca:'Hoca ve öğrenci', etki:'Etki', baglarNot:'Düz çizgi hoca ile öğrenciyi, kesikli çizgi etkiyi gösterir.', baglarYok:'Bu yerin bağları haritanın dışına uzanıyor: Belh, Tebriz ve İslam düşüncesinin geniş dünyası.', birincil:'Birincil kaynak', ceviri:'Türkçesi bu siteye ait.' },
  en:{ etiket:'ΦΙΛΟΣΟΦΙΑ · Anatolia', baslik:'Philosophy Map of Türkiye', giris:'From Heraclitus to Rumi: ten places where philosophy was born and lived in this land. Tap a place for its route, its words and a passport stamp.',
    tum:'All of Türkiye', ege:'Zoom to the Aegean', egeNot:'Seven stops lie on the Aegean coast; zoom in to choose.', kim:'Philosopher', donem:'Period', neden:'Why here?', soz:'Quote card', eser:'Work', dogru:'Checked against sources', bekliyor:'Translation being checked against the original',
    kartYap:'Download card', rota:'Walking route', muhur:'Collect stamp', muhurlu:'Stamped', muhurNot:'If you have visited, stamp your passport.', muhurBildir:'Stamp added to your passport.',
    oteller:'Stay nearby', otelNot:'See hotels near this place on Hotels.com.', otelBtn:'See hotels', otelAcik:'This site may earn a commission on bookings made through these links, at no extra cost to you.',
    rehber:'Open the Ephesus tour guide', rehberNot:'A full audio tour guide is ready for Ephesus.', kaynaklar:'Sources', pasaport:'Philosophy Passport', pasaportAlt:'One stamp for every place you visit.',
-   yakinda:'Coming soon: Colophon (Xenophanes), Priene, Harran, Hacıbektaş, Nusaybin and Istanbul.', alt1:'All illustrations are original to this site. Map data: Natural Earth (public domain).', alt2:'Facts are based on the Stanford Encyclopedia of Philosophy, the Internet Encyclopedia of Philosophy, Britannica and UNESCO.', sec:'Choose a place on the map.', kartAlt:'Philosophy Map of Türkiye' }
+   yakinda:'Coming soon: Colophon (Xenophanes), Priene, Harran, Hacıbektaş, Nusaybin and Istanbul.', alt1:'All illustrations are original to this site. Map data: Natural Earth (public domain).', alt2:'Facts are based on the Stanford Encyclopedia of Philosophy, the Internet Encyclopedia of Philosophy, Britannica and UNESCO.', sec:'Choose a place on the map.', kartAlt:'Philosophy Map of Türkiye',
+   dinle:'Listen', durdur:'Stop', dusun:'Think', notYer:'Write one sentence. It stays on this device only.', kaydet:'Save', kaydedildi:'Your note was saved.', sesYok:'This device cannot read aloud; you can read the text instead.',
+   baglar:'Connections', baglarGoster:'Connections', hoca:'Teacher and pupil', etki:'Influence', baglarNot:'Solid lines show teacher and pupil, dashed lines show influence.', baglarYok:'This place’s connections reach beyond the map: Balkh, Tabriz and the wide world of Islamic thought.', birincil:'Primary source', ceviri:'English rendering is this site’s own.' }
 };
 
 /* ==========================================================================
@@ -325,7 +388,7 @@ var M = {
    ========================================================================== */
 function oku(k, v){ try { var x = JSON.parse(localStorage.getItem(k)); return x == null ? v : x; } catch(e){ return v; } }
 function yaz(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
-var D = { dil: oku('fh-dil', (navigator.language || 'tr').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en'), muhur: oku('fh-muhur', {}), secili: null, zum: 'tum' };
+var D = { dil: oku('fh-dil', (navigator.language || 'tr').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en'), muhur: oku('fh-muhur', {}), secili: null, zum: 'tum', bag: oku('fh-bag', true), notlar: oku('fh-not', {}) };
 function t(k){ return M[D.dil][k]; }
 function y(yer){ return yer[D.dil]; }
 function $(id){ return document.getElementById(id); }
@@ -371,9 +434,26 @@ function haritaCiz(){
     '<rect x="-50" y="-50" width="' + (H.g + 100) + '" height="' + (H.y + 100) + '" fill="#DCE7EE"/>' + (D.zum === 'tum' ? dalgalar() : '') +
     '<path class="komsu" d="' + H.komsu + '"/>' +
     '<path class="kara" d="' + H.turkiye + '"/>' +
-    denizler + egeKutu + pinler + kume + '</svg>';
-  $('z-tum').setAttribute('aria-pressed', D.zum === 'tum'); $('z-ege').setAttribute('aria-pressed', D.zum === 'ege');
+    denizler + egeKutu + (D.bag ? baglarSVG(f, r) : '') + pinler + kume + '</svg>';
+  $('z-bag').setAttribute('aria-pressed', !!D.bag); $('z-tum').setAttribute('aria-pressed', D.zum === 'tum'); $('z-ege').setAttribute('aria-pressed', D.zum === 'ege');
 }
+
+/* İki yer arasında hafif kavisli bir çizgi; uçlar pinin kenarında durur, ucunda küçük bir ok. */
+function baglarSVG(f, r){
+  return '<g class="baglar">' + BAGLAR.map(function(b){
+    var A = izd(bul(b.a).lon, bul(b.a).lat), B = izd(bul(b.b).lon, bul(b.b).lat);
+    var dx = B[0] - A[0], dy = B[1] - A[1], L = Math.hypot(dx, dy) || 1, ux = dx / L, uy = dy / L;
+    var bukum = Math.min(L * 0.18, 60), K = [(A[0] + B[0]) / 2 - uy * bukum, (A[1] + B[1]) / 2 + ux * bukum];
+    var bas = kaydir(A, K, r * 1.25), son = kaydir(B, K, r * 1.35);
+    var tx = son[0] - K[0], ty = son[1] - K[1], tl = Math.hypot(tx, ty) || 1; tx /= tl; ty /= tl;
+    var o = 7 * f, ok = [son[0], son[1], son[0] - tx * o - ty * o * 0.6, son[1] - ty * o + tx * o * 0.6, son[0] - tx * o + ty * o * 0.6, son[1] - ty * o - tx * o * 0.6];
+    var ilgili = D.secili && (b.a === D.secili || b.b === D.secili), soluk = D.secili && !ilgili;
+    var sinif = 'bag ' + b.tur + (ilgili ? ' ilgili' : '') + (soluk ? ' soluk' : '');
+    return '<g class="' + sinif + '"><title>' + h(b[D.dil]) + '</title><path d="M' + bas[0] + ' ' + bas[1] + 'Q' + K[0] + ' ' + K[1] + ' ' + son[0] + ' ' + son[1] + '"/>' +
+      '<polygon points="' + ok.join(' ') + '"/></g>';
+  }).join('') + '</g>';
+}
+function kaydir(P, K, d){ var x = K[0] - P[0], y = K[1] - P[1], l = Math.hypot(x, y) || 1; return [P[0] + x / l * d, P[1] + y / l * d]; }
 
 function listeCiz(){
   $('liste').innerHTML = YERLER.map(function(yer, i){
@@ -405,7 +485,7 @@ function panelCiz(odakla){
       '<div class="muhur-kutu">' + muhurSVG(YERLER[0], true) + '<p class="not">' + h(t('pasaportAlt')) + '</p></div>';
     return;
   }
-  var m = y(yer), s = yer.soz, muhurlu = !!D.muhur[yer.id], i = YERLER.indexOf(yer);
+  var m = y(yer), s = yer.soz, muhurlu = !!D.muhur[yer.id], i = YERLER.indexOf(yer), dr = DERIN[yer.id][D.dil];
   var kaynak = (D.dil === 'en' && s.kaynakEn) ? s.kaynakEn : s.kaynak;
   var otel = OTEL.goster && OTEL.yerler[yer.id] ?
     '<div class="otel"><div class="etiket">' + h(t('oteller')) + '</div><p>' + h(t('otelNot')) + ' <span class="soluk">(' + h(OTEL.yerler[yer.id].arama) + ')</span></p>' +
@@ -417,15 +497,47 @@ function panelCiz(odakla){
     (yer.rehber ? '<a class="btn btn-koyu" href="' + yer.rehber + '">' + h(t('rehber')) + ' →</a>' : '') +
     '<div class="soz"><div class="etiket" style="color:var(--okra)">' + h(s.eser ? t('eser') : t('soz')) + '</div>' +
       '<blockquote>' + (s.eser ? '' : '“') + h(s[D.dil]) + (s.eser ? '' : '”') + '</blockquote>' +
-      '<p class="kaynak">' + h(kaynak) + '</p>' +
+      (s.ozgun ? '<p class="ozgun" lang="fa">' + h(s.ozgun) + '</p>' : '') +
+      '<p class="kaynak">' + h(kaynak) + (s.birincil ? ' · ' + h(t('ceviri')) : '') + '</p>' +
       '<span class="rozet' + (s.dogrulandi ? ' dogru' : '') + '">' + h(s.dogrulandi ? t('dogru') : t('bekliyor')) + '</span>' +
       '<div class="soz-eylem"><button type="button" class="btn btn-hayalet" data-eylem="kart">' + h(t('kartYap')) + '</button></div></div>' +
+    '<div><div class="etiket" style="margin-bottom:8px">' + h(t('dinle')) + '</div><p class="dinle-metin">' + h(dr.dinle) + '</p>' +
+      '<div style="margin-top:10px"><button type="button" class="btn btn-okra" data-eylem="ses" id="ses-btn">' + h(sesCalisiyor ? t('durdur') : t('dinle')) + '</button></div>' +
+      ('speechSynthesis' in window ? '' : '<p class="not">' + h(t('sesYok')) + '</p>') + '</div>' +
+    '<div class="dusun"><div class="etiket">' + h(t('dusun')) + '</div><p class="soru">' + h(dr.soru) + '</p>' +
+      '<label class="gizli" for="not-alan">' + h(t('notYer')) + '</label><textarea id="not-alan" placeholder="' + h(t('notYer')) + '">' + h(D.notlar[yer.id] || '') + '</textarea>' +
+      '<div><button type="button" class="btn btn-hayalet" data-eylem="not">' + h(t('kaydet')) + '</button></div></div>' +
     '<div><div class="etiket" style="margin-bottom:10px">' + h(t('rota')) + '</div><ol class="rota">' + m.rota.map(function(r){ return '<li><b>' + h(r[0]) + '</b><span>' + h(r[1]) + '</span></li>'; }).join('') + '</ol></div>' +
     '<div class="muhur-kutu">' + muhurSVG(yer, muhurlu) + '<div style="display:flex;flex-direction:column;gap:8px"><p class="not">' + h(muhurlu ? t('muhurlu') + ' · ' + D.muhur[yer.id] : t('muhurNot')) + '</p>' +
       (muhurlu ? '' : '<button type="button" class="btn btn-okra" data-eylem="muhur">' + h(t('muhur')) + '</button>') + '</div></div>' +
+    bagBolum(yer) +
     otel +
-    '<div><div class="etiket" style="margin-bottom:6px">' + h(t('kaynaklar')) + '</div><div class="kaynaklar">' + yer.kaynaklar.map(function(k){ return '<a href="' + k[1] + '" target="_blank" rel="noopener">' + h(k[0]) + '</a>'; }).join('') + '</div></div>';
+    '<div><div class="etiket" style="margin-bottom:6px">' + h(t('kaynaklar')) + '</div><div class="kaynaklar">' + (s.birincil ? [[t('birincil') + ': ' + s.birincil[0], s.birincil[1]]] : []).concat(yer.kaynaklar).map(function(k){ return '<a href="' + k[1] + '" target="_blank" rel="noopener">' + h(k[0]) + '</a>'; }).join('') + '</div></div>';
   if (odakla && window.matchMedia('(max-width:900px)').matches) p.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function bagBolum(yer){
+  var ilgili = BAGLAR.filter(function(b){ return b.a === yer.id || b.b === yer.id; });
+  var ic = ilgili.length ? '<ul class="bag-liste">' + ilgili.map(function(b){
+    var obur = bul(b.a === yer.id ? b.b : b.a);
+    return '<li class="' + b.tur + '"><button type="button" data-yer="' + obur.id + '"><span class="cizgi"></span><span><b>' + h(y(bul(b.a)).ad) + ' → ' + h(y(bul(b.b)).ad) + ' · ' + h(t(b.tur)) + '</b><span>' + h(b[D.dil]) + '</span></span></button></li>';
+  }).join('') + '</ul>' : '<p class="not">' + h(t('baglarYok')) + '</p>';
+  return '<div><div class="etiket" style="margin-bottom:10px">' + h(t('baglar')) + '</div>' + ic + '</div>';
+}
+
+/* Sesli anlatım: cihazın kendi yapay sesi, internetsiz de çalışır (Efes rehberindeki gibi). */
+var sesCalisiyor = false;
+function sesDurdur(){ try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch(e){} sesCalisiyor = false; var b = $('ses-btn'); if (b) b.textContent = t('dinle'); }
+function seslendir(){
+  if (sesCalisiyor){ sesDurdur(); return; }
+  if (!('speechSynthesis' in window)){ bildir(t('sesYok')); return; }
+  var yer = bul(D.secili); if (!yer) return;
+  var u = new SpeechSynthesisUtterance(DERIN[yer.id][D.dil].dinle);
+  u.lang = D.dil === 'tr' ? 'tr-TR' : 'en-GB'; u.rate = 0.95;
+  try { var sesler = speechSynthesis.getVoices().filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf(D.dil) === 0; }); if (sesler.length) u.voice = sesler[0]; } catch(e){}
+  u.onend = u.onerror = function(){ sesCalisiyor = false; var b = $('ses-btn'); if (b) b.textContent = t('dinle'); };
+  speechSynthesis.cancel(); speechSynthesis.speak(u); sesCalisiyor = true;
+  var b = $('ses-btn'); if (b) b.textContent = t('durdur');
 }
 
 function pasaportCiz(){
@@ -439,7 +551,7 @@ function metinCiz(){
   document.documentElement.lang = D.dil;
   document.title = t('baslik');
   $('ust-etiket').textContent = t('etiket'); $('baslik').textContent = t('baslik'); $('giris').textContent = t('giris');
-  $('z-tum').textContent = t('tum'); $('z-ege').textContent = t('ege'); $('harita-not').textContent = D.zum === 'tum' ? t('egeNot') : '';
+  $('z-tum').textContent = t('tum'); $('z-ege').textContent = t('ege'); $('z-bag').textContent = t('baglarGoster'); $('harita-not').textContent = (D.zum === 'tum' ? t('egeNot') + ' ' : '') + (D.bag ? t('baglarNot') : '');
   $('alt').innerHTML = '<p>' + h(t('alt1')) + '</p><p>' + h(t('alt2')) + '</p>';
   document.querySelectorAll('[data-dil]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-dil') === D.dil); });
 }
@@ -494,15 +606,18 @@ function sec(id, odakla){
   haritaCiz(); listeCiz(); panelCiz(!!odakla); metinCiz();
 }
 document.addEventListener('click', function(e){
-  var el = e.target.closest('[data-yer],[data-dil],[data-eylem],#z-tum,#z-ege,#ege-kutu,#ege-kume');
+  var el = e.target.closest('[data-yer],[data-dil],[data-eylem],#z-tum,#z-ege,#z-bag,#ege-kutu,#ege-kume');
   if (!el) return;
+  if (el.id === 'z-bag'){ D.bag = !D.bag; yaz('fh-bag', D.bag); haritaCiz(); metinCiz(); return; }
   if (el.id === 'z-tum'){ D.zum = 'tum'; haritaCiz(); metinCiz(); return; }
   if (el.id === 'z-ege' || el.id === 'ege-kutu' || el.id === 'ege-kume'){ D.zum = 'ege'; haritaCiz(); metinCiz(); return; }
-  if (el.hasAttribute('data-dil')){ D.dil = el.getAttribute('data-dil'); yaz('fh-dil', D.dil); hepsi(); return; }
-  if (el.hasAttribute('data-yer')){ sec(el.getAttribute('data-yer'), el.closest('#harita') ? 'harita' : true); return; }
+  if (el.hasAttribute('data-dil')){ sesDurdur(); D.dil = el.getAttribute('data-dil'); yaz('fh-dil', D.dil); hepsi(); return; }
+  if (el.hasAttribute('data-yer')){ sesDurdur(); sec(el.getAttribute('data-yer'), el.closest('#harita') ? 'harita' : true); return; }
   var ey = el.getAttribute('data-eylem');
   if (ey === 'muhur'){ D.muhur[D.secili] = new Date().toLocaleDateString(D.dil === 'tr' ? 'tr-TR' : 'en-GB'); yaz('fh-muhur', D.muhur); bildir(t('muhurBildir')); hepsi(); }
   else if (ey === 'kart') kartYap();
+  else if (ey === 'ses') seslendir();
+  else if (ey === 'not'){ var v = ($('not-alan').value || '').trim().slice(0, 500); if (v) D.notlar[D.secili] = v; else delete D.notlar[D.secili]; yaz('fh-not', D.notlar); bildir(t('kaydedildi')); }
 });
 document.addEventListener('keydown', function(e){
   if ((e.key === 'Enter' || e.key === ' ') && e.target.id === 'ege-kume'){ e.preventDefault(); D.zum = 'ege'; haritaCiz(); metinCiz(); return; }

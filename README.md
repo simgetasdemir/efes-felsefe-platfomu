@@ -87,6 +87,8 @@ Gerçek maliyeti ilk günlerde Anthropic Console’daki **Usage** ekranından iz
 - `DERIN`: her mekânın sesli anlatımı (Dinle, cihazın yapay sesiyle) ve düşünme sorusu (Düşün). Notlar yalnızca kullanıcının tarayıcısında saklanır.
 - `felsefe-veri.js`: her mekânın Düşünce sekmesi (temel fikirler, hayat çizgisi, bilmediklerimiz, mirası). Stanford Encyclopedia of Philosophy maddelerinin kendi sözlerimizle özetidir; her fikir ilgili SEP bölümüne bağlanır. SEP maddesi olmayan Diogenes için IEP, Mevlânâ için SEP'in İslam mistisizmi maddesi ve Britannica kullanıldı.
 - Haritadaki dağ sıraları, ırmaklar ve göller (`SIRALAR`, `IRMAKLAR`, `GOLLER`) elle yerleştirilmiş üsluplu çizimlerdir; atlas doğruluğunda değildir.
+- `SANAT`: her mekânın görülecek eserleri (tiyatro, heykel, mozaik, müze); panelin "Gezi ve sanat" sekmesinde görünür.
+- `ROTALAR`: çok günlük hazır rotalar. Her gün bir durak ve o gece kalınacak kasaba (`OTEL` ayarındaki yer adıyla) yazılır; gece kartı o kasabanın otel bağlantısını açar. Sürüş süreleri yaklaşıktır.
 - `BAGLAR`: filozoflar arası hoca-öğrenci (düz çizgi) ve etki (kesikli çizgi) ilişkileri. Yeni bir bağ eklemek için listeye bir satır yeterli.
 - Harita çizgisi Natural Earth (kamu malı) verisinden `scripts/harita-ciz.mjs` ile bir kez üretildi (`harita-veri.js`). Tüm amblem ve mühür çizimleri bu site için özgün SVG'dir.
 

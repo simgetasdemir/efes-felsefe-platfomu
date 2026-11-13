@@ -173,15 +173,93 @@ SAYFALAR.append(dict(
 ''',
   ilgili=[('/guides/ephesus-to-pamukkale-itinerary', 'Ephesus to Pamukkale in 4 days'), ('/#hierapolis', 'Hierapolis on the philosophy map')]))
 
+# ---------------------------------------------------------------- İstanbul
+SAYFALAR.append(dict(
+  slug='where-to-stay-in-istanbul',
+  baslik='Where to stay in Istanbul for Hagia Sophia and Byzantine history',
+  aciklama='Sultanahmet, Sirkeci or Karaköy: the best bases for Hagia Sophia, the Archaeology Museums and Chora, with a 3-day route that ends in İznik, the city of Hipparchus.',
+  etiket='Istanbul · Byzantium',
+  giris='For a thousand years Constantinople was the capital of Byzantium, and its scholars copied and taught the Greek philosophers. Most of the Plato and Aristotle we read today reached us through Byzantine manuscripts. If you come for that history, stay close to the old peninsula.',
+  ozet=['<b>Sultanahmet</b> puts Hagia Sophia, the Archaeology Museums and the Basilica Cistern within a short walk.',
+        '<b>Sirkeci</b>, just downhill, is a little cheaper and close to the tram, the ferries and Marmaray.',
+        '<b>Karaköy</b>, across the Galata Bridge, is livelier in the evening and one tram stop from the old city.'],
+  govde=f'''
+<h2>Sultanahmet: under the dome</h2>
+<p>Sultanahmet is the heart of the historic peninsula on the UNESCO World Heritage list. From here you can walk to Hagia Sophia, dedicated in 537, early in the morning before the queues. The historian Procopius wrote that its dome seemed not to rest on masonry but to hang from heaven. The Istanbul Archaeology Museums, a few minutes away in the grounds of Topkapı, hold the painted sarcophagi of Clazomenae, another stop on our map.</p>
+{otel('İstanbul', 'Hotels in Sultanahmet and the old city')}
+<h2>Sirkeci and Karaköy</h2>
+<p>Sirkeci sits between Sultanahmet and the Golden Horn and has good transport links. Karaköy, across the Galata Bridge, has cafés, galleries and views back to the old city. Both make sense if you want more choice or a lower price.</p>
+<h2>Chora and the land walls</h2>
+<p>Give a second day to the Chora (Kariye) with its 14th-century mosaics and frescoes, then walk a stretch of the Theodosian land walls. The Süleymaniye Mosque, named with Hagia Sophia in UNESCO's listing, is a good place to end the day.</p>
+{tur('Istanbul Hagia Sophia', 'Guided tours and tickets in Istanbul')}
+<h2>On to İznik</h2>
+<p>İznik, ancient Nicaea, is about two to two and a half hours away. It was the birthplace of the astronomer Hipparchus, the meeting place of two great church councils in 325 and 787, and in the 16th century the centre of Ottoman tile making. One night there is enough.</p>
+{otel('İznik', 'Hotels in İznik')}
+''',
+  ilgili=[('/#istanbul', 'Istanbul on the philosophy map'), ('/#iznik', 'İznik on the philosophy map'), ('/guides/where-to-stay-in-cappadocia', 'Where to stay in Cappadocia')]))
+
+# ---------------------------------------------------------------- Kapadokya
+SAYFALAR.append(dict(
+  slug='where-to-stay-in-cappadocia',
+  baslik='Where to stay in Cappadocia: Göreme, Uçhisar or Ürgüp',
+  aciklama='The best base in Cappadocia for the rock churches of Göreme, the valleys and the underground cities, with the philosophers behind the landscape and a route on to Konya.',
+  etiket='Cappadocia · Nevşehir',
+  giris='In the 4th century three thinkers from this region, the Cappadocian Fathers, brought Greek philosophy into Christian thought. Centuries later monks painted the rock churches of Göreme. Where you stay decides how easily you reach the valleys at sunrise.',
+  ozet=['<b>Göreme</b> is the most central: the Open Air Museum is a short walk away and most balloon flights pick up here.',
+        '<b>Uçhisar</b>, on the highest point, is quieter and has wide views over the valleys.',
+        '<b>Ürgüp</b> is a real town with more restaurants and a slightly slower pace.'],
+  govde=f'''
+<h2>Göreme: in the middle of it all</h2>
+<p>Göreme sits among the fairy chimneys, the cones left by the erosion of volcanic tuff. UNESCO describes its rock-cut churches as unique evidence of Byzantine art after the period of Iconoclasm. Many hotels here are cave rooms cut into the rock.</p>
+{otel('Göreme', 'Hotels in Göreme')}
+<h2>Uçhisar and Ürgüp</h2>
+<p>Uçhisar, a few kilometres away, climbs up to its rock castle and has the widest views. Ürgüp is a larger town with wineries and restaurants, about fifteen minutes by car from Göreme.</p>
+{otel('Ürgüp', 'Hotels in Ürgüp')}
+<h2>What to see</h2>
+<p>Start at the Göreme Open Air Museum early in the morning. Walk one of the valleys in the afternoon light and visit an underground city such as Derinkuyu or Kaymaklı, multi-storey refuges cut into the rock.</p>
+{tur('Cappadocia', 'Tours, balloon flights and tickets in Cappadocia')}
+<h2>The Cappadocian Fathers</h2>
+<p>Basil of Caesarea, his brother Gregory of Nyssa and their friend Gregory of Nazianzus were all trained in Greek philosophy. Basil urged the young to take what was useful from pagan poets and philosophers. Gregory of Nyssa argued that God cannot be fully grasped and that growth toward the good never ends.</p>
+<p class="not">See the Internet Encyclopedia of Philosophy entry on Gregory of Nyssa.</p>
+<h2>On to Konya</h2>
+<p>Konya, the city of Rumi, is about three hours away by road. A night there completes our three-day Cappadocia and Konya route.</p>
+{otel('Konya', 'Hotels in Konya')}
+''',
+  ilgili=[('/#kapadokya', 'Cappadocia on the philosophy map'), ('/#konya', 'Konya on the philosophy map'), ('/guides/where-to-stay-in-istanbul', 'Where to stay in Istanbul')]))
+
+# ---------------------------------------------------------------- Antalya
+SAYFALAR.append(dict(
+  slug='antalya-ancient-cities-perge-aspendos',
+  baslik='Perge, Aspendos and Side from Antalya: where to stay and what to see',
+  aciklama='A three-day plan for the ancient cities near Antalya: Perge, birthplace of the geometer Apollonius, the theatre of Aspendos and Side, with the best bases for each.',
+  etiket='Antalya · Pamphylia',
+  giris='Perge was the home of Apollonius, "the Great Geometer", who gave us the words ellipse, parabola and hyperbola. A short drive away, the theatre of Aspendos is one of the best preserved of the ancient world. Antalya makes an easy base for both.',
+  ozet=['<b>Antalya</b>, especially the old town of Kaleiçi, is about 20 minutes from Perge and 45 minutes from Aspendos.',
+        '<b>Side</b>, about an hour to an hour and a half east, has its own ruins and the Temple of Apollo by the sea.',
+        'Visit the Antalya Museum to see the statues found at Perge.'],
+  govde=f'''
+<h2>Antalya: the base for Perge and Aspendos</h2>
+<p>Stay in or near Kaleiçi, the walled old town above the harbour. In the morning drive to Perge for its colonnaded street, stadium and city gates, then on to Aspendos. Its theatre was built in the 2nd century AD by the architect Zeno and is still used for performances.</p>
+{otel('Antalya', 'Hotels in Antalya')}
+{tur('Aspendos Perge', 'Tours to Perge and Aspendos')}
+<h2>Side: ruins by the sea</h2>
+<p>Side combines a beach town with an ancient city. Watch the sunset at the columns of the Temple of Apollo on the last evening of the route.</p>
+{otel('Side', 'Hotels in Side')}
+<h2>The geometer of Perge</h2>
+<p>Apollonius was born in Perge around 262 BC and worked in Alexandria. In his <i>Conics</i> he studied the curves made by cutting a cone, and named them. Of its eight books, four survive in Greek and three only in Arabic translation.</p>
+<p class="not">See the MacTutor History of Mathematics biography of Apollonius.</p>
+''',
+  ilgili=[('/#antalya', 'Perge and Aspendos on the philosophy map'), ('/guides/where-to-stay-in-cappadocia', 'Where to stay in Cappadocia')]))
+
 # ---------------------------------------------------------------- Merkez sayfa
 SAYFALAR.append(dict(
   slug='philosophy-trip-turkey',
   baslik='A philosophy trip through Türkiye: places, routes and guides',
-  aciklama='Plan a trip to the places where philosophy and art were born in Türkiye: Ephesus, Miletus, Pergamon, Assos, Hierapolis, Aphrodisias, Sinop, Konya and more, with ready-made routes.',
+  aciklama='Plan a trip to the places where philosophy and art were born in Türkiye: Ephesus, Istanbul, Cappadocia, Göbekli Tepe, Pergamon, Konya and more, with nine ready-made routes.',
   etiket='Travel guides',
   giris='Many of the first philosophers lived on the coasts of what is now Türkiye. You can still walk through their cities: the theatres where people gathered, the libraries, the harbours. These guides help you plan the trip, choose where to stay and know what you are looking at.',
-  ozet=['Ten philosophy stops from Heraclitus to Rumi, on one <a href="/">interactive map</a>.',
-        'Four ready-made routes: Aegean and Pamukkale, Northern Aegean, Konya and the Mediterranean, and Sinop.',
+  ozet=['Eighteen philosophy and art stops from Göbekli Tepe to Rumi, on one <a href="/">interactive map</a>.',
+        'Nine ready-made routes, from the Aegean coast to Istanbul, Cappadocia, Antalya and Mesopotamia.',
         'Hotel and tour suggestions for every night of every route.'],
   govde=f'''
 <h2>Guides</h2>
@@ -189,8 +267,11 @@ SAYFALAR.append(dict(
 <a href="/guides/where-to-stay-in-ephesus">Where to stay for Ephesus: Selçuk, Şirince or Kuşadası →</a>
 <a href="/guides/ephesus-to-pamukkale-itinerary">Ephesus to Pamukkale in 4 days →</a>
 <a href="/guides/where-to-stay-in-pamukkale">Where to stay in Pamukkale →</a>
+<a href="/guides/where-to-stay-in-istanbul">Where to stay in Istanbul for Hagia Sophia →</a>
+<a href="/guides/where-to-stay-in-cappadocia">Where to stay in Cappadocia →</a>
+<a href="/guides/antalya-ancient-cities-perge-aspendos">Perge, Aspendos and Side from Antalya →</a>
 </div>
-<h2>The four routes</h2>
+<h2>The nine routes</h2>
 <h3>Aegean and Pamukkale · 4 days</h3>
 <p>Ephesus, Miletus, Aphrodisias and Hierapolis: from Heraclitus to Epictetus. Nights in Selçuk, Didim and Pamukkale.</p>
 <h3>Northern Aegean · 3 days</h3>
@@ -199,6 +280,16 @@ SAYFALAR.append(dict(
 <p>The Mevlana Museum and Seljuk tilework in Konya, then Tarsus and Soli, home of the Stoic Chrysippus. Nights in Konya and Mersin.</p>
 <h3>Diogenes' Sinop · 2 days</h3>
 <p>The Black Sea town where Diogenes the Cynic was born. Two nights in Sinop.</p>
+<h3>Istanbul and İznik · 3 days</h3>
+<p>Hagia Sophia, the Archaeology Museums and Chora, then İznik, birthplace of Hipparchus. Two nights in Istanbul, one in İznik.</p>
+<h3>Cappadocia and Konya · 3 days</h3>
+<p>The rock churches of Göreme and the land of the Cappadocian Fathers, then Rumi's Konya. Two nights in Göreme, one in Konya.</p>
+<h3>The ancient cities of Antalya · 3 days</h3>
+<p>Perge, home of Apollonius, the theatre of Aspendos and Side. Two nights in Antalya, one in Side.</p>
+<h3>Mesopotamia: Zeugma, Göbekli Tepe, Mardin · 4 days</h3>
+<p>The Zeugma mosaics, Göbekli Tepe, one of the earliest known monumental sites, Harran and the Syriac monasteries of Mardin. Nights in Gaziantep, Şanlıurfa and Mardin.</p>
+<h3>Miletus and Bodrum · 2 days</h3>
+<p>From the first philosophers at Miletus to Herodotus and the Mausoleum at Halicarnassus. Two nights in Bodrum.</p>
 <p><a href="/#rota-bolum">See the routes on the map →</a></p>
 {otel('Selçuk', 'Start in Selçuk, the base for Ephesus', 'Most trips begin here')}
 ''',

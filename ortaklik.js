@@ -15,7 +15,8 @@ window.ORTAKLIK = {
      "Links > Create link" ile üretilen bağlantıyı ilgili satıra yapıştır. */
   hotels: { goster: true, baglantilar: {
     'Selçuk': '', 'Kuşadası': '', 'Şirince': '', 'Didim': '', 'Urla': '', 'Behramkale': '', 'Bergama': '',
-    'Pamukkale': '', 'Karahayıt': '', 'Denizli': '', 'Karacasu': '', 'Sinop': '', 'Mersin': '', 'Tarsus': '', 'Konya': ''
+    'Pamukkale': '', 'Karahayıt': '', 'Denizli': '', 'Karacasu': '', 'Sinop': '', 'Mersin': '', 'Tarsus': '', 'Konya': '',
+    'İstanbul': '', 'İznik': '', 'Göreme': '', 'Antalya': '', 'Side': '', 'Şanlıurfa': '', 'Gaziantep': '', 'Mardin': '', 'Bodrum': '', 'Ürgüp': ''
   } },
 
   /* GetYourGuide Partner Program: panelde verilen "partner_id". */

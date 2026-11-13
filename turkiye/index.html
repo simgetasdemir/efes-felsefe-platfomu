@@ -12,7 +12,7 @@
 <meta property="og:description" content="Herakleitos'tan Mevlânâ'ya, Anadolu'da felsefenin izinde on durak.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C2A3A'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23E3B38A'%3EΦ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <style>
 /* Efes platformuyla aynı dil: mermer, Ege mavisi, pişmiş toprak, okra. Harita solda, ayrıntı sağda; telefonda alt alta. */
 :root{
@@ -138,6 +138,94 @@ main{max-width:1240px;margin:0 auto;padding:0 16px 48px;display:grid;grid-templa
 footer{max-width:1240px;margin:0 auto;padding:0 16px 40px;font-size:14.5px;color:var(--soluk);display:flex;flex-direction:column;gap:6px}
 .bildirim{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--murekkep);color:var(--mermer);border-radius:14px;padding:10px 16px;font-size:16px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9}
 .bildirim.acik{opacity:1}
+
+/* ==========================================================================
+   KİMLİK: yazıt harfleri (Cinzel), parşömen doku, meander bordür, mekân renkleri.
+   Harita bir antik gravür gibi: taranmış kara, kıyıyı izleyen su çizgileri, özgün pusula.
+   ========================================================================== */
+:root{
+  --parsomen:#F3ECDD; --parsomen-koyu:#E7DCC4; --murekkep-k:#3B2F22; --altin:#B8893A;
+  --yazit:'Cinzel','Trajan Pro',Georgia,serif;
+  --doku:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .32 0 0 0 0 .18 0 0 0 .10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --meander:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 11H18V1H4V8H14V4H9M18 11H24' fill='none' stroke='%23A0561F' stroke-width='1.3'/%3E%3C/svg%3E");
+  --meander-ak:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 11H18V1H4V8H14V4H9M18 11H24' fill='none' stroke='%23FFFFFF' stroke-opacity='.75' stroke-width='1.3'/%3E%3C/svg%3E");
+  --meander-okra:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 11H18V1H4V8H14V4H9M18 11H24' fill='none' stroke='%23E3B38A' stroke-opacity='.8' stroke-width='1.3'/%3E%3C/svg%3E");
+}
+html,body{background:var(--parsomen) var(--doku)}
+body{color:var(--murekkep)}
+.etiket{font-family:var(--yazit);font-weight:600;font-size:12.5px;letter-spacing:.24em}
+h1,h2{font-family:var(--yazit);font-weight:600;letter-spacing:.01em}
+h1{font-size:clamp(30px,4.6vw,52px);line-height:1.08}
+h2{font-size:26px}
+.meander{height:12px;background:var(--meander) repeat-x;background-size:24px 12px;opacity:.85}
+
+header.ust{position:relative;padding-top:34px}
+header.ust::before{content:"ΦΙΛΟΣΟΦΙΑ";position:absolute;right:16px;top:6px;font-family:var(--yazit);font-size:clamp(46px,11vw,150px);letter-spacing:.08em;color:rgba(160,86,31,.06);pointer-events:none;white-space:nowrap;line-height:1}
+header.ust > div:first-child{position:relative;max-width:780px}
+.ust-meander{max-width:1240px;margin:0 auto 18px;padding:0 16px}
+.dil{position:relative;background:rgba(255,255,255,.5)}
+.dil button{font-family:var(--yazit);letter-spacing:.08em}
+
+.harita{background:#D5E3EA;border:0;border-radius:6px;box-shadow:0 0 0 1px #B9A684,0 0 0 6px var(--parsomen),0 0 0 7px #B9A684,0 18px 40px -22px rgba(59,47,34,.55)}
+.harita .kara{fill:#F1E5C8;stroke:#6B5A3E;stroke-width:1.1}
+.harita .komsu{fill:#E9E1CF;stroke:#B9AC92;stroke-width:.7;stroke-dasharray:2 2}
+.harita .deniz-ad{font-family:var(--yazit);font-style:normal;fill:#56788F;letter-spacing:.5em;font-size:13px;opacity:.85}
+.harita .ege-yazi{font-family:'EB Garamond',Georgia,serif;font-style:italic;fill:#1F5C8A}
+.ege-kutu{fill:rgba(31,92,138,.04);stroke:#1F5C8A;stroke-dasharray:3 4;stroke-width:1.2;vector-effect:non-scaling-stroke}
+.pin .halka{stroke:#FBF6EA}
+.pin .ic-halka{fill:none;stroke:rgba(255,255,255,.65);pointer-events:none}
+.pin text{font-family:var(--yazit);font-weight:700}
+.pin .ad{font-family:var(--yazit);font-weight:600;letter-spacing:.06em;fill:var(--murekkep-k);stroke:#F1E5C8}
+.pin.muhurlu .halka{stroke:var(--altin)}
+.pin.secili .halka{filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.pin .yorunge{fill:none;stroke:var(--murekkep-k);opacity:0;transform-box:fill-box;transform-origin:center}
+.pin.secili .yorunge{opacity:.75;animation:yorunge 9s linear infinite}
+@keyframes yorunge{to{transform:rotate(360deg)}}
+.pin .nabiz{stroke:var(--murekkep-k)}
+.pin:hover .halka{filter:brightness(1.08)}
+.bag.etki.ilgili path{animation:akis 1.4s linear infinite}
+@keyframes akis{to{stroke-dashoffset:-20}}
+@media (prefers-reduced-motion:reduce){ .pin.secili .yorunge,.bag.etki.ilgili path{animation:none} }
+
+.cip{font-family:var(--yazit);font-size:13.5px;letter-spacing:.08em;font-weight:600;background:rgba(255,255,255,.6);border-color:#CDBF9F}
+.cip[aria-pressed="true"]{background:var(--murekkep-k);border-color:var(--murekkep-k)}
+.yer-btn{background:rgba(255,255,255,.62);border:1px solid #DED2B8;border-radius:10px;transition:transform .15s,box-shadow .15s}
+.yer-btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px -12px rgba(59,47,34,.5)}
+.yer-btn[aria-current="true"]{border-color:var(--murekkep-k);box-shadow:inset 4px 0 0 var(--r,#A0561F)}
+.yer-btn .no{background:var(--r,#A0561F);font-family:var(--yazit);box-shadow:0 0 0 2px #FBF6EA,0 0 0 3px var(--r,#A0561F)}
+.yer-btn.muhurlu .no{background:var(--r,#A0561F);box-shadow:0 0 0 2px #FBF6EA,0 0 0 3px var(--altin)}
+
+.panel{--r:#A0561F;background:#FBF7EE var(--doku);border:1px solid #D9CBAE;border-radius:8px;padding:0 20px 22px;overflow:hidden;box-shadow:0 22px 50px -30px rgba(59,47,34,.6)}
+.panel > *{animation:gir .45s cubic-bezier(.2,.7,.2,1) both}
+.panel > *:nth-child(2){animation-delay:.04s} .panel > *:nth-child(3){animation-delay:.08s} .panel > *:nth-child(4){animation-delay:.12s} .panel > *:nth-child(n+5){animation-delay:.16s}
+@keyframes gir{from{opacity:0;transform:translateY(10px)}}
+@media (prefers-reduced-motion:reduce){ .panel > *{animation:none} }
+.panel-bant{margin:0 -20px;height:46px;background:var(--r) var(--meander-ak) repeat-x 0 17px;background-size:24px 12px}
+.panel-bas{margin-top:-30px}
+.amblem{width:88px;height:88px;background:var(--r);color:#FBF6EA;box-shadow:0 0 0 4px #FBF7EE,0 0 0 5px var(--r)}
+.amblem svg{width:56px;height:56px}
+.panel-bas > div:last-child{padding-top:36px}
+.panel-bas h2{margin-top:2px}
+.panel .etiket{color:var(--r)}
+.panel .neden::first-letter{font-family:var(--yazit);float:left;font-size:3.1em;line-height:.9;padding:4px 8px 0 0;color:var(--r)}
+.soz{position:relative;border-radius:6px;background:#14202C radial-gradient(1.2px 1.2px at 12% 22%,rgba(255,255,255,.55),transparent) ,radial-gradient(1px 1px at 72% 14%,rgba(255,255,255,.45),transparent),radial-gradient(1.4px 1.4px at 88% 64%,rgba(255,255,255,.5),transparent),radial-gradient(1px 1px at 34% 82%,rgba(255,255,255,.4),transparent),radial-gradient(1px 1px at 56% 48%,rgba(255,255,255,.3),transparent);padding-top:30px}
+.soz::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:var(--meander-okra) repeat-x;background-size:24px 12px;opacity:.9}
+.soz blockquote{font-size:25px}
+.dusun,.muhur-kutu{background:rgba(231,220,196,.45);border-radius:8px}
+.bag-liste button{background:rgba(231,220,196,.45);border-radius:8px}
+.btn{border-radius:8px;font-family:var(--yazit);font-size:14.5px;letter-spacing:.08em}
+.btn-okra{background:var(--r,#E3B38A);color:#FBF6EA}
+.otel{border-color:#D9CBAE;border-radius:8px;background:rgba(255,255,255,.4)}
+.btn-ege{background:var(--murekkep-k)}
+.rota li::before{border-color:var(--r);color:var(--r);font-family:var(--yazit)}
+
+.pasaport-bolum h2{margin-top:2px}
+.pasaport{border-radius:8px;border:1px solid #CDBF9F;background:#FBF7EE var(--doku);background-image:var(--doku),repeating-linear-gradient(0deg,transparent 0 31px,rgba(160,86,31,.08) 31px 32px);position:relative;padding:28px 20px 22px}
+.pasaport::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:var(--meander) repeat-x;background-size:24px 12px;opacity:.6}
+.pasaport button span{font-family:var(--yazit);font-size:12px;letter-spacing:.1em}
+.pasaport svg{transition:transform .25s}
+.pasaport button:hover svg{transform:scale(1.06) rotate(-3deg)}
+footer{font-style:italic}
 </style>
 </head>
 <body>
@@ -151,6 +239,7 @@ footer{max-width:1240px;margin:0 auto;padding:0 16px 40px;font-size:14.5px;color
     <button type="button" data-dil="tr">TR</button><button type="button" data-dil="en">EN</button>
   </div>
 </header>
+<div class="ust-meander"><div class="meander" aria-hidden="true"></div></div>
 
 <main>
   <div class="harita-kutu">
@@ -223,6 +312,9 @@ var AMBLEM = {
 function amblemSVG(id, renk){
   return '<svg viewBox="0 0 64 64" fill="none" stroke="' + (renk || 'currentColor') + '" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:' + (renk || 'currentColor') + '">' + AMBLEM[id] + '</svg>';
 }
+
+/* Her mekânın kendi rengi: pin, panel bandı, mühür ve kart bu renkle çizilir. */
+var RENK = { efes:'#1F5C8A', milet:'#2E7D74', klazomenai:'#6B7B2C', assos:'#A0561F', bergama:'#7A4E2A', hierapolis:'#3E7FA0', afrodisias:'#9A4E6E', sinop:'#2D4A6B', soli:'#A8761C', konya:'#2F6E50' };
 
 /* ==========================================================================
    MEKÂNLAR. Kaynak: /mnt/project-files/efes/turkiye-felsefe-mekanlari.md
@@ -401,41 +493,82 @@ function bildir(m){ var b = $('bildirim'); b.textContent = m; b.classList.add('a
    ========================================================================== */
 var H = window.HARITA;
 function izd(lon, lat){ return [(lon - H.b0) * H.k * H.s, (H.e1 - lat) * H.s]; }
-var EGE = (function(){ var a = izd(25.7, 39.75), b = izd(30.1, 37.3); return [a[0], a[1], b[0] - a[0], b[1] - a[1]]; })();
+var EGE = (function(){ var ust = izd(27.9, 39.85), alt = izd(27.9, 37.2), yuk = alt[1] - ust[1], gen = yuk * H.g / H.y; return [ust[0] - gen / 2, ust[1], gen, yuk]; })();
+var EGE_KUTU = (function(){ var a = izd(25.9, 39.75), b = izd(29.6, 37.3); return [a[0], a[1], b[0] - a[0], b[1] - a[1]]; })();
 var GORUNUM = { tum: [0, 0, H.g, H.y], ege: EGE };
-function egede(yer){ return yer.lon < 30 && yer.lat > 37.3 && yer.lat < 39.75; }
+function egede(yer){ return yer.lon < 30 && yer.lat > 37.2 && yer.lat < 39.85; }
 
-function dalgalar(){
-  var s = '', yer = [[70,420],[150,360],[60,300],[380,440],[520,455],[700,430],[460,30],[620,60],[300,70]];
-  yer.forEach(function(p){ s += '<path class="dalga" d="M' + p[0] + ' ' + p[1] + 'q6-5 12 0t12 0t12 0"/>'; });
+/* Pusula: özgün sekiz kollu yıldız; kuzey ucunda K (EN: N). */
+function pusula(cx, cy, R){
+  var kol = '', aci = [0, 90, 180, 270, 45, 135, 225, 315];
+  aci.forEach(function(d, i){
+    var uz = i < 4 ? R : R * 0.55, en = i < 4 ? R * 0.16 : R * 0.12, a = (d - 90) * Math.PI / 180;
+    var uc = [cx + Math.cos(a) * uz, cy + Math.sin(a) * uz], sol = [cx + Math.cos(a - Math.PI / 2) * en, cy + Math.sin(a - Math.PI / 2) * en], sag = [cx + Math.cos(a + Math.PI / 2) * en, cy + Math.sin(a + Math.PI / 2) * en];
+    kol += '<path d="M' + cx + ' ' + cy + 'L' + uc.join(' ') + 'L' + sol.join(' ') + 'Z" fill="#6B5A3E"/><path d="M' + cx + ' ' + cy + 'L' + uc.join(' ') + 'L' + sag.join(' ') + 'Z" fill="#F1E5C8" stroke="#6B5A3E" stroke-width=".6"/>';
+  });
+  return '<g aria-hidden="true" opacity=".9"><circle cx="' + cx + '" cy="' + cy + '" r="' + (R * 0.78) + '" fill="none" stroke="#6B5A3E" stroke-width=".7"/><circle cx="' + cx + '" cy="' + cy + '" r="' + (R * 0.72) + '" fill="none" stroke="#6B5A3E" stroke-width=".4" stroke-dasharray="1.5 2.5"/>' + kol +
+    '<circle cx="' + cx + '" cy="' + cy + '" r="' + (R * 0.07) + '" fill="#A0561F"/><text x="' + cx + '" y="' + (cy - R - 6) + '" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="700" font-size="' + (R * 0.34) + '" fill="#6B5A3E">' + (D.dil === 'tr' ? 'K' : 'N') + '</text></g>';
+}
+/* Gravür tekniği: kıyıyı izleyen eş merkezli su çizgileri (her halka: mürekkep çizgi + üstünde deniz rengi). */
+function suCizgileri(f){
+  var d = H.turkiye + H.komsu, s = '';
+  [[30, .16], [21, .22], [13, .3], [6, .42]].forEach(function(h2){
+    s += '<path d="' + d + '" fill="none" stroke="#4E7A95" stroke-opacity="' + h2[1] + '" stroke-width="' + (h2[0] * f) + '" stroke-linejoin="round"/>' +
+         '<path d="' + d + '" fill="none" stroke="#D5E3EA" stroke-width="' + ((h2[0] - 1.6) * f) + '" stroke-linejoin="round"/>';
+  });
   return s;
 }
 function haritaCiz(){
   /* f: bir ekran pikselinin harita birimindeki karşılığı; işaretler her yakınlıkta aynı boyda görünsün */
   var v = GORUNUM[D.zum], gen = $('harita').clientWidth || 760, f = v[2] / gen;
-  var r = 12 * f, yaz = 15 * f;
+  var r = 12 * f, yaz = 12.5 * f;
   var dar = gen < 600 && D.zum === 'tum';   /* telefonda Ege pinleri üst üste biner: tek bir küme rozeti göster */
   var pinler = YERLER.map(function(yer, i){
     if (dar && egede(yer)) return '';
-    var p = izd(yer.lon, yer.lat), sec = D.secili === yer.id, m = D.muhur[yer.id];
+    var p = izd(yer.lon, yer.lat), sec = D.secili === yer.id, m = D.muhur[yer.id], rk = RENK[yer.id];
     var etiketGoster = D.zum === 'ege' ? egede(yer) : !egede(yer);
+    var rr = sec ? r * 1.25 : r;
     return '<g class="pin' + (sec ? ' secili' : '') + (m ? ' muhurlu' : '') + '" data-yer="' + yer.id + '" role="button" tabindex="0" aria-label="' + h((i + 1) + '. ' + y(yer).ad + ', ' + y(yer).kim) + '">' +
-      '<circle class="nabiz" cx="' + p[0] + '" cy="' + p[1] + '" r="' + r + '" stroke-width="' + (2 * f) + '"/>' +
-      '<circle class="halka" cx="' + p[0] + '" cy="' + p[1] + '" r="' + r + '" stroke-width="' + (2.5 * f) + '"/>' +
-      '<text x="' + p[0] + '" y="' + (p[1] + 0.5 * f) + '" font-size="' + (12.5 * f) + '">' + (i + 1) + '</text>' +
-      (etiketGoster ? '<text class="ad" x="' + (p[0] + r + 5 * f) + '" y="' + p[1] + '" dy="0.35em" font-size="' + yaz + '" stroke-width="' + (4 * f) + '">' + h(y(yer).ad) + '</text>' : '') +
+      '<circle class="nabiz" cx="' + p[0] + '" cy="' + p[1] + '" r="' + rr + '" stroke-width="' + (1.5 * f) + '"/>' +
+      '<circle class="yorunge" cx="' + p[0] + '" cy="' + p[1] + '" r="' + (rr + 6 * f) + '" stroke-width="' + (1.4 * f) + '" stroke-dasharray="' + (3 * f) + ' ' + (3 * f) + '"/>' +
+      '<circle class="halka" cx="' + p[0] + '" cy="' + p[1] + '" r="' + rr + '" stroke-width="' + ((m ? 3 : 2.2) * f) + '" style="fill:' + rk + '"/>' +
+      '<circle class="ic-halka" cx="' + p[0] + '" cy="' + p[1] + '" r="' + (rr * 0.74) + '" stroke-width="' + (0.8 * f) + '"/>' +
+      '<text x="' + p[0] + '" y="' + (p[1] + 0.6 * f) + '" font-size="' + ((sec ? 13 : 11) * f) + '">' + (i + 1) + '</text>' +
+      (etiketGoster ? '<text class="ad" x="' + (p[0] + rr + 6 * f) + '" y="' + p[1] + '" dy="0.36em" font-size="' + yaz + '" stroke-width="' + (4 * f) + '" paint-order="stroke">' + h(y(yer).ad.toLocaleUpperCase(D.dil === 'tr' ? 'tr' : 'en')) + '</text>' : '') +
       '</g>';
   }).join('');
-  var kume = dar ? (function(){ var c = [EGE[0] + EGE[2] / 2, EGE[1] + EGE[3] / 2], R = 17 * f; return '<g class="pin" id="ege-kume" role="button" tabindex="0" aria-label="' + h(t('ege')) + '"><circle class="halka" cx="' + c[0] + '" cy="' + c[1] + '" r="' + R + '" stroke-width="' + (2.5 * f) + '" style="fill:var(--ege)"/><text x="' + c[0] + '" y="' + c[1] + '" font-size="' + (14 * f) + '">+7</text></g>'; })() : '';
-  var egeKutu = D.zum === 'tum' ? '<rect class="ege-kutu" id="ege-kutu" x="' + EGE[0] + '" y="' + EGE[1] + '" width="' + EGE[2] + '" height="' + EGE[3] + '" rx="10"/>' +
-    '<text x="' + (EGE[0] + 8) + '" y="' + (EGE[1] + EGE[3] + 18) + '" font-size="14" fill="#1F5C8A" font-style="italic">' + h(D.dil === 'tr' ? 'Ege: 7 durak' : 'Aegean: 7 stops') + '</text>' : '';
-  var denizler = D.zum === 'tum' ? '<text class="deniz-ad" x="610" y="48">' + (D.dil === 'tr' ? 'KARADENİZ' : 'BLACK SEA') + '</text><text class="deniz-ad" x="330" y="462">' + (D.dil === 'tr' ? 'AKDENİZ' : 'MEDITERRANEAN') + '</text><text class="deniz-ad" x="22" y="370" transform="rotate(-90 22 370)">' + (D.dil === 'tr' ? 'EGE' : 'AEGEAN') + '</text>' : '';
+  var kume = dar ? (function(){ var c = [EGE_KUTU[0] + EGE_KUTU[2] / 2, EGE_KUTU[1] + EGE_KUTU[3] / 2], R = 17 * f; return '<g class="pin" id="ege-kume" role="button" tabindex="0" aria-label="' + h(t('ege')) + '"><circle class="halka" cx="' + c[0] + '" cy="' + c[1] + '" r="' + R + '" stroke-width="' + (2.5 * f) + '" style="fill:#3B2F22"/><circle class="ic-halka" cx="' + c[0] + '" cy="' + c[1] + '" r="' + (R * .76) + '" stroke-width="' + (0.8 * f) + '"/><text x="' + c[0] + '" y="' + c[1] + '" font-size="' + (12 * f) + '">+7</text></g>'; })() : '';
+  var egeKutu = D.zum === 'tum' ? '<rect class="ege-kutu" id="ege-kutu" x="' + EGE_KUTU[0] + '" y="' + EGE_KUTU[1] + '" width="' + EGE_KUTU[2] + '" height="' + EGE_KUTU[3] + '" rx="4"/>' +
+    '<text class="ege-yazi" x="' + (EGE_KUTU[0] + 6) + '" y="' + (EGE_KUTU[1] + EGE_KUTU[3] + 16) + '" font-size="14">' + h(D.dil === 'tr' ? 'Ege: 7 durak' : 'Aegean: 7 stops') + '</text>' : '';
+  var denizler = D.zum === 'tum' ? '<text class="deniz-ad" x="640" y="64">' + (D.dil === 'tr' ? 'KARADENİZ' : 'BLACK SEA') + '</text><text class="deniz-ad" x="120" y="464">' + (D.dil === 'tr' ? 'AKDENİZ' : 'MEDITERRANEAN') + '</text><text class="deniz-ad" x="20" y="360" transform="rotate(-90 20 360)">' + (D.dil === 'tr' ? 'EGE' : 'AEGEAN') + '</text>' + pusula(318, 418, 30) :
+    '<text class="deniz-ad" x="' + (v[0] + 18 * f) + '" y="' + (v[1] + v[3] * 0.62) + '" style="font-size:' + (12 * f) + 'px" transform="rotate(-90 ' + (v[0] + 18 * f) + ' ' + (v[1] + v[3] * 0.62) + ')">' + (D.dil === 'tr' ? 'EGE DENİZİ' : 'AEGEAN SEA') + '</text>';
   $('harita').innerHTML = '<svg viewBox="' + v.join(' ') + '" role="img" aria-label="' + h(t('baslik')) + '">' +
-    '<rect x="-50" y="-50" width="' + (H.g + 100) + '" height="' + (H.y + 100) + '" fill="#DCE7EE"/>' + (D.zum === 'tum' ? dalgalar() : '') +
+    '<defs><pattern id="tarama" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(38) scale(' + f + ')"><path d="M0 0V5" stroke="#B59A66" stroke-width=".55" opacity=".5"/></pattern>' +
+      '<radialGradient id="deniz-isik" cx="40%" cy="45%" r="70%"><stop offset="0" stop-color="#E2ECF0"/><stop offset="1" stop-color="#C7D9E3"/></radialGradient>' +
+      '<filter id="kagit" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="' + (0.9 / f) + '" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 .4 0 0 0 0 .3 0 0 0 0 .15 0 0 0 .16 0"/></filter></defs>' +
+    '<rect x="-400" y="-200" width="' + (H.g + 800) + '" height="' + (H.y + 400) + '" fill="#D5E3EA"/>' +
+    suCizgileri(f) +
     '<path class="komsu" d="' + H.komsu + '"/>' +
     '<path class="kara" d="' + H.turkiye + '"/>' +
+    '<path d="' + H.turkiye + '" fill="url(#tarama)" pointer-events="none"/>' +
+    '<rect x="' + v[0] + '" y="' + v[1] + '" width="' + v[2] + '" height="' + v[3] + '" filter="url(#kagit)" pointer-events="none"/>' +
     denizler + egeKutu + (D.bag ? baglarSVG(f, r) : '') + pinler + kume + '</svg>';
   $('z-bag').setAttribute('aria-pressed', !!D.bag); $('z-tum').setAttribute('aria-pressed', D.zum === 'tum'); $('z-ege').setAttribute('aria-pressed', D.zum === 'ege');
+}
+
+/* Yumuşak yakınlaşma: viewBox'ı iki görünüm arasında kaydırır, sonra haritayı yeni ölçekte yeniden çizer. */
+function zumla(z){
+  if (z === D.zum){ haritaCiz(); return; }
+  var svg = $('harita').querySelector('svg'), a = GORUNUM[D.zum], b = GORUNUM[z];
+  D.zum = z; metinCiz();
+  var azHareket = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!svg || azHareket){ haritaCiz(); return; }
+  var t0 = performance.now();
+  (function adim(n){
+    var k = Math.min(1, (n - t0) / 650), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    svg.setAttribute('viewBox', a.map(function(v, i){ return v + (b[i] - v) * e; }).join(' '));
+    if (k < 1) requestAnimationFrame(adim); else haritaCiz();
+  })(t0);
 }
 
 /* İki yer arasında hafif kavisli bir çizgi; uçlar pinin kenarında durur, ucunda küçük bir ok. */
@@ -457,7 +590,7 @@ function kaydir(P, K, d){ var x = K[0] - P[0], y = K[1] - P[1], l = Math.hypot(x
 
 function listeCiz(){
   $('liste').innerHTML = YERLER.map(function(yer, i){
-    return '<button type="button" class="yer-btn' + (D.muhur[yer.id] ? ' muhurlu' : '') + '" data-yer="' + yer.id + '" aria-current="' + (D.secili === yer.id) + '"><span class="no">' + (i + 1) + '</span><span><b>' + h(y(yer).ad) + '</b><small>' + h(y(yer).kim) + '</small></span></button>';
+    return '<button type="button" class="yer-btn' + (D.muhur[yer.id] ? ' muhurlu' : '') + '" style="--r:' + RENK[yer.id] + '" data-yer="' + yer.id + '" aria-current="' + (D.secili === yer.id) + '"><span class="no">' + (i + 1) + '</span><span><b>' + h(y(yer).ad) + '</b><small>' + h(y(yer).kim) + '</small></span></button>';
   }).join('');
 }
 
@@ -465,14 +598,17 @@ function listeCiz(){
    MÜHÜR (özgün, yuvarlak damga)
    ========================================================================== */
 function muhurSVG(yer, basili){
-  var renk = basili ? '#A0561F' : '#C9BFAE', yid = 'yy-' + yer.id + (basili ? 'b' : 'g');
-  return '<svg viewBox="0 0 120 120" class="' + (basili ? 'basili' : '') + '" aria-hidden="true">' +
+  var renk = basili ? RENK[yer.id] : '#C9BFAE', yid = 'yy-' + yer.id + (basili ? 'b' : 'g'), don = [-7, 5, -3, 8, -5, 3, -8, 6, -2, 4][YERLER.indexOf(yer) % 10];
+  var fid = 'mk-' + yer.id + (basili ? 'b' : 'g') + (muhurSVG.n = (muhurSVG.n || 0) + 1);
+  return '<svg viewBox="0 0 120 120" class="' + (basili ? 'basili' : '') + '" aria-hidden="true"' + (basili ? ' style="transform:rotate(' + don + 'deg)"' : '') + '>' +
+    (basili ? '<filter id="' + fid + '"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2" seed="' + (YERLER.indexOf(yer) + 3) + '"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter><g filter="url(#' + fid + ')" opacity=".92">' : '<g>') +
+    (basili ? '<circle cx="60" cy="60" r="57" fill="' + renk + '" opacity=".07"/>' : '') +
     '<defs><path id="' + yid + '" d="M60 60m-43 0a43 43 0 1 1 86 0a43 43 0 1 1-86 0"/></defs>' +
     '<circle cx="60" cy="60" r="56" fill="none" stroke="' + renk + '" stroke-width="3"' + (basili ? '' : ' stroke-dasharray="5 5"') + '/>' +
-    '<circle cx="60" cy="60" r="35" fill="none" stroke="' + renk + '" stroke-width="1.5"/>' +
-    '<text font-size="11.5" letter-spacing="2.5" fill="' + renk + '" font-family="EB Garamond,Georgia,serif" font-weight="700"><textPath href="#' + yid + '" startOffset="50%" text-anchor="middle">' + h(yer.yunan) + ' · ' + h((yer.mh || yer.tr.kim.split(',')[0]).toLocaleUpperCase('tr')) + '</textPath></text>' +
+    '<circle cx="60" cy="60" r="35" fill="none" stroke="' + renk + '" stroke-width="1.5"/>' + (basili ? '<circle cx="60" cy="60" r="51" fill="none" stroke="' + renk + '" stroke-width=".8"/>' : '') +
+    '<text font-size="10.5" letter-spacing="2.2" fill="' + renk + '" font-family="Cinzel,Georgia,serif" font-weight="700"><textPath href="#' + yid + '" startOffset="50%" text-anchor="middle">' + h(yer.yunan) + ' · ' + h((yer.mh || yer.tr.kim.split(',')[0]).toLocaleUpperCase('tr')) + '</textPath></text>' +
     '<g transform="translate(38 38) scale(.69)">' + amblemSVG(yer.id, renk).replace('<svg ', '<svg width="64" height="64" ') + '</g>' +
-    '</svg>';
+    '</g></svg>';
 }
 
 /* ==========================================================================
@@ -481,7 +617,8 @@ function muhurSVG(yer, basili){
 function panelCiz(odakla){
   var yer = bul(D.secili), p = $('panel');
   if (!yer){
-    p.innerHTML = '<div class="etiket">' + h(t('pasaport')) + '</div><h2>' + h(t('sec')) + '</h2><p class="soluk">' + h(t('giris')) + '</p>' +
+    p.style.setProperty('--r', '#A0561F');
+    p.innerHTML = '<div class="panel-bant" aria-hidden="true"></div>' + '<div class="etiket">' + h(t('pasaport')) + '</div><h2>' + h(t('sec')) + '</h2><p class="soluk">' + h(t('giris')) + '</p>' +
       '<div class="muhur-kutu">' + muhurSVG(YERLER[0], true) + '<p class="not">' + h(t('pasaportAlt')) + '</p></div>';
     return;
   }
@@ -491,9 +628,11 @@ function panelCiz(odakla){
     '<div class="otel"><div class="etiket">' + h(t('oteller')) + '</div><p>' + h(t('otelNot')) + ' <span class="soluk">(' + h(OTEL.yerler[yer.id].arama) + ')</span></p>' +
     '<a class="btn btn-ege" href="' + h(otelAdresi(yer.id)) + '" target="_blank" rel="sponsored noopener">' + h(t('otelBtn')) + ' →</a>' +
     (ortaklikVar() ? '<p class="not">' + h(t('otelAcik')) + '</p>' : '') + '</div>' : '';
+  p.style.setProperty('--r', RENK[yer.id]);
   p.innerHTML =
+    '<div class="panel-bant" aria-hidden="true"></div>' +
     '<div class="panel-bas"><div class="amblem">' + amblemSVG(yer.id) + '</div><div><div class="etiket">' + (i + 1) + ' · ' + h(yer.yunan) + '</div><h2>' + h(m.ad) + '</h2><div class="bilgi-satir"><span>' + h(m.il) + '</span><span>' + h(m.donem) + '</span></div></div></div>' +
-    '<div><h3>' + h(m.kim) + '</h3><p class="soluk" style="margin-top:4px">' + h(m.neden) + '</p></div>' +
+    '<div><h3>' + h(m.kim) + '</h3><p class="soluk neden" style="margin-top:4px">' + h(m.neden) + '</p></div>' +
     (yer.rehber ? '<a class="btn btn-koyu" href="' + yer.rehber + '">' + h(t('rehber')) + ' →</a>' : '') +
     '<div class="soz"><div class="etiket" style="color:var(--okra)">' + h(s.eser ? t('eser') : t('soz')) + '</div>' +
       '<blockquote>' + (s.eser ? '' : '“') + h(s[D.dil]) + (s.eser ? '' : '”') + '</blockquote>' +
@@ -567,27 +706,32 @@ function satirlara(ctx, metin, gen){
 }
 function amblemResmi(id){
   return new Promise(function(ok){
-    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="256" height="256" fill="none" stroke="#E3B38A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" color="#E3B38A">' + AMBLEM[id] + '</svg>';
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="256" height="256" fill="none" stroke="#FBF6EA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" color="#FBF6EA">' + AMBLEM[id] + '</svg>';
     var img = new Image(); img.onload = function(){ ok(img); }; img.onerror = function(){ ok(null); };
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
   });
 }
 async function kartYap(){
   var yer = bul(D.secili); if (!yer) return;
-  try { await document.fonts.ready; } catch(e){}
+  try { await Promise.all([document.fonts.load('600 34px Cinzel'), document.fonts.load('italic 500 64px "EB Garamond"')]); } catch(e){}
   var c = document.createElement('canvas'); c.width = 1080; c.height = 1350;
   var x = c.getContext('2d'), s = yer.soz, F = '"EB Garamond", Georgia, serif';
   x.fillStyle = '#14202C'; x.fillRect(0, 0, 1080, 1350);
-  x.strokeStyle = '#36495F'; x.lineWidth = 3; x.strokeRect(48, 48, 984, 1254);
-  var img = await amblemResmi(yer.id); if (img) x.drawImage(img, 412, 120, 256, 256);
-  x.fillStyle = '#E3B38A'; x.textAlign = 'center'; x.font = '600 34px ' + F;
-  x.fillText(yer.yunan.split('').join(' '), 540, 440);
+  /* yıldız tozu, meander bantlar ve mekân renginde madalyon */
+  for (var yi = 0; yi < 90; yi++){ var sx = (yi * 397) % 1080, sy = (yi * 211) % 1350; x.fillStyle = 'rgba(255,255,255,' + (0.12 + (yi % 5) * 0.06) + ')'; x.beginPath(); x.arc(sx, sy, 1 + (yi % 3) * 0.6, 0, 7); x.fill(); }
+  function meander(y0){ x.strokeStyle = '#E3B38A'; x.lineWidth = 3; x.beginPath(); for (var mx = 60; mx < 1020; mx += 48){ x.moveTo(mx, y0 + 22); x.lineTo(mx + 36, y0 + 22); x.lineTo(mx + 36, y0 + 2); x.lineTo(mx + 8, y0 + 2); x.lineTo(mx + 8, y0 + 16); x.lineTo(mx + 28, y0 + 16); x.lineTo(mx + 28, y0 + 8); x.lineTo(mx + 18, y0 + 8); x.moveTo(mx + 36, y0 + 22); x.lineTo(mx + 48, y0 + 22); } x.stroke(); }
+  meander(70); meander(1256);
+  x.fillStyle = RENK[yer.id]; x.beginPath(); x.arc(540, 250, 140, 0, 7); x.fill();
+  x.strokeStyle = '#E3B38A'; x.lineWidth = 3; x.beginPath(); x.arc(540, 250, 152, 0, 7); x.stroke();
+  var img = await amblemResmi(yer.id); if (img) x.drawImage(img, 428, 138, 224, 224);
+  x.fillStyle = '#E3B38A'; x.textAlign = 'center'; x.font = '600 34px Cinzel, ' + F;
+  x.fillText(yer.yunan.split('').join(' '), 540, 470);
   x.fillStyle = '#F4F1EA'; x.font = (s.eser ? '600 ' : 'italic 500 ') + '64px ' + F;
   var metin = s.eser ? s[D.dil] : '“' + s[D.dil] + '”', sat = satirlara(x, metin, 860), yuk = 82, y0 = 700 - (sat.length - 1) * yuk / 2;
   sat.forEach(function(l, i){ x.fillText(l, 540, y0 + i * yuk); });
   x.fillStyle = '#C3CEDA'; x.font = '400 32px ' + F;
   satirlara(x, (D.dil === 'en' && s.kaynakEn) ? s.kaynakEn : s.kaynak, 860).forEach(function(l, i){ x.fillText(l, 540, y0 + sat.length * yuk + 30 + i * 42); });
-  x.fillStyle = '#E3B38A'; x.font = '600 30px ' + F; x.fillText(t('kartAlt') + ' · ' + y(yer).ad, 540, 1240);
+  x.fillStyle = '#E3B38A'; x.font = '600 28px Cinzel, ' + F; x.fillText((t('kartAlt') + ' · ' + y(yer).ad).toLocaleUpperCase(D.dil === 'tr' ? 'tr' : 'en'), 540, 1215);
   c.toBlob(async function(b){
     var ad = 'felsefe-' + yer.id + '.png';
     try { var dosya = new File([b], ad, { type:'image/png' }); if (navigator.canShare && navigator.canShare({ files:[dosya] })){ await navigator.share({ files:[dosya], title:t('baslik') }); return; } } catch(e){ if (e && e.name === 'AbortError') return; }
@@ -601,16 +745,16 @@ async function kartYap(){
 function sec(id, odakla){
   D.secili = id;
   var yer = bul(id);
-  if (yer && D.zum === 'tum' && egede(yer) && odakla !== 'harita') D.zum = 'ege';
   try { history.replaceState(null, '', id ? '#' + id : location.pathname); } catch(e){}
-  haritaCiz(); listeCiz(); panelCiz(!!odakla); metinCiz();
+  listeCiz(); panelCiz(!!odakla); metinCiz();
+  if (yer && D.zum === 'tum' && egede(yer) && odakla !== 'harita') zumla('ege'); else haritaCiz();
 }
 document.addEventListener('click', function(e){
   var el = e.target.closest('[data-yer],[data-dil],[data-eylem],#z-tum,#z-ege,#z-bag,#ege-kutu,#ege-kume');
   if (!el) return;
   if (el.id === 'z-bag'){ D.bag = !D.bag; yaz('fh-bag', D.bag); haritaCiz(); metinCiz(); return; }
-  if (el.id === 'z-tum'){ D.zum = 'tum'; haritaCiz(); metinCiz(); return; }
-  if (el.id === 'z-ege' || el.id === 'ege-kutu' || el.id === 'ege-kume'){ D.zum = 'ege'; haritaCiz(); metinCiz(); return; }
+  if (el.id === 'z-tum'){ zumla('tum'); return; }
+  if (el.id === 'z-ege' || el.id === 'ege-kutu' || el.id === 'ege-kume'){ zumla('ege'); return; }
   if (el.hasAttribute('data-dil')){ sesDurdur(); D.dil = el.getAttribute('data-dil'); yaz('fh-dil', D.dil); hepsi(); return; }
   if (el.hasAttribute('data-yer')){ sesDurdur(); sec(el.getAttribute('data-yer'), el.closest('#harita') ? 'harita' : true); return; }
   var ey = el.getAttribute('data-eylem');
@@ -620,7 +764,7 @@ document.addEventListener('click', function(e){
   else if (ey === 'not'){ var v = ($('not-alan').value || '').trim().slice(0, 500); if (v) D.notlar[D.secili] = v; else delete D.notlar[D.secili]; yaz('fh-not', D.notlar); bildir(t('kaydedildi')); }
 });
 document.addEventListener('keydown', function(e){
-  if ((e.key === 'Enter' || e.key === ' ') && e.target.id === 'ege-kume'){ e.preventDefault(); D.zum = 'ege'; haritaCiz(); metinCiz(); return; }
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.id === 'ege-kume'){ e.preventDefault(); zumla('ege'); return; }
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('g.pin')){ e.preventDefault(); sec(e.target.getAttribute('data-yer'), 'harita'); }
 });
 window.addEventListener('resize', function(){ clearTimeout(haritaCiz.z); haritaCiz.z = setTimeout(haritaCiz, 150); });

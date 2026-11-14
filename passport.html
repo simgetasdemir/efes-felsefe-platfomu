@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<title>Philosophy Passport: your stamps and badges | Antikyol</title>
+<meta name="description" content="Collect a stamp at every philosophy and art site in Türkiye, from Ephesus to Göbekli Tepe, and earn badges for schools of thought and completed routes.">
+<meta name="theme-color" content="#1F2A36">
+<link rel="canonical" href="https://antikyol.com/passport">
+<meta property="og:title" content="Your Philosophy Passport">
+<meta property="og:image" content="https://antikyol.com/og-harita.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="/guides/rehber.css">
+<style>
+main{max-width:1000px}
+.ust{max-width:1000px}
+.ilerleme{margin:18px 0 6px;height:12px;border-radius:999px;background:var(--ince);overflow:hidden}
+.ilerleme span{display:block;height:100%;background:linear-gradient(90deg,#A0561F,#E3B38A);border-radius:999px;transition:width .6s}
+.sayac{font-size:18px;color:var(--soluk)}
+.dil{display:inline-flex;border:1px solid var(--ince);background:#fff;border-radius:999px;overflow:hidden}
+.dil button{border:0;background:none;min-height:38px;padding:0 12px;font:inherit;font-weight:600;cursor:pointer;color:var(--koyu)}
+.dil button[aria-pressed="true"]{background:var(--koyu);color:#fff}
+.muhurler{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:20px}
+.muhurler a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;border-radius:18px;background:#fff;box-shadow:var(--golge);text-decoration:none;color:var(--koyu);text-align:center}
+.muhurler a.yok{background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--ince);color:var(--soluk)}
+.muhurler svg{width:110px;height:110px}
+.muhurler b{font-size:17px;line-height:1.2}
+.muhurler small{font-size:14px;color:var(--soluk)}
+.rozetler{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:14px}
+.rozet{display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:18px;background:#fff;box-shadow:var(--golge)}
+.rozet.kilitli{background:var(--yuzey);box-shadow:inset 0 0 0 1px var(--ince)}
+.rozet .rozet-ikon{flex:none;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;background:radial-gradient(circle at 35% 30%,#F3D9B8,#C8833F);color:#3A220E;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 8px 16px -10px rgba(60,30,10,.8)}
+.kilitli .rozet-ikon{background:#E5DED1;color:#A69C8C;box-shadow:none}
+.rozet-metin b{display:block;font-size:19px;line-height:1.2}
+.rozet-metin span{display:block;font-size:15.5px;color:var(--soluk);line-height:1.4}
+.rozet em{display:block;font-style:normal;font-size:14px;color:var(--toprak);font-weight:600;margin-top:2px}
+.kilitli em{color:var(--soluk)}
+</style>
+</head>
+<body>
+<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/" id="n-harita">Map</a><a href="/places/" id="n-yerler">Places</a><a href="/guides/philosophy-trip-turkey" id="n-rehber">Guides</a><span class="dil" role="group" aria-label="Language"><button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button></span></nav></header>
+<main>
+<div class="etiket">ΔΙΑΒΑΤΗΡΙΟΝ</div>
+<h1 id="baslik"></h1>
+<p class="giris" id="giris"></p>
+<div class="ilerleme" aria-hidden="true"><span id="cubuk" style="width:0"></span></div>
+<p class="sayac" id="sayac"></p>
+<h2 id="h-rozet"></h2>
+<div class="rozetler" id="rozetler"></div>
+<h2 id="h-rota"></h2>
+<div class="rozetler" id="rota-rozet"></div>
+<h2 id="h-muhur"></h2>
+<div class="muhurler" id="muhurler"></div>
+<p class="not" id="not"></p>
+</main>
+<footer id="alt"></footer>
+<script src="/yer-veri.js"></script>
+<script>
+(function(){
+  var V = window.YER_VERI, $ = function(i){ return document.getElementById(i); };
+  function oku(k, v){ try { var x = JSON.parse(localStorage.getItem(k)); return x == null ? v : x; } catch(e){ return v; } }
+  var dil = oku('fh-dil', (navigator.language || 'en').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en');
+  var M = oku('fh-muhur', {});
+  var h = function(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); };
+  var T = {
+    en:{ baslik:'Your Philosophy Passport', giris:'Collect a stamp at each place you visit, on the map or on the place\'s own page. Stamps earn badges for schools of thought and for every route you complete.', sayac:'{n} of {t} stamps', rozet:'Badges', rota:'Routes completed', muhur:'Stamps', yok:'Not yet stamped', git:'Visit page', kazandin:'Earned', kalan:'{k} to go', not:'Your passport is saved only in this browser. No sign-in, nothing is sent anywhere.', harita:'Map', yerler:'Places', rehber:'Guides', alt:'Antikyol · Stamps and badges are stored on this device.' },
+    tr:{ baslik:'Felsefe Pasaportun', giris:'Gezdiğin her yerde, haritada ya da mekânın kendi sayfasında bir mühür al. Mühürler düşünce okulları ve tamamladığın her rota için rozet kazandırır.', sayac:'{t} mühürden {n} tanesi', rozet:'Rozetler', rota:'Tamamlanan rotalar', muhur:'Mühürler', yok:'Henüz mühürlenmedi', git:'Sayfaya git', kazandin:'Kazanıldı', kalan:'{k} kaldı', not:'Pasaportun yalnızca bu tarayıcıda saklanır. Giriş yok, hiçbir yere gönderilmez.', harita:'Harita', yerler:'Mekânlar', rehber:'Rehberler', alt:'Antikyol · Mühürler ve rozetler bu cihazda saklanır.' }
+  };
+  var ROZET = [
+    { ikon:'Ⅰ', say:1, en:['First step','Collect your first stamp.'], tr:['İlk adım','İlk mührünü al.'] },
+    { ikon:'Ⅴ', say:5, en:['Wanderer','Collect five stamps.'], tr:['Gezgin','Beş mühür topla.'] },
+    { ikon:'Ⅹ', say:10, en:['Pilgrim of ideas','Collect ten stamps.'], tr:['Fikir yolcusu','On mühür topla.'] },
+    { ikon:'◎', say:V.yerler.length, en:['Citizen of the world','Stamp every place, as Diogenes of Sinop would.'], tr:['Dünya yurttaşı','Sinoplu Diogenes gibi: her yeri mühürle.'] },
+    { ikon:'≈', yerler:['efes','milet','klazomenai','priene'], en:['Ionian School','Ephesus, Miletus, Clazomenae and Priene: where philosophy began.'], tr:['İyon Okulu','Efes, Milet, Klazomenai ve Priene: felsefenin başladığı kıyı.'] },
+    { ikon:'Σ', yerler:['assos','soli','hierapolis'], en:['The Stoic Way','Assos, Soli and Hierapolis: Cleanthes, Chrysippus and Epictetus.'], tr:['Stoa Yolu','Assos, Soli ve Hierapolis: Kleanthes, Khrysippos ve Epiktetos.'] },
+    { ikon:'✶', yerler:['istanbul','iznik','kapadokya'], en:['Byzantium','Istanbul, İznik and Cappadocia: a thousand years of copying and teaching.'], tr:['Bizans','İstanbul, İznik ve Kapadokya: bin yıllık kopyalama ve öğretme.'] },
+    { ikon:'▲', yerler:['gaziantep','sanliurfa','nemrut','mardin'], en:['Mesopotamia','Zeugma, Göbekli Tepe, Nemrut and Mardin.'], tr:['Mezopotamya','Zeugma, Göbeklitepe, Nemrut ve Mardin.'] },
+    { ikon:'✒', yerler:['troya','bodrum'], en:['Poets and historians','Troy and Bodrum: Homer and Herodotus.'], tr:['Şairler ve tarihçiler','Troya ve Bodrum: Homeros ve Herodotos.'] },
+    { ikon:'△', yerler:['bergama','afrodisias','antalya','iznik'], en:['Mind and number','Pergamon, Aphrodisias, Perge and İznik: Galen, Alexander, Apollonius and Hipparchus.'], tr:['Akıl ve sayı','Bergama, Afrodisias, Perge ve İznik: Galenos, Aleksandros, Apollonios ve Hipparkhos.'] }
+  ];
+  function rozetHTML(ikon, ad, acik, kazandi, kalan){
+    return '<div class="rozet' + (kazandi ? '' : ' kilitli') + '"><span class="rozet-ikon" aria-hidden="true">' + ikon + '</span><span class="rozet-metin"><b>' + h(ad) + '</b><span>' + h(acik) + '</span><em>' + h(kazandi ? T[dil].kazandin : T[dil].kalan.replace('{k}', kalan)) + '</em></span></div>';
+  }
+  function muhurSVG(y, b, i){
+    var renk = b ? y.renk : '#C9BFAE', pid = 'p' + i + (b ? 'b' : 'g'), don = [-7,5,-3,8,-5,3,-8,6,-2,4][i % 10];
+    return '<svg viewBox="0 0 120 120" aria-hidden="true"' + (b ? ' style="transform:rotate(' + don + 'deg)"' : '') + '><defs><path id="' + pid + '" d="M60 60m-43 0a43 43 0 1 1 86 0a43 43 0 1 1-86 0"/></defs>' +
+      (b ? '<circle cx="60" cy="60" r="57" fill="' + renk + '" opacity=".08"/>' : '') +
+      '<circle cx="60" cy="60" r="56" fill="none" stroke="' + renk + '" stroke-width="3"' + (b ? '' : ' stroke-dasharray="5 5"') + '/><circle cx="60" cy="60" r="35" fill="none" stroke="' + renk + '" stroke-width="1.5"/>' +
+      '<text font-size="10.5" letter-spacing="2.2" fill="' + renk + '" font-family="EB Garamond,Georgia,serif" font-weight="700"><textPath href="#' + pid + '" startOffset="50%" text-anchor="middle">' + h(y.yunan) + ' · ' + h(String(y.mh).toLocaleUpperCase('tr')) + '</textPath></text>' +
+      '<g transform="translate(38 38) scale(.69)"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="' + renk + '" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' + y.amblem + '</svg></g></svg>';
+  }
+  function ciz(){
+    var t = T[dil], n = V.yerler.filter(function(y){ return M[y.id]; }).length, top = V.yerler.length;
+    document.documentElement.lang = dil;
+    $('baslik').textContent = t.baslik; $('giris').textContent = t.giris;
+    $('sayac').textContent = t.sayac.replace('{n}', n).replace('{t}', top);
+    $('cubuk').style.width = (100 * n / top) + '%';
+    $('h-rozet').textContent = t.rozet; $('h-rota').textContent = t.rota; $('h-muhur').textContent = t.muhur;
+    $('n-harita').textContent = t.harita; $('n-yerler').textContent = t.yerler; $('n-rehber').textContent = t.rehber;
+    $('not').textContent = t.not; $('alt').textContent = t.alt;
+    $('rozetler').innerHTML = ROZET.map(function(r){
+      var var_ = r.yerler ? r.yerler.filter(function(id){ return M[id]; }).length : n, hedef = r.yerler ? r.yerler.length : r.say;
+      return rozetHTML(r.ikon, r[dil][0], r[dil][1], var_ >= hedef, hedef - var_);
+    }).join('');
+    $('rota-rozet').innerHTML = V.rotalar.map(function(r){
+      var var_ = r.duraklar.filter(function(id){ return M[id]; }).length;
+      return rozetHTML('⟿', r.ad[dil], r.duraklar.map(function(id){ return V.yerler.filter(function(y){ return y.id === id; })[0].ad[dil]; }).join(' · '), var_ >= r.duraklar.length, r.duraklar.length - var_);
+    }).join('');
+    $('muhurler').innerHTML = V.yerler.map(function(y, i){
+      var b = !!M[y.id];
+      return '<a href="/places/' + y.slug + '"' + (b ? '' : ' class="yok"') + '>' + muhurSVG(y, b, i) + '<b>' + h(y.ad[dil]) + '</b><small>' + h(b ? M[y.id] : t.yok) + '</small></a>';
+    }).join('');
+    document.querySelectorAll('[data-dil]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-dil') === dil); });
+  }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-dil]'); if (!b) return;
+    dil = b.getAttribute('data-dil'); try { localStorage.setItem('fh-dil', JSON.stringify(dil)); } catch(x){} ciz();
+  });
+  ciz();
+})();
+</script>
+</body>
+</html>

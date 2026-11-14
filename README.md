@@ -1,4 +1,4 @@
-# Efes — felsefe platformu (bağımsız site)
+# Antikyol (antikyol.com): Efes — felsefe platformu (bağımsız site)
 
 Antik Efes’i canlandıran felsefe platformu: Celsus’ta oku, Büyük Tiyatro’da bir filozofla tartış, Artemis’te düşün.
 Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak içindir.
@@ -7,7 +7,11 @@ Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak için
 
 | Dosya | Ne işe yarar |
 |---|---|
-| `index.html` | Uygulamanın tamamı: ekranlar, metinler, görseller (görseller dosyanın içine gömülü). |
+| `index.html` | Ana sayfa: Türkiye Felsefe Haritası. |
+| `efes.html` | Efes uygulaması (`/efes` adresinde): ekranlar, metinler, görseller. |
+| `harita-veri.js`, `felsefe-veri.js` | Harita çizgileri ve Düşünce sekmesi içerikleri. |
+| `vercel.json` | Kısa adresler (`/efes`), eski `/turkiye/` adresinin ana sayfaya yönlendirilmesi, önbellek ayarları. |
+| `robots.txt`, `og-harita.jpg`, `harita.webmanifest` | Arama motorları, harita paylaşım görseli, haritayı telefona ekleme. |
 | `api/katip.js` | Kâtip’i Anthropic API’ye bağlayan küçük sunucu fonksiyonu. API anahtarı yalnızca burada, sunucuda durur. |
 | `package.json` | Proje bilgisi. Ek paket kurulumu gerekmez. |
 | `og.jpg`, `og-kare.png` | Paylaşım önizleme görseli ve telefon ana ekranı ikonu. |
@@ -75,3 +79,59 @@ Gerçek maliyeti ilk günlerde Anthropic Console’daki **Usage** ekranından iz
 - Okuma odalarındaki bağlam ve yorum bölümleri Stanford Encyclopedia of Philosophy maddelerine dayanır ve kaynaklar uygulamada gösterilir. Tarih ve arkeoloji hikâyeleri ise ayrıca bir uzmanca kontrol edilmemiştir.
 - Kâtip bir yapay zekâdır ve hata yapabilir. Herkese açık yayında, uygunsuz bir cevabı bildirmek için bir iletişim adresi eklemen iyi olur.
 - Kişisel veri toplanmaz; ilerleme yalnızca kullanıcının tarayıcısında durur. Kâtip’e yazılanlar cevap üretmek için Anthropic’e gönderilir. Bunu bir gizlilik notunda belirtmelisin (Play Store için de gerekecek).
+
+## Türkiye Felsefe Haritası (ana sayfa `/`)
+
+- `index.html`: Göbeklitepe'den Mevlânâ'ya yirmi iki mekânlık harita (Ege'deki 10 felsefe durağına ek olarak İstanbul, Kapadokya, Antalya, Şanlıurfa, Gaziantep, Bodrum, İznik, Mardin, Troya, Nemrut Dağı, Likya ve Priene-Didim). Varsayılan dil İngilizce. Her mekânda filozof, söz kartı (indirilebilir PNG), yürüyüş rotası, pasaport mührü, çevre otelleri ve kaynaklar var. TR + EN.
+- Mekân metinleri aynı dosyadaki `YERLER` listesindedir. Kaynak dosyası: proje klasöründeki `efes/turkiye-felsefe-mekanlari.md`. Sitedeki tüm sözler kaynakta doğrulandı; `dogrulandi:false` yapılan bir söz sayfada "kontrol ediliyor" diye etiketlenir. Birincil metin bağlantıları `birincil` alanındadır.
+- `DERIN`: her mekânın sesli anlatımı (Dinle, cihazın yapay sesiyle) ve düşünme sorusu (Düşün). Notlar yalnızca kullanıcının tarayıcısında saklanır.
+- `felsefe-veri.js`: her mekânın Düşünce sekmesi (temel fikirler, hayat çizgisi, bilmediklerimiz, mirası). Stanford Encyclopedia of Philosophy maddelerinin kendi sözlerimizle özetidir; her fikir ilgili SEP bölümüne bağlanır. SEP maddesi olmayan Diogenes için IEP, Mevlânâ için SEP'in İslam mistisizmi maddesi ve Britannica kullanıldı. Yeni mekânlarda SEP (Bizans felsefesi, Arapçaya Yunan kaynakları), IEP, MacTutor, Britannica, UNESCO ve birincil metinler kullanıldı. Tartışmalı iddialar (ör. Harran'ın "ilk üniversite" olduğu) "Bilmediklerimiz" bölümünde kaynaklarla birlikte açıkça belirtilir.
+- Haritadaki ırmaklar ve göller (`IRMAKLAR`, `GOLLER`) elle yerleştirilmiş üsluplu çizimlerdir; atlas doğruluğunda değildir. Kalabalık bölgelerde harita etiketleri `HARITA_AD` (kısa ad), `ETIKET_KONUM` ve telefon için `ETIKET_DAR` ile ayarlanır.
+- `SANAT`: her mekânın görülecek eserleri (tiyatro, heykel, mozaik, müze); panelin "Gezi ve sanat" sekmesinde görünür.
+- `ROTALAR`: çok günlük hazır rotalar. Her gün bir durak ve o gece kalınacak kasaba (`YER_ARAMA` anahtarı ya da doğrudan bir kasaba adı, ör. `'Side'`) yazılır; gece kartı o kasabanın otel bağlantısını açar. Sürüş süreleri yaklaşıktır.
+- `BAGLAR`: filozoflar arası hoca-öğrenci (düz çizgi) ve etki (kesikli çizgi) ilişkileri. Yeni bir bağ eklemek için listeye bir satır yeterli.
+- Harita çizgisi Natural Earth (kamu malı) verisinden `scripts/harita-ciz.mjs` ile bir kez üretildi (`harita-veri.js`). Tüm amblem ve mühür çizimleri bu site için özgün SVG'dir.
+
+### Gelir ve ortaklıklar (tek ayar yeri: `ortaklik.js`)
+
+Haritadaki ve rehber sayfalarındaki tüm otel ve tur düğmeleri `ortaklik.js` dosyasından beslenir. Bir kimlik boşsa bağlantı yine çalışır, yalnızca komisyon gelmez. İlk kimlik eklendiğinde sayfalar ortaklık açıklamasını kendiliğinden gösterir.
+
+| Program | Nereden başvurulur | `ortaklik.js` içinde nereye yazılır |
+|---|---|---|
+| Booking.com Affiliate Partner Programme | booking.com/affiliate-program | `booking.aid` |
+| Hotels.com (Expedia Group Travel Creator Program) | creator.expediagroup.com | `hotels.baglantilar['Kasaba']`: her kasaba için panelde "Links → Create link" ile üretilen bağlantı |
+| GetYourGuide Partner Program | partner.getyourguide.com | `getyourguide.partner_id` |
+| Viator Affiliate Program | partnerresources.viator.com | `viator.pid` ve `viator.mcid` |
+| Sesli rehber bekleme listesi | Tally, Google Forms ya da Mailchimp'te ücretsiz bir form | `sesliRehber.kayit` (formun adresi) |
+
+Bir sağlayıcıyı tamamen gizlemek için `goster: false` yap.
+
+### Rehber yazıları (`guides/`)
+
+İngilizce, arama motoru için yazılmış sayfalar: `/guides/philosophy-trip-turkey`, `/guides/where-to-stay-in-ephesus`, `/guides/ephesus-to-pamukkale-itinerary`, `/guides/where-to-stay-in-pamukkale`, `/guides/where-to-stay-in-istanbul`, `/guides/where-to-stay-in-cappadocia`, `/guides/antalya-ancient-cities-perge-aspendos`, `/guides/lycian-way-xanthos-patara`. Metinler `scripts/rehber-sayfalari.py` içinde; değiştirdikten sonra `python3 scripts/rehber-sayfalari.py` çalıştır. Alan adı belli olunca betikteki `ALAN` değişkenini doldur.
+
+Anahtar kelime hedefli yazılar (her birinde sık sorulan sorular ve FAQ yapısal verisi var): `best-ancient-ruins-in-turkey`, `things-to-do-in-ephesus`, `cappadocia-3-day-itinerary`, `how-to-visit-gobekli-tepe`, `mount-nemrut-sunrise`, `visiting-troy-turkey`, `turkey-history-itinerary-10-days`, `ancient-greek-philosophers-from-turkey`.
+
+### Mekân sayfaları ve pasaport
+
+Her mekânın kendi İngilizce sayfası var: `/places/ephesus`, `/places/troy` … ve dizin `/places/`. Bu sayfalar ve `yer-veri.js`, `index.html` içindeki verilerden üretilir: `node scripts/sayfalar.mjs`. Haritada bir mekânı değiştirdikten sonra bu komutu yeniden çalıştır. Sayfa adresleri `index.html` içindeki `SLUG` tablosundan gelir.
+
+`/passport` (passport.html): toplanan mühürler, düşünce okulu rozetleri ve tamamlanan rota rozetleri. Mühürler yalnızca tarayıcıda (`fh-muhur`) saklanır.
+
+## Alan adını bağlama (Vercel)
+
+**En kolay yol: alan adını Vercel'den almak.** Vercel'de proje → **Settings → Domains → Buy**. Alınan ad projeye kendiliğinden bağlanır, DNS ayarı gerekmez, HTTPS sertifikası otomatik gelir.
+
+**Başka yerden (Cloudflare, Namecheap) aldıysan:**
+
+1. Vercel'de proje → **Settings → Domains → Add**, alan adını yaz (ör. `antikyol.com`). `www.antikyol.com` için de ekle; birini diğerine yönlendirmeyi Vercel önerir.
+2. Vercel o ekranda girilecek kayıtları gösterir. Genelde:
+   - kök ad (`@`) için bir **A** kaydı, Vercel'in gösterdiği IP adresine,
+   - `www` için bir **CNAME** kaydı, Vercel'in gösterdiği hedefe.
+   Değerleri o ekrandan kopyala; Vercel bunları zaman zaman değiştirir.
+3. Bu kayıtları alan adını aldığın yerin DNS ayarlarına gir. Cloudflare'de bu iki kaydın bulutunu (proxy) **kapalı (DNS only)** tut.
+4. Birkaç dakika ile birkaç saat içinde Vercel'de ad yeşil "Valid Configuration" olur.
+
+Sitenin adresi **https://antikyol.com** (kök ad asıl adres; `www` buna yönlendirilmeli). Tüm sayfalarda `canonical`, `og:url` ve tam adresli paylaşım görseli var; `robots.txt` site haritasını gösterir. Yeni sayfa ekleyince `python3 scripts/sitemap.py` ile `sitemap.xml`'i yenile. Adres `scripts/sayfalar.mjs`, `scripts/rehber-sayfalari.py` ve `scripts/sitemap.py` içindeki `ALAN` değerinden gelir.
+
+Yayına alındıktan sonra Google Search Console'a `antikyol.com` alanını ekle, Vercel'e bir TXT kaydıyla doğrula ve `https://antikyol.com/sitemap.xml` adresini gönder.

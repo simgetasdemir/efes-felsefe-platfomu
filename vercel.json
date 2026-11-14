@@ -3,11 +3,21 @@
   "redirects": [
     {
       "source": "/turkiye",
-      "destination": "/",
+      "destination": "/turkey",
       "permanent": true
     },
     {
       "source": "/turkiye/",
+      "destination": "/turkey",
+      "permanent": true
+    },
+    {
+      "source": "/world",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index",
       "destination": "/",
       "permanent": true
     }

@@ -1,14 +1,13 @@
 /* ==========================================================================
-   DÜNYA FELSEFE ROTASI (/world): Mapbox GL küre, 29 durak, beş çağ.
-   Veri: dunya-veri.js (metinler), dunya-foto.js (Commons fotoğrafları).
-   WebGL ya da Mapbox yoksa küre gizlenir; sayfadaki okuma bölümü yine çalışır.
+   ANA SAYFA: DÜNYA FELSEFE ROTASI. Tam ekran Mapbox küre, 29 durak, beş çağ.
+   Sayfa kaymaz: duraklar küre üstündeki panelde, okuma bölümü sayfa sayfa
+   çevrilen bir okuyucuda açılır. Metinler ve sayfalar: dunya-sayfalar.js.
    ========================================================================== */
 (function(){
   var ANAHTAR = 'pk.eyJ1IjoidGFzZGVtaXJzaW1nZSIsImEiOiJjbXdncmQxMjQwa21uMnlyMG12MHFjc2RkIn0.lFcrHH50LqDEmqO_t8FU3Q';
   var SURUM = '3.34.1';
-  var V = window.DUNYA, F = window.DUNYA_FOTO || {};
-  var CAG = {}; V.caglar.forEach(function(c, i){ c.no = i; CAG[c.id] = c; });
-  var DURAK = V.duraklar, SIRA = {}; DURAK.forEach(function(d, i){ SIRA[d.id] = i; });
+  var V = window.DUNYA, S = window.DUNYA_SAYFA, T = S.T, CAG = S.CAG, SIRA = S.SIRA, DURAK = V.duraklar;
+  var SAYFA = S.sira(), SAYFA_NO = {}; SAYFA.forEach(function(p, k){ SAYFA_NO[p.id] = k; });
 
   function oku(k, v){ try { var x = JSON.parse(localStorage.getItem(k)); return x == null ? v : x; } catch(e){ return v; } }
   function yaz(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
@@ -18,26 +17,20 @@
   function h(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function d(x){ return x[dil]; }
 
-  var T = {
-    en: { etiket: 'ΦΙΛΟΣΟΦΙΑ · ΚΟΣΜΟΣ', baslik: 'World Philosophy Route', alt: 'From Miletus to Kyoto: 2,600 years of thought in 29 places', giris: 'Philosophy began on the Anatolian coast, but it was never only Greek. Follow the questions as they travel: to India and China, through the houses of wisdom of Baghdad and Córdoba, to Timbuktu, Isfahan and Mexico, and on to Königsberg and Kyoto.',
-      basla: 'Begin the journey', oku: 'Read the route', durak: 'Stop', fikir: 'Key idea', dusun: 'Think', kaynak: 'Read further', arslan: 'In Turkish: Ahmet Arslan, İlkçağ Felsefe Tarihi (İstanbul Bilgi University Press)', arslanCilt: { 1: 'the volume on the Presocratics', 2: 'the volumes on Socrates, Plato and Aristotle', 4: 'the volume on Hellenistic philosophy' },
-      yer: 'Visit this place in Türkiye', bag: 'Related place in Türkiye', onceki: 'Previous', sonraki: 'Next', kapat: 'Close', kurede: 'Show on the globe', bitis: 'Back to the start', tumu: 'Whole world', foto: 'Photo', bolumH: 'The route, era by era', bolumAlt: 'Each stop is a short, sourced entry. Summaries are written for this site from the Stanford Encyclopedia of Philosophy and the other linked sources.', kurePasif: 'The 3D globe needs WebGL. The whole route is below.', ipucu: 'Drag to turn the globe', turkiye: 'Philosophy Map of Türkiye', fotoH: 'Photo credits', nav: ['Türkiye', 'World route', 'Places', 'Passport'] },
-    tr: { etiket: 'ΦΙΛΟΣΟΦΙΑ · ΚΟΣΜΟΣ', baslik: 'Dünya Felsefe Rotası', alt: 'Milet\'ten Kyoto\'ya: 29 yerde 2.600 yıllık düşünce', giris: 'Felsefe Anadolu kıyısında başladı ama hiçbir zaman yalnız Yunan değildi. Soruların yolculuğunu izle: Hindistan\'a ve Çin\'e, Bağdat\'ın ve Kurtuba\'nın hikmet evlerinden Timbuktu\'ya, İsfahan\'a ve Meksika\'ya, oradan Königsberg\'e ve Kyoto\'ya.',
-      basla: 'Yolculuğa başla', oku: 'Rotayı oku', durak: 'Durak', fikir: 'Ana fikir', dusun: 'Düşün', kaynak: 'Daha fazlası', arslan: 'Türkçe okuma önerisi: Ahmet Arslan, İlkçağ Felsefe Tarihi (İstanbul Bilgi Üniversitesi Yayınları)', arslanCilt: { 1: 'Sokrates öncesi filozoflar cildi', 2: 'Sokrates, Platon ve Aristoteles ciltleri', 4: 'Helenistik dönem cildi' },
-      yer: 'Bu yeri Türkiye\'de gez', bag: 'Türkiye\'de ilgili yer', onceki: 'Önceki', sonraki: 'Sonraki', kapat: 'Kapat', kurede: 'Kürede göster', bitis: 'Başa dön', tumu: 'Bütün dünya', foto: 'Fotoğraf', bolumH: 'Çağ çağ rota', bolumAlt: 'Her durak kısa ve kaynaklı bir madde. Özetler Stanford Encyclopedia of Philosophy ve bağlantısı verilen kaynaklardan bu site için yazılmıştır.', kurePasif: '3D küre için WebGL gerekiyor. Rotanın tamamı aşağıda.', ipucu: 'Küreyi çevirmek için sürükle', turkiye: 'Türkiye Felsefe Haritası', fotoH: 'Fotoğraf atıfları', nav: ['Türkiye', 'Dünya rotası', 'Mekânlar', 'Pasaport'] }
-  };
-
   /* ---------- metinler ---------- */
+  var cizilenDil = 'en';
   function metinler(){
     var t = T[dil];
     document.documentElement.lang = dil;
-    document.title = dil === 'tr' ? 'Dünya Felsefe Rotası: Milet\'ten Kyoto\'ya 29 durak | Antikyol' : 'World Philosophy Route: 29 places from Miletus to Kyoto | Antikyol';
+    document.title = dil === 'tr' ? 'Antikyol · Dünya Felsefe Rotası: Milet\'ten Kyoto\'ya 29 durak' : 'Antikyol · World Philosophy Route: 29 places from Miletus to Kyoto';
     $('#etiket').textContent = t.etiket; $('#baslik').textContent = t.baslik; $('#alt').textContent = t.alt; $('#giris').textContent = t.giris;
-    $('#basla').textContent = t.basla; $('#oku').textContent = t.oku; $('#bolum-h').textContent = t.bolumH; $('#bolum-alt').textContent = t.bolumAlt;
-    $('#foto-h').textContent = t.fotoH; $('#kure-pasif').textContent = t.kurePasif; $('#ipucu').textContent = t.ipucu;
+    $('#basla').textContent = t.basla; $('#oku').textContent = t.oku; $('#kure-pasif').textContent = t.kurePasif; $('#ipucu').textContent = t.ipucu;
+    $('#o-onceki').setAttribute('aria-label', t.onceki); $('#o-sonraki').setAttribute('aria-label', t.sonraki); $('#o-kapat').setAttribute('aria-label', t.kapat);
     var n = document.querySelectorAll('.site-nav a'); t.nav.forEach(function(x, i){ if (n[i]) n[i].textContent = x; });
     document.querySelectorAll('.dil button').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-dil') === dil); });
-    caglarCiz(); maddeler(); if (secili != null) panel(secili);
+    caglarCiz();
+    if (cizilenDil !== dil){ $('#sayfalar').innerHTML = S.sayfalar(dil); cizilenDil = dil; sayfaGoster(sayfaNo, true); }
+    if (secili != null) panel(secili);
     if (map && hazir) isaretAdlari();
   }
   function caglarCiz(){
@@ -45,35 +38,42 @@
       return '<button type="button" class="cag-cip" data-cag="' + c.id + '" style="--c:' + c.renk + '"><i></i>' + h(d(c).ad) + ' <small>' + h(d(c).tarih) + '</small></button>';
     }).join('');
   }
-  function fotoHTML(x, buyuk){
-    var f = F[x.foto]; if (!f) return '';
-    return '<figure class="foto"><img src="' + h(buyuk ? f.src : f.kucuk) + '" srcset="' + h(f.kucuk) + ' 640w, ' + h(f.src) + ' ' + f.w + 'w" sizes="(max-width: 900px) 100vw, 440px" width="' + f.w + '" height="' + f.h + '" alt="' + h(f.baslik ? f.baslik[dil] : d(x).ad) + '" loading="lazy" decoding="async">' +
-      '<figcaption>' + h(f.baslik ? f.baslik[dil] : '') + ' <a href="' + h(f.kaynak) + '" target="_blank" rel="noopener">' + h(T[dil].foto) + ': ' + h(f.yazar) + '</a>, <a href="' + h(f.lisansUrl) + '" target="_blank" rel="noopener license">' + h(f.lisans) + '</a></figcaption></figure>';
+
+  /* ---------- okuyucu: sayfa sayfa ---------- */
+  var okuyucuAcik = false, sayfaNo = 0;
+  function sayfaGoster(k, ani){
+    k = Math.max(0, Math.min(SAYFA.length - 1, k)); sayfaNo = k;
+    var ray = $('#sayfalar');
+    ray.style.transition = ani || !hareket ? 'none' : '';
+    ray.style.transform = 'translateX(' + (-100 * k) + '%)';
+    document.querySelectorAll('.sayfa').forEach(function(el, j){ el.setAttribute('aria-hidden', j !== k); el.inert = j !== k; if (j === k) el.scrollTop = 0; });
+    $('#o-onceki').disabled = k === 0; $('#o-sonraki').disabled = k === SAYFA.length - 1;
+    $('#o-sayac').textContent = (k + 1) + ' / ' + SAYFA.length;
+    $('#o-cubuk').style.width = ((k + 1) / SAYFA.length * 100) + '%';
+    var p = SAYFA[k], renk = p.tur === 'durak' ? CAG[p.x.cag].renk : p.tur === 'cag' ? p.cag.renk : '#C9A15B';
+    $('#okuyucu').style.setProperty('--c', renk);
+    if (okuyucuAcik) try { history.replaceState(null, '', k ? '#oku-' + p.id : '#oku'); } catch(e){}
   }
-  function govdeHTML(x){
-    var t = T[dil], m = d(x), s = '';
-    s += '<p class="fikir"><span>' + h(t.fikir) + '</span>' + h(m.fikir) + '</p>';
-    s += '<p class="metin">' + h(m.metin) + '</p>';
-    s += '<p class="soru"><span>' + h(t.dusun) + '</span>' + h(m.soru) + '</p>';
-    s += '<div class="kaynaklar"><span>' + h(t.kaynak) + '</span><ul>' + x.kaynak.map(function(k){ return '<li><a href="' + h(k.url) + '" target="_blank" rel="noopener">' + h(k.ad) + '</a></li>'; }).join('');
-    if (x.arslan) s += '<li class="arslan">' + h(t.arslan) + ': ' + h(t.arslanCilt[x.arslan]) + '</li>';
-    s += '</ul></div>';
-    if (x.yer) s += '<a class="tr-yer" href="' + x.yer + '">' + h(t.yer) + ' →</a>';
-    else if (x.bag) s += '<a class="tr-yer" href="' + x.bag + '">' + h(t.bag) + ' →</a>';
-    return s;
+  function okuyucuAc(k){
+    if (secili != null){ secili = null; $('#panel').hidden = true; document.body.classList.remove('panel-acik'); }
+    okuyucuAcik = true; document.body.classList.add('okuyucu-acik'); $('#okuyucu').setAttribute('aria-hidden', 'false');
+    sayfaGoster(k || 0, true);
+    setTimeout(function(){ $('#o-sonraki').focus({ preventScroll: true }); }, 50);
   }
-  function maddeler(){
-    $('#maddeler').innerHTML = V.caglar.map(function(c){
-      var ic = DURAK.filter(function(x){ return x.cag === c.id; }).map(function(x){
-        var m = d(x), i = SIRA[x.id];
-        return '<article class="madde" id="madde-' + x.id + '" style="--c:' + c.renk + '"><div class="madde-foto">' + fotoHTML(x) + '</div><div class="madde-ic">' +
-          '<div class="madde-ust"><span class="no">' + (i + 1) + '</span>' + h(m.ulke) + ' · ' + h(m.tarih) + '</div>' +
-          '<h3>' + h(m.ad) + '</h3><p class="kim">' + h(m.kim) + '</p>' + govdeHTML(x) +
-          '<button type="button" class="kurede" data-git="' + x.id + '">' + h(T[dil].kurede) + '</button></div></article>';
-      }).join('');
-      return '<section class="cag-bolum" id="cag-' + c.id + '" style="--c:' + c.renk + '"><header><span class="cag-no">' + ['I', 'II', 'III', 'IV', 'V'][c.no] + '</span><div><h2>' + h(d(c).ad) + '</h2><p class="cag-tarih">' + h(d(c).tarih) + '</p><p>' + h(d(c).alt) + '</p></div></header>' + ic + '</section>';
-    }).join('');
+  function okuyucuKapat(){
+    okuyucuAcik = false; document.body.classList.remove('okuyucu-acik'); $('#okuyucu').setAttribute('aria-hidden', 'true');
+    try { history.replaceState(null, '', location.pathname); } catch(e){}
   }
+  /* parmakla kaydırma */
+  (function(){
+    var x0 = null, y0 = 0;
+    document.addEventListener('touchstart', function(e){ if (!okuyucuAcik) return; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', function(e){
+      if (!okuyucuAcik || x0 == null) return;
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) sayfaGoster(sayfaNo + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  })();
 
   /* ---------- panel ---------- */
   var secili = null;
@@ -81,9 +81,9 @@
     var x = DURAK[i], m = d(x), c = CAG[x.cag], t = T[dil];
     var p = $('#panel');
     p.style.setProperty('--c', c.renk);
-    p.innerHTML = '<button type="button" class="panel-kapat" data-eylem="kapat" aria-label="' + h(t.kapat) + '">×</button>' + fotoHTML(x, true) +
+    p.innerHTML = '<button type="button" class="panel-kapat" data-eylem="kapat" aria-label="' + h(t.kapat) + '">×</button>' + S.foto(x, dil, true) +
       '<div class="panel-ic"><div class="madde-ust"><span class="no">' + (i + 1) + '</span>' + h(d(c).ad) + ' · ' + h(m.tarih) + '</div>' +
-      '<h2>' + h(m.ad) + ' <small>' + h(m.ulke) + '</small></h2><p class="kim">' + h(m.kim) + '</p>' + govdeHTML(x) + '</div>' +
+      '<h2>' + h(m.ad) + ' <small>' + h(m.ulke) + '</small></h2><p class="kim">' + h(m.kim) + '</p>' + S.govde(x, dil) + '</div>' +
       '<div class="panel-alt"><button type="button" data-eylem="onceki"' + (i === 0 ? ' disabled' : '') + '>← ' + h(t.onceki) + '</button><span>' + (i + 1) + ' / ' + DURAK.length + '</span>' +
       (i === DURAK.length - 1 ? '<button type="button" data-eylem="basa">' + h(t.bitis) + '</button>' : '<button type="button" class="ileri" data-eylem="sonraki">' + h(t.sonraki) + ' →</button>') + '</div>';
     p.hidden = false; p.scrollTop = 0;
@@ -104,13 +104,15 @@
     try { history.replaceState(null, '', location.pathname); } catch(e){}
     document.querySelectorAll('.k-isaret.secili').forEach(function(el){ el.classList.remove('secili'); });
     if (map && hazir){ rotaVurgu(-1); genel(); }
+    if (okuyucuAcik) return;
   }
 
   /* ---------- harita ---------- */
   var map = null, hazir = false, donuyor = true;
   function webgl(){ try { var c = document.createElement('canvas'); return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl'))); } catch(e){ return false; } }
   function dar(){ return window.innerWidth < 900; }
-  function pasif(){ document.body.classList.add('kure-yok'); }
+  function pasif(){ document.body.classList.add('kure-yok'); if (secili != null){ var k = SAYFA_NO[DURAK[secili].id]; secili = null; $('#panel').hidden = true; document.body.classList.remove('panel-acik'); okuyucuAc(k); } }
+  function kureYok(){ return document.body.classList.contains('kure-yok'); }
 
   function kureKur(){
     if (!webgl()) return pasif();
@@ -236,36 +238,51 @@
   document.addEventListener('click', function(e){
     var b = e.target.closest('[data-dil]');
     if (b){ dil = b.getAttribute('data-dil'); yaz('fh-dil', dil); metinler(); return; }
+    var sp = e.target.closest('[data-sayfa]');
+    if (sp){ sayfaGoster(+sp.getAttribute('data-sayfa')); return; }
     var a = e.target.closest('[data-eylem]');
     if (a){
       var ey = a.getAttribute('data-eylem');
-      if (ey === 'basla'){ donuyor = false; if (!hazir) { location.hash = DURAK[0].id; } window.scrollTo({ top: 0, behavior: hareket ? 'smooth' : 'auto' }); sec(0); }
+      if (ey === 'basla'){ e.preventDefault(); donuyor = false; if (kureYok()) okuyucuAc(SAYFA_NO[DURAK[0].id]); else { if (okuyucuAcik) okuyucuKapat(); sec(0); } }
+      else if (ey === 'okuyucu'){ e.preventDefault(); okuyucuAc(0); }
+      else if (ey === 'okuyucu-kapat') okuyucuKapat();
+      else if (ey === 'o-sonraki') sayfaGoster(sayfaNo + 1);
+      else if (ey === 'o-onceki') sayfaGoster(sayfaNo - 1);
       else if (ey === 'sonraki' && secili != null && secili < DURAK.length - 1) sec(secili + 1);
       else if (ey === 'onceki' && secili > 0) sec(secili - 1);
-      else if (ey === 'basa'){ kapat(); }
-      else if (ey === 'kapat') kapat();
+      else if (ey === 'basa' || ey === 'kapat') kapat();
       return;
     }
     var g = e.target.closest('[data-git]');
-    if (g){ if (hazir){ window.scrollTo({ top: 0, behavior: hareket ? 'smooth' : 'auto' }); sec(SIRA[g.getAttribute('data-git')]); } else location.hash = g.getAttribute('data-git'); return; }
+    if (g){ okuyucuKapat(); sec(SIRA[g.getAttribute('data-git')], !hazir); return; }
     var c = e.target.closest('[data-cag]');
     if (c){
       var id = c.getAttribute('data-cag');
       document.querySelectorAll('.cag-cip').forEach(function(x){ x.setAttribute('aria-pressed', x === c); });
-      if (secili != null){ secili = null; $('#panel').hidden = true; document.body.classList.remove('panel-acik'); rotaVurgu(-1); }
+      if (secili != null){ secili = null; $('#panel').hidden = true; document.body.classList.remove('panel-acik'); if (hazir) rotaVurgu(-1); }
       donuyor = false;
-      if (hazir) genel(id); else { var el = document.getElementById(id ? 'cag-' + id : 'maddeler'); if (el) el.scrollIntoView(); }
+      if (hazir) genel(id); else okuyucuAc(id ? SAYFA_NO['cag-' + id] : 0);
     }
   });
   document.addEventListener('keydown', function(e){
-    if (secili == null || /input|textarea/i.test(e.target.tagName)) return;
+    if (/input|textarea/i.test(e.target.tagName)) return;
+    if (okuyucuAcik){
+      if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); sayfaGoster(sayfaNo + 1); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); sayfaGoster(sayfaNo - 1); }
+      else if (e.key === 'Escape') okuyucuKapat();
+      return;
+    }
+    if (secili == null) return;
     if (e.key === 'ArrowRight' && secili < DURAK.length - 1) sec(secili + 1);
     else if (e.key === 'ArrowLeft' && secili > 0) sec(secili - 1);
     else if (e.key === 'Escape') kapat();
   });
 
   metinler();
+  sayfaGoster(0, true);
   var ilk = decodeURIComponent((location.hash || '').slice(1));
-  if (ilk && SIRA[ilk] != null){ secili = SIRA[ilk]; panel(secili); }
+  if (ilk === 'oku') okuyucuAc(0);
+  else if (ilk.indexOf('oku-') === 0 && SAYFA_NO[ilk.slice(4)] != null) okuyucuAc(SAYFA_NO[ilk.slice(4)]);
+  else if (ilk && SIRA[ilk] != null){ secili = SIRA[ilk]; panel(secili); }
   kureKur();
 })();

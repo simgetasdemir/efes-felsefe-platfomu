@@ -68,7 +68,7 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 {sss_ld}
 </head>
 <body>
-<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/#kesfet">Explore</a><a href="/places/">Places</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">All guides</a></nav></header>
+<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/turkey#kesfet">Explore</a><a href="/places/">Places</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">All guides</a></nav></header>
 <main>
 <div class="etiket">{e(etiket)}</div>
 <h1>{e(baslik)}</h1>
@@ -78,7 +78,7 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 {sss_html}
 {ACIKLAMA}
 <h2>Keep exploring</h2>
-<div class="ilgili">{ilgili_html}<a href="/places/">All 22 places, one page each →</a><a href="/">Open the philosophy map →</a></div>
+<div class="ilgili">{ilgili_html}<a href="/places/">All 22 places, one page each →</a><a href="/turkey">Open the philosophy map of Türkiye →</a></div>
 </main>
 <footer>Travel times are approximate; check opening hours and tickets before you go. Ideas are summarised from the Stanford Encyclopedia of Philosophy and other scholarly sources linked on the map.</footer>
 <script src="/ortaklik.js?v={ORT_SURUM}"></script>
@@ -118,7 +118,7 @@ SAYFALAR.append(dict(
 <blockquote>Upon those who step into the same rivers, different and again different waters flow.</blockquote>
 <p class="not">Heraclitus, fragment DK B12. See the Stanford Encyclopedia of Philosophy entry on Heraclitus for the debate about what he meant.</p>
 ''',
-  ilgili=[('/guides/ephesus-to-pamukkale-itinerary', 'Ephesus to Pamukkale in 4 days'), ('/#efes', 'Ephesus on the philosophy map')]))
+  ilgili=[('/guides/ephesus-to-pamukkale-itinerary', 'Ephesus to Pamukkale in 4 days'), ('/turkey#efes', 'Ephesus on the philosophy map')]))
 
 # ---------------------------------------------------------------- Efes-Pamukkale rotası
 SAYFALAR.append(dict(
@@ -184,7 +184,7 @@ SAYFALAR.append(dict(
 <blockquote>Some things are up to us and some are not up to us.</blockquote>
 <p class="not">Epictetus, Handbook 1. See the Stanford Encyclopedia of Philosophy entry on Epictetus.</p>
 ''',
-  ilgili=[('/guides/ephesus-to-pamukkale-itinerary', 'Ephesus to Pamukkale in 4 days'), ('/#hierapolis', 'Hierapolis on the philosophy map')]))
+  ilgili=[('/guides/ephesus-to-pamukkale-itinerary', 'Ephesus to Pamukkale in 4 days'), ('/turkey#hierapolis', 'Hierapolis on the philosophy map')]))
 
 # ---------------------------------------------------------------- İstanbul
 SAYFALAR.append(dict(
@@ -209,7 +209,7 @@ SAYFALAR.append(dict(
 <p>İznik, ancient Nicaea, is about two to two and a half hours away. It was the birthplace of the astronomer Hipparchus, the meeting place of two great church councils in 325 and 787, and in the 16th century the centre of Ottoman tile making. One night there is enough.</p>
 {otel('İznik', 'Hotels in İznik')}
 ''',
-  ilgili=[('/#istanbul', 'Istanbul on the philosophy map'), ('/#iznik', 'İznik on the philosophy map'), ('/guides/where-to-stay-in-cappadocia', 'Where to stay in Cappadocia')]))
+  ilgili=[('/turkey#istanbul', 'Istanbul on the philosophy map'), ('/turkey#iznik', 'İznik on the philosophy map'), ('/guides/where-to-stay-in-cappadocia', 'Where to stay in Cappadocia')]))
 
 # ---------------------------------------------------------------- Kapadokya
 SAYFALAR.append(dict(
@@ -238,7 +238,7 @@ SAYFALAR.append(dict(
 <p>Konya, the city of Rumi, is about three hours away by road. A night there completes our three-day Cappadocia and Konya route.</p>
 {otel('Konya', 'Hotels in Konya')}
 ''',
-  ilgili=[('/#kapadokya', 'Cappadocia on the philosophy map'), ('/#konya', 'Konya on the philosophy map'), ('/guides/where-to-stay-in-istanbul', 'Where to stay in Istanbul')]))
+  ilgili=[('/turkey#kapadokya', 'Cappadocia on the philosophy map'), ('/turkey#konya', 'Konya on the philosophy map'), ('/guides/where-to-stay-in-istanbul', 'Where to stay in Istanbul')]))
 
 # ---------------------------------------------------------------- Antalya
 SAYFALAR.append(dict(
@@ -262,7 +262,7 @@ SAYFALAR.append(dict(
 <p>Apollonius was born in Perge around 262 BC and worked in Alexandria. In his <i>Conics</i> he studied the curves made by cutting a cone, and named them. Of its eight books, four survive in Greek and three only in Arabic translation.</p>
 <p class="not">See the MacTutor History of Mathematics biography of Apollonius.</p>
 ''',
-  ilgili=[('/#antalya', 'Perge and Aspendos on the philosophy map'), ('/guides/where-to-stay-in-cappadocia', 'Where to stay in Cappadocia')]))
+  ilgili=[('/turkey#antalya', 'Perge and Aspendos on the philosophy map'), ('/guides/where-to-stay-in-cappadocia', 'Where to stay in Cappadocia')]))
 
 # ---------------------------------------------------------------- Likya
 SAYFALAR.append(dict(
@@ -292,7 +292,7 @@ SAYFALAR.append(dict(
 <blockquote>Were I to give a model of an excellent confederate republic, I should pitch upon that of Lycia.</blockquote>
 <p class="not">Montesquieu, The Spirit of the Laws, Book IX, 3 (Nugent translation). Quoted by Alexander Hamilton in Federalist No. 9.</p>
 ''',
-  ilgili=[('/#likya', 'Lycia on the philosophy map'), ('/guides/antalya-ancient-cities-perge-aspendos', 'Perge, Aspendos and Side from Antalya')]))
+  ilgili=[('/turkey#likya', 'Lycia on the philosophy map'), ('/guides/antalya-ancient-cities-perge-aspendos', 'Perge, Aspendos and Side from Antalya')]))
 
 # ---------------------------------------------------------------- SEO yazıları (anahtar kelime hedefli)
 # Her yazının hedef anahtar kelimesi yorum satırında. Başlık, açıklama, ilk paragraf ve en az bir H2 bu kelimeyi içerir.
@@ -530,7 +530,7 @@ SAYFALAR.append(dict(
 <p>Not Greek or Roman, but some of the most beautiful ancient and medieval sites in the country, in the land of the Cappadocian Fathers. <a href="/guides/cappadocia-3-day-itinerary">Cappadocia in 3 days</a>.</p>
 {otel('Göreme', 'Cave hotels in Göreme')}
 <h2>How to see them in one trip</h2>
-<p>You cannot see all fifteen in one holiday. For a first trip of ten days, combine Istanbul, Cappadocia and the Aegean: see our <a href="/guides/turkey-history-itinerary-10-days">10-day Turkey history itinerary</a>. Or pick one of the <a href="/#rota-bolum">ten routes on the map</a>.</p>
+<p>You cannot see all fifteen in one holiday. For a first trip of ten days, combine Istanbul, Cappadocia and the Aegean: see our <a href="/guides/turkey-history-itinerary-10-days">10-day Turkey history itinerary</a>. Or pick one of the <a href="/turkey#rota-bolum">ten routes on the map</a>.</p>
 ''',
   sss=[('What is the most impressive ancient site in Turkey?', 'For most visitors, Ephesus: it is the most complete Roman city in the region. For age, Göbekli Tepe; for setting, Mount Nemrut at sunrise.'),
        ('Does Turkey have more Greek ruins than Greece?', 'Many guides say so. Western Türkiye, ancient Ionia, Aeolis, Caria and Lycia, was full of Greek cities, and many are well preserved because they were abandoned rather than built over.'),
@@ -567,7 +567,7 @@ SAYFALAR.append(dict(
 <h2>Getting around</h2>
 <p>Domestic flights are frequent and usually cheap if booked early. On the Aegean side a rental car gives the most freedom; trains run from İzmir to Selçuk and Denizli, and intercity buses go everywhere. Leave buffer time around balloon flights, which are often cancelled by wind.</p>
 <h2>Other ways to spend 10 days</h2>
-<p>Swap Cappadocia for the south: Antalya, Perge and Aspendos, then the Lycian coast. Or go east to Göbekli Tepe, Mount Nemrut and Mardin. All ten of our routes are on the <a href="/#rota-bolum">philosophy map</a>.</p>
+<p>Swap Cappadocia for the south: Antalya, Perge and Aspendos, then the Lycian coast. Or go east to Göbekli Tepe, Mount Nemrut and Mardin. All ten of our routes are on the <a href="/turkey#rota-bolum">philosophy map</a>.</p>
 ''',
   sss=[('Is 10 days enough for Turkey?', 'Ten days is enough for Istanbul, Cappadocia and the Aegean coast if you fly between them. It is not enough to add the east as well.'),
        ('What is the best order for a Turkey itinerary?', 'Istanbul first (most international flights land there), then fly to Cappadocia, then fly to İzmir for the Aegean. End in Pamukkale or İzmir.'),
@@ -622,7 +622,7 @@ SAYFALAR.append(dict(
   aciklama='Plan a trip to the places where philosophy and art were born in Türkiye: Ephesus, Istanbul, Cappadocia, Göbekli Tepe, Troy, Lycia, Konya and more, with ten ready-made routes.',
   etiket='Travel guides',
   giris='Many of the first philosophers lived on the coasts of what is now Türkiye. You can still walk through their cities: the theatres where people gathered, the libraries, the harbours. These guides help you plan the trip, choose where to stay and know what you are looking at.',
-  ozet=['Twenty-two philosophy and art stops from Göbekli Tepe to Rumi, on one <a href="/">interactive map</a>.',
+  ozet=['Twenty-two philosophy and art stops from Göbekli Tepe to Rumi, on one <a href="/turkey">interactive map</a>.',
         'Ten ready-made routes, from Troy and the Aegean coast to Istanbul, Cappadocia, Lycia and Mesopotamia.',
         'Hotel and tour suggestions for every night of every route.'],
   govde=f'''
@@ -670,7 +670,7 @@ SAYFALAR.append(dict(
 <p>Priene, city of Bias, one of the Seven Sages, the oracle of Apollo at Didyma, the first philosophers at Miletus, then Herodotus and the Mausoleum at Halicarnassus. A night in Didim, two in Bodrum.</p>
 <h3>Lycia: Xanthos, Letoon, Patara · 3 days</h3>
 <p>Montesquieu's model republic: pillar tombs, the league's assembly hall at Patara and a day on the Lycian Way. Two nights in Kalkan, one in Kaş.</p>
-<p><a href="/#rota-bolum">See the routes on the map →</a></p>
+<p><a href="/turkey#rota-bolum">See the routes on the map →</a></p>
 {otel('Selçuk', 'Start in Selçuk, the base for Ephesus', 'Most trips begin here')}
 ''',
   ilgili=[]))

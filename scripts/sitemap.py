@@ -5,7 +5,7 @@ ALAN = 'https://antikyol.com'
 KOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 bugun = datetime.date.today().isoformat()
 adresler = [('/', '1.0'), ('/places/', '0.9'), ('/passport', '0.5'), ('/efes', '0.7')]
-for d, onc in (('places', '0.8'), ('guides', '0.8')):
+for d, onc in (('places', '0.8'), ('guides', '0.8'), ('walk', '0.6')):
     for f in sorted(glob.glob(os.path.join(KOK, d, '*.html'))):
         ad = os.path.basename(f)[:-5]
         if ad != 'index': adresler.append((f'/{d}/{ad}', onc))

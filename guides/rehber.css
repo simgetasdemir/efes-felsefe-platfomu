@@ -118,25 +118,18 @@ footer{max-width:760px;margin:0 auto;padding:0 16px 40px;font-family:var(--ui);f
 .yk-otel{background:var(--altin);color:var(--lacivert)}
 .yk-tur{background:#fff;color:var(--lacivert)}
 .yk-harita{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5)}
-.yer-duzen{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px;padding:0 16px}
+.yer-duzen{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:56px;padding:0 16px}
 .yer-duzen > main{max-width:760px;margin:0;padding:12px 0 56px;grid-column:1;grid-row:1}
-.rezervasyon{grid-column:2;grid-row:1;position:sticky;top:20px;align-self:start;margin-top:28px;display:flex;flex-direction:column;gap:0}
-.rezervasyon .rz-bas{font-family:var(--sans);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--soluk)}
-.rezervasyon .cta{margin:12px 0 0}
-.rezervasyon .cta a{min-width:0}
-.rz-muhur{margin-top:14px;font-family:var(--sans);font-size:14.5px;font-weight:600}
-.yalniz-dar{display:none}
-.alt-cubuk{display:none}
+.icindekiler{grid-column:2;grid-row:1;position:sticky;top:24px;align-self:start;margin-top:34px;padding-left:18px;border-left:1px solid var(--ince)}
+.icindekiler small{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--soluk);margin-bottom:8px}
+.icindekiler ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.icindekiler a{display:block;padding:5px 0;font-size:16.5px;line-height:1.3;color:var(--koyu);text-decoration:none}
+.icindekiler a:hover{color:var(--toprak);text-decoration:underline}
+.yer-sayfa h2{scroll-margin-top:16px}
 @media (max-width:980px){
   .yer-duzen{grid-template-columns:minmax(0,1fr);gap:0}
-  .yer-duzen > main{max-width:760px;margin:0 auto;width:100%}
-  .rezervasyon{display:none}
-  .yalniz-dar{display:block}
-  .alt-cubuk{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--lacivert);color:#fff;font-family:var(--sans);box-shadow:0 -10px 30px -12px rgba(0,0,0,.5)}
-  .alt-cubuk small{display:block;font-size:12px;color:#D9CFBD;letter-spacing:.06em;text-transform:uppercase}
-  .alt-cubuk b{font-size:17px}
-  .alt-cubuk a{flex:none;display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:12px;background:var(--altin);color:var(--lacivert);font-weight:700;text-decoration:none}
-  body:has(.alt-cubuk){padding-bottom:76px}
+  .yer-duzen > main{margin:0 auto;width:100%}
+  .icindekiler{display:none}
 }
 @media (max-width:600px){
   .ust{flex-wrap:wrap;padding:10px 16px}
@@ -144,3 +137,15 @@ footer{max-width:760px;margin:0 auto;padding:0 16px 40px;font-family:var(--ui);f
   .yer-kapak .yer-amblem{width:72px;height:72px}
   .yk-dugmeler a{flex:1 1 auto;justify-content:center}
 }
+.okuma{margin:34px 0 0;padding:18px 20px;border-radius:16px;background:#FBF6EA;border:1px solid #E6D9BD;display:flex;flex-direction:column;gap:2px}
+.okuma small{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--toprak)}
+.okuma b{font-size:22px;font-weight:600}
+.okuma span{font-size:16px;color:var(--soluk)}
+.okuma p{margin:8px 0 0;font-size:17px}
+/* "Buraya gitmek istersen": sakin, okumanın devamı gibi */
+.yer-sayfa .cta{background:#fff;color:var(--koyu);border:1px solid var(--ince);box-shadow:none;border-radius:16px}
+.yer-sayfa .cta small{color:var(--toprak)}
+.yer-sayfa .cta b{font-size:20px}
+.yer-sayfa .cta a,.yer-sayfa .cta a + a{background:var(--yuzey);color:var(--koyu);box-shadow:inset 0 0 0 1px var(--ince);font-size:16px;min-height:44px}
+.yer-sayfa .cta a:hover{box-shadow:inset 0 0 0 1.5px var(--koyu)}
+.yk-gezi{background:var(--altin);color:var(--lacivert)}

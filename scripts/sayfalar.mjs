@@ -35,6 +35,10 @@ const YERLER = blok('YERLER'), RENK = blok('RENK'), AMBLEM = blok('AMBLEM'), SAN
   ROTALAR = blok('ROTALAR'), BAGLAR = blok('BAGLAR'), YER_ARAMA = blok('YER_ARAMA'), SLUG = blok('SLUG');
 const kum = { window: {} }; vm.runInNewContext(fs.readFileSync(path.join(KOK, 'felsefe-veri.js'), 'utf8'), kum);
 const FELSEFE = kum.window.FELSEFE, OKUMA = kum.window.OKUMA_ARSLAN || {};
+/* foto-veri.js (varsa): Commons fotoğrafları, atıflarıyla. Mekân kapağı ve /walk sayfaları kullanır. */
+const fvYol = path.join(KOK, 'foto-veri.js'), gfKum = { window: {} };
+if (fs.existsSync(fvYol)) vm.runInNewContext(fs.readFileSync(fvYol, 'utf8'), gfKum);
+const FOTOLAR = gfKum.window.FOTOLAR || {};
 
 const e = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const enc = encodeURIComponent;
@@ -101,9 +105,10 @@ YERLER.forEach((yer, i) => {
   const baglar = BAGLAR.filter(b => b.a === yer.id || b.b === yer.id);
   const onceki = YERLER[(i + YERLER.length - 1) % YERLER.length], sonraki = YERLER[(i + 1) % YERLER.length];
   const ara = YER_ARAMA[yer.id];
+  const kapakFoto = (FOTOLAR[yer.id] || [])[0];
   const soz = `<figure class="soz-blok" style="--r:${renk}"><small>${s.eser ? 'Key work' : 'In their words'}</small><blockquote>${s.eser ? '' : '“'}${e(s.en)}${s.eser ? '' : '”'}</blockquote><figcaption>${e(s.kaynakEn)}${s.birincil ? ` · <a href="${e(s.birincil[1])}" target="_blank" rel="noopener">primary source</a>` : ''}</figcaption></figure>`;
   const govde = `
-<section class="yer-kapak" style="--r:${renk}"><div class="yk-ic">
+<section class="yer-kapak${kapakFoto ? ' foto' : ''}" style="--r:${renk}">${kapakFoto ? `<img class="yk-foto" src="${e(kapakFoto.src)}"${kapakFoto.kucuk ? ` srcset="${e(kapakFoto.kucuk)} 640w, ${e(kapakFoto.src)} ${kapakFoto.w || 1600}w" sizes="100vw"` : ''} alt="${e(kapakFoto.baslik ? kapakFoto.baslik.en : '')}" fetchpriority="high" decoding="async"><small class="yk-atif">Photo: <a href="${e(kapakFoto.kaynak)}" target="_blank" rel="noopener">${e(kapakFoto.yazar)}</a> · ${kapakFoto.lisansUrl ? `<a href="${e(kapakFoto.lisansUrl)}" target="_blank" rel="noopener">${e(kapakFoto.lisans)}</a>` : e(kapakFoto.lisans)}</small>` : ''}<div class="yk-ic">
 <nav class="kirinti" aria-label="Breadcrumb"><a href="/">Map</a> › <a href="/places/">Places</a> › <span>${e(m.ad)}</span></nav>
 <div class="yer-bas"><span class="yer-amblem">${amblem(yer.id, renk, 64)}</span><div><div class="etiket">${i + 1} · ${e(yer.yunan)}</div><h1>${e(m.ad)}</h1><p class="yer-alt">${e(m.il)} · ${e(m.donem)}</p></div></div>
 <div class="yk-dugmeler"><a class="yk-gezi" href="/walk/${slug}">Walk through ${e(m.ad)} →</a><a class="yk-harita" href="/#${yer.id}">See it on the map</a>${f ? '<a class="yk-harita" href="#key-ideas">Key ideas ↓</a>' : ''}</div>
@@ -185,9 +190,6 @@ console.log('places:', YERLER.length, '+ index, yer-veri.js');
    ========================================================================== */
 /* foto-veri.js (varsa): window.FOTOLAR = { <yer.id>: [ { src, kucuk, w, h, baslik:{tr,en}, yazar, lisans, lisansUrl, kaynak }, ... ] }
    Sıra = gezi sırası: 0 giriş, 1..n yerindeki duraklar, n+1 kapanış. */
-const fvYol = path.join(KOK, 'foto-veri.js'), gfKum = { window: {} };
-if (fs.existsSync(fvYol)) vm.runInNewContext(fs.readFileSync(fvYol, 'utf8'), gfKum);
-const FOTOLAR = gfKum.window.FOTOLAR || {};
 fs.mkdirSync(path.join(KOK, 'walk'), { recursive: true });
 YERLER.forEach((yer, i) => {
   const m = yer.en, F = FELSEFE[yer.id], f = F && F.en, Dr = DERIN[yer.id].en, renk = RENK[yer.id], slug = SLUG[yer.id], s = yer.soz;

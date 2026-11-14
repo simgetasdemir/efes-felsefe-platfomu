@@ -876,6 +876,76 @@ body{background:#F6F3EC}
 .kart-cta a,.kart-cta button{white-space:nowrap;padding:0 12px;font-size:13.5px}
 .filtreler{max-width:100%}
 .gezi-link{margin-left:18px}
+/* ===== Türkiye yolculuğu: tam ekran, durak durak, şehirden şehre ===== */
+.btn-yolculuk{background:var(--altin);color:#14202E;border:0;font-weight:700}
+.btn-yolculuk:hover{background:var(--altin-acik)}
+.kf-gorsel.slayt{transition:opacity 1.4s ease}
+.kf-gorsel.slayt.soluk{opacity:.15}
+.kf-atif{position:absolute;right:10px;bottom:8px;z-index:3;font-family:var(--ui);font-size:11px;color:#D9CFBD;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:6px;max-width:calc(100% - 20px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kf-atif a{color:#fff}
+.kf-atif b{color:var(--altin-acik);font-weight:600}
+html.yl-acik{overflow:hidden}
+.yolculuk{position:fixed;inset:0;z-index:200;background:#0B141F;color:#fff;font-family:var(--yazi);overflow:hidden}
+.yolculuk[hidden]{display:none}
+.yl-katman{position:absolute;inset:0;background:#14202E center/cover no-repeat;opacity:0;transition:opacity 1.1s ease}
+.yl-katman.acik{opacity:1}
+@media (prefers-reduced-motion:no-preference){.yl-katman.acik{animation:ylKen 16s ease-out both}}
+@keyframes ylKen{from{transform:scale(1.09) translate(1%,1%)}to{transform:scale(1) translate(0,0)}}
+.yl-katman.cizim{display:flex;align-items:center;justify-content:center}
+.yl-katman.cizim svg{width:min(42vw,280px);height:auto;opacity:.35}
+.yl-sahne::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,20,31,.55) 0%,rgba(11,20,31,0) 22%,rgba(11,20,31,0) 45%,rgba(11,20,31,.9) 100%);pointer-events:none}
+.yl-ust{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;align-items:center;gap:14px;padding:14px 16px;font-family:var(--ui)}
+.yl-kapat{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(11,20,31,.45);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+.yl-yer{flex:1 1 auto;min-width:0}
+.yl-yer small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--altin-acik);font-weight:600}
+.yl-yer b{display:block;font-family:var(--yazi);font-weight:500;font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.yl-mini{flex:0 0 auto;width:190px;background:rgba(11,20,31,.55);border:1px solid rgba(232,211,166,.25);border-radius:10px;padding:4px;backdrop-filter:blur(4px)}
+.yl-mini svg{display:block;width:100%;height:auto}
+.yl-mini circle{cursor:pointer}
+.yl-noktalar{position:absolute;left:16px;right:16px;top:124px;z-index:3;display:flex;gap:6px}
+.yl-noktalar i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.25)}
+.yl-noktalar i.su{background:var(--altin)}
+.yl-noktalar i.gecti{background:rgba(232,211,166,.6)}
+.yl-kart{position:absolute;z-index:3;left:max(16px,calc(50% - 380px));right:max(16px,calc(50% - 380px));bottom:28px;max-height:min(58vh,560px);overflow:auto;padding:22px 24px 20px;background:rgba(11,20,31,.72);border:1px solid rgba(232,211,166,.22);border-radius:16px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.yl-kart .yl-etiket{font-family:var(--ui);font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--altin-acik)}
+.yl-kart h2{margin:6px 0 6px;font-weight:500;font-size:clamp(28px,4vw,42px);line-height:1.1;color:#fff}
+.yl-kart .yl-alt{font-family:var(--ui);font-size:14px;color:#D7CDBA;margin:0 0 10px}
+.yl-kart p{margin:0 0 10px;font-size:19px;line-height:1.5;color:#F1EADC}
+.yl-kart blockquote{margin:10px 0;padding:0 0 0 14px;border-left:3px solid var(--altin);font-style:italic;font-size:21px;color:#fff}
+.yl-kart blockquote cite{display:block;font-style:normal;font-family:var(--ui);font-size:13px;color:#D7CDBA;margin-top:4px}
+.yl-fikir{margin:12px 0 4px;padding:12px 14px;border-radius:12px;background:rgba(232,211,166,.1);border:1px solid rgba(232,211,166,.2)}
+.yl-fikir small{font-family:var(--ui);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--altin-acik);font-weight:600}
+.yl-fikir b{display:block;font-size:20px;font-weight:600;margin:2px 0 4px}
+.yl-fikir p{font-size:17px;margin:0}
+.yl-kart a{color:var(--altin-acik)}
+.yl-okuma{font-family:var(--ui);font-size:14px!important;color:#D7CDBA!important;border-top:1px solid rgba(232,211,166,.2);padding-top:10px;margin-top:12px!important}
+.yl-dugmeler{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;font-family:var(--ui)}
+.yl-dugmeler button,.yl-dugmeler a{font-family:var(--ui);display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border-radius:12px;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;border:1px solid rgba(232,211,166,.45);background:transparent;color:#fff}
+.yl-dugmeler .ana{background:var(--altin);color:#14202E;border-color:var(--altin)}
+.yl-ok{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(11,20,31,.45);color:#fff;font-size:30px;line-height:1;cursor:pointer}
+.yl-geri{left:16px}.yl-ileri{right:16px}
+.yl-ok:disabled{opacity:.25;cursor:default}
+.yl-atif{position:absolute;z-index:4;right:10px;bottom:6px;font-family:var(--ui);font-size:11px;color:#D9CFBD;background:rgba(0,0,0,.5);padding:1px 8px;border-radius:6px;max-width:calc(100% - 20px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.yl-atif a{color:#fff}
+.yl-ipucu{position:absolute;z-index:3;left:0;right:0;bottom:6px;text-align:center;font-family:var(--ui);font-size:12px;color:rgba(255,255,255,.55);pointer-events:none}
+.yl-yolda{position:absolute;inset:0;z-index:6;background:#0E1A27;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;cursor:pointer}
+.yl-yolda[hidden]{display:none}
+.yl-yolda svg{width:min(92vw,980px);height:auto}
+.yl-yolda .yy-yazi{font-family:var(--ui);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--altin-acik)}
+.yl-yolda .yy-ad{font-family:var(--yazi);font-size:clamp(28px,4vw,44px);color:#fff;text-align:center}
+.yl-yolda .yy-alt{font-family:var(--ui);font-size:14px;color:#B9AF9D;text-align:center;max-width:560px}
+.yy-cizgi{fill:none;stroke:var(--altin);stroke-width:3;stroke-linecap:round;stroke-dasharray:6 7}
+@media (prefers-reduced-motion:no-preference){.yy-cizgi{animation:yyCiz 1.9s ease-in-out both}}
+@keyframes yyCiz{from{stroke-dashoffset:var(--uz)}to{stroke-dashoffset:0}}
+@media (max-width:700px){
+  .yl-mini{width:110px}
+  .yl-noktalar{top:78px}
+  .yl-yer b{font-size:18px}
+  .yl-kart{left:10px;right:10px;bottom:22px;padding:16px 16px 14px;max-height:56vh}
+  .yl-kart p{font-size:17px}
+  .yl-ok{top:auto;bottom:calc(56vh + 34px);width:44px;height:44px;font-size:24px;transform:none}
+  .yl-geri{left:10px}.yl-ileri{right:10px}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Antikyol","url":"https://antikyol.com/","alternateName":["Philosophy Map of Türkiye","Türkiye Felsefe Haritası"],"inLanguage":["en","tr"],"description":"From Göbekli Tepe to Rumi: 22 places in Türkiye where philosophy and art were born, with ready-made routes and places to stay.","mainEntity":{"@type":"ItemList","name":"Philosophy and art stops","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"TouristAttraction","name":"Ephesus","description":"The philosophy of change and logos was born here. Heraclitus held that everything flows, but that the flow follows a measure, a \"logos\".","geo":{"@type":"GeoCoordinates","latitude":37.94,"longitude":27.34},"address":{"@type":"PostalAddress","addressRegion":"Selçuk, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":2,"item":{"@type":"TouristAttraction","name":"Miletus","description":"The first school of Western philosophy. Thales looked for the first stuff of the world; Anaximander called the source of all things the \"apeiron\", the boundless.","geo":{"@type":"GeoCoordinates","latitude":37.53,"longitude":27.28},"address":{"@type":"PostalAddress","addressRegion":"Didim, Aydın","addressCountry":"TR"}}},{"@type":"ListItem","position":3,"item":{"@type":"TouristAttraction","name":"Clazomenae","description":"The first philosopher to bring philosophy to Athens. He argued that a \"nous\", a mind, set the cosmos in order.","geo":{"@type":"GeoCoordinates","latitude":38.36,"longitude":26.77},"address":{"@type":"PostalAddress","addressRegion":"Urla, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":4,"item":{"@type":"TouristAttraction","name":"Assos","description":"After Plato's death (347 BC) Aristotle came to Assos and stayed about three years. Cleanthes, second head of the Stoic school, was also from Assos.","geo":{"@type":"GeoCoordinates","latitude":39.49,"longitude":26.34},"address":{"@type":"PostalAddress","addressRegion":"Ayvacık, Çanakkale","addressCountry":"TR"}}},{"@type":"ListItem","position":5,"item":{"@type":"TouristAttraction","name":"Pergamon","description":"Home to one of the greatest libraries of the ancient world, and birthplace of Galen (129–c. 200), physician and philosopher.","geo":{"@type":"GeoCoordinates","latitude":39.13,"longitude":27.18},"address":{"@type":"PostalAddress","addressRegion":"Bergama, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":6,"item":{"@type":"TouristAttraction","name":"Hierapolis","description":"Epictetus, born a slave and later one of the most widely read Stoic teachers, was born here in the 50s AD.","geo":{"@type":"GeoCoordinates","latitude":37.93,"longitude":29.13},"address":{"@type":"PostalAddress","addressRegion":"Pamukkale, Denizli","addressCountry":"TR"}}},{"@type":"ListItem","position":7,"item":{"@type":"TouristAttraction","name":"Aphrodisias","description":"The most influential ancient commentator on Aristotle. An inscription found here in 2001 calls him one of the heads of the philosophical schools in Athens.","geo":{"@type":"GeoCoordinates","latitude":37.71,"longitude":28.72},"address":{"@type":"PostalAddress","addressRegion":"Karacasu, Aydın","addressCountry":"TR"}}},{"@type":"ListItem","position":8,"item":{"@type":"TouristAttraction","name":"Sinope","description":"Diogenes (c. 404–323 BC), emblem of Cynic philosophy, was a citizen of Sinope who fled or was exiled from the city.","geo":{"@type":"GeoCoordinates","latitude":42.03,"longitude":35.15},"address":{"@type":"PostalAddress","addressRegion":"Sinop","addressCountry":"TR"}}},{"@type":"ListItem","position":9,"item":{"@type":"TouristAttraction","name":"Soli and Tarsus","description":"Chrysippus (c. 280–207 BC), who built the Stoic system, was born in Soli near today's Mersin. Tarsus was the city of Stoics such as Antipater.","geo":{"@type":"GeoCoordinates","latitude":36.8,"longitude":34.7},"address":{"@type":"PostalAddress","addressRegion":"Mersin","addressCountry":"TR"}}},{"@type":"ListItem","position":10,"item":{"@type":"TouristAttraction","name":"Konya","description":"Rumi was born in Balkh in 1207 and died in Konya in 1273. After his death his disciples organised the Mevlevi order; Konya adds Sufi thought to the map.","geo":{"@type":"GeoCoordinates","latitude":37.87,"longitude":32.48},"address":{"@type":"PostalAddress","addressRegion":"Konya","addressCountry":"TR"}}},{"@type":"ListItem","position":11,"item":{"@type":"TouristAttraction","name":"Istanbul","description":"For a thousand years the Byzantine capital, Constantinople, kept ancient Greek philosophy alive by teaching and copying it. Psellos revived Plato here; Plethon was born here.","geo":{"@type":"GeoCoordinates","latitude":41.01,"longitude":28.98},"address":{"@type":"PostalAddress","addressRegion":"Istanbul","addressCountry":"TR"}}},{"@type":"ListItem","position":12,"item":{"@type":"TouristAttraction","name":"Cappadocia","description":"In the 4th century three thinkers from this region brought Greek philosophy into dialogue with Christian thought. Kayseri (Caesarea) was Basil's city.","geo":{"@type":"GeoCoordinates","latitude":38.64,"longitude":34.83},"address":{"@type":"PostalAddress","addressRegion":"Nevşehir, Kayseri","addressCountry":"TR"}}},{"@type":"ListItem","position":13,"item":{"@type":"TouristAttraction","name":"Antalya: Perge and Aspendos","description":"Apollonius, \"the Great Geometer\", was born in Perge. We still use the names ellipse, parabola and hyperbola from his Conics.","geo":{"@type":"GeoCoordinates","latitude":36.96,"longitude":30.85},"address":{"@type":"PostalAddress","addressRegion":"Antalya","addressCountry":"TR"}}},{"@type":"ListItem","position":14,"item":{"@type":"TouristAttraction","name":"Şanlıurfa and Harran","description":"At Göbekli Tepe people raised monumental structures more than 11,000 years ago. The school of Edessa, Urfa's ancient name, translated Greek works into Syriac; Thabit ibn Qurra, born in Harran, carried Greek mathematics into Arabic.","geo":{"@type":"GeoCoordinates","latitude":37.16,"longitude":38.79},"address":{"@type":"PostalAddress","addressRegion":"Şanlıurfa","addressCountry":"TR"}}},{"@type":"ListItem","position":15,"item":{"@type":"TouristAttraction","name":"Gaziantep and Zeugma","description":"The mosaics from the villas of Zeugma on the Euphrates set myth and theatre in stone. This is an art stop: you see the stories philosophy told, in pictures.","geo":{"@type":"GeoCoordinates","latitude":37.06,"longitude":37.38},"address":{"@type":"PostalAddress","addressRegion":"Gaziantep","addressCountry":"TR"}}},{"@type":"ListItem","position":16,"item":{"@type":"TouristAttraction","name":"Bodrum","description":"Herodotus, who wrote history as an \"inquiry\" (historia), was born here in ancient Halicarnassus. The Mausoleum, one of the Seven Wonders, stood in this city.","geo":{"@type":"GeoCoordinates","latitude":37.04,"longitude":27.43},"address":{"@type":"PostalAddress","addressRegion":"Muğla","addressCountry":"TR"}}},{"@type":"ListItem","position":17,"item":{"@type":"TouristAttraction","name":"İznik","description":"Hipparchus, a founder of astronomy, was born in ancient Nicaea. The city later hosted two great church councils and, in the 16th century, the famous İznik tiles.","geo":{"@type":"GeoCoordinates","latitude":40.43,"longitude":29.72},"address":{"@type":"PostalAddress","addressRegion":"Bursa","addressCountry":"TR"}}},{"@type":"ListItem","position":18,"item":{"@type":"TouristAttraction","name":"Mardin and Nusaybin","description":"The School of Nisibis (Nusaybin) was one of the centres that translated Greek works into Syriac. The Arabs came to know Greek thought chiefly through these Syriac translations.","geo":{"@type":"GeoCoordinates","latitude":37.31,"longitude":40.74},"address":{"@type":"PostalAddress","addressRegion":"Mardin","addressCountry":"TR"}}},{"@type":"ListItem","position":19,"item":{"@type":"TouristAttraction","name":"Troy","description":"The city of the siege Homer sang in the Iliad. Plato mentions those who call Homer \"the educator of Hellas\" and questions that power of poetry: this is a stop both for poetry and for the first great philosophical critique of it.","geo":{"@type":"GeoCoordinates","latitude":39.957,"longitude":26.239},"address":{"@type":"PostalAddress","addressRegion":"Çanakkale","addressCountry":"TR"}}},{"@type":"ListItem","position":20,"item":{"@type":"TouristAttraction","name":"Mount Nemrut","description":"King Antiochus I (r. 69–34 BC) built a hierotheseion on the summit: a temple-tomb and house of the gods. Colossal statues that merge Greek and Iranian gods bring the beliefs of two worlds together in stone.","geo":{"@type":"GeoCoordinates","latitude":37.98,"longitude":38.74},"address":{"@type":"PostalAddress","addressRegion":"Adıyaman","addressCountry":"TR"}}},{"@type":"ListItem","position":21,"item":{"@type":"TouristAttraction","name":"Lycia: Xanthos and Patara","description":"The cities of Lycia formed a league with a common council: large cities had three votes, middling ones two, small towns one. Montesquieu chose Lycia as the model of an excellent confederate republic; the American Federalist Papers cited it too.","geo":{"@type":"GeoCoordinates","latitude":36.33,"longitude":29.32},"address":{"@type":"PostalAddress","addressRegion":"Antalya, Muğla","addressCountry":"TR"}}},{"@type":"ListItem","position":22,"item":{"@type":"TouristAttraction","name":"Priene and Didyma","description":"Priene, the city of Bias, one of the Seven Sages, was refounded on its present site around 350 BC on a grid plan. Nearby Didyma held Apollo's oracle; there the Milesians began a temple meant to be the largest in the Greek world, and never finished it.","geo":{"@type":"GeoCoordinates","latitude":37.4,"longitude":27.42},"address":{"@type":"PostalAddress","addressRegion":"Aydın","addressCountry":"TR"}}}]}}</script>
 </head>
@@ -891,6 +961,7 @@ body{background:#F6F3EC}
 </header>
 <section class="kahraman-foto" aria-labelledby="baslik">
   <div class="kf-gorsel" id="kf-gorsel" aria-hidden="true"></div>
+  <small class="kf-atif" id="kf-atif" hidden></small>
   <div class="kf-ic">
     <div class="kf-etiket" id="ust-etiket"></div>
     <h1 id="baslik"></h1>
@@ -898,7 +969,8 @@ body{background:#F6F3EC}
     <figure class="gunun-sozu" id="gunun-sozu"></figure>
     <ul class="sayilar" id="sayilar"></ul>
     <div class="kahraman-dugmeler">
-      <button type="button" class="btn btn-koyu" data-eylem="haritaya-in" id="k-harita"></button>
+      <button type="button" class="btn btn-yolculuk" data-eylem="yolculuk" id="k-yolculuk"></button>
+      <button type="button" class="btn btn-hayalet" data-eylem="haritaya-in" id="k-harita"></button>
       <button type="button" class="btn btn-hayalet" data-eylem="rotalar" id="k-rota"></button>
       <a class="ust-link" id="ust-link" href="/efes"></a>
     </div>
@@ -948,12 +1020,23 @@ body{background:#F6F3EC}
 <section class="pasaport-bolum" id="pasaport-bolum" aria-label="Philosophy Passport"></section>
 
 <footer id="alt"></footer>
+<div class="yolculuk" id="yolculuk" hidden role="dialog" aria-modal="true" aria-label="Journey through Türkiye">
+  <div class="yl-sahne"><div class="yl-katman" id="yl-a"></div><div class="yl-katman" id="yl-b"></div></div>
+  <div class="yl-ust"><button type="button" class="yl-kapat" id="yl-kapat" data-yl="kapat" aria-label="Close">×</button><div class="yl-yer" id="yl-yer"></div><div class="yl-mini" id="yl-mini"></div></div>
+  <div class="yl-noktalar" id="yl-noktalar" aria-hidden="true"></div>
+  <button type="button" class="yl-ok yl-geri" id="yl-geri" data-yl="geri" aria-label="Previous">‹</button>
+  <button type="button" class="yl-ok yl-ileri" id="yl-ileri" data-yl="ileri" aria-label="Next">›</button>
+  <article class="yl-kart" id="yl-kart" aria-live="polite"></article>
+  <small class="yl-atif" id="yl-atif"></small>
+  <div class="yl-yolda" id="yl-yolda" hidden></div>
+</div>
 <div class="bildirim" id="bildirim" role="status"></div>
 <button type="button" class="haritaya" id="haritaya" hidden></button>
 
 <script src="/ortaklik.js?v=0de4952e"></script>
 <script src="harita-veri.js"></script>
 <script src="felsefe-veri.js"></script>
+<script src="foto-veri.js"></script>
 <script>
 /* ==========================================================================
    KONAKLAMA VE TUR ARAMALARI: her mekân için kalınacak kasaba ve tur arama sözcüğü.
@@ -1661,7 +1744,7 @@ function panelCiz(odakla){
   p.innerHTML =
     '<div class="panel-bant" aria-hidden="true"></div>' +
     '<div class="panel-bas"><div class="amblem">' + amblemSVG(yer.id) + '</div><div><div class="etiket">' + (i + 1) + ' · ' + h(yer.yunan) + '</div><h2>' + h(m.ad) + '</h2><div class="bilgi-satir"><span>' + h(m.il) + '</span><span>' + h(m.donem) + '</span></div></div></div>' +
-    '<div><h3>' + h(m.kim) + '</h3><p class="soluk neden" style="margin-top:4px">' + h(m.neden) + '</p><a class="tam-sayfa" href="/places/' + SLUG[yer.id] + '">' + h(t('tamSayfa')) + ' →</a><a class="tam-sayfa gezi-link" href="/walk/' + SLUG[yer.id] + '">' + (D.dil === 'tr' ? 'Sanal gezi' : 'Virtual walk') + ' →</a></div>' +
+    '<div><h3>' + h(m.kim) + '</h3><p class="soluk neden" style="margin-top:4px">' + h(m.neden) + '</p><a class="tam-sayfa" href="/places/' + SLUG[yer.id] + '">' + h(t('tamSayfa')) + ' →</a><a class="tam-sayfa gezi-link" href="/walk/' + SLUG[yer.id] + '" data-eylem="yolculuk-burada" data-id="' + yer.id + '">' + (D.dil === 'tr' ? 'Sanal gezi' : 'Virtual walk') + ' →</a></div>' +
     sekmeler + '<div class="sekme-ic" role="tabpanel">' + icerik + '</div>' + okumaKutu(yer) + '<div class="gitmek">' + konakKart(yer) + '</div>';
   if (odakla){ var ck = $('cekmece'); ck.scrollTop = 0; }
 }
@@ -1835,7 +1918,7 @@ function metinCiz(){
 }
 /* Efes gezi rehberine doğrudan, seçili dilde git (giriş ekranını atla) */
 function efesAdres(){ return '/efes?gezi=1&dil=' + D.dil; }
-function hepsi(odakla){ metinCiz(); haritaCiz(); listeCiz(); panelCiz(odakla); rotaBolumCiz(); konakBolumCiz(); sesBolumCiz(); rehberBolumCiz(); pasaportCiz(); haritayaGuncelle(); }
+function hepsi(odakla){ metinCiz(); if (window.ylMetin) ylMetin(); haritaCiz(); listeCiz(); panelCiz(odakla); rotaBolumCiz(); konakBolumCiz(); sesBolumCiz(); rehberBolumCiz(); pasaportCiz(); haritayaGuncelle(); }
 
 /* ==========================================================================
    SÖZ KARTI (1080x1350 PNG, paylaşılabilir)
@@ -1957,10 +2040,138 @@ function muhurEfekt(yer){
   k.addEventListener('scroll', function(){ if (k.scrollLeft > 20) ip.classList.add('gizli'); }, { passive:true });
 })();
 window.addEventListener('resize', function(){ clearTimeout(haritaCiz.z); haritaCiz.z = setTimeout(haritaCiz, 150); });
+/* ==========================================================================
+   TÜRKİYE YOLCULUĞU: /efes canlandırmasının bütün Türkiye'ye yayılmış hâli.
+   Göbekli Tepe'den Mardin'e düşünce tarihi sırasıyla 22 şehir; her şehirde
+   varış, yerindeki duraklar (fikirleriyle) ve "ayrılmadan" durağı.
+   Fotoğraflar foto-veri.js'ten (Commons, atıflı); eksikse özgün çizim.
+   ========================================================================== */
+var YOLCULUK = ['sanliurfa','troya','milet','priene','efes','klazomenai','bodrum','sinop','assos','bergama','soli','likya','afrodisias','hierapolis','nemrut','gaziantep','iznik','istanbul','kapadokya','antalya','konya','mardin'];
+var YL = { id:null, n:0, d:[], katman:0, zaman:null };
+function ty(tr, en){ return D.dil === 'tr' ? tr : en; }
+function ylDuraklar(yer){
+  var m = y(yer), F = (window.FELSEFE || {})[yer.id], f = F && F[D.dil], Dr = DERIN[yer.id] && DERIN[yer.id][D.dil], fot = (window.FOTOLAR || {})[yer.id] || [], d = [];
+  d.push({ tur:'giris', ust:yer.yunan, baslik:m.ad, alt:m.kim + ' · ' + m.donem + ' · ' + m.il, metin:m.neden, soz:yer.soz && !yer.soz.eser ? yer.soz : null });
+  m.rota.forEach(function(r, k){ d.push({ tur:'durak', ust:ty('Durak ', 'Stop ') + (k + 1) + ' / ' + m.rota.length, baslik:r[0], metin:r[1], fikir:f && f.fikirler[k] }); });
+  d.push({ tur:'son', ust:ty('Ayrılmadan', 'Before you leave'), baslik:ty('Bir an otur', 'Sit for a moment'), metin:Dr ? Dr.dinle : '', soru:Dr ? Dr.soru : '' });
+  d.forEach(function(x, i){ x.foto = fot[i] || null; });
+  return d;
+}
+function ylSonraki(id, yon){ var i = YOLCULUK.indexOf(id); return YOLCULUK[(i + yon + YOLCULUK.length) % YOLCULUK.length]; }
+function ylMini(){
+  var p = YOLCULUK.map(function(id){ var x = bul(id); return izd(x.lon, x.lat); });
+  return '<svg viewBox="0 0 ' + H.g + ' ' + H.y + '" aria-label="' + h(ty('Yolculuk haritası', 'Journey map')) + '"><path d="' + H.turkiye + '" fill="#2A3B50" stroke="#4A5E77" stroke-width="2"/>' +
+    YOLCULUK.map(function(id, i){ var su = id === YL.id; return '<circle data-yl-yer="' + id + '" cx="' + p[i][0].toFixed(1) + '" cy="' + p[i][1].toFixed(1) + '" r="' + (su ? 15 : 9) + '" fill="' + (su ? '#C9A15B' : (D.muhur[id] ? '#E8D3A6' : '#8C9AAB')) + '" stroke="#0B141F" stroke-width="3"><title>' + h(y(bul(id)).ad) + '</title></circle>'; }).join('') + '</svg>';
+}
+function ylKatman(ft, yer){
+  var a = $('yl-a'), b = $('yl-b'), yeni = YL.katman ? a : b, eski = YL.katman ? b : a; YL.katman = 1 - YL.katman;
+  yeni.className = 'yl-katman'; yeni.style.backgroundImage = ''; yeni.innerHTML = '';
+  if (ft){ var src = window.innerWidth <= 700 && ft.kucuk ? ft.kucuk : ft.src; yeni.style.backgroundImage = 'url("' + src + '")'; }
+  else { yeni.classList.add('cizim'); yeni.style.background = 'radial-gradient(circle at 70% 30%, rgba(232,211,166,.25), transparent 60%), ' + RENK[yer.id]; yeni.innerHTML = amblemSVG(yer.id, '#F6EBD4'); }
+  void yeni.offsetWidth; yeni.classList.add('acik'); eski.classList.remove('acik');
+  $('yl-atif').innerHTML = ft ? ty('Fotoğraf: ', 'Photo: ') + '<a href="' + h(ft.kaynak) + '" target="_blank" rel="noopener">' + h(ft.yazar) + '</a> · ' + (ft.lisansUrl ? '<a href="' + h(ft.lisansUrl) + '" target="_blank" rel="noopener">' + h(ft.lisans) + '</a>' : h(ft.lisans)) + ' · Wikimedia Commons' : ty('Özgün çizim', 'Original illustration');
+}
+function ylCiz(){
+  var yer = bul(YL.id), m = y(yer), x = YL.d[YL.n], son = YL.n === YL.d.length - 1, sonraki = bul(ylSonraki(YL.id, 1));
+  ylKatman(x.foto, yer);
+  $('yl-yer').innerHTML = '<small>' + h(ty('Türkiye yolculuğu', 'Journey through Türkiye')) + ' · ' + (YOLCULUK.indexOf(YL.id) + 1) + ' / ' + YOLCULUK.length + '</small><b>' + h(m.ad) + '</b>';
+  $('yl-mini').innerHTML = ylMini();
+  $('yl-noktalar').innerHTML = YL.d.map(function(_, i){ return '<i class="' + (i === YL.n ? 'su' : i < YL.n ? 'gecti' : '') + '"></i>'; }).join('');
+  var k = '<div class="yl-etiket">' + h(x.ust) + '</div><h2>' + h(x.baslik) + '</h2>';
+  if (x.alt) k += '<p class="yl-alt">' + h(x.alt) + '</p>';
+  if (x.metin) k += '<p>' + h(x.metin) + '</p>';
+  if (x.soz){ var s = x.soz; k += '<blockquote>“' + h(s[D.dil]) + '”<cite>' + h(D.dil === 'en' ? (s.kaynakEn || s.kaynak) : s.kaynak) + '</cite></blockquote>'; }
+  if (x.fikir) k += '<div class="yl-fikir"><small>' + h(ty('Fikir', 'Idea')) + '</small><b>' + h(x.fikir[0]) + '</b><p>' + h(x.fikir[1]) + ' <a href="' + h(x.fikir[2]) + '" target="_blank" rel="noopener">' + h(ty('Kaynak', 'Source')) + ' ↗</a></p></div>';
+  if (x.soru) k += '<div class="yl-fikir"><small>' + h(ty('Düşün', 'Think')) + '</small><p>' + h(x.soru) + '</p></div>';
+  if (son){
+    var ok = (window.OKUMA_ARSLAN || {});
+    if (YL.id in ok) k += '<p class="yl-okuma">' + h(ty('Okuma önerisi: Ahmet Arslan, ', 'Further reading (in Turkish): Ahmet Arslan, ')) + '<i>İlkçağ Felsefe Tarihi</i>' + (ok[YL.id] ? ', ' + h(D.dil === 'en' ? ok[YL.id].replace('Cilt', 'Vol.') : ok[YL.id]) : '') + '.</p>';
+    k += '<div class="yl-dugmeler"><button type="button" class="ana" data-yl="ileri">' + h(ty('Yola devam: ', 'Travel on: ') + y(sonraki).ad) + ' →</button><a href="/places/' + SLUG[YL.id] + '">' + h(ty('Maddenin tamamı', 'Full entry')) + '</a>' + (yer.rehber ? '<a href="/efes">' + h(ty('Efes canlandırması', 'Ephesus experience')) + '</a>' : '') + '<button type="button" data-yl="harita">' + h(ty('Haritada gör', 'See on the map')) + '</button></div>';
+  }
+  $('yl-kart').innerHTML = k; $('yl-kart').scrollTop = 0;
+  $('yl-geri').disabled = YL.n === 0 && YL.id === YOLCULUK[0];
+  try { history.replaceState(null, '', '#gez-' + YL.id + (YL.n ? '-' + YL.n : '')); } catch(e){}
+  /* bir sonraki fotoğrafı önceden yükle */
+  var on = YL.d[YL.n + 1] || ((window.FOTOLAR || {})[sonraki.id] || [])[0];
+  if (on && on.foto !== undefined) on = on.foto;
+  if (on && on.src){ var im = new Image(); im.src = window.innerWidth <= 700 && on.kucuk ? on.kucuk : on.src; }
+}
+function ylAc(id, n){
+  if (!bul(id)) id = YOLCULUK[0];
+  YL.id = id; YL.d = ylDuraklar(bul(id)); YL.n = Math.max(0, Math.min(YL.d.length - 1, n || 0));
+  var el = $('yolculuk'); if (el.hidden){ el.hidden = false; document.documentElement.classList.add('yl-acik'); YL.odak = document.activeElement; }
+  ylCiz(); $('yl-kapat').focus();
+}
+function ylKapat(){
+  $('yolculuk').hidden = true; document.documentElement.classList.remove('yl-acik'); clearTimeout(YL.zaman);
+  try { history.replaceState(null, '', location.pathname + location.search); } catch(e){}
+  if (YL.odak && YL.odak.focus) YL.odak.focus();
+}
+function ylYolculuk(hedef, yon){
+  var a = bul(YL.id), b = bul(hedef), pa = izd(a.lon, a.lat), pb = izd(b.lon, b.lat), el = $('yl-yolda');
+  var dx = pb[0] - pa[0], dy = pb[1] - pa[1], uz = Math.sqrt(dx * dx + dy * dy), cx = (pa[0] + pb[0]) / 2 - dy * .18, cy = (pa[1] + pb[1]) / 2 + dx * .18 - 20;
+  var km = Math.round(haversine(a, b));
+  el.innerHTML = '<div class="yy-yazi">' + h(ty('Yolculuk', 'Travelling')) + ' · ' + h(y(a).ad) + ' → ' + h(y(b).ad) + ' · ~' + km + ' km</div>' +
+    '<svg viewBox="0 0 ' + H.g + ' ' + H.y + '" aria-hidden="true"><path d="' + H.turkiye + '" fill="#22344A" stroke="#3E5470" stroke-width="2"/>' +
+    '<path class="yy-cizgi" style="--uz:' + Math.round(uz * 1.3) + '" d="M' + pa[0].toFixed(1) + ' ' + pa[1].toFixed(1) + ' Q' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ' ' + pb[0].toFixed(1) + ' ' + pb[1].toFixed(1) + '" stroke-dasharray="' + Math.round(uz * 1.3) + '"/>' +
+    '<circle cx="' + pa[0].toFixed(1) + '" cy="' + pa[1].toFixed(1) + '" r="9" fill="#8C9AAB"/><circle cx="' + pb[0].toFixed(1) + '" cy="' + pb[1].toFixed(1) + '" r="13" fill="#C9A15B" stroke="#fff" stroke-width="3"/></svg>' +
+    '<div class="yy-ad">' + h(y(b).ad) + '</div><div class="yy-alt">' + h(y(b).kim) + ' · ' + h(y(b).donem) + '</div>';
+  el.hidden = false; clearTimeout(YL.zaman);
+  var bitir = function(){ el.hidden = true; el.onclick = null; ylAc(hedef, yon < 0 ? 99 : 0); };
+  el.onclick = function(){ clearTimeout(YL.zaman); bitir(); };
+  YL.zaman = setTimeout(bitir, HAREKET ? 2300 : 900);
+}
+function haversine(a, b){ var r = Math.PI / 180, dl = (b.lat - a.lat) * r, dn = (b.lon - a.lon) * r, s = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dn / 2) * Math.sin(dn / 2); return 6371 * 2 * Math.atan2(Math.sqrt(s), Math.sqrt(1 - s)); }
+function ylAdim(yon){
+  if (!$('yl-yolda').hidden) return;
+  var n = YL.n + yon;
+  if (n >= YL.d.length){ ylYolculuk(ylSonraki(YL.id, 1), 1); return; }
+  if (n < 0){ if (YL.id !== YOLCULUK[0]) ylYolculuk(ylSonraki(YL.id, -1), -1); return; }
+  YL.n = n; ylCiz();
+}
+document.addEventListener('click', function(e){
+  var el = e.target.closest('[data-yl],[data-yl-yer],[data-eylem="yolculuk"],[data-eylem="yolculuk-burada"]'); if (!el) return;
+  if (el.hasAttribute('data-eylem')){ e.preventDefault(); e.stopPropagation(); ylAc(el.getAttribute('data-eylem') === 'yolculuk-burada' ? (el.getAttribute('data-id') || D.secili) : (el.getAttribute('data-id') || YOLCULUK[0])); return; }
+  if (el.hasAttribute('data-yl-yer')){ var id = el.getAttribute('data-yl-yer'); if (id !== YL.id) ylYolculuk(id, 1); return; }
+  var k = el.getAttribute('data-yl');
+  if (k === 'kapat') ylKapat(); else if (k === 'ileri') ylAdim(1); else if (k === 'geri') ylAdim(-1);
+  else if (k === 'harita'){ var hid = YL.id; ylKapat(); sec(hid, true); }
+}, true);
+document.addEventListener('keydown', function(e){
+  if ($('yolculuk').hidden) return;
+  if (e.key === 'Escape') ylKapat();
+  else if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); ylAdim(1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); ylAdim(-1); }
+});
+(function(){ var x0 = null, y0 = 0, el = $('yolculuk');
+  el.addEventListener('touchstart', function(e){ if (e.target.closest('.yl-kart,.yl-mini')) { x0 = null; return; } x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive:true });
+  el.addEventListener('touchend', function(e){ if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) ylAdim(dx < 0 ? 1 : -1); x0 = null; }, { passive:true });
+})();
+/* Ana sayfa girişi: yolculuğun fotoğrafları sırayla akar */
+function kahramanSlayt(){
+  var F = window.FOTOLAR || {}, kare = [];
+  YOLCULUK.forEach(function(id){ (F[id] || []).forEach(function(ft, i){ if (ft && i < 2) kare.push({ id:id, ft:ft }); }); });
+  var g = $('kf-gorsel'), at = $('kf-atif'); if (!kare.length || !g) return;
+  var bas = Math.floor(Date.now() / 864e5) % kare.length, i = bas;
+  function goster(){
+    var k = kare[i % kare.length], ft = k.ft, src = window.innerWidth <= 700 && ft.kucuk ? ft.kucuk : ft.src;
+    var im = new Image(); im.onload = function(){
+      g.classList.add('soluk');
+      setTimeout(function(){ g.classList.add('foto', 'slayt'); g.style.backgroundImage = 'url("' + src + '")'; g.style.backgroundPosition = 'center'; g.classList.remove('soluk');
+        at.innerHTML = '<b>' + h(y(bul(k.id)).ad) + '</b> · ' + h(ft.baslik[D.dil]) + ' · ' + ty('Fotoğraf: ', 'Photo: ') + '<a href="' + h(ft.kaynak) + '" target="_blank" rel="noopener">' + h(ft.yazar) + '</a>, ' + h(ft.lisans); at.hidden = false; }, i === bas ? 0 : 700);
+    }; im.src = src;
+    i++;
+  }
+  goster();
+  if (HAREKET && kare.length > 1) setInterval(function(){ if (!document.hidden && $('yolculuk').hidden) goster(); }, 8000);
+}
+function ylMetin(){ $('k-yolculuk').textContent = ty('Türkiye’yi gez: 22 şehir, durak durak →', 'Walk through Türkiye: 22 cities, stop by stop →'); $('k-harita').textContent = ty('Haritayı keşfet', 'Explore the map'); }
 window.addEventListener('hashchange', function(){ var id = location.hash.slice(1); if (bul(id) && id !== D.secili) sec(id, true); });
 
 (function(){ try { var rq = new URLSearchParams(location.search).get('rota'); if (rq && rotaBul(rq)) D.rotaSec = rq; } catch(e){}
   var id = location.hash.slice(1); if (bul(id)){ D.secili = id; if (egede(bul(id))) D.zum = 'ege'; } hepsi(); })();
+kahramanSlayt();
+(function(){ var m = /^#gez-([a-z]+)(?:-(\d+))?$/.exec(location.hash); if (m && bul(m[1])) ylAc(m[1], +(m[2] || 0)); })();
 if ('serviceWorker' in navigator) window.addEventListener('load', function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); });
 </script>
 </body>

@@ -1,4 +1,4 @@
-# Efes — felsefe platformu (bağımsız site)
+# Antikyol (antikyol.com): Efes — felsefe platformu (bağımsız site)
 
 Antik Efes’i canlandıran felsefe platformu: Celsus’ta oku, Büyük Tiyatro’da bir filozofla tartış, Artemis’te düşün.
 Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak içindir.

@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Philosophy Passport: your stamps and badges | Philosophy Map of Türkiye</title>
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<title>Philosophy Passport: your stamps and badges | Antikyol</title>
 <meta name="description" content="Collect a stamp at every philosophy and art site in Türkiye, from Ephesus to Göbekli Tepe, and earn badges for schools of thought and completed routes.">
 <meta name="theme-color" content="#1F2A36">
 <link rel="canonical" href="https://antikyol.com/passport">
@@ -40,7 +41,7 @@ main{max-width:1000px}
 </style>
 </head>
 <body>
-<header class="ust"><a class="marka" href="/">Philosophy Map of Türkiye</a><nav class="ust-nav"><a href="/" id="n-harita">Map</a><a href="/places/" id="n-yerler">Places</a><a href="/guides/philosophy-trip-turkey" id="n-rehber">Guides</a><span class="dil" role="group" aria-label="Language"><button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button></span></nav></header>
+<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/" id="n-harita">Map</a><a href="/places/" id="n-yerler">Places</a><a href="/guides/philosophy-trip-turkey" id="n-rehber">Guides</a><span class="dil" role="group" aria-label="Language"><button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button></span></nav></header>
 <main>
 <div class="etiket">ΔΙΑΒΑΤΗΡΙΟΝ</div>
 <h1 id="baslik"></h1>
@@ -65,8 +66,8 @@ main{max-width:1000px}
   var M = oku('fh-muhur', {});
   var h = function(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); };
   var T = {
-    en:{ baslik:'Your Philosophy Passport', giris:'Collect a stamp at each place you visit, on the map or on the place\'s own page. Stamps earn badges for schools of thought and for every route you complete.', sayac:'{n} of {t} stamps', rozet:'Badges', rota:'Routes completed', muhur:'Stamps', yok:'Not yet stamped', git:'Visit page', kazandin:'Earned', kalan:'{k} to go', not:'Your passport is saved only in this browser. No sign-in, nothing is sent anywhere.', harita:'Map', yerler:'Places', rehber:'Guides', alt:'Philosophy Map of Türkiye · Stamps and badges are stored on this device.' },
-    tr:{ baslik:'Felsefe Pasaportun', giris:'Gezdiğin her yerde, haritada ya da mekânın kendi sayfasında bir mühür al. Mühürler düşünce okulları ve tamamladığın her rota için rozet kazandırır.', sayac:'{t} mühürden {n} tanesi', rozet:'Rozetler', rota:'Tamamlanan rotalar', muhur:'Mühürler', yok:'Henüz mühürlenmedi', git:'Sayfaya git', kazandin:'Kazanıldı', kalan:'{k} kaldı', not:'Pasaportun yalnızca bu tarayıcıda saklanır. Giriş yok, hiçbir yere gönderilmez.', harita:'Harita', yerler:'Mekânlar', rehber:'Rehberler', alt:'Türkiye Felsefe Haritası · Mühürler ve rozetler bu cihazda saklanır.' }
+    en:{ baslik:'Your Philosophy Passport', giris:'Collect a stamp at each place you visit, on the map or on the place\'s own page. Stamps earn badges for schools of thought and for every route you complete.', sayac:'{n} of {t} stamps', rozet:'Badges', rota:'Routes completed', muhur:'Stamps', yok:'Not yet stamped', git:'Visit page', kazandin:'Earned', kalan:'{k} to go', not:'Your passport is saved only in this browser. No sign-in, nothing is sent anywhere.', harita:'Map', yerler:'Places', rehber:'Guides', alt:'Antikyol · Stamps and badges are stored on this device.' },
+    tr:{ baslik:'Felsefe Pasaportun', giris:'Gezdiğin her yerde, haritada ya da mekânın kendi sayfasında bir mühür al. Mühürler düşünce okulları ve tamamladığın her rota için rozet kazandırır.', sayac:'{t} mühürden {n} tanesi', rozet:'Rozetler', rota:'Tamamlanan rotalar', muhur:'Mühürler', yok:'Henüz mühürlenmedi', git:'Sayfaya git', kazandin:'Kazanıldı', kalan:'{k} kaldı', not:'Pasaportun yalnızca bu tarayıcıda saklanır. Giriş yok, hiçbir yere gönderilmez.', harita:'Harita', yerler:'Mekânlar', rehber:'Rehberler', alt:'Antikyol · Mühürler ve rozetler bu cihazda saklanır.' }
   };
   var ROZET = [
     { ikon:'Ⅰ', say:1, en:['First step','Collect your first stamp.'], tr:['İlk adım','İlk mührünü al.'] },

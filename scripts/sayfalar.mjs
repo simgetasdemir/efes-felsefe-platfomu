@@ -47,7 +47,7 @@ function tur(sorgu, baslik){
 const ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Booking.com, Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>';
 
 function ust(){
-  return `<header class="ust"><a class="marka" href="/">Philosophy Map of Türkiye</a><nav class="ust-nav"><a href="/">Map</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">Guides</a></nav></header>`;
+  return `<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/">Map</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">Guides</a></nav></header>`;
 }
 function bas(baslik, aciklama, adres, ld, ek = ''){
   return `<!doctype html>
@@ -55,6 +55,7 @@ function bas(baslik, aciklama, adres, ld, ek = ''){
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
 <title>${e(baslik)}</title>
 <meta name="description" content="${e(aciklama)}">
 ${ALAN ? `<link rel="canonical" href="${ALAN}${adres}">\n<meta property="og:url" content="${ALAN}${adres}">` : ''}
@@ -86,7 +87,7 @@ YERLER.forEach((yer, i) => {
   const aciklama = (m.neden.length > 150 ? m.neden.slice(0, m.neden.lastIndexOf(' ', 150)) + '…' : m.neden);
   const ld = { '@context':'https://schema.org', '@graph':[
     { '@type':'TouristAttraction', name:m.ad, description:m.neden, geo:{ '@type':'GeoCoordinates', latitude:yer.lat, longitude:yer.lon }, address:{ '@type':'PostalAddress', addressRegion:m.il, addressCountry:'TR' } },
-    { '@type':'BreadcrumbList', itemListElement:[{ '@type':'ListItem', position:1, name:'Philosophy Map of Türkiye', item:(ALAN || '') + '/' }, { '@type':'ListItem', position:2, name:m.ad, item:(ALAN || '') + adres }] } ] };
+    { '@type':'BreadcrumbList', itemListElement:[{ '@type':'ListItem', position:1, name:'Antikyol', item:(ALAN || '') + '/' }, { '@type':'ListItem', position:2, name:m.ad, item:(ALAN || '') + adres }] } ] };
   const rotalar = ROTALAR.filter(r => r.duraklar.includes(yer.id));
   const baglar = BAGLAR.filter(b => b.a === yer.id || b.b === yer.id);
   const onceki = YERLER[(i + YERLER.length - 1) % YERLER.length], sonraki = YERLER[(i + 1) % YERLER.length];
@@ -130,7 +131,7 @@ ${SON}
 </body>
 </html>
 `;
-  fs.writeFileSync(path.join(KOK, 'places', slug + '.html'), bas(baslik + ' | Philosophy Map of Türkiye', aciklama, adres, ld) + govde);
+  fs.writeFileSync(path.join(KOK, 'places', slug + '.html'), bas(baslik + ' | Antikyol', aciklama, adres, ld) + govde);
 });
 
 /* Pasaport sayfası için hafif veri */
@@ -141,7 +142,7 @@ const veri = {
 fs.writeFileSync(path.join(KOK, 'yer-veri.js'), '/* scripts/sayfalar.mjs üretir; elle düzenleme. */\nwindow.YER_VERI = ' + JSON.stringify(veri) + ';\n');
 
 /* Mekân dizini sayfası */
-const dizin = bas('Philosophy and art places in Türkiye: all ' + YERLER.length + ' stops | Philosophy Map of Türkiye',
+const dizin = bas('Philosophy and art places in Türkiye: all ' + YERLER.length + ' stops | Antikyol',
   'All ' + YERLER.length + ' places on the Philosophy Map of Türkiye, from Göbekli Tepe and Troy to Ephesus, Cappadocia and Konya, each with its ideas, art and where to stay.',
   '/places/', { '@context':'https://schema.org', '@type':'ItemList', itemListElement: YERLER.map((y, i) => ({ '@type':'ListItem', position:i + 1, name:y.en.ad, url:(ALAN || '') + '/places/' + SLUG[y.id] })) }) + `
 <main>

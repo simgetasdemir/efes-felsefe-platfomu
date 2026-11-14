@@ -32,7 +32,7 @@ ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affi
 def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
     adres = (ALAN + '/guides/' + slug) if ALAN else ''
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": baslik, "description": aciklama, "inLanguage": "en",
-          "about": {"@type": "Place", "name": etiket}, "isPartOf": {"@type": "WebSite", "name": "Philosophy Map of Türkiye"}}
+          "about": {"@type": "Place", "name": etiket}, "isPartOf": {"@type": "WebSite", "name": "Antikyol", "url": "https://antikyol.com/"}}
     if adres: ld["mainEntityOfPage"] = adres
     sss_html = ''
     if sss:
@@ -47,7 +47,8 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{e(baslik)} | Philosophy Map of Türkiye</title>
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<title>{e(baslik)} | Antikyol</title>
 <meta name="description" content="{e(aciklama)}">
 {f'<link rel="canonical" href="{adres}"><meta property="og:url" content="{adres}">' if adres else ''}
 <meta property="og:type" content="article">
@@ -64,7 +65,7 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 {sss_ld}
 </head>
 <body>
-<header class="ust"><a class="marka" href="/">Philosophy Map of Türkiye</a><nav class="ust-nav"><a href="/places/">Places</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">All guides</a></nav></header>
+<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/places/">Places</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">All guides</a></nav></header>
 <main>
 <div class="etiket">{e(etiket)}</div>
 <h1>{e(baslik)}</h1>

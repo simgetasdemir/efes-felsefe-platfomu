@@ -98,7 +98,7 @@ Haritadaki ve rehber sayfalarındaki tüm otel ve tur düğmeleri `ortaklik.js` 
 
 | Program | Nereden başvurulur | `ortaklik.js` içinde nereye yazılır |
 |---|---|---|
-| Booking.com Affiliate Partner Programme | booking.com/affiliate-program | `booking.aid` |
+| Booking.com (Haziran 2025'ten beri Awin üzerinden) | awin.com → yayıncı kaydı → "Booking.com" programına katıl | `booking.awinaffid` (Awin yayıncı kimliği) ve `booking.awinmid` (Booking'in Awin kimliği) |
 | Hotels.com (Expedia Group Travel Creator Program) | creator.expediagroup.com | `hotels.baglantilar['Kasaba']`: her kasaba için panelde "Links → Create link" ile üretilen bağlantı |
 | GetYourGuide Partner Program | partner.getyourguide.com | `getyourguide.partner_id` |
 | Viator Affiliate Program | partnerresources.viator.com | `viator.pid` ve `viator.mcid` |

@@ -34,7 +34,7 @@ function blok(ad){
 const YERLER = blok('YERLER'), RENK = blok('RENK'), AMBLEM = blok('AMBLEM'), SANAT = blok('SANAT'), DERIN = blok('DERIN'),
   ROTALAR = blok('ROTALAR'), BAGLAR = blok('BAGLAR'), YER_ARAMA = blok('YER_ARAMA'), SLUG = blok('SLUG');
 const kum = { window: {} }; vm.runInNewContext(fs.readFileSync(path.join(KOK, 'felsefe-veri.js'), 'utf8'), kum);
-const FELSEFE = kum.window.FELSEFE;
+const FELSEFE = kum.window.FELSEFE, OKUMA = kum.window.OKUMA_ARSLAN || {};
 
 const e = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const enc = encodeURIComponent;
@@ -106,19 +106,15 @@ YERLER.forEach((yer, i) => {
 <section class="yer-kapak" style="--r:${renk}"><div class="yk-ic">
 <nav class="kirinti" aria-label="Breadcrumb"><a href="/">Map</a> › <a href="/places/">Places</a> › <span>${e(m.ad)}</span></nav>
 <div class="yer-bas"><span class="yer-amblem">${amblem(yer.id, renk, 64)}</span><div><div class="etiket">${i + 1} · ${e(yer.yunan)}</div><h1>${e(m.ad)}</h1><p class="yer-alt">${e(m.il)} · ${e(m.donem)}</p></div></div>
-${ara ? `<div class="yk-dugmeler"><a class="yk-otel" href="${e(ORT.otel('hotels', ara.kasaba))}" data-otel="hotels" data-kasaba="${e(ara.kasaba)}" target="_blank" rel="sponsored noopener">Hotels in ${e(ara.kasaba)}</a><a class="yk-tur" href="https://www.getyourguide.com/s/?q=${enc(ara.tur)}" data-tur="getyourguide" data-sorgu="${e(ara.tur)}" target="_blank" rel="sponsored noopener">Tours &amp; tickets</a><a class="yk-harita" href="/#${yer.id}">On the map</a></div>` : ''}
+<div class="yk-dugmeler"><a class="yk-gezi" href="/walk/${slug}">Walk through ${e(m.ad)} →</a><a class="yk-harita" href="/#${yer.id}">See it on the map</a>${f ? '<a class="yk-harita" href="#key-ideas">Key ideas ↓</a>' : ''}</div>
 </div></section>
 <div class="yer-duzen">
-<aside class="rezervasyon" aria-label="Plan your visit"><small class="rz-bas">Plan your visit</small>
-${ara ? otel(ara.kasaba, 'Hotels in and around ' + ara.kasaba) : ''}
-${ara ? tur(ara.tur, 'Tours and tickets: ' + m.ad) : ''}
-<a class="rz-muhur" href="/passport">Collect the stamp in your passport →</a></aside>
+<aside class="icindekiler" aria-label="On this page">@@ICINDEKILER@@</aside>
 <main class="yer-sayfa" style="--r:${renk}">
 <p class="giris">${e(m.neden)}</p>
 <p class="kim"><b>Who:</b> ${e(m.kim)}</p>
 ${soz}
-<div class="yalniz-dar">${ara ? otel(ara.kasaba, 'Hotels in and around ' + ara.kasaba) : ''}
-${ara ? tur(ara.tur, 'Guided tours and tickets: ' + m.ad) : ''}</div>
+
 ${f ? `<h2>Key ideas</h2><ol class="fikir-liste">${f.fikirler.map(k => `<li><b>${e(k[0])}</b><p>${e(k[1])} <a href="${e(k[2])}" target="_blank" rel="noopener">${e(etiket(k[2]))}${k[3] && k[3] !== etiket(k[2]) ? ' ' + e(k[3]) : ''} ↗</a></p></li>`).join('')}</ol>${F.not ? `<p class="not">${e(F.not.en)}</p>` : ''}` : ''}
 ${S ? `<h2>Art and monuments</h2><ul class="sanat-liste">${S.en.map(x => `<li><b>${e(x[0])}</b><span>${e(x[1])}</span></li>`).join('')}</ul>` : ''}
 <h2>A walk on site</h2><ol class="rota-liste">${m.rota.map(x => `<li><b>${e(x[0])}</b> ${e(x[1])}</li>`).join('')}</ol>
@@ -130,13 +126,14 @@ ${f ? `<h2>Timeline</h2><ol class="zaman">${f.hayat.map(z => `<li><span>${e(z[0]
 <div class="muhur-cta"><div><small>Philosophy Passport</small><b>Been here? Collect your stamp.</b></div><button type="button" id="muhur-al" data-yer="${yer.id}">Collect stamp</button><a href="/passport">See your badges →</a></div>
 ${rotalar.length ? `<h2>Routes that include ${e(m.ad)}</h2><div class="ilgili">${rotalar.map(r => `<a href="/?rota=${r.id}#rota-bolum">${e(r.en.ad)} · ${e(r.en.sure)} →</a>`).join('')}</div>` : ''}
 ${baglar.length ? `<h2>Connections</h2><ul class="bag-liste">${baglar.map(b => { const o = yerBul(b.a === yer.id ? b.b : b.a); return `<li><a href="/places/${SLUG[o.id]}">${e(o.en.ad)}</a>: ${e(b.en)}</li>`; }).join('')}</ul>` : ''}
+${ara ? `<h2>If you want to go</h2><p>${e(m.ad)} is a place you can still walk through. If reading about ${e(m.kim.split(/[,;]/)[0])} makes you want to see it, these are the nearest places to stay and the guided visits on offer.</p>${otel(ara.kasaba, 'Stay in or near ' + ara.kasaba)}${tur(ara.tur, 'Guided visits: ' + m.ad)}` : ''}
+${yer.id in OKUMA ? `<aside class="okuma"><small>Further reading in Turkish</small><b>Ahmet Arslan, <i>İlkçağ Felsefe Tarihi</i></b><span>${OKUMA[yer.id] ? e(OKUMA[yer.id].replace('Cilt', 'Vol.')) + ' · ' : ''}İstanbul Bilgi Üniversitesi Yayınları</span><p>The standard Turkish history of ancient philosophy, by the philosopher Ahmet Arslan. A natural next step after this page for Turkish readers.</p></aside>` : ''}
 <h2>Sources</h2><ul class="kaynak-liste">${(F ? F.kaynak.map(k => [k[0] + ', ' + k[1], k[2]]) : []).concat(yer.kaynaklar).map(k => `<li><a href="${e(k[1])}" target="_blank" rel="noopener">${e(k[0])}</a></li>`).join('')}</ul>
 ${ACIKLAMA}
 <nav class="komsu" aria-label="More places"><a href="/places/${SLUG[onceki.id]}">← ${e(onceki.en.ad)}</a><a href="/places/${SLUG[sonraki.id]}">${e(sonraki.en.ad)} →</a></nav>
 <p><a href="/#${yer.id}">Open ${e(m.ad)} on the map →</a></p>
 </main>
 </div>
-${ara ? `<div class="alt-cubuk"><span><small>Stay near</small><b>${e(ara.kasaba)}</b></span><a href="${e(ORT.otel('hotels', ara.kasaba))}" data-otel="hotels" data-kasaba="${e(ara.kasaba)}" target="_blank" rel="sponsored noopener">See hotels</a></div>` : ''}
 ${SON}
 <script>
 (function(){
@@ -150,7 +147,11 @@ ${SON}
 </body>
 </html>
 `;
-  fs.writeFileSync(path.join(KOK, 'places', slug + '.html'), bas(baslik + ' | Antikyol', aciklama, adres, ld) + govde);
+  const kim = t => t.replace(/<[^>]+>/g, '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const basliklar = [];
+  let g = govde.replace(/<h2>([\s\S]*?)<\/h2>/g, (_, x) => { const id = kim(x); basliklar.push([id, x]); return `<h2 id="${id}">${x}</h2>`; });
+  g = g.replace('@@ICINDEKILER@@', '<small>On this page</small><ol>' + basliklar.map(b => `<li><a href="#${b[0]}">${b[1]}</a></li>`).join('') + '</ol>');
+  fs.writeFileSync(path.join(KOK, 'places', slug + '.html'), bas(baslik + ' | Antikyol', aciklama, adres, ld) + g);
 });
 
 /* Pasaport sayfası için hafif veri */
@@ -176,3 +177,49 @@ ${SON}
 `;
 fs.writeFileSync(path.join(KOK, 'places', 'index.html'), dizin);
 console.log('places:', YERLER.length, '+ index, yer-veri.js');
+
+/* ==========================================================================
+   SANAL GEZİ: /walk/<slug>. Durak durak yürüyüş: giriş, yerinde duraklar
+   (her biri bir ana fikirle), düşünme sorusu ve okuma önerisi.
+   Fotoğraflar gezi-foto.js'ten; yoksa özgün çizim.
+   ========================================================================== */
+/* foto-veri.js (varsa): window.FOTOLAR = { <yer.id>: [ { src, kucuk, w, h, baslik:{tr,en}, yazar, lisans, lisansUrl, kaynak }, ... ] }
+   Sıra = gezi sırası: 0 giriş, 1..n yerindeki duraklar, n+1 kapanış. */
+const fvYol = path.join(KOK, 'foto-veri.js'), gfKum = { window: {} };
+if (fs.existsSync(fvYol)) vm.runInNewContext(fs.readFileSync(fvYol, 'utf8'), gfKum);
+const FOTOLAR = gfKum.window.FOTOLAR || {};
+fs.mkdirSync(path.join(KOK, 'walk'), { recursive: true });
+YERLER.forEach((yer, i) => {
+  const m = yer.en, F = FELSEFE[yer.id], f = F && F.en, Dr = DERIN[yer.id].en, renk = RENK[yer.id], slug = SLUG[yer.id], s = yer.soz;
+  const fotolar = FOTOLAR[yer.id] || [];
+  const gorsel = n => { const ft = fotolar[n];
+    if (ft) return `<div class="gz-gorsel foto"><img src="${e(ft.src)}"${ft.kucuk ? ` srcset="${e(ft.kucuk)} 640w, ${e(ft.src)} ${ft.w || 1600}w" sizes="100vw"` : ''}${ft.w ? ` width="${ft.w}" height="${ft.h}"` : ''} alt="${e(ft.baslik ? ft.baslik.en : '')}" ${n ? 'loading="lazy"' : ''} decoding="async"></div><small class="gz-atif">Photo: <a href="${e(ft.kaynak)}" target="_blank" rel="noopener">${e(ft.yazar)}</a> · ${ft.lisansUrl ? `<a href="${e(ft.lisansUrl)}" target="_blank" rel="noopener">${e(ft.lisans)}</a>` : e(ft.lisans)}</small>`;
+    return `<div class="gz-gorsel cizim" aria-hidden="true"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="g${n}" cx="${70 - n * 9}%" cy="${30 + n * 6}%" r="80%"><stop offset="0" stop-color="#E8D3A6" stop-opacity=".35"/><stop offset="1" stop-color="#E8D3A6" stop-opacity="0"/></radialGradient></defs><rect width="1600" height="900" fill="${renk}"/><rect width="1600" height="900" fill="#14202E" opacity=".55"/><rect width="1600" height="900" fill="url(#g${n})"/><path d="M0 ${700 - n * 14} Q400 ${640 - n * 10} 800 ${690 - n * 6} T1600 ${660 + n * 8} V900 H0z" fill="#0B141F" opacity=".55"/><g transform="translate(1080 ${180 + n * 20}) scale(5.5)" fill="none" stroke="#F6EBD4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".22">${AMBLEM[yer.id]}</g></svg></div>`; };
+  const fikir = k => f && f.fikirler[k] ? `<div class="gz-fikir"><small>Idea</small><b>${e(f.fikirler[k][0])}</b><p>${e(f.fikirler[k][1])} <a href="${e(f.fikirler[k][2])}" target="_blank" rel="noopener">${e(etiket(f.fikirler[k][2]))} ↗</a></p></div>` : '';
+  const duraklar = [];
+  duraklar.push(`<section class="durak giris-durak" id="d0">${gorsel(0)}<div class="gz-metin"><small class="gz-no">${e(yer.yunan)}</small><h1>Walk through ${e(m.ad)}</h1><p class="gz-alt">${e(m.kim)} · ${e(m.donem)} · ${e(m.il)}</p><p>${e(m.neden)}</p>${s && !s.eser ? `<blockquote>“${e(s.en)}”<cite>${e(s.kaynakEn || s.kaynak)}</cite></blockquote>` : ''}<a class="gz-basla" href="#d1">Begin the walk ↓</a></div></section>`);
+  m.rota.forEach((r, k) => duraklar.push(`<section class="durak" id="d${k + 1}">${gorsel(k + 1)}<div class="gz-metin"><small class="gz-no">Stop ${k + 1} of ${m.rota.length}</small><h2>${e(r[0])}</h2><p class="gz-ilk">${e(r[1])}</p>${fikir(k)}</div></section>`));
+  const son = m.rota.length + 1;
+  duraklar.push(`<section class="durak son-durak" id="d${son}">${gorsel(son)}<div class="gz-metin"><small class="gz-no">Before you leave</small><h2>Sit for a moment</h2><p>${e(Dr.dinle)}</p><div class="gz-fikir dusun"><small>Think</small><p>${e(Dr.soru)}</p></div>${yer.id in OKUMA ? `<p class="gz-okuma">Further reading in Turkish: Ahmet Arslan, <i>İlkçağ Felsefe Tarihi</i>${OKUMA[yer.id] ? ', ' + e(OKUMA[yer.id].replace('Cilt', 'Vol.')) : ''}.</p>` : ''}<div class="gz-son-linkler"><a href="/places/${slug}">Read the full entry →</a>${yer.rehber ? '<a href="/efes">Open the full Ephesus experience →</a>' : ''}<a href="/#${yer.id}">Back to the map</a></div></div></section>`);
+  const adres = '/walk/' + slug;
+  const baslik = `Virtual walk through ${m.ad}: ${m.kim.split(/[,;]/)[0]} stop by stop`;
+  const ld = { '@context':'https://schema.org', '@type':'Article', headline:baslik, about:m.ad, isPartOf:(ALAN || '') + '/places/' + slug };
+  const sayfa = bas(baslik + ' | Antikyol', `A stop-by-stop virtual walk through ${m.ad} and the ideas of ${m.kim}.`, adres, ld, '\n<link rel="stylesheet" href="/guides/gezi.css">').replace('<body>', '<body class="gezi-govde">') + `
+<main class="gezi" style="--r:${renk}">
+<nav class="gz-ilerleme" aria-label="Stops">${duraklar.map((_, k) => `<a href="#d${k}" aria-label="Stop ${k}"></a>`).join('')}</nav>
+${duraklar.join('\n')}
+</main>
+<script>
+(function(){ var n = document.querySelectorAll('.gz-ilerleme a'), d = document.querySelectorAll('.durak');
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if (x.isIntersecting){ var k = [].indexOf.call(d, x.target); n.forEach(function(a, j){ a.classList.toggle('su', j === k); }); x.target.classList.add('gorundu'); } }); }, { threshold:.55 });
+  d.forEach(function(x){ io.observe(x); });
+  document.addEventListener('keydown', function(e){ if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return; var k = [].findIndex.call(n, function(a){ return a.classList.contains('su'); }); var h = d[Math.max(0, Math.min(d.length - 1, k + (e.key === 'ArrowDown' ? 1 : -1)))]; if (h){ e.preventDefault(); h.scrollIntoView({ behavior:'smooth' }); } });
+})();
+</script>
+</body>
+</html>
+`;
+  fs.writeFileSync(path.join(KOK, 'walk', slug + '.html'), sayfa);
+});
+console.log('walk:', YERLER.length);

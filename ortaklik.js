@@ -8,8 +8,10 @@
    Başvuru adresleri ve adımlar README.md içinde, "Gelir ve ortaklıklar" bölümünde.
    ========================================================================== */
 window.ORTAKLIK = {
-  /* Booking.com Affiliate Partner Programme: panelde verilen "aid" numarası (yalnızca rakam). */
-  booking: { goster: true, aid: '' },
+  /* Booking.com: Haziran 2025'ten beri ortaklık Awin ağı üzerinden yürüyor.
+     awinaffid: Awin yayıncı kimliğin (panelin sağ üstü), awinmid: Booking.com programının Awin kimliği.
+     İkisi doluysa bağlantılar Awin üzerinden gider. Eski doğrudan programın "aid" numarası varsa aid'e yaz. */
+  booking: { goster: true, aid: '', awinmid: '', awinaffid: '' },
 
   /* Hotels.com (Expedia Group Travel Creator Program).
      parametreler: Link builder'ın verdiği bağlantıdaki takip kısmı ("destination=..." dışındaki her şey).
@@ -44,7 +46,10 @@ window.ORTAKLIK = {
   /* kasaba: "Selçuk" gibi kısa ad; arama metnine ülke eklenir */
   O.otel = function(saglayici, kasaba){
     var yer = kasaba + ', Türkiye';
-    if (saglayici === 'booking') return 'https://www.booking.com/searchresults.html?ss=' + enc(yer) + (O.booking.aid ? '&aid=' + enc(O.booking.aid) : '');
+    if (saglayici === 'booking'){
+      var b = 'https://www.booking.com/searchresults.html?ss=' + enc(yer) + (O.booking.aid ? '&aid=' + enc(O.booking.aid) : '');
+      return (O.booking.awinmid && O.booking.awinaffid) ? 'https://www.awin1.com/cread.php?awinmid=' + enc(O.booking.awinmid) + '&awinaffid=' + enc(O.booking.awinaffid) + '&ued=' + enc(b) : b;
+    }
     if (saglayici === 'hotels') return (O.hotels.baglantilar && O.hotels.baglantilar[kasaba]) ||
       ('https://www.hotels.com/Hotel-Search?destination=' + enc(ascii(kasaba) + ', Turkey') + (O.hotels.parametreler ? '&' + O.hotels.parametreler : ''));
     return '';
@@ -56,7 +61,7 @@ window.ORTAKLIK = {
   };
   /* En az bir ortaklık kimliği dolu mu? (açıklama metnini göstermek için) */
   O.kazanc = function(){
-    if (O.booking.aid || O.hotels.parametreler || O.getyourguide.partner_id || O.viator.pid) return true;
+    if (O.booking.aid || (O.booking.awinmid && O.booking.awinaffid) || O.hotels.parametreler || O.getyourguide.partner_id || O.viator.pid) return true;
     var b = O.hotels.baglantilar || {}; for (var k in b) if (b[k]) return true;
     return false;
   };

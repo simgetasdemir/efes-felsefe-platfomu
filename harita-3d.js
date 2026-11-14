@@ -11,9 +11,11 @@
   var LACI = '#14202E', LACI_DERIN = '#0A121C', ALTIN = '#C9A15B', KREM = '#F3E7CF';
   var TUM = [[25.4, 35.55], [45.0, 42.35]], EGE_S = [[25.9, 36.95], [29.6, 40.05]];
 
-  if (!window.YERLER || !document.getElementById('harita')) return;
-  try { if (new URLSearchParams(location.search).get('harita') === 'klasik') return; } catch(e){}
-  if (!webgl()) return;
+  /* index.html <head> 'uc-bekle' sınıfıyla eski haritayı gizler; 3D açılmazsa sınıfı kaldır, eski harita görünsün */
+  function bekleBitti(){ document.documentElement.classList.remove('uc-bekle'); }
+  if (!window.YERLER || !document.getElementById('harita')) return bekleBitti();
+  try { if (new URLSearchParams(location.search).get('harita') === 'klasik') return bekleBitti(); } catch(e){}
+  if (!webgl()) return bekleBitti();
 
   var eskiCiz = window.haritaCiz, eskiZum = window.zumla;
   var kutu = document.getElementById('harita');
@@ -35,7 +37,7 @@
     if (bitti) return; bitti = true;
     try { if (map) map.remove(); } catch(e){}
     window.haritaCiz = eskiCiz; window.zumla = eskiZum;
-    kutu.classList.remove('uc'); kutu.innerHTML = ''; eskiCiz();
+    kutu.classList.remove('uc'); kutu.innerHTML = ''; bekleBitti(); eskiCiz();
   }
 
   /* ---------- stil: kendi stilimiz, Mapbox Streets verisi + arazi ---------- */
@@ -107,7 +109,7 @@
     var zaman = setTimeout(function(){ if (!hazir) geriDon(); }, 30000);
     map.on('error', function(e){ if (!hazir && e && e.error && /40[13]|Unauthorized|Forbidden/i.test(String(e.error.message || e.error.status))) geriDon(); });
     map.on('load', function(){
-      hazir = true; clearTimeout(zaman);
+      hazir = true; clearTimeout(zaman); bekleBitti();
       katmanlar();
       window.haritaCiz = ciz; window.zumla = zumla3;
       ciz();
@@ -138,6 +140,8 @@
       if (!m){
         var el = document.createElement('button');
         el.type = 'button'; el.className = 'm3 pin'; el.setAttribute('data-yer', yer.id); el.style.setProperty('--r', RENK[yer.id]);
+        /* Tıklamayı doğrudan işaretin üstünde yakala: harita sürükleme olayları sayfanın genel dinleyicisine ulaşmasa da seçim çalışsın */
+        el.addEventListener('click', (function(id){ return function(e){ e.preventDefault(); e.stopPropagation(); if (typeof sesDurdur === 'function') sesDurdur(); sec(id, 'harita'); }; })(yer.id));
         el.innerHTML = '<span class="m3-no">' + (i + 1) + '</span><span class="m3-ad"></span>';
         if (window.ETIKET_KONUM && ETIKET_KONUM[yer.id]) el.classList.add('k-' + ETIKET_KONUM[yer.id]);
         if (window.ETIKET_DAR && ETIKET_DAR[yer.id]) el.classList.add('kd-' + ETIKET_DAR[yer.id]);
@@ -156,6 +160,7 @@
       var k = document.createElement('button'); k.type = 'button'; k.id = 'ege-kume'; k.className = 'm3-kume';
       var ege = YERLER.filter(egede);
       k.textContent = '+' + ege.length;
+      k.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); zumla3('ege'); });
       kume = new mapboxgl.Marker({ element: k }).setLngLat([27.75, 38.5]).addTo(map);
     }
     kume.getElement().setAttribute('aria-label', t('ege'));

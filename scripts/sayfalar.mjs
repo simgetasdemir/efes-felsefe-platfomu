@@ -4,7 +4,7 @@
    Kullanım: node scripts/sayfalar.mjs   (index.html ya da felsefe-veri.js değişince yeniden çalıştır) */
 import fs from 'fs'; import path from 'path'; import vm from 'vm'; import { fileURLToPath } from 'url';
 const KOK = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ALAN = ''; // alan adı belli olunca: 'https://www.ornek.com'
+const ALAN = 'https://antikyol.com';
 const html = fs.readFileSync(path.join(KOK, 'index.html'), 'utf8');
 
 /* "var AD = " ile başlayan bir JS değişmezini dengeli parantez sayarak çıkar */
@@ -57,7 +57,7 @@ function bas(baslik, aciklama, adres, ld, ek = ''){
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${e(baslik)}</title>
 <meta name="description" content="${e(aciklama)}">
-${ALAN ? `<link rel="canonical" href="${ALAN}${adres}">` : ''}
+${ALAN ? `<link rel="canonical" href="${ALAN}${adres}">\n<meta property="og:url" content="${ALAN}${adres}">` : ''}
 <meta property="og:type" content="article">
 <meta property="og:title" content="${e(baslik)}">
 <meta property="og:description" content="${e(aciklama)}">

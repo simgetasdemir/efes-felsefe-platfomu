@@ -124,7 +124,7 @@ Her mekânın kendi İngilizce sayfası var: `/places/ephesus`, `/places/troy` �
 
 **Başka yerden (Cloudflare, Namecheap) aldıysan:**
 
-1. Vercel'de proje → **Settings → Domains → Add**, alan adını yaz (ör. `ornek.com`). `www.ornek.com` için de ekle; birini diğerine yönlendirmeyi Vercel önerir.
+1. Vercel'de proje → **Settings → Domains → Add**, alan adını yaz (ör. `antikyol.com`). `www.antikyol.com` için de ekle; birini diğerine yönlendirmeyi Vercel önerir.
 2. Vercel o ekranda girilecek kayıtları gösterir. Genelde:
    - kök ad (`@`) için bir **A** kaydı, Vercel'in gösterdiği IP adresine,
    - `www` için bir **CNAME** kaydı, Vercel'in gösterdiği hedefe.
@@ -132,4 +132,6 @@ Her mekânın kendi İngilizce sayfası var: `/places/ephesus`, `/places/troy` �
 3. Bu kayıtları alan adını aldığın yerin DNS ayarlarına gir. Cloudflare'de bu iki kaydın bulutunu (proxy) **kapalı (DNS only)** tut.
 4. Birkaç dakika ile birkaç saat içinde Vercel'de ad yeşil "Valid Configuration" olur.
 
-Alan adı belli olunca `index.html` ve `efes.html` içine `canonical` bağlantısı, paylaşım görsellerine tam adres ve bir `sitemap.xml` eklenmeli.
+Sitenin adresi **https://antikyol.com** (kök ad asıl adres; `www` buna yönlendirilmeli). Tüm sayfalarda `canonical`, `og:url` ve tam adresli paylaşım görseli var; `robots.txt` site haritasını gösterir. Yeni sayfa ekleyince `python3 scripts/sitemap.py` ile `sitemap.xml`'i yenile. Adres `scripts/sayfalar.mjs`, `scripts/rehber-sayfalari.py` ve `scripts/sitemap.py` içindeki `ALAN` değerinden gelir.
+
+Yayına alındıktan sonra Google Search Console'a `antikyol.com` alanını ekle, Vercel'e bir TXT kaydıyla doğrula ve `https://antikyol.com/sitemap.xml` adresini gönder.

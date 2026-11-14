@@ -8,7 +8,7 @@ Alan adı belli olunca ALAN değişkenini doldur: canonical ve paylaşım adresl
 """
 import html, json, os, re, urllib.parse
 
-ALAN = ''  # ör. 'https://www.ornek.com' (sonunda / olmadan)
+ALAN = 'https://antikyol.com'
 KOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'guides')
 
 def e(x): return html.escape(x, quote=True)
@@ -49,7 +49,7 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(baslik)} | Philosophy Map of Türkiye</title>
 <meta name="description" content="{e(aciklama)}">
-{f'<link rel="canonical" href="{adres}">' if adres else ''}
+{f'<link rel="canonical" href="{adres}"><meta property="og:url" content="{adres}">' if adres else ''}
 <meta property="og:type" content="article">
 <meta property="og:title" content="{e(baslik)}">
 <meta property="og:description" content="{e(aciklama)}">

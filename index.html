@@ -2066,7 +2066,7 @@ function ylMini(){
 function ylKatman(ft, yer){
   var a = $('yl-a'), b = $('yl-b'), yeni = YL.katman ? a : b, eski = YL.katman ? b : a; YL.katman = 1 - YL.katman;
   yeni.className = 'yl-katman'; yeni.style.backgroundImage = ''; yeni.innerHTML = '';
-  if (ft){ var src = window.innerWidth <= 700 && ft.kucuk ? ft.kucuk : ft.src; yeni.style.backgroundImage = 'url("' + src + '")'; }
+  if (ft){ var src = ft.src; yeni.style.backgroundImage = 'url("' + src + '")'; }
   else { yeni.classList.add('cizim'); yeni.style.background = 'radial-gradient(circle at 70% 30%, rgba(232,211,166,.25), transparent 60%), ' + RENK[yer.id]; yeni.innerHTML = amblemSVG(yer.id, '#F6EBD4'); }
   void yeni.offsetWidth; yeni.classList.add('acik'); eski.classList.remove('acik');
   $('yl-atif').innerHTML = ft ? ty('Fotoğraf: ', 'Photo: ') + '<a href="' + h(ft.kaynak) + '" target="_blank" rel="noopener">' + h(ft.yazar) + '</a> · ' + (ft.lisansUrl ? '<a href="' + h(ft.lisansUrl) + '" target="_blank" rel="noopener">' + h(ft.lisans) + '</a>' : h(ft.lisans)) + ' · Wikimedia Commons' : ty('Özgün çizim', 'Original illustration');
@@ -2094,7 +2094,7 @@ function ylCiz(){
   /* bir sonraki fotoğrafı önceden yükle */
   var on = YL.d[YL.n + 1] || ((window.FOTOLAR || {})[sonraki.id] || [])[0];
   if (on && on.foto !== undefined) on = on.foto;
-  if (on && on.src){ var im = new Image(); im.src = window.innerWidth <= 700 && on.kucuk ? on.kucuk : on.src; }
+  if (on && on.src){ var im = new Image(); im.src = on.src; }
 }
 function ylAc(id, n){
   if (!bul(id)) id = YOLCULUK[0];
@@ -2154,7 +2154,7 @@ function kahramanSlayt(){
   var g = $('kf-gorsel'), at = $('kf-atif'); if (!kare.length || !g) return;
   var bas = Math.floor(Date.now() / 864e5) % kare.length, i = bas;
   function goster(){
-    var k = kare[i % kare.length], ft = k.ft, src = window.innerWidth <= 700 && ft.kucuk ? ft.kucuk : ft.src;
+    var k = kare[i % kare.length], ft = k.ft, src = ft.src;
     var im = new Image(); im.onload = function(){
       g.classList.add('soluk');
       setTimeout(function(){ g.classList.add('foto', 'slayt'); g.style.backgroundImage = 'url("' + src + '")'; g.style.backgroundPosition = 'center'; g.classList.remove('soluk');

@@ -409,6 +409,17 @@ details.koyu-alinti cite{color:#D9CFC0}
   #yan li b{color:#A0561F}
   #yan small{color:#4A5868}
 }
+
+/* Tarayıcıda tam boy (kullanıcı isteği): masaüstünde telefon şeridi yok, sahneler pencereyi kaplar, metin okunur genişlikte */
+@media (min-width:700px){
+  #app{max-width:none;border-radius:0!important;box-shadow:none!important}
+  #yan{display:none!important}
+  .harita-serit{max-width:none;padding-left:max(16px,calc(50% - 480px));padding-right:max(16px,calc(50% - 480px))}
+  .ic{width:100%;max-width:820px;margin-left:auto;margin-right:auto;padding-left:24px;padding-right:24px;box-sizing:border-box}
+  .sahne [role="img"][style*="height"],.ekran > [role="img"][style*="height"]{height:min(64vh,680px)!important}
+  .sahne .ust{max-width:820px;margin:0 auto;width:100%;box-sizing:border-box}
+  #app > section.koyu > div:not(.kenburns) > div{width:100%;max-width:820px;margin-left:auto;margin-right:auto;box-sizing:border-box}
+}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 .foto-atif{position:absolute;right:8px;bottom:6px;z-index:5;font:11px/1.5 system-ui,-apple-system,sans-serif;color:#eee;background:rgba(0,0,0,.55);padding:1px 7px;border-radius:6px;max-width:calc(100% - 16px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:auto}.foto-atif a{color:#fff;text-decoration:underline}
 </style>

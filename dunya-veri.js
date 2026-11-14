@@ -248,3 +248,35 @@ duraklar: [
   kaynak: [{ ad: 'SEP: Nishida Kitarō', url: 'https://plato.stanford.edu/entries/nishida-kitaro/' }, { ad: 'SEP: The Kyoto School', url: 'https://plato.stanford.edu/entries/kyoto-school/' }] }
 ]
 };
+
+/* Ziyaretini planla: otel araması için "kent, ülke", tur araması için sorgu. Türkiye durakları (yer)
+   Türkiye haritasının kasaba/tur bilgisini kullanır. null: seyahat uyarısı ya da yaptırım nedeniyle
+   bu durak için rezervasyon bağlantısı gösterilmez. */
+window.DUNYA.plan = {
+  elea: { otel: 'Ascea, Italy', tur: 'Paestum Velia' },
+  athens: { otel: 'Athens, Greece', tur: 'Acropolis Athens' },
+  sarnath: { otel: 'Varanasi, India', tur: 'Sarnath' },
+  louguantai: { otel: "Xi'an, China", tur: "Xi'an" },
+  qufu: { otel: 'Qufu, China', tur: 'Qufu' },
+  alexandria: { otel: 'Alexandria, Egypt', tur: 'Alexandria Egypt' },
+  rome: { otel: 'Rome, Italy', tur: 'Roman Forum' },
+  hippo: { otel: 'Annaba, Algeria', tur: 'Annaba' },
+  nalanda: { otel: 'Rajgir, India', tur: 'Nalanda' },
+  baghdad: null,
+  bukhara: { otel: 'Bukhara, Uzbekistan', tur: 'Bukhara' },
+  cordoba: { otel: 'Cordoba, Spain', tur: 'Cordoba Mezquita' },
+  paris: { otel: 'Paris, France', tur: 'Latin Quarter Paris' },
+  tunis: { otel: 'Tunis, Tunisia', tur: 'Tunis Medina' },
+  florence: { otel: 'Florence, Italy', tur: 'Florence' },
+  timbuktu: null,
+  isfahan: null,
+  aksum: null,
+  mexico: { otel: 'Mexico City, Mexico', tur: 'Mexico City' },
+  amsterdam: { otel: 'Amsterdam, Netherlands', tur: 'Amsterdam' },
+  edinburgh: { otel: 'Edinburgh, United Kingdom', tur: 'Edinburgh Old Town' },
+  konigsberg: null,
+  berlin: { otel: 'Berlin, Germany', tur: 'Berlin' },
+  copenhagen: { otel: 'Copenhagen, Denmark', tur: 'Copenhagen' },
+  concord: { otel: 'Concord, Massachusetts', tur: 'Concord Lexington' },
+  kyoto: { otel: 'Kyoto, Japan', tur: 'Kyoto' }
+};

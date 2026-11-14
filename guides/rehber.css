@@ -38,3 +38,56 @@ footer{max-width:760px;margin:0 auto;padding:0 16px 40px;font-family:var(--ui);f
 
 /* Garamond'un küçük x-yüksekliği için arayüz metinleri biraz büyük */
 .ust{font-size:16px}.etiket{font-size:13.5px}.ozet{font-size:17.5px}.cta small{font-size:13px}.cta a{font-size:17px}.not,footer{font-size:15.5px}
+
+/* ==========================================================================
+   Üst gezinme, mekân sayfaları, mekân dizini, pasaport
+   ========================================================================== */
+.ust-nav{display:flex;gap:16px;flex-wrap:wrap}
+.kirinti{font-size:16px;color:var(--soluk);margin-top:16px}
+.kirinti a{color:var(--soluk)}
+.yer-bas{display:flex;gap:18px;align-items:center;margin-top:8px}
+.yer-bas .etiket{margin-top:0;color:var(--r,var(--toprak))}
+.yer-bas h1{margin:2px 0 2px}
+.yer-alt{margin:0;color:var(--soluk);font-size:17px}
+.yer-amblem{flex:none;width:92px;height:92px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 3px var(--r,var(--toprak)),0 14px 28px -18px rgba(40,30,20,.6)}
+.kim{font-size:18px}
+.soz-blok{margin:22px 0;padding:20px 22px;border-radius:20px;background:#1F2A36;color:#F4EFE6}
+.soz-blok small{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--okra);font-weight:600}
+.soz-blok blockquote{border:0;padding:0;margin:8px 0;font-size:24px;line-height:1.35;color:#fff}
+.soz-blok figcaption{font-size:16px;color:#C9C1B4}
+.soz-blok a{color:var(--okra)}
+.fikir-liste{padding-left:22px}
+.fikir-liste li{margin:12px 0}
+.fikir-liste p{margin:2px 0}
+.sanat-liste,.bag-liste,.kaynak-liste{padding-left:20px}
+.sanat-liste li{margin:10px 0}
+.sanat-liste b{display:block}
+.rota-liste li{margin:6px 0}
+.dusun{margin:16px 0;padding:16px 20px;border-radius:16px;background:#fff;box-shadow:var(--golge);border-left:4px solid var(--r,var(--toprak))}
+.dusun small{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--r,var(--toprak));font-weight:600}
+.dusun p{margin:4px 0 0;font-style:italic;font-size:21px}
+.zaman{list-style:none;padding:0}
+.zaman li{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--ince)}
+.zaman span{font-weight:700;color:var(--r,var(--toprak))}
+.zaman p{margin:0}
+.muhur-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin:28px 0;padding:18px 20px;border-radius:20px;background:#fff;box-shadow:var(--golge)}
+.muhur-cta div{flex:1 1 220px}
+.muhur-cta small{display:block;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--toprak);font-weight:600}
+.muhur-cta b{font-size:21px}
+.muhur-cta button{min-height:46px;padding:0 20px;border-radius:12px;border:0;background:var(--r,var(--koyu));color:#fff;font:inherit;font-weight:700;font-size:17px;cursor:pointer}
+.muhur-cta button:disabled{opacity:.75;cursor:default}
+.komsu{display:flex;justify-content:space-between;gap:12px;margin-top:32px;flex-wrap:wrap}
+.komsu a{font-weight:600}
+.yer-izgara{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:20px}
+.yer-izgara a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:#fff;box-shadow:var(--golge);text-decoration:none;color:var(--koyu)}
+.yer-izgara .yer-amblem{width:56px;height:56px;box-shadow:inset 0 0 0 2px var(--r)}
+.yer-izgara b{display:block;font-size:19px;line-height:1.2}
+.yer-izgara small{color:var(--soluk);font-size:15px}
+@media (max-width:600px){
+  .ust{flex-wrap:wrap}
+  .yer-amblem{width:72px;height:72px}
+  .zaman li{grid-template-columns:96px 1fr}
+}
+.sss details{background:#fff;border-radius:14px;box-shadow:var(--golge);margin:10px 0;padding:0 18px}
+.sss summary{cursor:pointer;font-weight:700;font-size:19px;padding:14px 0;min-height:44px}
+.sss p{margin:0 0 14px}

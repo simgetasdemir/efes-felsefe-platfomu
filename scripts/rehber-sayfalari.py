@@ -6,7 +6,7 @@ Metni değiştirmek için aşağıdaki SAYFALAR listesini düzenle ve betiği ye
 Otel ve tur bağlantılarının kimlikleri ortaklik.js dosyasından gelir; burada kimlik yazılmaz.
 Alan adı belli olunca ALAN değişkenini doldur: canonical ve paylaşım adresleri tam olur.
 """
-import html, json, os, urllib.parse
+import html, json, os, re, urllib.parse
 
 ALAN = ''  # ör. 'https://www.ornek.com' (sonunda / olmadan)
 KOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'guides')
@@ -29,11 +29,18 @@ def tur(sorgu, baslik, alt='Tours and tickets'):
 
 ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Booking.com, Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>'
 
-def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili):
+def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
     adres = (ALAN + '/guides/' + slug) if ALAN else ''
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": baslik, "description": aciklama, "inLanguage": "en",
           "about": {"@type": "Place", "name": etiket}, "isPartOf": {"@type": "WebSite", "name": "Philosophy Map of Türkiye"}}
     if adres: ld["mainEntityOfPage"] = adres
+    sss_html = ''
+    if sss:
+        sss_html = '<h2>Frequently asked questions</h2><div class="sss">' + ''.join(f'<details><summary>{e(q)}</summary><p>{a}</p></details>' for q, a in sss) + '</div>'
+        sss_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": html.unescape(re.sub('<[^>]+>', '', a))}} for q, a in sss]}
+        sss_ld = f'<script type="application/ld+json">{json.dumps(sss_ld, ensure_ascii=False)}</script>'
+    else:
+        sss_ld = ''
     ilgili_html = ''.join(f'<a href="{a}">{e(b)} →</a>' for a, b in ilgili)
     return f'''<!doctype html>
 <html lang="en">
@@ -54,18 +61,20 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <link rel="stylesheet" href="/guides/rehber.css">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+{sss_ld}
 </head>
 <body>
-<header class="ust"><a class="marka" href="/">Philosophy Map of Türkiye</a><a href="/guides/philosophy-trip-turkey">All guides</a></header>
+<header class="ust"><a class="marka" href="/">Philosophy Map of Türkiye</a><nav class="ust-nav"><a href="/places/">Places</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">All guides</a></nav></header>
 <main>
 <div class="etiket">{e(etiket)}</div>
 <h1>{e(baslik)}</h1>
 <p class="giris">{giris}</p>
 <div class="ozet"><b>In short</b><ul>{''.join('<li>' + x + '</li>' for x in ozet)}</ul></div>
 {govde}
+{sss_html}
 {ACIKLAMA}
 <h2>Keep exploring</h2>
-<div class="ilgili">{ilgili_html}<a href="/">Open the philosophy map →</a></div>
+<div class="ilgili">{ilgili_html}<a href="/places/">All 22 places, one page each →</a><a href="/">Open the philosophy map →</a></div>
 </main>
 <footer>Travel times are approximate; check opening hours and tickets before you go. Ideas are summarised from the Stanford Encyclopedia of Philosophy and other scholarly sources linked on the map.</footer>
 <script src="/ortaklik.js"></script>
@@ -281,6 +290,327 @@ SAYFALAR.append(dict(
 ''',
   ilgili=[('/#likya', 'Lycia on the philosophy map'), ('/guides/antalya-ancient-cities-perge-aspendos', 'Perge, Aspendos and Side from Antalya')]))
 
+# ---------------------------------------------------------------- SEO yazıları (anahtar kelime hedefli)
+# Her yazının hedef anahtar kelimesi yorum satırında. Başlık, açıklama, ilk paragraf ve en az bir H2 bu kelimeyi içerir.
+
+# Hedef: "things to do in Ephesus"
+SAYFALAR.append(dict(
+  slug='things-to-do-in-ephesus',
+  baslik='12 things to do in Ephesus and Selçuk (beyond the Library of Celsus)',
+  aciklama='The best things to do in Ephesus and Selçuk: the Library of Celsus, the Terrace Houses, the Great Theatre, the Temple of Artemis, the Basilica of St John, Şirince and more, with tips on timing and tickets.',
+  etiket='Ephesus · Selçuk, İzmir',
+  giris='Most visitors give Ephesus three hours and leave. That is a pity, because the ruins are only half of it. Here are the best things to do in Ephesus and in Selçuk, the small town next to it, in the order that makes a good day or two.',
+  ozet=['Arrive when the gates open and walk downhill from the upper gate.',
+        'Pay the extra ticket for the <b>Terrace Houses</b>: they are the highlight for many visitors.',
+        'Keep the afternoon for Selçuk: the Ephesus Museum, the Basilica of St John and the Temple of Artemis.',
+        'Sleep in Selçuk or Şirince so you can start early.'],
+  govde=f'''
+<h2>Things to do inside ancient Ephesus</h2>
+<h3>1. Walk Curetes Street from the upper gate</h3>
+<p>Start at the upper (Magnesian) gate and walk downhill. Curetes Street runs past fountains, honorific monuments and the Temple of Hadrian, with its carved arch, to the lower city. Walking downhill saves your legs and gives you the best view of the Library of Celsus as it comes into sight.</p>
+<h3>2. See the Library of Celsus</h3>
+<p>The two-storey façade of the Library of Celsus, built in the 2nd century AD as a library and a tomb for a Roman governor, is the image everyone knows. Look for the four niches with statues of Wisdom, Virtue, Thought and Knowledge (the ones on site are copies).</p>
+<h3>3. Step inside the Terrace Houses</h3>
+<p>Under a modern roof on the slope above Curetes Street are the homes of wealthy Roman families, with wall paintings, mosaic floors and marble panels still being pieced together. It is a separate ticket, and worth it.</p>
+<h3>4. Sit in the Great Theatre</h3>
+<p>The Great Theatre held about 25,000 people. It is where, according to the Acts of the Apostles, the silversmiths rioted against Paul. From the top rows you can see the Harbour Street running towards what was once the sea.</p>
+<h3>5. Stand where Heraclitus lived</h3>
+<p>Ephesus was the home of Heraclitus, around 500 BC, the philosopher of change and the <i>logos</i>. Nothing of his house survives, but reading a few of his fragments in the city makes the visit different. Our <a href="/places/ephesus">Ephesus page</a> has his key ideas, with sources.</p>
+{tur('Ephesus Terrace Houses', 'Guided tours of Ephesus and the Terrace Houses')}
+<h2>Things to do in Selçuk, next to Ephesus</h2>
+<h3>6. The Ephesus Museum</h3>
+<p>In the centre of Selçuk, the museum holds the famous statues of Artemis of Ephesus found in the city, and finds from the Terrace Houses. Visit it after the ruins, when you know what you are looking at.</p>
+<h3>7. The Temple of Artemis</h3>
+<p>One of the Seven Wonders of the ancient world is now a single re-erected column in a marshy field, often with a stork's nest on top. It is a quiet, strange and moving place at sunset.</p>
+<h3>8. The Basilica of St John and Ayasuluk Hill</h3>
+<p>On the hill above the town are the ruins of the great basilica built over the traditional tomb of John the Apostle, and a Byzantine and Turkish fortress. The views over the plain are wide.</p>
+<h3>9. The İsa Bey Mosque</h3>
+<p>At the foot of the hill stands a 14th-century mosque of the Aydınoğulları, built partly with reused ancient columns: a good place to see how one civilisation builds on another.</p>
+<h3>10. The House of the Virgin Mary</h3>
+<p>On Bülbül Mountain above Ephesus is a small chapel venerated by Christians and Muslims as the last home of Mary. It is a pilgrimage site, so dress modestly.</p>
+<h2>Around Ephesus</h2>
+<h3>11. Şirince village</h3>
+<p>A hillside village of stone houses about 8 km above Selçuk, known for fruit wines, olive oil and lunch in a garden.</p>
+<h3>12. Day trips to Priene, Miletus and Didyma</h3>
+<p>Within about an hour to the south are three more great sites: Priene on its terraces, Miletus, the city of the first philosophers, and the Temple of Apollo at Didyma. See our <a href="/places/priene-didyma">Priene and Didyma</a> and <a href="/places/miletus">Miletus</a> pages.</p>
+{tur('Priene Miletus Didyma', 'Day tours to Priene, Miletus and Didyma')}
+{otel('Selçuk', 'Hotels in Selçuk, walking distance to the town sights', 'Where to stay')}
+''',
+  sss=[('How long do you need in Ephesus?', 'Allow at least three hours for the ancient city, and four with the Terrace Houses. Add half a day for the museum, the Temple of Artemis and the Basilica of St John in Selçuk.'),
+       ('What is the best time to visit Ephesus?', 'Spring (April to early June) and autumn (September and October). In any season, go as soon as the gates open: by late morning the site is hot and busy with tour groups.'),
+       ('Are the Terrace Houses worth it?', 'Yes, for most visitors. They are the best-preserved Roman houses in the region, with paintings and mosaics, and they are less crowded than the main street.'),
+       ('Where should I stay for Ephesus?', 'Selçuk is the closest town, about 3 km from the ruins. Şirince is a quiet village above it, and Kuşadası is a beach resort about 20 km away. See <a href="/guides/where-to-stay-in-ephesus">where to stay for Ephesus</a>.')],
+  ilgili=[('/guides/where-to-stay-in-ephesus', 'Where to stay for Ephesus'), ('/guides/ephesus-to-pamukkale-itinerary', 'Ephesus to Pamukkale in 4 days'), ('/places/ephesus', 'Ephesus and Heraclitus')]))
+
+# Hedef: "Cappadocia itinerary", "3 days in Cappadocia"
+SAYFALAR.append(dict(
+  slug='cappadocia-3-day-itinerary',
+  baslik='Cappadocia itinerary: 3 days of rock churches, valleys and balloons',
+  aciklama='A 3-day Cappadocia itinerary: Göreme Open-Air Museum, a sunrise balloon flight, the Rose and Red Valleys, an underground city, Ihlara Valley and Avanos, with where to stay each night.',
+  etiket='Cappadocia · Nevşehir',
+  giris='Three days is the right amount of time for Cappadocia: enough for a balloon morning, the painted rock churches, a walk through the valleys and one underground city, without rushing. This Cappadocia itinerary assumes you sleep in Göreme or Ürgüp and have a car or book day tours.',
+  ozet=['<b>Day 1</b> Göreme Open-Air Museum, Uçhisar, sunset over the Rose Valley.',
+        '<b>Day 2</b> Sunrise balloon flight, then Paşabağ, Zelve and Avanos.',
+        '<b>Day 3</b> An underground city and the Ihlara Valley walk.',
+        'Book the balloon for your first morning: flights are often cancelled by wind, so you keep a spare day.'],
+  govde=f'''
+<h2>Day 1: Göreme and the painted churches</h2>
+<p>Start at the <b>Göreme Open-Air Museum</b>, a valley of monastic churches cut into the rock and painted between roughly the 10th and 12th centuries. Pay the extra ticket for the <b>Dark Church</b>, whose frescoes kept their colours because so little light reaches them, and do not miss the <b>Tokalı Church</b> just below the entrance. In the afternoon climb <b>Uçhisar Castle</b>, the highest rock in the area, and end the day on the ridge above the <b>Rose and Red Valleys</b> for sunset.</p>
+<p><b>Philosophy:</b> this was the land of the Cappadocian Fathers, Basil of Caesarea, Gregory of Nazianzus and Gregory of Nyssa, who used Greek philosophy to think about God, the soul and the care of the poor. See our <a href="/places/cappadocia">Cappadocia page</a>.</p>
+{tur('Cappadocia red tour Göreme Open Air Museum', 'Göreme and northern Cappadocia day tours')}
+<h2>Day 2: A balloon at sunrise, then the fairy chimneys</h2>
+<p>Hot-air balloons lift off around dawn when the weather allows. Prices change with the season, and flights are cancelled on windy mornings, which is why it pays to book for day 1 or 2 and keep a spare. After breakfast, drive to <b>Paşabağ</b> (Monks' Valley) for the mushroom-capped chimneys, then to the <b>Zelve Open-Air Museum</b>, a village abandoned in the 1950s. Spend the afternoon in <b>Avanos</b> on the Kızılırmak river, the pottery town.</p>
+{tur('Cappadocia hot air balloon', 'Hot-air balloon flights in Cappadocia')}
+<h2>Day 3: Underground city and the Ihlara Valley</h2>
+<p>Go down into <b>Derinkuyu</b> or <b>Kaymaklı</b>, underground cities with several levels of rooms, stables, chapels and ventilation shafts, used as refuges over many centuries. Then drive to the <b>Ihlara Valley</b>, a canyon with a stream and rock churches along its walls. The walk from Ihlara village to Belisırma is about 4 km. Finish at <b>Selime Monastery</b>, a rock-cut complex at the end of the valley.</p>
+{tur('Cappadocia green tour Ihlara Derinkuyu', 'Underground city and Ihlara Valley tours')}
+<h2>Where to stay in Cappadocia</h2>
+<p><b>Göreme</b> is at the centre of everything and has the most cave hotels. <b>Uçhisar</b> is quieter, with the best views. <b>Ürgüp</b> is a real town with more restaurants. For the details, read <a href="/guides/where-to-stay-in-cappadocia">where to stay in Cappadocia</a>.</p>
+{otel('Göreme', 'Cave hotels in Göreme')}
+{otel('Ürgüp', 'Hotels in Ürgüp')}
+<h2>Add Konya on day 4</h2>
+<p>Konya, the city of Rumi and the Mevlana Museum, is about two and a half to three hours west by road. It makes a natural fourth day. Our <a href="/places/konya">Konya page</a> explains Rumi's thought.</p>
+''',
+  sss=[('How many days do you need in Cappadocia?', 'Three days is ideal: one for the Göreme Open-Air Museum and valleys, one for the balloon and the fairy chimneys, and one for an underground city and the Ihlara Valley. Two days is possible if you skip Ihlara.'),
+       ('What is the best base in Cappadocia?', 'Göreme is the most central and has the most cave hotels. Uçhisar is quieter with wide views; Ürgüp is a larger town with more restaurants.'),
+       ('Which underground city is best, Derinkuyu or Kaymaklı?', 'Derinkuyu goes deeper; Kaymaklı is wider and usually a little less crowded. One is enough for most visitors.'),
+       ('How do you get to Cappadocia?', 'Fly to Kayseri or Nevşehir (Kapadokya) airport, both about an hour or less from Göreme, or take an overnight bus from Istanbul.')],
+  ilgili=[('/guides/where-to-stay-in-cappadocia', 'Where to stay in Cappadocia'), ('/places/cappadocia', 'Cappadocia and the Cappadocian Fathers'), ('/places/konya', 'Konya and Rumi')]))
+
+# Hedef: "Göbekli Tepe tour", "how to visit Göbekli Tepe"
+SAYFALAR.append(dict(
+  slug='how-to-visit-gobekli-tepe',
+  baslik='How to visit Göbekli Tepe from Şanlıurfa: tickets, tours and what to see',
+  aciklama='How to visit Göbekli Tepe, one of the oldest known monumental sites in the world: getting there from Şanlıurfa, tours, what to see, Karahan Tepe, the Şanlıurfa Museum and where to stay.',
+  etiket='Göbekli Tepe · Şanlıurfa',
+  giris='Göbekli Tepe is a hilltop of great stone enclosures built by hunter-gatherers some eleven thousand years ago, thousands of years before writing or the wheel. It is easy to visit from the city of Şanlıurfa. Here is how to visit Göbekli Tepe, and what to see around it.',
+  ozet=['Göbekli Tepe is about 15 km northeast of Şanlıurfa, roughly 20 to 30 minutes by car or taxi.',
+        'UNESCO dates its use to around 9600 to 8200 BC. It is a World Heritage Site since 2018.',
+        'See the <b>Şanlıurfa Archaeology Museum</b> too: it holds many of the finds.',
+        'Stay in Şanlıurfa and add <b>Karahan Tepe</b> and <b>Harran</b>.'],
+  govde=f'''
+<h2>What Göbekli Tepe is</h2>
+<p>The site is a series of round and oval enclosures ringed by T-shaped limestone pillars, some over five metres tall. Many are carved with foxes, boars, snakes, vultures and scorpions, and some have arms and hands, as if the pillars were people. It was built by people who did not yet farm, which surprised archaeologists: monumental building had been thought to come after agriculture.</p>
+<p class="not">What the enclosures were for is still debated. They were first described as temples; more recent work has found evidence of daily life nearby, and some researchers now see them as large communal buildings. Our <a href="/places/gobekli-tepe-sanliurfa">Göbekli Tepe page</a> sets out what is known and what is not.</p>
+<h2>How to get to Göbekli Tepe</h2>
+<p>The site is about 15 km northeast of the Şanlıurfa city centre. The simplest way is a taxi or a rental car. There are also shuttle services from the visitor centre and organised tours from Şanlıurfa, some of which include Karahan Tepe and Harran. Şanlıurfa has an airport (GAP) with flights from Istanbul and Ankara.</p>
+{tur('Gobekli Tepe', 'Göbekli Tepe tours from Şanlıurfa')}
+<h2>What to see at the site</h2>
+<p>From the visitor centre a short walk or shuttle takes you up to the main excavation, covered by a large membrane roof. Walkways circle the enclosures so you can look down on the pillars. Look for the fox carved on the pillars of Enclosure D and for the hands on the central pillars. Allow about one to two hours.</p>
+<h2>Karahan Tepe and the Taş Tepeler</h2>
+<p>Göbekli Tepe is not alone. It belongs to a group of related sites in the hills around Şanlıurfa, known as the <i>Taş Tepeler</i> ("Stone Hills"). The best known, <b>Karahan Tepe</b>, has a room of pillars carved out of the bedrock and a striking carved human head. It is about an hour from the city.</p>
+<h2>The Şanlıurfa Archaeology Museum and Balıklıgöl</h2>
+<p>Back in the city, the <b>Şanlıurfa Archaeology Museum</b> is one of the largest in Türkiye and shows finds from Göbekli Tepe and from the region, including the "Urfa Man", a life-size stone figure dated to the same period. Next door, the <b>Haleplibahçe Mosaic Museum</b> protects Roman villa mosaics. In the evening walk to <b>Balıklıgöl</b>, the pools of sacred carp linked to the story of Abraham.</p>
+<h2>Harran</h2>
+<p>About 45 km south of the city, Harran has beehive-shaped mud-brick houses and the ruins of a medieval mosque and university. It was a centre of learning in late antiquity and the early Islamic period.</p>
+{otel('Şanlıurfa', 'Hotels in Şanlıurfa', 'Where to stay')}
+''',
+  sss=[('How old is Göbekli Tepe?', 'UNESCO dates the site to around 9600 to 8200 BC, in the Pre-Pottery Neolithic. That makes it one of the oldest known monumental sites in the world.'),
+       ('How far is Göbekli Tepe from Şanlıurfa?', 'About 15 km northeast of the city centre, usually 20 to 30 minutes by car or taxi.'),
+       ('How long do you need at Göbekli Tepe?', 'One to two hours at the site. Add half a day for the Şanlıurfa Archaeology Museum and Balıklıgöl, and a further half day for Karahan Tepe or Harran.'),
+       ('Is Göbekli Tepe a temple?', 'That is debated. It was first described as a temple; newer research suggests the enclosures may also have been communal buildings used by people who lived nearby.')],
+  ilgili=[('/places/gobekli-tepe-sanliurfa', 'Göbekli Tepe and Şanlıurfa'), ('/guides/mount-nemrut-sunrise', 'Mount Nemrut at sunrise'), ('/places/mardin', 'Mardin')]))
+
+# Hedef: "Mount Nemrut sunrise"
+SAYFALAR.append(dict(
+  slug='mount-nemrut-sunrise',
+  baslik='Mount Nemrut at sunrise: how to visit the stone heads',
+  aciklama='How to see the sunrise or sunset on Mount Nemrut: the colossal statues of Antiochus I of Commagene, when to go, how to get there from Kahta, Malatya or Şanlıurfa, and where to stay.',
+  etiket='Mount Nemrut · Adıyaman',
+  giris='On top of Mount Nemrut, over 2,100 metres up, a king of the first century BC built himself a burial mound and surrounded it with giant statues of gods and of himself. Their heads now sit on the ground, and they turn gold at dawn. Seeing the Mount Nemrut sunrise takes some planning. Here is how.',
+  ozet=['Sunrise is seen from the <b>east terrace</b>, sunset from the <b>west terrace</b>.',
+        'The summit road is generally open from spring to autumn; check before you go in winter.',
+        'Most people stay in <b>Kahta</b> or the village of <b>Karadut</b> and leave before dawn.',
+        'Bring warm clothes even in summer: it is cold on the top before sunrise.'],
+  govde=f'''
+<h2>What you will see</h2>
+<p>Mount Nemrut (Nemrut Dağı) was the tomb-sanctuary of <b>Antiochus I</b>, king of Commagene in the first century BC. On the peak is an artificial mound of loose stones. On its east and west terraces stood rows of seated colossal statues: the king, Greek and Persian gods merged into one (Zeus-Oromasdes, Apollo-Mithras-Helios-Hermes, Heracles-Artagnes-Ares) and the goddess of Commagene. Earthquakes toppled the heads, which now stand in a row at the foot of the bodies. The site has been on the UNESCO World Heritage List since 1987.</p>
+<p>The king also left a long inscription explaining what he had built and why. Our <a href="/places/mount-nemrut">Mount Nemrut page</a> explains how this mixing of Greek and Persian gods fits into the history of ideas.</p>
+<h2>Sunrise or sunset on Mount Nemrut?</h2>
+<p>Both are beautiful. <b>Sunrise</b> is the classic: you climb in the dark, wait on the east terrace, and watch the first light hit the faces. <b>Sunset</b> on the west terrace is easier, warmer and has fewer early starts. If you can, stay a night nearby and do both.</p>
+<p>From the car park it is a walk of about 600 metres, steep in places, up to the terraces. Allow 20 to 30 minutes.</p>
+{tur('Mount Nemrut sunrise', 'Mount Nemrut sunrise and sunset tours')}
+<h2>How to get to Mount Nemrut</h2>
+<p>The usual bases are <b>Kahta</b> (in Adıyaman province) and the small village of <b>Karadut</b>, which is closer to the top. Tours also leave from Şanlıurfa, Malatya and Cappadocia, but those are long nights. The nearest airport is Adıyaman. In winter, snow can close the road to the summit, so the usual season is roughly May to October.</p>
+<h2>On the way: Arsameia, Cendere Bridge and Karakuş</h2>
+<p>Many tours stop at <b>Arsameia</b>, the old Commagene capital, where a relief shows the king shaking hands with Heracles; at the Roman <b>Cendere Bridge</b>; and at <b>Karakuş</b>, a burial mound for the royal women, with a column topped by an eagle.</p>
+{otel('Kahta', 'Hotels in Kahta for Mount Nemrut', 'Where to stay')}
+<h2>Combine with Göbekli Tepe and Zeugma</h2>
+<p>Mount Nemrut sits well in a five-day route through Mesopotamia: the Zeugma mosaics in Gaziantep, Nemrut, Göbekli Tepe and Mardin. See <a href="/places/zeugma-gaziantep">Zeugma</a> and <a href="/guides/how-to-visit-gobekli-tepe">how to visit Göbekli Tepe</a>.</p>
+''',
+  sss=[('What time is sunrise on Mount Nemrut?', 'It depends on the season: roughly 5 am in early summer and 6 to 7 am in autumn. Tours from Kahta usually leave two to three hours before sunrise.'),
+       ('Is it cold on Mount Nemrut?', 'Yes. The summit is over 2,100 metres high and the wind is strong before dawn. Bring a warm jacket, even in July.'),
+       ('When is Mount Nemrut open?', 'The summit road is usually open from about May to October. In winter, snow can close it; check locally before you go.'),
+       ('Who built Mount Nemrut?', 'Antiochus I, king of Commagene, in the first century BC, as his tomb-sanctuary. The burial chamber itself has never been found.')],
+  ilgili=[('/places/mount-nemrut', 'Mount Nemrut on the map'), ('/guides/how-to-visit-gobekli-tepe', 'How to visit Göbekli Tepe'), ('/places/zeugma-gaziantep', 'Zeugma and Gaziantep')]))
+
+# Hedef: "visiting Troy Turkey", "Troy ruins"
+SAYFALAR.append(dict(
+  slug='visiting-troy-turkey',
+  baslik='Visiting Troy in Türkiye: the ruins, the museum and Çanakkale',
+  aciklama='A guide to visiting the ruins of Troy near Çanakkale: what to see on the site, the Troy Museum, how many cities are layered there, getting there, and combining it with Assos and Gallipoli.',
+  etiket='Troy · Çanakkale',
+  giris='The ruins of Troy are on a low mound called Hisarlık, near the Dardanelles. What you find there is not one city but many, built on top of each other for over four thousand years. Visiting Troy in Türkiye is easy from Çanakkale. Here is what to see, and how to make sense of it.',
+  ozet=['Troy is about 30 km south of Çanakkale, roughly 30 to 40 minutes by car or bus.',
+        'See the <b>Troy Museum</b> as well as the ruins: it explains the layers.',
+        'Allow two hours for the site and one to two for the museum.',
+        'Combine with <b>Assos</b> to the south and the <b>Gallipoli</b> battlefields across the strait.'],
+  govde=f'''
+<h2>Why Troy is many cities</h2>
+<p>Archaeologists count at least nine main settlements at Troy, from the early Bronze Age to the Roman city of Ilion. Each was built on the ruins of the one before, so a walk around the mound is a walk through time. Which layer, if any, matches the Troy of Homer's <i>Iliad</i> is still debated; many scholars point to the Late Bronze Age levels known as Troy VI and VIIa. The site has been on the UNESCO World Heritage List since 1998.</p>
+<h2>What to see on the site</h2>
+<p>A marked path takes you round the mound. Highlights are the sloping <b>walls and towers of Troy VI</b>, the <b>ramp of Troy II</b>, the deep trench dug by Heinrich Schliemann in the 1870s, which cut through several layers, and the small <b>Roman theatre</b> (odeon) and council house. Near the entrance stands a modern wooden horse that children can climb.</p>
+{tur('Troy Turkey', 'Troy tours from Çanakkale and Istanbul')}
+<h2>The Troy Museum</h2>
+<p>The Troy Museum, opened in 2018 near the entrance to the site, is one of the best archaeology museums in the country. It shows finds from Troy and from the region of the Troad, and makes the layers of the city easy to follow. Do not skip it.</p>
+<h2>Troy and the poets</h2>
+<p>For the ancient Greeks Troy was the setting of the <i>Iliad</i>, the first great poem of their tradition, and Homer was often called the teacher of Greece. Plato, in the <i>Republic</i>, argued about whether poets like Homer should be allowed in the ideal city. Our <a href="/places/troy">Troy page</a> tells the story, with sources.</p>
+<h2>Getting there and where to stay</h2>
+<p><b>Çanakkale</b> is the natural base, with hotels on the waterfront and a lively student town. Buses and minibuses run to Troy, and many tours include it. Çanakkale is about five to six hours by road from Istanbul, and there is a small airport.</p>
+{otel('Çanakkale', 'Hotels in Çanakkale', 'Where to stay')}
+<h2>Combine Troy with Assos and Gallipoli</h2>
+<p>Assos, where Aristotle lived for some years, is about an hour and a half south and makes a beautiful stop on the way down the coast. Across the Dardanelles are the Gallipoli battlefields of 1915. See <a href="/places/assos">Assos and Aristotle</a>.</p>
+''',
+  sss=[('Is Troy worth visiting?', 'Yes, especially if you visit the Troy Museum as well. The ruins are less spectacular than Ephesus, but the layers of so many cities on one hill, and the link to Homer, make it unique.'),
+       ('How far is Troy from Istanbul?', 'About five to six hours by road to Çanakkale, then 30 to 40 minutes to the site. Day tours from Istanbul exist but are long; one night in Çanakkale is better.'),
+       ('Was the Trojan War real?', 'No one knows for sure. Troy was a real, large Bronze Age city that was destroyed more than once; whether a war like the one in the Iliad happened is still debated.'),
+       ('How long do you need at Troy?', 'About two hours on the site and one to two hours in the Troy Museum.')],
+  ilgili=[('/places/troy', 'Troy and Homer'), ('/places/assos', 'Assos and Aristotle'), ('/places/pergamon', 'Pergamon')]))
+
+# Hedef: "best ancient ruins in Turkey"
+SAYFALAR.append(dict(
+  slug='best-ancient-ruins-in-turkey',
+  baslik='The 15 best ancient ruins in Türkiye, and the ideas behind them',
+  aciklama='The best ancient ruins in Turkey, from Göbekli Tepe and Troy to Ephesus, Pergamon, Aphrodisias, Hierapolis, Aspendos, Xanthos and Mount Nemrut, with where to stay for each.',
+  etiket='Ancient sites · Türkiye',
+  giris='Türkiye has more Greek and Roman cities than Greece, and some of the oldest monumental sites on earth. This list of the best ancient ruins in Turkey picks fifteen, and adds what most guides leave out: the people who thought and wrote there.',
+  ozet=['<b>For a first trip:</b> Ephesus, Hierapolis-Pamukkale, Aphrodisias and the Göreme valleys.',
+        '<b>For deep time:</b> Göbekli Tepe and Troy.',
+        '<b>For drama:</b> Mount Nemrut at sunrise and the theatre of Aspendos.',
+        'Every place below has its own page with sources, and a hotel suggestion.'],
+  govde=f'''
+<h2>The Aegean: the cities of the first philosophers</h2>
+<h3>1. Ephesus</h3>
+<p>The most complete Roman city in the eastern Mediterranean, with the Library of Celsus, the Great Theatre and the Terrace Houses. Home of Heraclitus. <a href="/guides/things-to-do-in-ephesus">Things to do in Ephesus</a>.</p>
+<h3>2. Pergamon</h3>
+<p>An acropolis on a steep hill above Bergama with one of the steepest theatres of antiquity, a great library and the Asklepion healing sanctuary where the physician Galen trained. <a href="/places/pergamon">Pergamon</a>.</p>
+<h3>3. Aphrodisias</h3>
+<p>A city of sculptors with a huge, well-preserved stadium and the Sebasteion reliefs. Home of Alexander of Aphrodisias, the great commentator on Aristotle. <a href="/places/aphrodisias">Aphrodisias</a>.</p>
+<h3>4. Hierapolis and Pamukkale</h3>
+<p>A Roman spa city on top of white travertine terraces, with a fine theatre and a museum in the old baths. Birthplace of Epictetus. <a href="/places/hierapolis-pamukkale">Hierapolis</a>.</p>
+<h3>5. Miletus, Priene and Didyma</h3>
+<p>Three sites within an hour of each other: Miletus, home of Thales and Anaximander; Priene, a planned city on terraces; and the vast Temple of Apollo at Didyma. <a href="/places/miletus">Miletus</a>, <a href="/places/priene-didyma">Priene and Didyma</a>.</p>
+{otel('Selçuk', 'Base for Ephesus, Miletus and Priene: Selçuk')}
+<h3>6. Assos</h3>
+<p>A temple of Athena on a volcanic hill above the sea, where Aristotle lived for some years. <a href="/places/assos">Assos</a>.</p>
+<h3>7. Troy</h3>
+<p>Nine cities on one mound, and the setting of Homer's <i>Iliad</i>, with an excellent museum. <a href="/guides/visiting-troy-turkey">Visiting Troy</a>.</p>
+<h2>The south coast: theatres and tombs</h2>
+<h3>8. Aspendos</h3>
+<p>Probably the best-preserved Roman theatre in the world, still used for performances. Near Antalya. <a href="/guides/antalya-ancient-cities-perge-aspendos">Perge, Aspendos and Side</a>.</p>
+<h3>9. Perge</h3>
+<p>Colonnaded streets, a huge stadium and the Hellenistic gate towers. Home of Apollonius, the geometer of the conic sections. <a href="/places/perge-aspendos">Perge</a>.</p>
+<h3>10. Xanthos, Letoon and Patara</h3>
+<p>Pillar tombs and the assembly hall of the Lycian League, which Montesquieu praised as a model republic. <a href="/guides/lycian-way-xanthos-patara">Lycia</a>.</p>
+<h3>11. Halicarnassus (Bodrum)</h3>
+<p>The site of the Mausoleum, one of the Seven Wonders, and the castle museum of underwater archaeology. Birthplace of Herodotus. <a href="/places/bodrum">Bodrum</a>.</p>
+{tur('Aspendos Perge', 'Tours of Aspendos, Perge and Side')}
+<h2>Central and eastern Anatolia: deep time</h2>
+<h3>12. Göbekli Tepe</h3>
+<p>Stone enclosures built by hunter-gatherers about eleven thousand years ago. <a href="/guides/how-to-visit-gobekli-tepe">How to visit Göbekli Tepe</a>.</p>
+<h3>13. Mount Nemrut</h3>
+<p>Colossal heads of gods and a king on a mountain top, at their best at sunrise. <a href="/guides/mount-nemrut-sunrise">Mount Nemrut at sunrise</a>.</p>
+<h3>14. Zeugma</h3>
+<p>A Roman city on the Euphrates whose mosaics, including the "Gypsy Girl", are in the Zeugma Mosaic Museum in Gaziantep. <a href="/places/zeugma-gaziantep">Zeugma</a>.</p>
+<h3>15. The rock churches of Cappadocia</h3>
+<p>Not Greek or Roman, but some of the most beautiful ancient and medieval sites in the country, in the land of the Cappadocian Fathers. <a href="/guides/cappadocia-3-day-itinerary">Cappadocia in 3 days</a>.</p>
+{otel('Göreme', 'Cave hotels in Göreme')}
+<h2>How to see them in one trip</h2>
+<p>You cannot see all fifteen in one holiday. For a first trip of ten days, combine Istanbul, Cappadocia and the Aegean: see our <a href="/guides/turkey-history-itinerary-10-days">10-day Turkey history itinerary</a>. Or pick one of the <a href="/#rota-bolum">ten routes on the map</a>.</p>
+''',
+  sss=[('What is the most impressive ancient site in Turkey?', 'For most visitors, Ephesus: it is the most complete Roman city in the region. For age, Göbekli Tepe; for setting, Mount Nemrut at sunrise.'),
+       ('Does Turkey have more Greek ruins than Greece?', 'Many guides say so. Western Türkiye, ancient Ionia, Aeolis, Caria and Lycia, was full of Greek cities, and many are well preserved because they were abandoned rather than built over.'),
+       ('Which ruins can you combine in one trip?', 'Ephesus, Miletus, Priene, Didyma, Aphrodisias and Hierapolis are all within a few hours of each other on the Aegean side, and make a good four- or five-day route.')],
+  ilgili=[('/places/', 'All 22 places'), ('/guides/turkey-history-itinerary-10-days', 'A 10-day history itinerary'), ('/guides/ancient-greek-philosophers-from-turkey', 'Philosophers from Türkiye')]))
+
+# Hedef: "Turkey itinerary 10 days"
+SAYFALAR.append(dict(
+  slug='turkey-history-itinerary-10-days',
+  baslik='Turkey itinerary for 10 days: Istanbul, Cappadocia, Ephesus and Pamukkale',
+  aciklama='A 10-day Turkey itinerary for history lovers: three days in Istanbul, two in Cappadocia, then Ephesus, Priene, Miletus, Aphrodisias and Pamukkale, with where to sleep each night and how to travel.',
+  etiket='Türkiye · 10 days',
+  giris='Ten days is enough for the classic triangle of Istanbul, Cappadocia and the Aegean coast, if you fly the long legs. This Turkey itinerary for 10 days is built for people who want history and ideas, with one main place each day and time to look.',
+  ozet=['<b>Days 1 to 3</b> Istanbul. Fly to Cappadocia.',
+        '<b>Days 4 to 5</b> Cappadocia. Fly to İzmir.',
+        '<b>Days 6 to 8</b> Ephesus, Priene, Miletus and Didyma from Selçuk.',
+        '<b>Days 9 to 10</b> Aphrodisias and Pamukkale. Fly home via Denizli or İzmir.'],
+  govde=f'''
+<h2>Days 1 to 3: Istanbul</h2>
+<p><b>Day 1:</b> Hagia Sophia, the Blue Mosque and the Basilica Cistern, all within a few minutes' walk in Sultanahmet. <b>Day 2:</b> Topkapı Palace and the <b>Istanbul Archaeology Museums</b> next door, among the richest collections of ancient art in the world. <b>Day 3:</b> the Chora (Kariye) mosaics, the Süleymaniye Mosque and a ferry on the Bosphorus.</p>
+<p>Istanbul was Byzantium and Constantinople, where for a thousand years scholars copied and taught the ancient texts. See our <a href="/places/istanbul">Istanbul page</a>.</p>
+{otel('İstanbul', 'Hotels in Istanbul (Sultanahmet and around)')}
+{tur('Istanbul Hagia Sophia Topkapi', 'Istanbul tours and skip-the-line tickets')}
+<h2>Days 4 to 5: Cappadocia</h2>
+<p>Fly to Kayseri or Nevşehir in about an hour and a half. <b>Day 4:</b> the Göreme Open-Air Museum and sunset over the Rose Valley. <b>Day 5:</b> a sunrise balloon, then an underground city. If you can spare a third day, follow our <a href="/guides/cappadocia-3-day-itinerary">3-day Cappadocia itinerary</a>.</p>
+{otel('Göreme', 'Cave hotels in Göreme')}
+<h2>Days 6 to 8: Ephesus and the Ionian coast</h2>
+<p>Fly to İzmir (usually via Istanbul or Ankara), then take the train or a car to Selçuk, about an hour. <b>Day 7:</b> Ephesus early, the Terrace Houses, then the museum and the Temple of Artemis. <b>Day 8:</b> Priene, Miletus and Didyma, the cities of the first philosophers. See <a href="/guides/things-to-do-in-ephesus">things to do in Ephesus</a>.</p>
+{otel('Selçuk', 'Hotels in Selçuk')}
+{tur('Ephesus', 'Ephesus tours and tickets')}
+<h2>Days 9 to 10: Aphrodisias and Pamukkale</h2>
+<p><b>Day 9:</b> drive inland to Aphrodisias, city of sculptors, then on to Pamukkale for the night. <b>Day 10:</b> walk the travertine terraces at dawn and explore Hierapolis, birthplace of Epictetus, before flying home from Denizli (via Istanbul) or driving back to İzmir.</p>
+{otel('Pamukkale', 'Hotels in Pamukkale')}
+<h2>Getting around</h2>
+<p>Domestic flights are frequent and usually cheap if booked early. On the Aegean side a rental car gives the most freedom; trains run from İzmir to Selçuk and Denizli, and intercity buses go everywhere. Leave buffer time around balloon flights, which are often cancelled by wind.</p>
+<h2>Other ways to spend 10 days</h2>
+<p>Swap Cappadocia for the south: Antalya, Perge and Aspendos, then the Lycian coast. Or go east to Göbekli Tepe, Mount Nemrut and Mardin. All ten of our routes are on the <a href="/#rota-bolum">philosophy map</a>.</p>
+''',
+  sss=[('Is 10 days enough for Turkey?', 'Ten days is enough for Istanbul, Cappadocia and the Aegean coast if you fly between them. It is not enough to add the east as well.'),
+       ('What is the best order for a Turkey itinerary?', 'Istanbul first (most international flights land there), then fly to Cappadocia, then fly to İzmir for the Aegean. End in Pamukkale or İzmir.'),
+       ('What is the best time of year?', 'April to June and September to October: warm, but not too hot for walking around ruins.')],
+  ilgili=[('/guides/best-ancient-ruins-in-turkey', 'The 15 best ancient ruins'), ('/guides/where-to-stay-in-istanbul', 'Where to stay in Istanbul'), ('/guides/ephesus-to-pamukkale-itinerary', 'Ephesus to Pamukkale in 4 days')]))
+
+# Hedef: "ancient Greek philosophers from Turkey", "Ionian philosophers"
+SAYFALAR.append(dict(
+  slug='ancient-greek-philosophers-from-turkey',
+  baslik='Ancient Greek philosophers from Türkiye, and where to find their cities',
+  aciklama='Thales, Anaximander, Heraclitus, Anaxagoras, Diogenes, Epictetus and more were born on the coasts of today\'s Türkiye. A guide to the Ionian philosophers and the ruins you can visit.',
+  etiket='Philosophy · Ionia and beyond',
+  giris='Western philosophy began in Ionia, the Greek cities on the Aegean coast of what is now Türkiye. Many of the most famous ancient Greek philosophers were born here, and you can still walk through their cities. This is who they were and where to go.',
+  ozet=['<b>Miletus:</b> Thales, Anaximander and Anaximenes, often called the first philosophers.',
+        '<b>Ephesus:</b> Heraclitus. <b>Clazomenae:</b> Anaxagoras. <b>Sinop:</b> Diogenes the Cynic.',
+        '<b>Assos, Soli, Hierapolis:</b> Aristotle\'s years in Assos, the Stoics Cleanthes and Chrysippus, and Epictetus.',
+        'Each name links to a page with the main ideas and sources.'],
+  govde=f'''
+<h2>The Ionian philosophers of Miletus</h2>
+<p><b>Thales</b> (early 6th century BC) is traditionally the first Greek philosopher. He is said to have held that water is the origin of things. <b>Anaximander</b>, his younger fellow citizen, proposed a boundless, indefinite source (the <i>apeiron</i>) and is credited with an early map of the world. <b>Anaximenes</b> chose air. What unites them is the attempt to explain nature by nature, not by myth.</p>
+<p class="not">Almost everything we know about them comes from later writers, especially Aristotle. Even the famous story that Thales predicted a solar eclipse, usually dated to 585 BC, comes from Herodotus and is debated.</p>
+<p>Visit: <a href="/places/miletus">Miletus</a>, with its great theatre and the Baths of Faustina.</p>
+{tur('Miletus Priene Didyma', 'Tours to Miletus, Priene and Didyma')}
+<h2>Heraclitus of Ephesus</h2>
+<p>Around 500 BC Heraclitus wrote that everything flows and that opposites are bound together by a hidden order, the <i>logos</i>. He was famous for being hard to understand. Visit: <a href="/places/ephesus">Ephesus</a>, and read <a href="/guides/things-to-do-in-ephesus">things to do in Ephesus</a>.</p>
+{otel('Selçuk', 'Stay in Selçuk for Ephesus')}
+<h2>Anaxagoras of Clazomenae</h2>
+<p>Anaxagoras, from Clazomenae near today's Urla, brought philosophy to Athens in the 5th century BC. He said that Mind (<i>nous</i>) set the world in motion, and that the sun was a fiery stone, which got him prosecuted for impiety. Visit: <a href="/places/clazomenae">Clazomenae</a>, with its ancient olive-oil workshop.</p>
+<h2>Bias of Priene, one of the Seven Sages</h2>
+<p>Priene, on the slopes of Mount Mykale, was the city of Bias, counted among the Seven Sages of Greece. Visit: <a href="/places/priene-didyma">Priene</a>, a planned Hellenistic town on terraces.</p>
+<h2>Aristotle in Assos</h2>
+<p>Aristotle was born in Stagira in northern Greece, but after Plato's death he spent some years at Assos, at the court of Hermias, around 347 to 345 BC, before moving to Lesbos. Assos was also the birthplace of <b>Cleanthes</b>, the second head of the Stoic school. Visit: <a href="/places/assos">Assos</a>.</p>
+<h2>Diogenes of Sinope</h2>
+<p>Diogenes the Cynic, who lived in a jar and called himself a citizen of the world, was born in Sinope, today's Sinop on the Black Sea. Visit: <a href="/places/sinop">Sinop</a>.</p>
+<h2>The Stoics: Chrysippus and Epictetus</h2>
+<p><b>Chrysippus</b>, who gave Stoic logic and ethics their system, came from Soli near today's Mersin. <b>Epictetus</b>, born a slave in Hierapolis, taught that we should care only about what is up to us. Visit: <a href="/places/soli-tarsus">Soli</a> and <a href="/places/hierapolis-pamukkale">Hierapolis</a>.</p>
+{otel('Pamukkale', 'Stay in Pamukkale for Hierapolis')}
+<h2>And more</h2>
+<p><b>Herodotus</b>, the first historian, was from Halicarnassus (<a href="/places/bodrum">Bodrum</a>). <b>Galen</b>, the physician-philosopher, from <a href="/places/pergamon">Pergamon</a>. <b>Alexander of Aphrodisias</b>, the commentator on Aristotle, from <a href="/places/aphrodisias">Aphrodisias</a>. The astronomer <b>Hipparchus</b> from Nicaea (<a href="/places/iznik">İznik</a>) and the geometer <b>Apollonius</b> from <a href="/places/perge-aspendos">Perge</a>. Later, <b>Rumi</b> taught in <a href="/places/konya">Konya</a>.</p>
+<p>Collect a stamp for each of them in your <a href="/passport">Philosophy Passport</a>: visit four Ionian cities and you earn the Ionian School badge.</p>
+''',
+  sss=[('Who was the first Greek philosopher?', 'By tradition, Thales of Miletus, in the early 6th century BC. Miletus is on the Aegean coast of today\'s Türkiye, near Didim.'),
+       ('Which Greek philosophers were born in Turkey?', 'Among others: Thales, Anaximander and Anaximenes (Miletus), Heraclitus (Ephesus), Anaxagoras (Clazomenae), Bias (Priene), Diogenes (Sinope), Cleanthes (Assos), Chrysippus (Soli) and Epictetus (Hierapolis).'),
+       ('Was Aristotle from Turkey?', 'No. He was born in Stagira in northern Greece, but he lived in Assos, on the coast of today\'s Türkiye, for some years around 347 to 345 BC.'),
+       ('What was the Ionian school?', 'The name given to the early philosophers of Ionia, especially Thales, Anaximander and Anaximenes of Miletus, who tried to explain the world through natural causes.')],
+  ilgili=[('/places/', 'All 22 places'), ('/passport', 'Your Philosophy Passport'), ('/guides/best-ancient-ruins-in-turkey', 'The 15 best ancient ruins')]))
+
 # ---------------------------------------------------------------- Merkez sayfa
 SAYFALAR.append(dict(
   slug='philosophy-trip-turkey',
@@ -301,6 +631,19 @@ SAYFALAR.append(dict(
 <a href="/guides/where-to-stay-in-cappadocia">Where to stay in Cappadocia →</a>
 <a href="/guides/antalya-ancient-cities-perge-aspendos">Perge, Aspendos and Side from Antalya →</a>
 <a href="/guides/lycian-way-xanthos-patara">Lycia and the Lycian Way →</a>
+</div>
+<h2>Plan by topic</h2>
+<div class="ilgili">
+<a href="/guides/best-ancient-ruins-in-turkey">The 15 best ancient ruins in Türkiye →</a>
+<a href="/guides/turkey-history-itinerary-10-days">Turkey itinerary for 10 days →</a>
+<a href="/guides/things-to-do-in-ephesus">12 things to do in Ephesus and Selçuk →</a>
+<a href="/guides/cappadocia-3-day-itinerary">Cappadocia itinerary: 3 days →</a>
+<a href="/guides/how-to-visit-gobekli-tepe">How to visit Göbekli Tepe →</a>
+<a href="/guides/mount-nemrut-sunrise">Mount Nemrut at sunrise →</a>
+<a href="/guides/visiting-troy-turkey">Visiting Troy →</a>
+<a href="/guides/ancient-greek-philosophers-from-turkey">Ancient Greek philosophers from Türkiye →</a>
+<a href="/places/">All 22 places, one page each →</a>
+<a href="/passport">Your Philosophy Passport: stamps and badges →</a>
 </div>
 <h2>The ten routes</h2>
 <h3>Aegean and Pamukkale · 4 days</h3>

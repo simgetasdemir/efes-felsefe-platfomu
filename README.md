@@ -110,6 +110,14 @@ Bir sağlayıcıyı tamamen gizlemek için `goster: false` yap.
 
 İngilizce, arama motoru için yazılmış sayfalar: `/guides/philosophy-trip-turkey`, `/guides/where-to-stay-in-ephesus`, `/guides/ephesus-to-pamukkale-itinerary`, `/guides/where-to-stay-in-pamukkale`, `/guides/where-to-stay-in-istanbul`, `/guides/where-to-stay-in-cappadocia`, `/guides/antalya-ancient-cities-perge-aspendos`, `/guides/lycian-way-xanthos-patara`. Metinler `scripts/rehber-sayfalari.py` içinde; değiştirdikten sonra `python3 scripts/rehber-sayfalari.py` çalıştır. Alan adı belli olunca betikteki `ALAN` değişkenini doldur.
 
+Anahtar kelime hedefli yazılar (her birinde sık sorulan sorular ve FAQ yapısal verisi var): `best-ancient-ruins-in-turkey`, `things-to-do-in-ephesus`, `cappadocia-3-day-itinerary`, `how-to-visit-gobekli-tepe`, `mount-nemrut-sunrise`, `visiting-troy-turkey`, `turkey-history-itinerary-10-days`, `ancient-greek-philosophers-from-turkey`.
+
+### Mekân sayfaları ve pasaport
+
+Her mekânın kendi İngilizce sayfası var: `/places/ephesus`, `/places/troy` … ve dizin `/places/`. Bu sayfalar ve `yer-veri.js`, `index.html` içindeki verilerden üretilir: `node scripts/sayfalar.mjs`. Haritada bir mekânı değiştirdikten sonra bu komutu yeniden çalıştır. Sayfa adresleri `index.html` içindeki `SLUG` tablosundan gelir.
+
+`/passport` (passport.html): toplanan mühürler, düşünce okulu rozetleri ve tamamlanan rota rozetleri. Mühürler yalnızca tarayıcıda (`fh-muhur`) saklanır.
+
 ## Alan adını bağlama (Vercel)
 
 **En kolay yol: alan adını Vercel'den almak.** Vercel'de proje → **Settings → Domains → Buy**. Alınan ad projeye kendiliğinden bağlanır, DNS ayarı gerekmez, HTTPS sertifikası otomatik gelir.

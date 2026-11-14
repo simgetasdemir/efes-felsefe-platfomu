@@ -11,12 +11,16 @@ window.ORTAKLIK = {
   /* Booking.com Affiliate Partner Programme: panelde verilen "aid" numarası (yalnızca rakam). */
   booking: { goster: true, aid: '' },
 
-  /* Hotels.com (Expedia Group Travel Creator Program): her kasaba için panelde
-     "Links > Create link" ile üretilen bağlantıyı ilgili satıra yapıştır. */
-  hotels: { goster: true, baglantilar: {
-    'Selçuk': '', 'Kuşadası': '', 'Şirince': '', 'Didim': '', 'Urla': '', 'Behramkale': '', 'Bergama': '',
+  /* Hotels.com (Expedia Group Travel Creator Program).
+     parametreler: Link builder'ın verdiği bağlantıdaki takip kısmı ("destination=..." dışındaki her şey).
+     Site her kasaba için Hotels.com aramasını bu parametrelerle kurar.
+     baglantilar: bir kasaba için panelden ayrıca bağlantı üretirsen buraya yapıştır; o kasabada bu kullanılır. */
+  hotels: { goster: true,
+    parametreler: 'clickref=1101lE8SjmCG&rffrid=aff.hcom.US.038.000.1011l444930.kwrd%3D1101lE8SjmCG&affcid=HCOM-US.DIRECT.PHG.1011l444930&afflid=1101lE8SjmCG&affdtl=PHG.1101lE8SjmCG.PZuCgXVVHz',
+    baglantilar: {
+    'Selçuk': 'https://www.hotels.com/Hotel-Search?destination=Selcuk%2C%20Izmir%2C%20Turkey&clickref=1101lE8SjmCG&rffrid=aff.hcom.US.038.000.1011l444930.kwrd%3D1101lE8SjmCG&affcid=HCOM-US.DIRECT.PHG.1011l444930&afflid=1101lE8SjmCG&affdtl=PHG.1101lE8SjmCG.PZuCgXVVHz', 'Kuşadası': '', 'Şirince': '', 'Didim': '', 'Urla': '', 'Behramkale': '', 'Bergama': '',
     'Pamukkale': '', 'Karahayıt': '', 'Denizli': '', 'Karacasu': '', 'Sinop': '', 'Mersin': '', 'Tarsus': '', 'Konya': '',
-    'İstanbul': '', 'İznik': '', 'Göreme': '', 'Antalya': '', 'Side': '', 'Şanlıurfa': '', 'Gaziantep': '', 'Mardin': '', 'Bodrum': '', 'Ürgüp': '', 'Çanakkale': '', 'Kahta': '', 'Kalkan': '', 'Kaş': ''
+    'İstanbul': '', 'İznik': '', 'Göreme': 'https://www.hotels.com/Hotel-Search?destination=Goreme%2C%20Nevsehir%2C%20Turkey&clickref=1101lE8SmXRt&rffrid=aff.hcom.US.038.000.1011l444930.kwrd%3D1101lE8SmXRt&affcid=HCOM-US.DIRECT.PHG.1011l444930&afflid=1101lE8SmXRt&affdtl=PHG.1101lE8SmXRt.PZtxEv0egq', 'Antalya': '', 'Side': '', 'Şanlıurfa': '', 'Gaziantep': '', 'Mardin': '', 'Bodrum': '', 'Ürgüp': '', 'Çanakkale': '', 'Kahta': '', 'Kalkan': '', 'Kaş': ''
   } },
 
   /* GetYourGuide Partner Program: panelde verilen "partner_id". */
@@ -32,6 +36,8 @@ window.ORTAKLIK = {
 
 (function(O){
   var enc = encodeURIComponent;
+  /* Hotels.com'un kendi bağlantıları gibi Türkçe harfsiz yaz: İstanbul → Istanbul */
+  function ascii(x){ var m = { 'ç':'c','Ç':'C','ğ':'g','Ğ':'G','ı':'i','İ':'I','ö':'o','Ö':'O','ş':'s','Ş':'S','ü':'u','Ü':'U','â':'a','Â':'A' }; return x.replace(/[çÇğĞıİöÖşŞüÜâÂ]/g, function(c){ return m[c]; }); }
   O.ad = { booking: 'Booking.com', hotels: 'Hotels.com', getyourguide: 'GetYourGuide', viator: 'Viator' };
   O.oteller = function(){ return ['booking', 'hotels'].filter(function(k){ return O[k] && O[k].goster; }); };
   O.turlar = function(){ return ['getyourguide', 'viator'].filter(function(k){ return O[k] && O[k].goster; }); };
@@ -39,7 +45,8 @@ window.ORTAKLIK = {
   O.otel = function(saglayici, kasaba){
     var yer = kasaba + ', Türkiye';
     if (saglayici === 'booking') return 'https://www.booking.com/searchresults.html?ss=' + enc(yer) + (O.booking.aid ? '&aid=' + enc(O.booking.aid) : '');
-    if (saglayici === 'hotels') return (O.hotels.baglantilar && O.hotels.baglantilar[kasaba]) || ('https://www.hotels.com/Hotel-Search?destination=' + enc(yer));
+    if (saglayici === 'hotels') return (O.hotels.baglantilar && O.hotels.baglantilar[kasaba]) ||
+      ('https://www.hotels.com/Hotel-Search?destination=' + enc(ascii(kasaba) + ', Turkey') + (O.hotels.parametreler ? '&' + O.hotels.parametreler : ''));
     return '';
   };
   O.tur = function(saglayici, sorgu){
@@ -49,7 +56,7 @@ window.ORTAKLIK = {
   };
   /* En az bir ortaklık kimliği dolu mu? (açıklama metnini göstermek için) */
   O.kazanc = function(){
-    if (O.booking.aid || O.getyourguide.partner_id || O.viator.pid) return true;
+    if (O.booking.aid || O.hotels.parametreler || O.getyourguide.partner_id || O.viator.pid) return true;
     var b = O.hotels.baglantilar || {}; for (var k in b) if (b[k]) return true;
     return false;
   };

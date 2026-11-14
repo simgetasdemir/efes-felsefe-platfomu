@@ -58,7 +58,7 @@ function tur(sorgu, baslik){
 const ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>';
 
 function ust(){
-  return `<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/#kesfet">Explore</a><a href="/places/">Places</a><a href="/guides/philosophy-trip-turkey">Guides</a><a href="/passport">Passport</a></nav></header>`;
+  return `<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/turkey#kesfet">Explore</a><a href="/places/">Places</a><a href="/guides/philosophy-trip-turkey">Guides</a><a href="/passport">Passport</a></nav></header>`;
 }
 function bas(baslik, aciklama, adres, ld, ek = ''){
   return `<!doctype html>
@@ -107,9 +107,9 @@ YERLER.forEach((yer, i) => {
   const soz = `<figure class="soz-blok" style="--r:${renk}"><small>${s.eser ? 'Key work' : 'In their words'}</small><blockquote>${s.eser ? '' : '“'}${e(s.en)}${s.eser ? '' : '”'}</blockquote><figcaption>${e(s.kaynakEn)}${s.birincil ? ` · <a href="${e(s.birincil[1])}" target="_blank" rel="noopener">primary source</a>` : ''}</figcaption></figure>`;
   const govde = `
 <section class="yer-kapak${kapakFoto ? ' foto' : ''}" style="--r:${renk}">${kapakFoto ? `<img class="yk-foto" src="${e(kapakFoto.src)}"${kapakFoto.kucuk ? ` srcset="${e(kapakFoto.kucuk)} 640w, ${e(kapakFoto.src)} ${kapakFoto.w || 1600}w" sizes="100vw"` : ''} alt="${e(kapakFoto.baslik ? kapakFoto.baslik.en : '')}" fetchpriority="high" decoding="async"><small class="yk-atif">Photo: <a href="${e(kapakFoto.kaynak)}" target="_blank" rel="noopener">${e(kapakFoto.yazar)}</a> · ${kapakFoto.lisansUrl ? `<a href="${e(kapakFoto.lisansUrl)}" target="_blank" rel="noopener">${e(kapakFoto.lisans)}</a>` : e(kapakFoto.lisans)}</small>` : ''}<div class="yk-ic">
-<nav class="kirinti" aria-label="Breadcrumb"><a href="/">Map</a> › <a href="/places/">Places</a> › <span>${e(m.ad)}</span></nav>
+<nav class="kirinti" aria-label="Breadcrumb"><a href="/turkey">Map</a> › <a href="/places/">Places</a> › <span>${e(m.ad)}</span></nav>
 <div class="yer-bas"><span class="yer-amblem">${amblem(yer.id, renk, 64)}</span><div><div class="etiket">${i + 1} · ${e(yer.yunan)}</div><h1>${e(m.ad)}</h1><p class="yer-alt">${e(m.il)} · ${e(m.donem)}</p></div></div>
-<div class="yk-dugmeler"><a class="yk-gezi" href="/walk/${slug}">Walk through ${e(m.ad)} →</a><a class="yk-harita" href="/#${yer.id}">See it on the map</a>${f ? '<a class="yk-harita" href="#key-ideas">Key ideas ↓</a>' : ''}</div>
+<div class="yk-dugmeler"><a class="yk-gezi" href="/walk/${slug}">Walk through ${e(m.ad)} →</a><a class="yk-harita" href="/turkey#${yer.id}">See it on the map</a>${f ? '<a class="yk-harita" href="#key-ideas">Key ideas ↓</a>' : ''}</div>
 </div></section>
 <div class="yer-duzen">
 <aside class="icindekiler" aria-label="On this page">@@ICINDEKILER@@</aside>
@@ -134,7 +134,7 @@ ${yer.id in OKUMA ? `<aside class="okuma"><small>Further reading in Turkish</sma
 <h2>Sources</h2><ul class="kaynak-liste">${(F ? F.kaynak.map(k => [k[0] + ', ' + k[1], k[2]]) : []).concat(yer.kaynaklar).map(k => `<li><a href="${e(k[1])}" target="_blank" rel="noopener">${e(k[0])}</a></li>`).join('')}</ul>
 ${ACIKLAMA}
 <nav class="komsu" aria-label="More places"><a href="/places/${SLUG[onceki.id]}">← ${e(onceki.en.ad)}</a><a href="/places/${SLUG[sonraki.id]}">${e(sonraki.en.ad)} →</a></nav>
-<p><a href="/#${yer.id}">Open ${e(m.ad)} on the map →</a></p>
+<p><a href="/turkey#${yer.id}">Open ${e(m.ad)} on the map →</a></p>
 </main>
 </div>
 ${SON}
@@ -200,7 +200,7 @@ YERLER.forEach((yer, i) => {
   duraklar.push(`<section class="durak giris-durak" id="d0">${gorsel(0)}<div class="gz-metin"><small class="gz-no">${e(yer.yunan)}</small><h1>Walk through ${e(m.ad)}</h1><p class="gz-alt">${e(m.kim)} · ${e(m.donem)} · ${e(m.il)}</p><p>${e(m.neden)}</p>${s && !s.eser ? `<blockquote>“${e(s.en)}”<cite>${e(s.kaynakEn || s.kaynak)}</cite></blockquote>` : ''}<a class="gz-basla" href="#d1">Begin the walk ↓</a></div></section>`);
   m.rota.forEach((r, k) => duraklar.push(`<section class="durak" id="d${k + 1}">${gorsel(k + 1)}<div class="gz-metin"><small class="gz-no">Stop ${k + 1} of ${m.rota.length}</small><h2>${e(r[0])}</h2><p class="gz-ilk">${e(r[1])}</p>${fikir(k)}</div></section>`));
   const son = m.rota.length + 1;
-  duraklar.push(`<section class="durak son-durak" id="d${son}">${gorsel(son)}<div class="gz-metin"><small class="gz-no">Before you leave</small><h2>Sit for a moment</h2><p>${e(Dr.dinle)}</p><div class="gz-fikir dusun"><small>Think</small><p>${e(Dr.soru)}</p></div>${yer.id in OKUMA ? `<p class="gz-okuma">Further reading in Turkish: Ahmet Arslan, <i>İlkçağ Felsefe Tarihi</i>${OKUMA[yer.id] ? ', ' + e(OKUMA[yer.id].replace('Cilt', 'Vol.')) : ''}.</p>` : ''}<div class="gz-son-linkler"><a href="/places/${slug}">Read the full entry →</a>${yer.rehber ? '<a href="/efes">Open the full Ephesus experience →</a>' : ''}<a href="/#${yer.id}">Back to the map</a></div></div></section>`);
+  duraklar.push(`<section class="durak son-durak" id="d${son}">${gorsel(son)}<div class="gz-metin"><small class="gz-no">Before you leave</small><h2>Sit for a moment</h2><p>${e(Dr.dinle)}</p><div class="gz-fikir dusun"><small>Think</small><p>${e(Dr.soru)}</p></div>${yer.id in OKUMA ? `<p class="gz-okuma">Further reading in Turkish: Ahmet Arslan, <i>İlkçağ Felsefe Tarihi</i>${OKUMA[yer.id] ? ', ' + e(OKUMA[yer.id].replace('Cilt', 'Vol.')) : ''}.</p>` : ''}<div class="gz-son-linkler"><a href="/places/${slug}">Read the full entry →</a>${yer.rehber ? '<a href="/efes">Open the full Ephesus experience →</a>' : ''}<a href="/turkey#${yer.id}">Back to the map</a></div></div></section>`);
   const adres = '/walk/' + slug;
   const baslik = `Virtual walk through ${m.ad}: ${m.kim.split(/[,;]/)[0]} stop by stop`;
   const ld = { '@context':'https://schema.org', '@type':'Article', headline:baslik, about:m.ad, isPartOf:(ALAN || '') + '/places/' + slug };

@@ -1236,7 +1236,7 @@ function seritGuncelle(){
   var en = (P.gezi && P.gezi.dil === 'en'), b = document.getElementById('harita-don-ad'), s = document.getElementById('harita-serit-ad');
   if (b) b.textContent = en ? 'Philosophy Map of Türkiye' : 'Türkiye Felsefe Haritası';
   if (s) s.textContent = en ? 'Ephesus' : 'Efes';
-  var l = document.getElementById('harita-don'); if (l) l.href = '/#efes';
+  var l = document.getElementById('harita-don'); if (l) l.href = '/turkey#efes';
   var y = document.getElementById('yan');
   if (y && y.getAttribute('data-dil') !== (en ? 'en' : 'tr')){
     y.setAttribute('data-dil', en ? 'en' : 'tr');

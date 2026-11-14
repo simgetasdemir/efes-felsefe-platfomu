@@ -1,7 +1,7 @@
 /* ==========================================================================
    ORTAKLIK (AFFILIATE) AYARLARI: TEK AYAR YERİ
    --------------------------------------------------------------------------
-   Harita (index.html) ve rehber sayfaları (guides/) bu dosyayı okur.
+   Ana sayfa küresi (index.html), Türkiye haritası (turkey.html), mekân ve rehber sayfaları bu dosyayı okur.
    Bir kimliği boş bırakırsan bağlantı yine çalışır, yalnızca komisyon gelmez.
    Herhangi bir kimlik dolunca sayfalar ortaklık açıklamasını kendiliğinden gösterir.
 
@@ -43,15 +43,16 @@ window.ORTAKLIK = {
   O.ad = { booking: 'Booking.com', hotels: 'Hotels.com', getyourguide: 'GetYourGuide', viator: 'Viator' };
   O.oteller = function(){ return ['booking', 'hotels'].filter(function(k){ return O[k] && O[k].goster; }); };
   O.turlar = function(){ return ['getyourguide', 'viator'].filter(function(k){ return O[k] && O[k].goster; }); };
-  /* kasaba: "Selçuk" gibi kısa ad; arama metnine ülke eklenir */
+  /* kasaba: "Selçuk" gibi kısa ad; arama metnine ülke eklenir. Virgül içeriyorsa ("Kyoto, Japan")
+     ülke zaten yazılmıştır, dokunulmaz (dünya rotası durakları). */
   O.otel = function(saglayici, kasaba){
-    var yer = kasaba + ', Türkiye';
+    var tam = kasaba.indexOf(',') > 0, yer = tam ? kasaba : kasaba + ', Türkiye';
     if (saglayici === 'booking'){
       var b = 'https://www.booking.com/searchresults.html?ss=' + enc(yer) + (O.booking.aid ? '&aid=' + enc(O.booking.aid) : '');
       return (O.booking.awinmid && O.booking.awinaffid) ? 'https://www.awin1.com/cread.php?awinmid=' + enc(O.booking.awinmid) + '&awinaffid=' + enc(O.booking.awinaffid) + '&ued=' + enc(b) : b;
     }
     if (saglayici === 'hotels') return (O.hotels.baglantilar && O.hotels.baglantilar[kasaba]) ||
-      ('https://www.hotels.com/Hotel-Search?destination=' + enc(ascii(kasaba) + ', Turkey') + (O.hotels.parametreler ? '&' + O.hotels.parametreler : ''));
+      ('https://www.hotels.com/Hotel-Search?destination=' + enc(tam ? ascii(kasaba) : ascii(kasaba) + ', Turkey') + (O.hotels.parametreler ? '&' + O.hotels.parametreler : ''));
     return '';
   };
   O.tur = function(saglayici, sorgu){

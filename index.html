@@ -12,7 +12,7 @@
 <link rel="manifest" href="/harita.webmanifest">
 <script>/* Eski Türkiye haritası adresleri (/#efes, /#kesfet, /#gez-...) artık /turkey'de */
 (function(){ var h = location.hash.slice(1), dunya = ["miletus","ephesus","elea","athens","sarnath","louguantai","qufu","alexandria","rome","hippo","nalanda","baghdad","bukhara","cordoba","konya","paris","tunis","florence","timbuktu","isfahan","aksum","mexico","amsterdam","edinburgh","konigsberg","berlin","copenhagen","concord","kyoto"];
-  if (h && h !== 'oku' && h.indexOf('oku-') !== 0 && dunya.indexOf(decodeURIComponent(h)) < 0) location.replace('/turkey' + location.hash); })();</script>
+  if (h && h !== 'oku' && h.indexOf('oku-') !== 0 && h.indexOf('turkiye') !== 0 && dunya.indexOf(decodeURIComponent(h)) < 0) location.replace('/turkey' + location.hash); })();</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Antikyol">
 <meta property="og:locale" content="en_GB">
@@ -35,7 +35,7 @@
 <body class="ev">
 <header class="site-ust">
   <a class="marka-ana" href="/" aria-label="Antikyol"><img src="/logo.svg" alt="" width="36" height="36"><span class="marka-yazi">antikyol</span></a>
-  <nav class="site-nav" aria-label="Site"><a href="/turkey">Türkiye</a><a href="#oku" data-eylem="okuyucu">Read</a><a href="/places/">Places</a><a href="/passport">Passport</a></nav>
+  <nav class="site-nav" aria-label="Site"><a href="/turkey" data-eylem="turkiye">Türkiye</a><a href="#oku" data-eylem="okuyucu">Read</a><a href="/places/">Places</a><a href="/passport">Passport</a></nav>
   <div class="dil" role="group" aria-label="Dil / Language"><button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button></div>
 </header>
 <main class="kure-bolum" id="kure-bolum" aria-labelledby="baslik">
@@ -51,9 +51,10 @@
   <span class="ipucu" id="ipucu" aria-hidden="true"></span>
   <div class="caglar" id="caglar" role="group" aria-label="Eras"></div>
   <aside class="panel" id="panel" hidden aria-live="polite"></aside>
+  <button type="button" class="plan-dugme" id="plan-dugme" data-eylem="plan" aria-haspopup="dialog" aria-controls="plan"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Plan your visit</span></button>
 </main>
 <div class="okuyucu" id="okuyucu" role="dialog" aria-modal="true" aria-label="World Philosophy Route" aria-hidden="true">
-  <div class="o-ust"><span class="o-cubuk-yol"><span class="o-cubuk" id="o-cubuk"></span></span><span class="o-sayac" id="o-sayac"></span><button type="button" class="o-kapat" id="o-kapat" data-eylem="okuyucu-kapat" aria-label="Close">×</button></div>
+  <div class="o-ust"><span class="o-cubuk-yol"><span class="o-cubuk" id="o-cubuk"></span></span><span class="o-sayac" id="o-sayac"></span><button type="button" class="o-plan" id="o-plan" data-eylem="plan" aria-haspopup="dialog" aria-controls="plan" aria-label="Plan your visit"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Plan</span></button><button type="button" class="o-kapat" id="o-kapat" data-eylem="okuyucu-kapat" aria-label="Close">×</button></div>
   <div class="o-pencere"><div class="sayfalar" id="sayfalar">
 <section class="sayfa sayfa-kapak" id="s-oku" data-n="0" aria-roledescription="page"><div class="kapak"><div class="etiket">ΦΙΛΟΣΟΦΙΑ · ΚΟΣΜΟΣ</div><h2>The route, era by era</h2><p class="kapak-alt">Each stop is a short, sourced entry. Summaries are written for this site from the Stanford Encyclopedia of Philosophy and the other linked sources. Turn the pages with the arrows, by swiping, or with the arrow keys.</p><h3>Contents</h3><ol class="icindekiler"><li style="--c:#E3B38A"><button type="button" data-sayfa="1"><span class="cag-no">I</span><b>The Axial Age</b><small>600 – 300 BCE · 7 stops</small></button></li><li style="--c:#9EC3DE"><button type="button" data-sayfa="9"><span class="cag-no">II</span><b>Schools and empires</b><small>300 BCE – 600 CE · 4 stops</small></button></li><li style="--c:#C9A15B"><button type="button" data-sayfa="14"><span class="cag-no">III</span><b>Houses of wisdom</b><small>800 – 1400 · 6 stops</small></button></li><li style="--c:#B7D3A8"><button type="button" data-sayfa="21"><span class="cag-no">IV</span><b>Rebirths</b><small>1400 – 1700 · 6 stops</small></button></li><li style="--c:#D9A0A0"><button type="button" data-sayfa="28"><span class="cag-no">V</span><b>Modern questions</b><small>1700 – 1950 · 6 stops</small></button></li></ol><a class="tr-kart" href="/turkey"><b>Philosophy Map of Türkiye →</b><small>22 places in Anatolia, with routes and a passport</small></a></div></section>
 <section class="sayfa sayfa-cag" id="s-cag-eksen" data-n="1" aria-roledescription="page"><div class="cag-sayfa" style="--c:#E3B38A"><span class="cag-no">I</span><h2>The Axial Age</h2><p class="cag-tarih">600 – 300 BCE</p><p class="cag-alt">In the same centuries, in three places that knew nothing of each other, the same questions: what lies behind everything, and how should we live?</p><ol class="cag-duraklar"><li><button type="button" data-sayfa="2"><span class="no">1</span>Miletus <small>Thales, Anaximander, Anaximenes</small></button></li><li><button type="button" data-sayfa="3"><span class="no">2</span>Ephesus <small>Heraclitus</small></button></li><li><button type="button" data-sayfa="4"><span class="no">3</span>Elea (Velia) <small>Parmenides, Zeno of Elea</small></button></li><li><button type="button" data-sayfa="5"><span class="no">4</span>Athens <small>Socrates, Plato, Aristotle, Epicurus, Zeno of Citium</small></button></li><li><button type="button" data-sayfa="6"><span class="no">5</span>Varanasi and Sarnath <small>The Buddha; the Upanishadic tradition</small></button></li><li><button type="button" data-sayfa="7"><span class="no">6</span>Louguantai <small>Laozi; the Daodejing</small></button></li><li><button type="button" data-sayfa="8"><span class="no">7</span>Qufu <small>Confucius (Kongzi)</small></button></li></ol></div></section>
@@ -95,6 +96,10 @@
   <button type="button" class="o-ok o-onceki" id="o-onceki" data-eylem="o-onceki" aria-label="Previous">‹</button>
   <button type="button" class="o-ok o-sonraki" id="o-sonraki" data-eylem="o-sonraki" aria-label="Next">›</button>
 </div>
+<div class="plan-ort" id="plan-ort" data-eylem="plan-kapat" hidden></div>
+<aside class="plan" id="plan" role="dialog" aria-modal="true" aria-labelledby="plan-baslik" aria-hidden="true"></aside>
+<script src="/ortaklik.js?v=62449b1e"></script>
+<script src="/yer-veri.js"></script>
 <script src="/dunya-veri.js"></script>
 <script src="/dunya-foto.js"></script>
 <script src="/dunya-sayfalar.js"></script>

@@ -56,7 +56,7 @@ function tur(sorgu, baslik){
 const ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Booking.com, Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>';
 
 function ust(){
-  return `<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/">Map</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">Guides</a></nav></header>`;
+  return `<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/#kesfet">Explore</a><a href="/places/">Places</a><a href="/guides/philosophy-trip-turkey">Guides</a><a href="/passport">Passport</a></nav></header>`;
 }
 function bas(baslik, aciklama, adres, ld, ek = ''){
   return `<!doctype html>
@@ -73,10 +73,10 @@ ${ALAN ? `<link rel="canonical" href="${ALAN}${adres}">\n<meta property="og:url"
 <meta property="og:description" content="${e(aciklama)}">
 <meta property="og:image" content="${ALAN}/og-harita.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#1F2A36">
+<meta name="theme-color" content="#14202E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@500;600;700&display=swap">
 <link rel="stylesheet" href="/guides/rehber.css">
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>${ek}
 </head>
@@ -103,14 +103,22 @@ YERLER.forEach((yer, i) => {
   const ara = YER_ARAMA[yer.id];
   const soz = `<figure class="soz-blok" style="--r:${renk}"><small>${s.eser ? 'Key work' : 'In their words'}</small><blockquote>${s.eser ? '' : '“'}${e(s.en)}${s.eser ? '' : '”'}</blockquote><figcaption>${e(s.kaynakEn)}${s.birincil ? ` · <a href="${e(s.birincil[1])}" target="_blank" rel="noopener">primary source</a>` : ''}</figcaption></figure>`;
   const govde = `
-<main class="yer-sayfa" style="--r:${renk}">
-<nav class="kirinti" aria-label="Breadcrumb"><a href="/">Map</a> › <span>${e(m.ad)}</span></nav>
+<section class="yer-kapak" style="--r:${renk}"><div class="yk-ic">
+<nav class="kirinti" aria-label="Breadcrumb"><a href="/">Map</a> › <a href="/places/">Places</a> › <span>${e(m.ad)}</span></nav>
 <div class="yer-bas"><span class="yer-amblem">${amblem(yer.id, renk, 64)}</span><div><div class="etiket">${i + 1} · ${e(yer.yunan)}</div><h1>${e(m.ad)}</h1><p class="yer-alt">${e(m.il)} · ${e(m.donem)}</p></div></div>
+${ara ? `<div class="yk-dugmeler"><a class="yk-otel" href="${e(ORT.otel('hotels', ara.kasaba))}" data-otel="hotels" data-kasaba="${e(ara.kasaba)}" target="_blank" rel="sponsored noopener">Hotels in ${e(ara.kasaba)}</a><a class="yk-tur" href="https://www.getyourguide.com/s/?q=${enc(ara.tur)}" data-tur="getyourguide" data-sorgu="${e(ara.tur)}" target="_blank" rel="sponsored noopener">Tours &amp; tickets</a><a class="yk-harita" href="/#${yer.id}">On the map</a></div>` : ''}
+</div></section>
+<div class="yer-duzen">
+<aside class="rezervasyon" aria-label="Plan your visit"><small class="rz-bas">Plan your visit</small>
+${ara ? otel(ara.kasaba, 'Hotels in and around ' + ara.kasaba) : ''}
+${ara ? tur(ara.tur, 'Tours and tickets: ' + m.ad) : ''}
+<a class="rz-muhur" href="/passport">Collect the stamp in your passport →</a></aside>
+<main class="yer-sayfa" style="--r:${renk}">
 <p class="giris">${e(m.neden)}</p>
 <p class="kim"><b>Who:</b> ${e(m.kim)}</p>
 ${soz}
-${ara ? otel(ara.kasaba, 'Hotels in and around ' + ara.kasaba) : ''}
-${ara ? tur(ara.tur, 'Guided tours and tickets: ' + m.ad) : ''}
+<div class="yalniz-dar">${ara ? otel(ara.kasaba, 'Hotels in and around ' + ara.kasaba) : ''}
+${ara ? tur(ara.tur, 'Guided tours and tickets: ' + m.ad) : ''}</div>
 ${f ? `<h2>Key ideas</h2><ol class="fikir-liste">${f.fikirler.map(k => `<li><b>${e(k[0])}</b><p>${e(k[1])} <a href="${e(k[2])}" target="_blank" rel="noopener">${e(etiket(k[2]))}${k[3] && k[3] !== etiket(k[2]) ? ' ' + e(k[3]) : ''} ↗</a></p></li>`).join('')}</ol>${F.not ? `<p class="not">${e(F.not.en)}</p>` : ''}` : ''}
 ${S ? `<h2>Art and monuments</h2><ul class="sanat-liste">${S.en.map(x => `<li><b>${e(x[0])}</b><span>${e(x[1])}</span></li>`).join('')}</ul>` : ''}
 <h2>A walk on site</h2><ol class="rota-liste">${m.rota.map(x => `<li><b>${e(x[0])}</b> ${e(x[1])}</li>`).join('')}</ol>
@@ -127,6 +135,8 @@ ${ACIKLAMA}
 <nav class="komsu" aria-label="More places"><a href="/places/${SLUG[onceki.id]}">← ${e(onceki.en.ad)}</a><a href="/places/${SLUG[sonraki.id]}">${e(sonraki.en.ad)} →</a></nav>
 <p><a href="/#${yer.id}">Open ${e(m.ad)} on the map →</a></p>
 </main>
+</div>
+${ara ? `<div class="alt-cubuk"><span><small>Stay near</small><b>${e(ara.kasaba)}</b></span><a href="${e(ORT.otel('hotels', ara.kasaba))}" data-otel="hotels" data-kasaba="${e(ara.kasaba)}" target="_blank" rel="sponsored noopener">See hotels</a></div>` : ''}
 ${SON}
 <script>
 (function(){

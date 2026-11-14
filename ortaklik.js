@@ -36,6 +36,8 @@ window.ORTAKLIK = {
 
 (function(O){
   var enc = encodeURIComponent;
+  /* Hotels.com'un kendi bağlantıları gibi Türkçe harfsiz yaz: İstanbul → Istanbul */
+  function ascii(x){ var m = { 'ç':'c','Ç':'C','ğ':'g','Ğ':'G','ı':'i','İ':'I','ö':'o','Ö':'O','ş':'s','Ş':'S','ü':'u','Ü':'U','â':'a','Â':'A' }; return x.replace(/[çÇğĞıİöÖşŞüÜâÂ]/g, function(c){ return m[c]; }); }
   O.ad = { booking: 'Booking.com', hotels: 'Hotels.com', getyourguide: 'GetYourGuide', viator: 'Viator' };
   O.oteller = function(){ return ['booking', 'hotels'].filter(function(k){ return O[k] && O[k].goster; }); };
   O.turlar = function(){ return ['getyourguide', 'viator'].filter(function(k){ return O[k] && O[k].goster; }); };
@@ -44,7 +46,7 @@ window.ORTAKLIK = {
     var yer = kasaba + ', Türkiye';
     if (saglayici === 'booking') return 'https://www.booking.com/searchresults.html?ss=' + enc(yer) + (O.booking.aid ? '&aid=' + enc(O.booking.aid) : '');
     if (saglayici === 'hotels') return (O.hotels.baglantilar && O.hotels.baglantilar[kasaba]) ||
-      ('https://www.hotels.com/Hotel-Search?destination=' + enc(kasaba + ', Turkey') + (O.hotels.parametreler ? '&' + O.hotels.parametreler : ''));
+      ('https://www.hotels.com/Hotel-Search?destination=' + enc(ascii(kasaba) + ', Turkey') + (O.hotels.parametreler ? '&' + O.hotels.parametreler : ''));
     return '';
   };
   O.tur = function(saglayici, sorgu){

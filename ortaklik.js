@@ -11,9 +11,13 @@ window.ORTAKLIK = {
   /* Booking.com Affiliate Partner Programme: panelde verilen "aid" numarası (yalnızca rakam). */
   booking: { goster: true, aid: '' },
 
-  /* Hotels.com (Expedia Group Travel Creator Program): her kasaba için panelde
-     "Links > Create link" ile üretilen bağlantıyı ilgili satıra yapıştır. */
-  hotels: { goster: true, baglantilar: {
+  /* Hotels.com (Expedia Group Travel Creator Program).
+     parametreler: Link builder'ın verdiği bağlantıdaki takip kısmı ("destination=..." dışındaki her şey).
+     Site her kasaba için Hotels.com aramasını bu parametrelerle kurar.
+     baglantilar: bir kasaba için panelden ayrıca bağlantı üretirsen buraya yapıştır; o kasabada bu kullanılır. */
+  hotels: { goster: true,
+    parametreler: 'clickref=1101lE8SjmCG&rffrid=aff.hcom.US.038.000.1011l444930.kwrd%3D1101lE8SjmCG&affcid=HCOM-US.DIRECT.PHG.1011l444930&afflid=1101lE8SjmCG&affdtl=PHG.1101lE8SjmCG.PZuCgXVVHz',
+    baglantilar: {
     'Selçuk': '', 'Kuşadası': '', 'Şirince': '', 'Didim': '', 'Urla': '', 'Behramkale': '', 'Bergama': '',
     'Pamukkale': '', 'Karahayıt': '', 'Denizli': '', 'Karacasu': '', 'Sinop': '', 'Mersin': '', 'Tarsus': '', 'Konya': '',
     'İstanbul': '', 'İznik': '', 'Göreme': '', 'Antalya': '', 'Side': '', 'Şanlıurfa': '', 'Gaziantep': '', 'Mardin': '', 'Bodrum': '', 'Ürgüp': '', 'Çanakkale': '', 'Kahta': '', 'Kalkan': '', 'Kaş': ''
@@ -39,7 +43,8 @@ window.ORTAKLIK = {
   O.otel = function(saglayici, kasaba){
     var yer = kasaba + ', Türkiye';
     if (saglayici === 'booking') return 'https://www.booking.com/searchresults.html?ss=' + enc(yer) + (O.booking.aid ? '&aid=' + enc(O.booking.aid) : '');
-    if (saglayici === 'hotels') return (O.hotels.baglantilar && O.hotels.baglantilar[kasaba]) || ('https://www.hotels.com/Hotel-Search?destination=' + enc(yer));
+    if (saglayici === 'hotels') return (O.hotels.baglantilar && O.hotels.baglantilar[kasaba]) ||
+      ('https://www.hotels.com/Hotel-Search?destination=' + enc(kasaba + ', Turkey') + (O.hotels.parametreler ? '&' + O.hotels.parametreler : ''));
     return '';
   };
   O.tur = function(saglayici, sorgu){
@@ -49,7 +54,7 @@ window.ORTAKLIK = {
   };
   /* En az bir ortaklık kimliği dolu mu? (açıklama metnini göstermek için) */
   O.kazanc = function(){
-    if (O.booking.aid || O.getyourguide.partner_id || O.viator.pid) return true;
+    if (O.booking.aid || O.hotels.parametreler || O.getyourguide.partner_id || O.viator.pid) return true;
     var b = O.hotels.baglantilar || {}; for (var k in b) if (b[k]) return true;
     return false;
   };

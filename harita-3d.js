@@ -104,7 +104,7 @@
     } catch(e){ return geriDon(); }
     map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
     map.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), 'top-right');
-    var zaman = setTimeout(function(){ if (!hazir) geriDon(); }, 15000);
+    var zaman = setTimeout(function(){ if (!hazir) geriDon(); }, 30000);
     map.on('error', function(e){ if (!hazir && e && e.error && /40[13]|Unauthorized|Forbidden/i.test(String(e.error.message || e.error.status))) geriDon(); });
     map.on('load', function(){
       hazir = true; clearTimeout(zaman);

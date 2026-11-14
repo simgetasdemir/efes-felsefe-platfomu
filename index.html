@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Antikyol · Philosophy Map of Türkiye: places, routes and where to stay</title>
 <meta name="description" content="A map of the places in Türkiye where philosophy and art were born, from Göbekli Tepe, Troy and Ephesus to Hagia Sophia, Cappadocia, Lycia and Rumi in Konya. Key ideas, ancient theatres and sculpture, multi-day routes, and hotels and tours near every stop.">
-<meta name="theme-color" content="#3B2F22">
+<meta name="theme-color" content="#14202E">
 <meta name="color-scheme" content="light">
 <link rel="manifest" href="/harita.webmanifest">
 <link rel="apple-touch-icon" href="/og-kare.png">
@@ -25,7 +25,7 @@
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap">
 <style>
 /* Efes platformuyla aynı dil: mermer, Ege mavisi, pişmiş toprak, okra. Harita solda, ayrıntı sağda; telefonda alt alta. */
 :root{
@@ -722,38 +722,149 @@ main > .kahraman .kahraman-dugmeler{justify-content:flex-start}
 @keyframes mp-sayac{0%,25%{opacity:0;transform:translate(-50%,10px)}40%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
 .muhur-patlama.sakin .mp-muhur,.muhur-patlama.sakin .mp-sayac{animation:mp-sakin 1.4s ease both}
 @keyframes mp-sakin{0%{opacity:0}20%,75%{opacity:1}100%{opacity:0}}
+
+/* ===== Antikyol 2: keşif + planlama ===== */
+:root{--lacivert:#14202E;--lacivert-2:#1E2D40;--altin:#C9A15B;--altin-acik:#E8D3A6;--ui:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+body{background:#F6F3EC}
+.site-ust{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:24px;padding:12px 28px;background:var(--lacivert);color:#F3ECDD;box-shadow:0 1px 0 rgba(201,161,91,.25)}
+.site-ust .marka-ana{position:static;color:#F7F1E4;font-family:var(--ui);font-weight:700;font-size:23px;letter-spacing:-.01em;gap:10px}
+.site-ust .marka-ana img{width:40px;height:40px}
+.marka-yazi{text-transform:lowercase}
+.site-nav{display:flex;gap:6px;margin-left:auto;font-family:var(--ui)}
+.site-nav a{color:#E6DCC7;text-decoration:none;font-size:15px;font-weight:500;padding:10px 12px;border-radius:10px;min-height:44px;display:inline-flex;align-items:center}
+.site-nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.site-ust .dil{border-color:rgba(201,161,91,.5);background:transparent;box-shadow:none}
+.site-ust .dil button{color:#E6DCC7;font-family:var(--ui);font-size:14px}
+.site-ust .dil button[aria-pressed="true"]{background:var(--altin);color:var(--lacivert)}
+.kahraman-foto{position:relative;min-height:min(78vh,720px);display:flex;align-items:flex-end;color:#fff;background:var(--lacivert);overflow:hidden}
+.kf-gorsel{position:absolute;inset:0;background:url(/img/kahraman.svg) center/cover no-repeat}
+.kf-gorsel.foto{background-size:cover}
+.kf-gorsel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,32,46,.15) 0%,rgba(20,32,46,.1) 40%,rgba(20,32,46,.82) 100%)}
+.kf-ic{position:relative;z-index:1;width:100%;max-width:1240px;margin:0 auto;padding:80px 28px 40px}
+.kahraman-foto #ust-etiket{display:block;padding:0;margin:0 0 14px;font-family:var(--ui);font-weight:600;font-size:13px;letter-spacing:.28em;color:var(--altin-acik)}
+.kahraman-foto #ust-etiket::before,.kahraman-foto #ust-etiket::after{display:none}
+.kahraman-foto h1#baslik{margin:0;max-width:820px;font-family:var(--yazi);font-weight:500;font-size:clamp(40px,6vw,78px);line-height:1.02;letter-spacing:-.01em;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.kahraman-foto h1#baslik em{font-style:italic;color:var(--altin-acik)}
+.kahraman-foto #giris{max-width:620px;margin:16px 0 0;font-family:var(--ui);font-size:18px;line-height:1.55;color:#EEE7DA;text-align:left}
+.arama{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:4px;margin-top:28px;max-width:900px;background:#fff;border-radius:18px;padding:6px;box-shadow:0 24px 60px -20px rgba(0,0,0,.55)}
+.ar-alan{display:flex;flex-direction:column;gap:2px;padding:8px 16px;border-radius:12px;font-family:var(--ui);color:var(--lacivert);min-width:0}
+.ar-alan + .ar-alan{border-left:1px solid #E6E0D4}
+.ar-alan span{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#6B7684}
+.ar-alan select{border:0;background:transparent;font-family:var(--ui);font-size:16px;font-weight:500;color:var(--lacivert);padding:4px 0;min-height:32px;width:100%;cursor:pointer}
+.ar-alan:focus-within{background:#F4F0E7}
+.ar-dugme{border:0;border-radius:13px;background:var(--altin);color:var(--lacivert);font-family:var(--ui);font-weight:700;font-size:16px;padding:0 28px;min-height:56px;cursor:pointer}
+.ar-dugme:hover{background:#D7B276}
+.kahraman-foto .sayilar{justify-content:flex-start;margin-top:22px;gap:28px}
+.kahraman-foto .sayilar li{color:#E6DCC7;font-family:var(--ui)}
+.kahraman-foto .sayilar b{color:#fff;font-family:var(--ui);font-weight:700}
+.kahraman-foto .sayilar span{color:#D7CDBA;font-family:var(--ui);letter-spacing:.08em;font-size:12px}
+.kahraman-foto .kahraman-dugmeler{justify-content:flex-start;margin-top:18px}
+.kahraman-foto .btn{font-family:var(--ui);font-weight:600;font-size:15px}
+.kahraman-foto .btn-koyu{background:#fff;color:var(--lacivert)}
+.kahraman-foto .btn-hayalet{background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+.kahraman-foto .ust-link{color:var(--altin-acik);font-family:var(--ui)}
+.kesfet{max-width:1680px;margin:0 auto;padding:40px 28px 20px}
+.kesfet-bas{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 24px;margin-bottom:18px}
+.kesfet-bas h2{margin:0;font-family:var(--yazi);font-weight:500;font-size:clamp(30px,3.4vw,44px);color:var(--lacivert);text-align:left}
+.kesfet-sonuc{margin:4px 0 0;font-family:var(--ui);font-size:15px;color:#5B6675}
+.filtreler{display:flex;flex-wrap:wrap;gap:8px}
+.filtre{font-family:var(--ui);font-size:14.5px;font-weight:500;min-height:42px;padding:0 16px;border-radius:999px;border:1.5px solid #D8D0BF;background:#fff;color:var(--lacivert);cursor:pointer}
+.filtre:hover{border-color:var(--lacivert)}
+.filtre.acik{background:var(--lacivert);border-color:var(--lacivert);color:#fff}
+.kesfet-izgara{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;align-items:start}
+.kesfet-izgara .dev-harita{order:2;position:sticky;top:84px;max-width:none;margin:0;padding:0}
+.kesfet-izgara .dev-harita .harita svg{max-height:calc(100vh - 170px);max-height:calc(100svh - 170px)}
+.kesfet-liste{order:1;min-width:0}
+.kartlar{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.kart{position:relative;display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(20,32,46,.06),0 12px 28px -18px rgba(20,32,46,.35);transition:transform .2s,box-shadow .2s;font-family:var(--ui)}
+.kart:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(20,32,46,.06),0 22px 40px -20px rgba(20,32,46,.45)}
+.kart.secili{outline:2.5px solid var(--altin);outline-offset:2px}
+.kart-ac{position:relative;display:block;border:0;padding:0;background:none;cursor:pointer;width:100%}
+.kapak{position:relative;aspect-ratio:16/10;background:linear-gradient(150deg,var(--r) 0%,color-mix(in srgb,var(--r) 55%,#14202E) 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.kapak-desen{position:absolute;inset:0;width:100%;height:100%}
+.kapak-amblem{position:relative;width:34%;max-width:96px;aspect-ratio:1;display:block}
+.kapak-amblem svg{width:100%;height:100%}
+.kapak-yunan{position:absolute;left:14px;bottom:10px;font-family:var(--yazi);font-size:13px;letter-spacing:.16em;color:rgba(255,255,255,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100% - 28px)}
+.kapak.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.kapak .atif{position:absolute;right:6px;bottom:4px;font-size:10px;color:#fff;background:rgba(0,0,0,.45);padding:1px 6px;border-radius:6px}
+.kart-no{position:absolute;left:12px;top:12px;min-width:30px;height:30px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--lacivert);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;padding:0 8px}
+.kart-muhur{position:absolute;right:12px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--altin);color:var(--lacivert);font-weight:800;display:flex;align-items:center;justify-content:center}
+.kart-govde{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;flex:1}
+.kart-bolge{font-size:12.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#7A6A4C}
+.kart h3{margin:0;font-family:var(--yazi);font-weight:600;font-size:23px;line-height:1.15}
+.kart h3 button{border:0;background:none;padding:0;font:inherit;color:var(--lacivert);text-align:left;cursor:pointer}
+.kart h3 button:hover{text-decoration:underline;text-decoration-color:var(--altin)}
+.kart p{margin:0;font-size:14.5px;line-height:1.5;color:#4C5766}
+.kart-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:10px}
+.kart-cta a{display:inline-flex;align-items:center;min-height:40px;padding:0 13px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none}
+.kc-rehber{background:var(--lacivert);color:#fff}
+.kc-otel{background:var(--altin);color:var(--lacivert)}
+.kc-tur{background:#fff;color:var(--lacivert);border:1.5px solid #D8D0BF}
+.kesfet-liste .liste{margin-top:18px}
+.pin.disari{opacity:.22;transition:opacity .3s}
+.pin.disari .ad{display:none}
+.pin.vurgu .halka{stroke:var(--altin);stroke-width:4}
+.pin.vurgu{filter:drop-shadow(0 0 6px rgba(201,161,91,.9))}
+/* Çekmece: seçilen yerin paneli */
+.cekmece{position:fixed;z-index:50;top:0;right:0;bottom:0;width:min(480px,100vw);background:#FBF8F2;box-shadow:-30px 0 60px -30px rgba(20,32,46,.55);overflow-y:auto;overscroll-behavior:contain;transform:translateX(105%);visibility:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),visibility 0s .35s}
+.cekmece-acik .cekmece{transform:none;visibility:visible;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.cekmece .panel{border-radius:0;box-shadow:none;background:transparent;padding:0 22px 40px}
+.cekmece-kapat{position:sticky;top:10px;display:block;margin:10px 10px -54px auto;z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:var(--lacivert);color:#fff;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+.haritaya{display:none!important}
+@media (max-width:1100px){
+  .kesfet-izgara{grid-template-columns:minmax(0,1fr)}
+  .kesfet-izgara .dev-harita{order:0;position:relative;top:auto}
+}
+@media (max-width:760px){
+  .site-ust{padding:10px 16px;gap:10px;flex-wrap:wrap}
+  .site-ust .marka-ana{font-size:20px}.site-ust .marka-ana img{width:34px;height:34px}
+  .site-nav{order:3;flex:1 0 100%;margin:0 -6px;overflow-x:auto;gap:2px}
+  .site-nav a{font-size:14px;padding:8px 10px;white-space:nowrap}
+  .site-ust .dil{margin-left:auto}
+  .site-ust{position:relative}
+  .kahraman-foto{min-height:0}
+  .kf-ic{padding:64px 16px 28px}
+  .kahraman-foto #giris{font-size:16.5px}
+  .kf-gorsel{background-position:22% 100%}
+  .kahraman-foto h1#baslik{font-size:42px}
+  .arama{grid-template-columns:minmax(0,1fr);padding:8px}
+  .ar-alan + .ar-alan{border-left:0;border-top:1px solid #E6E0D4}
+  .ar-dugme{margin-top:4px}
+  .kesfet{padding:28px 0 10px}
+  .kesfet-bas{padding:0 16px}
+  .filtreler{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px;padding:0 16px 4px;scrollbar-width:none}
+  .filtre{flex:none}
+  .kesfet-liste{padding:0 16px}
+  .kartlar{grid-template-columns:minmax(0,1fr);gap:14px}
+  .cekmece{top:auto;left:0;width:100%;height:88vh;height:88svh;border-radius:22px 22px 0 0;transform:translateY(105%)}
+  .cekmece .panel{padding:0 16px 32px}
+}
+@media (prefers-reduced-motion:reduce){ .cekmece,.cekmece-acik .cekmece,.kart{transition:none} }
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Antikyol","url":"https://antikyol.com/","alternateName":["Philosophy Map of Türkiye","Türkiye Felsefe Haritası"],"inLanguage":["en","tr"],"description":"From Göbekli Tepe to Rumi: 22 places in Türkiye where philosophy and art were born, with ready-made routes and places to stay.","mainEntity":{"@type":"ItemList","name":"Philosophy and art stops","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"TouristAttraction","name":"Ephesus","description":"The philosophy of change and logos was born here. Heraclitus held that everything flows, but that the flow follows a measure, a \"logos\".","geo":{"@type":"GeoCoordinates","latitude":37.94,"longitude":27.34},"address":{"@type":"PostalAddress","addressRegion":"Selçuk, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":2,"item":{"@type":"TouristAttraction","name":"Miletus","description":"The first school of Western philosophy. Thales looked for the first stuff of the world; Anaximander called the source of all things the \"apeiron\", the boundless.","geo":{"@type":"GeoCoordinates","latitude":37.53,"longitude":27.28},"address":{"@type":"PostalAddress","addressRegion":"Didim, Aydın","addressCountry":"TR"}}},{"@type":"ListItem","position":3,"item":{"@type":"TouristAttraction","name":"Clazomenae","description":"The first philosopher to bring philosophy to Athens. He argued that a \"nous\", a mind, set the cosmos in order.","geo":{"@type":"GeoCoordinates","latitude":38.36,"longitude":26.77},"address":{"@type":"PostalAddress","addressRegion":"Urla, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":4,"item":{"@type":"TouristAttraction","name":"Assos","description":"After Plato's death (347 BC) Aristotle came to Assos and stayed about three years. Cleanthes, second head of the Stoic school, was also from Assos.","geo":{"@type":"GeoCoordinates","latitude":39.49,"longitude":26.34},"address":{"@type":"PostalAddress","addressRegion":"Ayvacık, Çanakkale","addressCountry":"TR"}}},{"@type":"ListItem","position":5,"item":{"@type":"TouristAttraction","name":"Pergamon","description":"Home to one of the greatest libraries of the ancient world, and birthplace of Galen (129–c. 200), physician and philosopher.","geo":{"@type":"GeoCoordinates","latitude":39.13,"longitude":27.18},"address":{"@type":"PostalAddress","addressRegion":"Bergama, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":6,"item":{"@type":"TouristAttraction","name":"Hierapolis","description":"Epictetus, born a slave and later one of the most widely read Stoic teachers, was born here in the 50s AD.","geo":{"@type":"GeoCoordinates","latitude":37.93,"longitude":29.13},"address":{"@type":"PostalAddress","addressRegion":"Pamukkale, Denizli","addressCountry":"TR"}}},{"@type":"ListItem","position":7,"item":{"@type":"TouristAttraction","name":"Aphrodisias","description":"The most influential ancient commentator on Aristotle. An inscription found here in 2001 calls him one of the heads of the philosophical schools in Athens.","geo":{"@type":"GeoCoordinates","latitude":37.71,"longitude":28.72},"address":{"@type":"PostalAddress","addressRegion":"Karacasu, Aydın","addressCountry":"TR"}}},{"@type":"ListItem","position":8,"item":{"@type":"TouristAttraction","name":"Sinope","description":"Diogenes (c. 404–323 BC), emblem of Cynic philosophy, was a citizen of Sinope who fled or was exiled from the city.","geo":{"@type":"GeoCoordinates","latitude":42.03,"longitude":35.15},"address":{"@type":"PostalAddress","addressRegion":"Sinop","addressCountry":"TR"}}},{"@type":"ListItem","position":9,"item":{"@type":"TouristAttraction","name":"Soli and Tarsus","description":"Chrysippus (c. 280–207 BC), who built the Stoic system, was born in Soli near today's Mersin. Tarsus was the city of Stoics such as Antipater.","geo":{"@type":"GeoCoordinates","latitude":36.8,"longitude":34.7},"address":{"@type":"PostalAddress","addressRegion":"Mersin","addressCountry":"TR"}}},{"@type":"ListItem","position":10,"item":{"@type":"TouristAttraction","name":"Konya","description":"Rumi was born in Balkh in 1207 and died in Konya in 1273. After his death his disciples organised the Mevlevi order; Konya adds Sufi thought to the map.","geo":{"@type":"GeoCoordinates","latitude":37.87,"longitude":32.48},"address":{"@type":"PostalAddress","addressRegion":"Konya","addressCountry":"TR"}}},{"@type":"ListItem","position":11,"item":{"@type":"TouristAttraction","name":"Istanbul","description":"For a thousand years the Byzantine capital, Constantinople, kept ancient Greek philosophy alive by teaching and copying it. Psellos revived Plato here; Plethon was born here.","geo":{"@type":"GeoCoordinates","latitude":41.01,"longitude":28.98},"address":{"@type":"PostalAddress","addressRegion":"Istanbul","addressCountry":"TR"}}},{"@type":"ListItem","position":12,"item":{"@type":"TouristAttraction","name":"Cappadocia","description":"In the 4th century three thinkers from this region brought Greek philosophy into dialogue with Christian thought. Kayseri (Caesarea) was Basil's city.","geo":{"@type":"GeoCoordinates","latitude":38.64,"longitude":34.83},"address":{"@type":"PostalAddress","addressRegion":"Nevşehir, Kayseri","addressCountry":"TR"}}},{"@type":"ListItem","position":13,"item":{"@type":"TouristAttraction","name":"Antalya: Perge and Aspendos","description":"Apollonius, \"the Great Geometer\", was born in Perge. We still use the names ellipse, parabola and hyperbola from his Conics.","geo":{"@type":"GeoCoordinates","latitude":36.96,"longitude":30.85},"address":{"@type":"PostalAddress","addressRegion":"Antalya","addressCountry":"TR"}}},{"@type":"ListItem","position":14,"item":{"@type":"TouristAttraction","name":"Şanlıurfa and Harran","description":"At Göbekli Tepe people raised monumental structures more than 11,000 years ago. The school of Edessa, Urfa's ancient name, translated Greek works into Syriac; Thabit ibn Qurra, born in Harran, carried Greek mathematics into Arabic.","geo":{"@type":"GeoCoordinates","latitude":37.16,"longitude":38.79},"address":{"@type":"PostalAddress","addressRegion":"Şanlıurfa","addressCountry":"TR"}}},{"@type":"ListItem","position":15,"item":{"@type":"TouristAttraction","name":"Gaziantep and Zeugma","description":"The mosaics from the villas of Zeugma on the Euphrates set myth and theatre in stone. This is an art stop: you see the stories philosophy told, in pictures.","geo":{"@type":"GeoCoordinates","latitude":37.06,"longitude":37.38},"address":{"@type":"PostalAddress","addressRegion":"Gaziantep","addressCountry":"TR"}}},{"@type":"ListItem","position":16,"item":{"@type":"TouristAttraction","name":"Bodrum","description":"Herodotus, who wrote history as an \"inquiry\" (historia), was born here in ancient Halicarnassus. The Mausoleum, one of the Seven Wonders, stood in this city.","geo":{"@type":"GeoCoordinates","latitude":37.04,"longitude":27.43},"address":{"@type":"PostalAddress","addressRegion":"Muğla","addressCountry":"TR"}}},{"@type":"ListItem","position":17,"item":{"@type":"TouristAttraction","name":"İznik","description":"Hipparchus, a founder of astronomy, was born in ancient Nicaea. The city later hosted two great church councils and, in the 16th century, the famous İznik tiles.","geo":{"@type":"GeoCoordinates","latitude":40.43,"longitude":29.72},"address":{"@type":"PostalAddress","addressRegion":"Bursa","addressCountry":"TR"}}},{"@type":"ListItem","position":18,"item":{"@type":"TouristAttraction","name":"Mardin and Nusaybin","description":"The School of Nisibis (Nusaybin) was one of the centres that translated Greek works into Syriac. The Arabs came to know Greek thought chiefly through these Syriac translations.","geo":{"@type":"GeoCoordinates","latitude":37.31,"longitude":40.74},"address":{"@type":"PostalAddress","addressRegion":"Mardin","addressCountry":"TR"}}},{"@type":"ListItem","position":19,"item":{"@type":"TouristAttraction","name":"Troy","description":"The city of the siege Homer sang in the Iliad. Plato mentions those who call Homer \"the educator of Hellas\" and questions that power of poetry: this is a stop both for poetry and for the first great philosophical critique of it.","geo":{"@type":"GeoCoordinates","latitude":39.957,"longitude":26.239},"address":{"@type":"PostalAddress","addressRegion":"Çanakkale","addressCountry":"TR"}}},{"@type":"ListItem","position":20,"item":{"@type":"TouristAttraction","name":"Mount Nemrut","description":"King Antiochus I (r. 69–34 BC) built a hierotheseion on the summit: a temple-tomb and house of the gods. Colossal statues that merge Greek and Iranian gods bring the beliefs of two worlds together in stone.","geo":{"@type":"GeoCoordinates","latitude":37.98,"longitude":38.74},"address":{"@type":"PostalAddress","addressRegion":"Adıyaman","addressCountry":"TR"}}},{"@type":"ListItem","position":21,"item":{"@type":"TouristAttraction","name":"Lycia: Xanthos and Patara","description":"The cities of Lycia formed a league with a common council: large cities had three votes, middling ones two, small towns one. Montesquieu chose Lycia as the model of an excellent confederate republic; the American Federalist Papers cited it too.","geo":{"@type":"GeoCoordinates","latitude":36.33,"longitude":29.32},"address":{"@type":"PostalAddress","addressRegion":"Antalya, Muğla","addressCountry":"TR"}}},{"@type":"ListItem","position":22,"item":{"@type":"TouristAttraction","name":"Priene and Didyma","description":"Priene, the city of Bias, one of the Seven Sages, was refounded on its present site around 350 BC on a grid plan. Nearby Didyma held Apollo's oracle; there the Milesians began a temple meant to be the largest in the Greek world, and never finished it.","geo":{"@type":"GeoCoordinates","latitude":37.4,"longitude":27.42},"address":{"@type":"PostalAddress","addressRegion":"Aydın","addressCountry":"TR"}}}]}}</script>
 </head>
 <body>
-<header class="ust ust-kompakt">
-  <a class="marka-ana" href="/" aria-label="Antikyol"><img src="/logo.svg" alt="" width="40" height="40"><span>Antikyol</span></a>
-  <div class="acilis-baslik">
-    <div class="etiket" id="ust-etiket"></div>
-    <h1 id="baslik"></h1>
-  </div>
+<header class="site-ust">
+  <a class="marka-ana" href="/" aria-label="Antikyol"><img src="/logo.svg" alt="" width="40" height="40"><span class="marka-yazi">antikyol</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="#kesfet" id="n-kesfet"></a><a href="#rota-bolum" id="n-rota"></a><a href="/guides/philosophy-trip-turkey" id="n-rehber"></a><a href="/passport" id="n-pasaport"></a>
+  </nav>
   <div class="dil" role="group" aria-label="Dil / Language">
     <button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button>
   </div>
 </header>
-<section class="dev-harita" aria-label="Map">
-  <div class="harita-kutu">
-    <div class="harita" id="harita"></div>
-    <span class="kaydir-ipucu" id="kaydir-ipucu" aria-hidden="true"></span>
-    <div class="harita-araclar">
-      <button type="button" class="cip" id="z-tum"></button>
-      <button type="button" class="cip" id="z-ege"></button>
-      <button type="button" class="cip" id="z-bag"></button>
-      <button type="button" class="cip cip-rota" id="z-rota" hidden></button>
-      <span class="not" id="harita-not"></span>
-    </div>
-    <div class="liste" id="liste"></div>
-  </div>
-</section>
-
-<main>
-  <div class="kahraman">
+<section class="kahraman-foto" aria-labelledby="baslik">
+  <div class="kf-gorsel" id="kf-gorsel" aria-hidden="true"></div>
+  <div class="kf-ic">
+    <div class="kf-etiket" id="ust-etiket"></div>
+    <h1 id="baslik"></h1>
     <p class="giris" id="giris"></p>
+    <form class="arama" id="arama" role="search">
+      <label class="ar-alan"><span id="ar-nereye-l"></span><select id="ar-nereye"></select></label>
+      <label class="ar-alan"><span id="ar-zaman-l"></span><select id="ar-zaman"></select></label>
+      <label class="ar-alan"><span id="ar-tur-l"></span><select id="ar-tur"></select></label>
+      <button type="submit" class="ar-dugme" id="ar-dugme"></button>
+    </form>
     <ul class="sayilar" id="sayilar"></ul>
     <div class="kahraman-dugmeler">
       <button type="button" class="btn btn-koyu" data-eylem="haritaya-in" id="k-harita"></button>
@@ -761,8 +872,38 @@ main > .kahraman .kahraman-dugmeler{justify-content:flex-start}
       <a class="ust-link" id="ust-link" href="/efes"></a>
     </div>
   </div>
+</section>
+
+<section class="kesfet" id="kesfet" aria-labelledby="kesfet-h">
+  <div class="kesfet-bas">
+    <div><h2 id="kesfet-h"></h2><p class="kesfet-sonuc" id="kesfet-sonuc" aria-live="polite"></p></div>
+    <div class="filtreler" id="filtreler" role="group"></div>
+  </div>
+  <div class="kesfet-izgara">
+    <div class="kesfet-liste">
+      <div class="kartlar" id="kartlar"></div>
+      <div class="liste" id="liste"></div>
+    </div>
+    <div class="dev-harita" aria-label="Map">
+      <div class="harita-kutu">
+        <div class="harita" id="harita"></div>
+        <span class="kaydir-ipucu" id="kaydir-ipucu" aria-hidden="true"></span>
+        <div class="harita-araclar">
+          <button type="button" class="cip" id="z-tum"></button>
+          <button type="button" class="cip" id="z-ege"></button>
+          <button type="button" class="cip" id="z-bag"></button>
+          <button type="button" class="cip cip-rota" id="z-rota" hidden></button>
+          <span class="not" id="harita-not"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<aside class="cekmece" id="cekmece" aria-label="Place">
+  <button type="button" class="cekmece-kapat" data-eylem="cekmece-kapat" id="cekmece-kapat" aria-label="Close">×</button>
   <section class="panel" id="panel" aria-live="polite" tabindex="-1"></section>
-</main>
+</aside>
 
 <noscript><section style="max-width:780px;margin:0 auto;padding:16px"><h2>22 philosophy and art stops</h2><ol><li><b>Ephesus</b> (Selçuk, İzmir): Heraclitus</li><li><b>Miletus</b> (Didim, Aydın): Thales, Anaximander, Anaximenes</li><li><b>Clazomenae</b> (Urla, İzmir): Anaxagoras</li><li><b>Assos</b> (Ayvacık, Çanakkale): Aristotle, Cleanthes</li><li><b>Pergamon</b> (Bergama, İzmir): Galen</li><li><b>Hierapolis</b> (Pamukkale, Denizli): Epictetus</li><li><b>Aphrodisias</b> (Karacasu, Aydın): Alexander of Aphrodisias</li><li><b>Sinope</b> (Sinop): Diogenes</li><li><b>Soli and Tarsus</b> (Mersin): Chrysippus, Antipater of Tarsus</li><li><b>Konya</b> (Konya): Jalāl al-Dīn Rūmī</li><li><b>Istanbul</b> (Istanbul): Michael Psellos, Gemistos Plethon</li><li><b>Cappadocia</b> (Nevşehir, Kayseri): The Cappadocian Fathers: Basil, Gregory of Nyssa, Gregory of Nazianzus</li><li><b>Antalya: Perge and Aspendos</b> (Antalya): Apollonius of Perga</li><li><b>Şanlıurfa and Harran</b> (Şanlıurfa): Thabit ibn Qurra of Harran</li><li><b>Gaziantep and Zeugma</b> (Gaziantep): The mosaic makers of Zeugma</li><li><b>Bodrum</b> (Muğla): Herodotus of Halicarnassus</li><li><b>İznik</b> (Bursa): Hipparchus of Nicaea</li><li><b>Mardin and Nusaybin</b> (Mardin): The School of Nisibis: Narsai</li><li><b>Troy</b> (Çanakkale): Homer and the Iliad</li><li><b>Mount Nemrut</b> (Adıyaman): King Antiochus I of Commagene</li><li><b>Lycia: Xanthos and Patara</b> (Antalya, Muğla): The Lycian League; Montesquieu and the Federalist Papers</li><li><b>Priene and Didyma</b> (Aydın): Bias of Priene; the oracle of Didyma</li></ol><p>JavaScript is needed to see the map and details.</p></section></noscript>
 <section class="rota-bolum" id="rota-bolum" aria-labelledby="rota-h"></section>
@@ -1103,7 +1244,7 @@ var BAGLAR = [
    METİNLER
    ========================================================================== */
 var M = {
- tr:{ etiket:'ΦΙΛΟΣΟΦΙΑ · Anadolu', baslik:'Türkiye Felsefe Haritası', giris:'Thales\'in denize baktığı kıyı, Herakleitos\'un ırmağı, Ayasofya\'nın kubbesi, Mevlânâ\'nın neyi. Bu topraklarda on bir bin yıldır düşünülüyor. İzini sür: gündüz fikirler ve antik tiyatrolar, gece kalacak güzel bir yer.', sDurak:'durak', sRota:'hazır rota', sYil:'yıllık düşünce', kHarita:'Haritayı keşfet', kRota:'Rotaları gör',
+ tr:{ etiket:'KEŞFET · PLANLA · YOLA ÇIK', baslik:'Türkiye Felsefe Haritası', kb:'Anadolu\'nun *antik yollarında* yürü', giris:'Göbeklitepe\'den Mevlânâ\'ya felsefenin ve sanatın doğduğu 22 yer. Rotanı kur, kalacak yerini seç, yol boyunca mühür topla.', nKesfet:'Keşfet', nRota:'Rotalar', nRehber:'Rehberler', nPasaport:'Pasaport', arNereye:'Nereye', arZaman:'Ne zaman', arTur:'Ne tür', arHer:'Her yer', arHerZaman:'Her mevsim', arHerTur:'Hepsi', arDugme:'Ara', kesfetH:'Türkiye\'yi keşfet', sonuc:'{n} yer', sonucYok:'Bu seçime uyan yer yok. Filtreleri genişlet.', kisNot:'Nemrut\'un zirve yolu kışın kapanabilir.', kRehber:'Rehber', kOtel:'Oteller', kTur:'Turlar', kapat:'Kapat', mIlk:'İlkbahar', mYaz:'Yaz', mSon:'Sonbahar', mKis:'Kış', bEge:'Ege', bMarmara:'İstanbul ve Marmara', bAkdeniz:'Akdeniz', bIc:'İç Anadolu', bGd:'Güneydoğu', bKaradeniz:'Karadeniz', cAntik:'Antik kentler', cFelsefe:'Filozoflar', cSanat:'Sanat ve müzeler', cDeniz:'Deniz ve kıyı', cDoga:'Doğa', sDurak:'durak', sRota:'hazır rota', sYil:'yıllık düşünce', kHarita:'Haritayı keşfet', kRota:'Rotaları gör',
    tum:'Tüm Türkiye', ege:'Ege\'ye yakınlaş', egeNot:'Ege kıyısında on durak var; yakınlaşarak seç.', kim:'Filozof', donem:'Dönem', neden:'Neden burada?', soz:'Söz kartı', eser:'Eser', dogru:'Kaynakta doğrulandı', bekliyor:'Çeviri birincil kaynakta kontrol ediliyor',
    kartYap:'Kartı indir', rota:'Yürüyüş rotası', muhur:'Mühür al', muhurlu:'Mühürlendi', muhurNot:'Bu yeri gezdiysen pasaportuna mühür bas.', muhurBildir:'Mühür pasaportuna basıldı.',
    oteller:'Gezini burada uzat', otelNot:'Bu yere yakın otelleri Hotels.com\'da gör.', otelBtn:'Otelleri gör', otelAcik:'Otel ve tur bağlantılarının bazıları ortaklık bağlantısıdır (Booking.com, Hotels.com, GetYourGuide, Viator). Bunlardan rezervasyon yaparsan site komisyon alabilir; sana ek ücret yansımaz.', turlar:'Turlar ve biletler', sesEtiket:'Sesli rehber paketi · yakında', sesBaslik:'Kulağında bir filozofla gez', sesAlt:'Efes, Bergama, Hierapolis ve diğer duraklar için indirilebilir, anlatımlı yürüyüşler hazırlanıyor. Çıktığında ilk sen haberdar ol.', sesKayit:'Bekleme listesine katıl', sesYakinda:'Çok yakında', sesDene:'Ücretsiz Efes rehberini dene', rehberBaslik:'Gezi rehberleri', oku:'Oku', rehberDil:'Rehber yazıları şimdilik İngilizce.',
@@ -1111,7 +1252,7 @@ var M = {
    yakinda:'Yakında: Kolophon (Ksenofanes), Priene, Hacıbektaş ve Trabzon.', alt1:'Çizimler bu site için özgün olarak yapıldı. Harita verisi: Natural Earth (kamu malı).', alt2:'Bilgiler Stanford Encyclopedia of Philosophy, Internet Encyclopedia of Philosophy, Britannica ve UNESCO sayfalarına dayanır.', sec:'Haritadan bir yer seç.', kartAlt:'Türkiye Felsefe Haritası',
    dinle:'Dinle', durdur:'Durdur', dusun:'Düşün', notYer:'Bir cümle yaz. Yalnızca bu cihazda saklanır.', kaydet:'Kaydet', kaydedildi:'Notun kaydedildi.', sesYok:'Bu cihaz sesli okumayı desteklemiyor; metni okuyabilirsin.',
    baglar:'Bağlantılar', baglarGoster:'Bağlantılar', hoca:'Hoca ve öğrenci', etki:'Etki', baglarNot:'Düz çizgi hoca ile öğrenciyi, kesikli çizgi etkiyi gösterir.', baglarYok:'Bu yerin bağları haritanın dışına uzanıyor: Belh, Tebriz ve İslam düşüncesinin geniş dünyası.', sDusunce:'Düşünce', sGezi:'Gezi ve sanat', sBaglar:'Bağlar ve kaynaklar', fikirler:'Temel fikirler', hayat:'Hayat çizgisi', bilinmeyen:'Bilmediklerimiz', miras:'Mirası', konakBaslik:'{yer} ve çevresindeki oteller', basla:'Nereden başlamalı?', hosgeldin:'Bir yer seç, yolculuk başlasın.', tumYerler:'{n} mekânın ayrı sayfaları', tamSayfa:'Mekânın tam sayfası', pasaportKart:'Topladığın mühürleri ve kazandığın rozetleri gör.', gununSozu:'Günün sözü', git:'Bu durağa git', y1b:'Baştan başla', y1k:'Efes\'te Herakleitos ile: her şey akar.', y2b:'Hazır rotalar', y2k:'2–4 günlük, her gecesi planlı.', y3b:'Beni şaşırt', y3k:'Rastgele bir filozofla tanış.', nasil:'Nasıl gezilir', n1b:'Oku', n1k:'Fikirler, hayat çizgisi, doğrulanmış söz.', n2b:'Yürü', n2k:'Ören yerinde rota, yakında otel.', n3b:'Mühürle', n3k:'Her durak pasaportuna bir mühür.', konakBolum:'Felsefe rotasında konakla', konakBolumAlt:'Her durağın yakınındaki otelleri Booking.com ya da Hotels.com\'da karşılaştır.', haritaya:'↑ Harita', efesLink:'Efes gezi rehberi →', sanat:'Sanat ve yapılar', rotaBaslik:'Hazır rotalar: gündüz felsefe, gece konak', rotaAlt:'Her durakta ne göreceğin, hangi turu alabileceğin ve her gece nerede kalacağın planlı.', gun:'Gün', gece:'Gece', geceKal:'{n} gece kal', haritadaGoster:'Rotayı haritada göster', rotaKapat:'Rotayı kapat', rotaCip:'Rota: {ad} ✕', oteleGit:'Otelleri gör', durak:'Durak', rotaOzet:'Bu rotanın gecelerini planla', ozetNot:'Düşünce bölümü SEP maddelerinin bu site için yazılmış özetidir; ayrıntı ve tartışmalar için maddelerin kendisine bakın.', birincil:'Birincil kaynak', ceviri:'Türkçesi bu siteye ait.' },
- en:{ etiket:'ΦΙΛΟΣΟΦΙΑ · Anatolia', baslik:'Philosophy Map of Türkiye', giris:'The shore where Thales watched the sea, the river of Heraclitus, the dome of Hagia Sophia, the reed flute of Rumi. People have been thinking on this land for eleven thousand years. Follow their trail: ideas and ancient theatres by day, a beautiful place to stay by night.', sDurak:'stops', sRota:'ready-made routes', sYil:'years of thought', kHarita:'Explore the map', kRota:'See the routes',
+ en:{ etiket:'DISCOVER MORE · TRAVEL DIFFERENTLY', baslik:'Philosophy Map of Türkiye', kb:'Walk the *ancient roads* of Türkiye', giris:'22 places where philosophy and art were born, from Göbekli Tepe to Rumi. Plan your route, pick a place to stay, collect stamps on the way.', nKesfet:'Explore', nRota:'Routes', nRehber:'Guides', nPasaport:'Passport', arNereye:'Where', arZaman:'When', arTur:'Interest', arHer:'Anywhere', arHerZaman:'Any season', arHerTur:'Everything', arDugme:'Search', kesfetH:'Explore Türkiye', sonuc:'{n} places', sonucYok:'Nothing matches. Try wider filters.', kisNot:'The road to the summit of Mount Nemrut can close in winter.', kRehber:'Guide', kOtel:'Hotels', kTur:'Tours', kapat:'Close', mIlk:'Spring', mYaz:'Summer', mSon:'Autumn', mKis:'Winter', bEge:'Aegean', bMarmara:'Istanbul & Marmara', bAkdeniz:'Mediterranean', bIc:'Central Anatolia', bGd:'Southeast', bKaradeniz:'Black Sea', cAntik:'Ancient cities', cFelsefe:'Philosophers', cSanat:'Art & museums', cDeniz:'Sea & coast', cDoga:'Nature', sDurak:'stops', sRota:'ready-made routes', sYil:'years of thought', kHarita:'Explore the map', kRota:'See the routes',
    tum:'All of Türkiye', ege:'Zoom to the Aegean', egeNot:'Ten stops lie on the Aegean coast; zoom in to choose.', kim:'Philosopher', donem:'Period', neden:'Why here?', soz:'Quote card', eser:'Work', dogru:'Checked against sources', bekliyor:'Translation being checked against the original',
    kartYap:'Download card', rota:'Walking route', muhur:'Collect stamp', muhurlu:'Stamped', muhurNot:'If you have visited, stamp your passport.', muhurBildir:'Stamp added to your passport.',
    oteller:'Stay a little longer', otelNot:'See hotels near this place on Hotels.com.', otelBtn:'See hotels', otelAcik:'Some hotel and tour links are affiliate links (Booking.com, Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.', turlar:'Tours and tickets', sesEtiket:'Audio guide pack · coming soon', sesBaslik:'Walk with a philosopher in your ear', sesAlt:'Narrated walks for Ephesus, Pergamon, Hierapolis and the other stops, to download before your trip. Be the first to hear when they are ready.', sesKayit:'Join the waitlist', sesYakinda:'Coming soon', sesDene:'Try the free Ephesus guide', rehberBaslik:'Travel guides', oku:'Read', rehberDil:'Guides are in English for now.',
@@ -1241,7 +1382,7 @@ function haritaCiz(){
     var etiketGoster = D.zum === 'ege' ? egede(yer) : !egede(yer);
     var rr = sec ? r * 1.25 : r;
     var H3 = (sec ? 20 : 15) * f, tx = p[0], ty = Math.max(p[1] - H3, v[1] + rr + 3 * f);
-    return '<g class="pin' + (sec ? ' secili' : '') + (m ? ' muhurlu' : '') + '" style="--g:' + i + '" data-yer="' + yer.id + '" role="button" tabindex="0" aria-label="' + h((i + 1) + '. ' + y(yer).ad + ', ' + y(yer).kim) + '">' +
+    return '<g class="pin' + (sec ? ' secili' : '') + (m ? ' muhurlu' : '') + (uyuyor(yer) ? '' : ' disari') + '" style="--g:' + i + '" data-yer="' + yer.id + '" role="button" tabindex="0" aria-label="' + h((i + 1) + '. ' + y(yer).ad + ', ' + y(yer).kim) + '">' +
       '<ellipse class="taban" cx="' + p[0] + '" cy="' + p[1] + '" rx="' + (rr * 0.75) + '" ry="' + (rr * 0.28) + '"/>' +
       '<circle class="nabiz" cx="' + p[0] + '" cy="' + p[1] + '" r="' + rr + '" stroke-width="' + (1.5 * f) + '"/>' +
       '<path class="sap" d="M' + p[0] + ' ' + p[1] + 'V' + ty + '" stroke-width="' + (1.8 * f) + '"/>' +
@@ -1314,6 +1455,64 @@ function kaydir(P, K, d){ var x = K[0] - P[0], y = K[1] - P[1], l = Math.hypot(x
 
 function listeCiz(){
   $('liste').innerHTML = '<a class="tum-yerler" href="/places/">' + h(t('tumYerler').replace('{n}', YERLER.length)) + ' →</a>';
+  kartlarCiz();
+}
+/* ==========================================================================
+   KEŞFET: arama (nereye / ne zaman / ne tür), kategori filtreleri, kartlar
+   ========================================================================== */
+var BOLGE = { efes:'ege', milet:'ege', klazomenai:'ege', assos:'ege', bergama:'ege', hierapolis:'ege', afrodisias:'ege', bodrum:'ege', priene:'ege',
+  istanbul:'marmara', iznik:'marmara', troya:'marmara', sinop:'karadeniz', soli:'akdeniz', antalya:'akdeniz', likya:'akdeniz',
+  konya:'ic', kapadokya:'ic', sanliurfa:'gd', gaziantep:'gd', mardin:'gd', nemrut:'gd' };
+var BOLGE_AD = { ege:'bEge', marmara:'bMarmara', akdeniz:'bAkdeniz', ic:'bIc', gd:'bGd', karadeniz:'bKaradeniz' };
+var KATEGORI = {
+  antik: ['efes','milet','klazomenai','assos','bergama','hierapolis','afrodisias','soli','antalya','troya','likya','priene','gaziantep','bodrum','nemrut','sanliurfa'],
+  felsefe: ['efes','milet','klazomenai','assos','bergama','hierapolis','afrodisias','sinop','soli','iznik','priene','konya','kapadokya','bodrum'],
+  sanat: ['istanbul','konya','gaziantep','kapadokya','afrodisias','bergama','iznik','mardin','sanliurfa','efes'],
+  deniz: ['assos','klazomenai','sinop','bodrum','likya','antalya','istanbul','milet'],
+  doga: ['hierapolis','kapadokya','nemrut','likya','mardin']
+};
+var KAT_AD = { antik:'cAntik', felsefe:'cFelsefe', sanat:'cSanat', deniz:'cDeniz', doga:'cDoga' };
+var MEVSIM_DISI = { kis: ['nemrut'] };
+/* Lisanslı fotoğraf eklemek için: FOTO.efes = { src:'/img/yerler/efes.jpg', yazar:'…', lisans:'CC BY-SA 4.0', kaynak:'https://commons.wikimedia.org/wiki/File:…' } */
+var FOTO = {};
+D.filtre = { nereye:'', zaman:'', tur:'' };
+function uyuyor(yer){
+  var f = D.filtre;
+  if (f.nereye && BOLGE[yer.id] !== f.nereye) return false;
+  if (f.tur && KATEGORI[f.tur].indexOf(yer.id) < 0) return false;
+  if (f.zaman && (MEVSIM_DISI[f.zaman] || []).indexOf(yer.id) >= 0) return false;
+  return true;
+}
+function aramaCiz(){
+  var f = D.filtre;
+  function sec(deger, secenekler){ return secenekler.map(function(o){ return '<option value="' + o[0] + '"' + (o[0] === deger ? ' selected' : '') + '>' + h(o[1]) + '</option>'; }).join(''); }
+  $('ar-nereye-l').textContent = t('arNereye'); $('ar-zaman-l').textContent = t('arZaman'); $('ar-tur-l').textContent = t('arTur'); $('ar-dugme').textContent = t('arDugme');
+  $('ar-nereye').innerHTML = sec(f.nereye, [['', t('arHer')]].concat(Object.keys(BOLGE_AD).map(function(k){ return [k, t(BOLGE_AD[k])]; })));
+  $('ar-zaman').innerHTML = sec(f.zaman, [['', t('arHerZaman')], ['ilk', t('mIlk')], ['yaz', t('mYaz')], ['son', t('mSon')], ['kis', t('mKis')]]);
+  $('ar-tur').innerHTML = sec(f.tur, [['', t('arHerTur')]].concat(Object.keys(KAT_AD).map(function(k){ return [k, t(KAT_AD[k])]; })));
+  $('kesfet-h').textContent = t('kesfetH');
+  $('filtreler').setAttribute('aria-label', t('arTur'));
+  $('filtreler').innerHTML = [['', t('arHerTur')]].concat(Object.keys(KAT_AD).map(function(k){ return [k, t(KAT_AD[k])]; })).map(function(o){
+    return '<button type="button" class="filtre' + (f.tur === o[0] ? ' acik' : '') + '" data-eylem="filtre" data-k="' + o[0] + '" aria-pressed="' + (f.tur === o[0]) + '">' + h(o[1]) + '</button>'; }).join('');
+}
+function kapakHTML(yer, i){
+  var ft = FOTO[yer.id];
+  if (ft) return '<div class="kapak foto"><img src="' + h(ft.src) + '" alt="" loading="lazy" decoding="async"><small class="atif">' + h(ft.yazar) + ' · ' + h(ft.lisans) + '</small></div>';
+  return '<div class="kapak" style="--r:' + RENK[yer.id] + '"><svg class="kapak-desen" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="160" cy="18" r="56" fill="#fff" opacity=".07"/><circle cx="160" cy="18" r="34" fill="#fff" opacity=".07"/><path d="M0 98 Q50 80 100 92 T200 86 V120 H0z" fill="#000" opacity=".16"/></svg>' +
+    '<span class="kapak-amblem">' + amblemSVG(yer.id, '#F6EBD4') + '</span><span class="kapak-yunan">' + h(yer.yunan) + '</span></div>';
+}
+function kartlarCiz(){
+  var liste = YERLER.filter(uyuyor), O2 = window.ORTAKLIK;
+  $('kesfet-sonuc').textContent = liste.length ? t('sonuc').replace('{n}', liste.length) + (D.filtre.zaman === 'kis' ? ' · ' + t('kisNot') : '') : t('sonucYok');
+  $('kartlar').innerHTML = liste.map(function(yer){
+    var i = YERLER.indexOf(yer), m = y(yer), ka = YER_ARAMA[yer.id];
+    return '<article class="kart' + (D.secili === yer.id ? ' secili' : '') + (D.muhur[yer.id] ? ' muhurlu' : '') + '" data-kart="' + yer.id + '" style="--r:' + RENK[yer.id] + '">' +
+      '<button type="button" class="kart-ac" data-yer="' + yer.id + '" aria-label="' + h(m.ad) + '">' + kapakHTML(yer, i) + '<span class="kart-no">' + (i + 1) + '</span>' + (D.muhur[yer.id] ? '<span class="kart-muhur" title="' + h(t('muhurlu')) + '">✓</span>' : '') + '</button>' +
+      '<div class="kart-govde"><small class="kart-bolge">' + h(t(BOLGE_AD[BOLGE[yer.id]])) + ' · ' + h(m.il) + '</small><h3><button type="button" data-yer="' + yer.id + '">' + h(m.ad) + '</button></h3><p>' + h(m.kim) + '</p>' +
+      '<div class="kart-cta"><a class="kc-rehber" href="/places/' + SLUG[yer.id] + '">' + h(t('kRehber')) + ' →</a>' +
+      (O2.hotels.goster ? '<a class="kc-otel" href="' + h(O2.otel('hotels', ka.kasaba)) + '" target="_blank" rel="sponsored noopener">' + h(t('kOtel')) + '</a>' : '') +
+      '<a class="kc-tur" href="' + h(O2.tur('getyourguide', ka.tur)) + '" target="_blank" rel="sponsored noopener">' + h(t('kTur')) + '</a></div></div></article>';
+  }).join('');
 }
 function eskiListeCiz(){
   $('liste').innerHTML = YERLER.map(function(yer, i){
@@ -1377,6 +1576,8 @@ function kaynakBolum(yer){
 }
 function panelCiz(odakla){
   var yer = bul(D.secili), p = $('panel');
+  document.body.classList.toggle('cekmece-acik', !!yer);
+  document.querySelectorAll('.kart').forEach(function(k){ k.classList.toggle('secili', k.getAttribute('data-kart') === D.secili); });
   if (!yer){ karsilamaCiz(p); return; }
   var m = y(yer), s = yer.soz, muhurlu = !!D.muhur[yer.id], i = YERLER.indexOf(yer), dr = DERIN[yer.id][D.dil];
   var kaynak = (D.dil === 'en' && s.kaynakEn) ? s.kaynakEn : s.kaynak;
@@ -1390,8 +1591,7 @@ function panelCiz(odakla){
       sanatBolum(yer) +
       '<section><div class="etiket" style="margin-bottom:10px">' + h(t('rota')) + '</div><ol class="rota">' + m.rota.map(function(r){ return '<li><b>' + h(r[0]) + '</b><span>' + h(r[1]) + '</span></li>'; }).join('') + '</ol></section>' +
       '<div class="muhur-kutu">' + muhurSVG(yer, muhurlu) + '<div style="display:flex;flex-direction:column;gap:8px"><p class="not">' + h(muhurlu ? t('muhurlu') + ' · ' + D.muhur[yer.id] : t('muhurNot')) + '</p>' +
-        (muhurlu ? '' : '<button type="button" class="btn btn-okra" data-eylem="muhur">' + h(t('muhur')) + '</button>') + '</div></div>' +
-      konakKart(yer);
+        (muhurlu ? '' : '<button type="button" class="btn btn-okra" data-eylem="muhur">' + h(t('muhur')) + '</button>') + '</div></div>';
   } else if (sekme === 'baglar'){
     icerik = bagBolum(yer) + kaynakBolum(yer);
   } else {
@@ -1415,9 +1615,9 @@ function panelCiz(odakla){
     '<div class="panel-bant" aria-hidden="true"></div>' +
     '<div class="panel-bas"><div class="amblem">' + amblemSVG(yer.id) + '</div><div><div class="etiket">' + (i + 1) + ' · ' + h(yer.yunan) + '</div><h2>' + h(m.ad) + '</h2><div class="bilgi-satir"><span>' + h(m.il) + '</span><span>' + h(m.donem) + '</span></div></div></div>' +
     '<div><h3>' + h(m.kim) + '</h3><p class="soluk neden" style="margin-top:4px">' + h(m.neden) + '</p><a class="tam-sayfa" href="/places/' + SLUG[yer.id] + '">' + h(t('tamSayfa')) + ' →</a></div>' +
-    (sekme === 'gezi' ? '' : konakKart(yer)) +
+    konakKart(yer) +
     sekmeler + '<div class="sekme-ic" role="tabpanel">' + icerik + '</div>';
-  if (odakla) p.scrollIntoView({ behavior:'smooth', block:'start' });
+  if (odakla){ var ck = $('cekmece'); ck.scrollTop = 0; }
 }
 
 var YOL_SVG = {
@@ -1571,10 +1771,12 @@ function pasaportCiz(){
 
 function metinCiz(){
   document.documentElement.lang = D.dil;
-  document.title = t('baslik');
-  $('ust-etiket').innerHTML = '<span>' + h(t('etiket')) + '</span>';
-  var bp = t('baslik').split(' '), vurgu = D.dil === 'tr' ? 1 : 0;
-  $('baslik').innerHTML = bp.map(function(w, i){ return i === vurgu ? '<em>' + h(w) + '</em>' : h(w); }).join(' ');
+  document.title = 'Antikyol · ' + t('baslik');
+  $('ust-etiket').textContent = t('etiket');
+  $('baslik').innerHTML = h(t('kb')).replace(/\*([^*]+)\*/, '<em>$1</em>');
+  $('n-kesfet').textContent = t('nKesfet'); $('n-rota').textContent = t('nRota'); $('n-rehber').textContent = t('nRehber'); $('n-pasaport').textContent = t('nPasaport');
+  $('cekmece-kapat').setAttribute('aria-label', t('kapat'));
+  aramaCiz();
   $('giris').textContent = t('giris');
   var gunToplam = ROTALAR.reduce(function(a, r){ return a + r[D.dil].gunler.length; }, 0);
   $('sayilar').innerHTML = [[YERLER.length, t('sDurak')], [ROTALAR.length, t('sRota')], [D.dil === 'tr' ? '11.000' : '11,000', t('sYil')]].map(function(x){ return '<li><b>' + x[0] + '</b><span>' + h(x[1]) + '</span></li>'; }).join('');
@@ -1656,7 +1858,9 @@ document.addEventListener('click', function(e){
   var ey = el.getAttribute('data-eylem');
   if (ey === 'otel') return;
   if (ey === 'rota-goster'){ rotaGoster(D.rotaSec); return; }
-  if (ey === 'haritaya-in'){ $('harita').scrollIntoView({ behavior:'smooth', block:'center' }); return; }
+  if (ey === 'filtre'){ D.filtre.tur = el.getAttribute('data-k'); aramaCiz(); kartlarCiz(); haritaCiz(); return; }
+  if (ey === 'cekmece-kapat'){ sec(null); return; }
+  if (ey === 'haritaya-in'){ $('kesfet').scrollIntoView({ behavior:'smooth', block:'start' }); return; }
   if (ey === 'rotalar'){ $('rota-bolum').scrollIntoView({ behavior:'smooth', block:'start' }); return; }
   if (ey === 'ege'){ zumla('ege'); if (window.matchMedia('(max-width:900px)').matches) $('harita').scrollIntoView({ behavior:'smooth', block:'start' }); return; }
   if (ey === 'rastgele'){ var digerleri = YERLER.filter(function(x){ return x.id !== D.secili; }); sesDurdur(); sec(digerleri[Math.floor(Math.random() * digerleri.length)].id, true); return; }
@@ -1681,6 +1885,10 @@ document.addEventListener('keydown', function(e){
 var haritaGorunur = true;
 function haritayaGuncelle(){ var b = $('haritaya'); if (b) b.hidden = haritaGorunur || !D.secili; }
 if ('IntersectionObserver' in window) new IntersectionObserver(function(g){ haritaGorunur = g[0].isIntersecting; haritayaGuncelle(); }).observe($('harita'));
+$('arama').addEventListener('submit', function(e){ e.preventDefault(); D.filtre = { nereye:$('ar-nereye').value, zaman:$('ar-zaman').value, tur:$('ar-tur').value }; aramaCiz(); kartlarCiz(); haritaCiz(); $('kesfet').scrollIntoView({ behavior:'smooth', block:'start' }); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && D.secili) sec(null); });
+/* Kart üstüne gelince haritadaki işaret parlasın */
+document.addEventListener('mouseover', function(e){ var k = e.target.closest && e.target.closest('[data-kart]'); document.querySelectorAll('.pin.vurgu').forEach(function(p){ if (!k || p.getAttribute('data-yer') !== k.getAttribute('data-kart')) p.classList.remove('vurgu'); }); if (k){ var p = document.querySelector('.pin[data-yer="' + k.getAttribute('data-kart') + '"]'); if (p) p.classList.add('vurgu'); } });
 $('haritaya').addEventListener('click', function(){ $('harita').scrollIntoView({ behavior:'smooth', block:'start' }); });
 
 /* Mühür alınınca: ekrana basılan büyük mühür, saçılan altın parçalar, sayaç */

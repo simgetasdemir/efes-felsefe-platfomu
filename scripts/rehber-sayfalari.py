@@ -64,13 +64,13 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 <meta name="theme-color" content="#1F2A36">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@500;600;700&display=swap">
 <link rel="stylesheet" href="/guides/rehber.css">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 {sss_ld}
 </head>
 <body>
-<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/places/">Places</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">All guides</a></nav></header>
+<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/#kesfet">Explore</a><a href="/places/">Places</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">All guides</a></nav></header>
 <main>
 <div class="etiket">{e(etiket)}</div>
 <h1>{e(baslik)}</h1>

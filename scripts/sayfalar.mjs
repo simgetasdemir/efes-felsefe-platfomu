@@ -48,16 +48,14 @@ const etiket = u => { for (const k in ETIKET) if (u.includes(k)) return ETIKET[k
 
 function otel(kasaba, baslik){
   return `<div class="cta"><small>Stay nearby</small><b>${e(baslik)}</b><div class="dugmeler">
-<a href="${e(ORT.otel('booking', kasaba))}" data-otel="booking" data-kasaba="${e(kasaba)}" target="_blank" rel="sponsored noopener">Booking.com</a>
 <a href="${e(ORT.otel('hotels', kasaba))}" data-otel="hotels" data-kasaba="${e(kasaba)}" target="_blank" rel="sponsored noopener">Hotels.com</a></div></div>`;
 }
 function tur(sorgu, baslik){
-  const q = enc(sorgu);
   return `<div class="cta tur"><small>Tours and tickets</small><b>${e(baslik)}</b><div class="dugmeler">
-<a href="https://www.getyourguide.com/s/?q=${q}" data-tur="getyourguide" data-sorgu="${e(sorgu)}" target="_blank" rel="sponsored noopener">GetYourGuide</a>
-<a href="https://www.viator.com/searchResults/all?text=${q}" data-tur="viator" data-sorgu="${e(sorgu)}" target="_blank" rel="sponsored noopener">Viator</a></div></div>`;
+<a href="${e(ORT.tur('getyourguide', sorgu))}" data-tur="getyourguide" data-sorgu="${e(sorgu)}" target="_blank" rel="sponsored noopener">GetYourGuide</a>
+<a href="${e(ORT.tur('viator', sorgu))}" data-tur="viator" data-sorgu="${e(sorgu)}" target="_blank" rel="sponsored noopener">Viator</a></div></div>`;
 }
-const ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Booking.com, Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>';
+const ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>';
 
 function ust(){
   return `<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/#kesfet">Explore</a><a href="/places/">Places</a><a href="/guides/philosophy-trip-turkey">Guides</a><a href="/passport">Passport</a></nav></header>`;

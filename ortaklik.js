@@ -8,10 +8,10 @@
    Başvuru adresleri ve adımlar README.md içinde, "Gelir ve ortaklıklar" bölümünde.
    ========================================================================== */
 window.ORTAKLIK = {
-  /* Booking.com: Haziran 2025'ten beri ortaklık Awin ağı üzerinden yürüyor.
+  /* Booking.com: şimdilik kapalı (goster: false); başvurulmadı. Haziran 2025'ten beri ortaklık Awin ağı üzerinden yürüyor.
      awinaffid: Awin yayıncı kimliğin (panelin sağ üstü), awinmid: Booking.com programının Awin kimliği.
      İkisi doluysa bağlantılar Awin üzerinden gider. Eski doğrudan programın "aid" numarası varsa aid'e yaz. */
-  booking: { goster: true, aid: '', awinmid: '', awinaffid: '' },
+  booking: { goster: false, aid: '', awinmid: '', awinaffid: '' },
 
   /* Hotels.com (Expedia Group Travel Creator Program).
      parametreler: Link builder'ın verdiği bağlantıdaki takip kısmı ("destination=..." dışındaki her şey).
@@ -26,7 +26,7 @@ window.ORTAKLIK = {
   } },
 
   /* GetYourGuide Partner Program: panelde verilen "partner_id". */
-  getyourguide: { goster: true, partner_id: '' },
+  getyourguide: { goster: true, partner_id: 'FLFFSW2' },
 
   /* Viator Affiliate Program: panelde verilen "pid" (P00 ile başlar) ve "mcid". */
   viator: { goster: true, pid: '', mcid: '' },

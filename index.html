@@ -653,32 +653,67 @@ h1#baslik{font-size:clamp(44px,7vw,88px);line-height:1}
 .marka-ana{position:absolute;top:18px;left:20px;display:flex;align-items:center;gap:10px;text-decoration:none;color:#1F2A36;font-family:'EB Garamond',Georgia,serif;font-weight:600;font-size:24px;letter-spacing:.01em;z-index:2}
 .marka-ana img{display:block}
 @media (max-width:600px){.marka-ana{top:14px;left:16px;font-size:21px}.marka-ana img{width:34px;height:34px}}
+
+/* ===== Açılış: dev harita ===== */
+header.ust.ust-kompakt{max-width:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px 12px;text-align:left}
+header.ust.ust-kompakt::before{display:none}
+header.ust.ust-kompakt .marka-ana{position:static;flex:none}
+header.ust.ust-kompakt > .dil{position:static;flex:none}
+.acilis-baslik{flex:1;text-align:center;min-width:0}
+.acilis-baslik .etiket{margin:0;font-size:12px;letter-spacing:.24em}
+.acilis-baslik .etiket::before,.acilis-baslik .etiket::after{display:none}
+.acilis-baslik .etiket#ust-etiket{margin:0 0 2px;padding:0}
+.acilis-baslik h1#baslik{margin:0;font-size:clamp(26px,2.8vw,42px);line-height:1.1;letter-spacing:0}
+.acilis-baslik h1#baslik em{display:inline}
+.dev-harita{max-width:1680px;margin:0 auto;padding:0 20px}
+.dev-harita .harita-kutu{position:relative;display:flex;flex-direction:column;gap:12px;top:auto}
+.dev-harita .harita{border-radius:26px}
+.dev-harita .harita svg{max-height:calc(100vh - 150px);max-height:calc(100svh - 150px)}
+.dev-harita .harita-araclar{justify-content:center}
+main{margin-top:28px}
+main > .kahraman{position:sticky;top:20px;max-width:none;margin:0;text-align:left;padding-top:8px}
+main > .kahraman::before{display:none}
+main > .kahraman .giris{margin-top:0;font-size:21px;text-align:left}
+main > .kahraman .sayilar{justify-content:flex-start}
+main > .kahraman .kahraman-dugmeler{justify-content:flex-start}
+@media (min-width:901px){ .haritaya{display:inline-flex;align-items:center} .haritaya[hidden]{display:none} }
+@media (max-width:900px){
+  main > .kahraman{position:static}
+  #panel{order:0}
+}
+@media (max-width:700px){
+  header.ust.ust-kompakt{flex-wrap:wrap;padding:12px 16px 10px;row-gap:8px}
+  .acilis-baslik{order:3;flex:1 0 100%}
+  .acilis-baslik h1#baslik{font-size:28px}
+  .acilis-baslik .etiket#ust-etiket{font-size:11px}
+  .dev-harita .kaydir-ipucu{display:block}
+  .dev-harita .tum-yerler{margin-left:16px;margin-right:16px}
+  .dev-harita{padding:0}
+  .dev-harita .harita{border-radius:0;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;box-shadow:none;border-top:1px solid var(--ince);border-bottom:1px solid var(--ince);transform:none!important}
+  .dev-harita .harita svg{max-height:none}
+  .dev-harita .harita-araclar{padding:0 16px;justify-content:flex-start}
+  main > .kahraman .giris{font-size:19px}
+}
+.kaydir-ipucu{display:none;position:absolute;right:12px;top:12px;z-index:3;pointer-events:none;background:rgba(31,42,54,.82);color:#fff;font-family:var(--yazit);font-size:14px;padding:6px 12px;border-radius:999px;transition:opacity .4s}
+.kaydir-ipucu.gizli{opacity:0}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Antikyol","url":"https://antikyol.com/","alternateName":["Philosophy Map of Türkiye","Türkiye Felsefe Haritası"],"inLanguage":["en","tr"],"description":"From Göbekli Tepe to Rumi: 22 places in Türkiye where philosophy and art were born, with ready-made routes and places to stay.","mainEntity":{"@type":"ItemList","name":"Philosophy and art stops","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"TouristAttraction","name":"Ephesus","description":"The philosophy of change and logos was born here. Heraclitus held that everything flows, but that the flow follows a measure, a \"logos\".","geo":{"@type":"GeoCoordinates","latitude":37.94,"longitude":27.34},"address":{"@type":"PostalAddress","addressRegion":"Selçuk, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":2,"item":{"@type":"TouristAttraction","name":"Miletus","description":"The first school of Western philosophy. Thales looked for the first stuff of the world; Anaximander called the source of all things the \"apeiron\", the boundless.","geo":{"@type":"GeoCoordinates","latitude":37.53,"longitude":27.28},"address":{"@type":"PostalAddress","addressRegion":"Didim, Aydın","addressCountry":"TR"}}},{"@type":"ListItem","position":3,"item":{"@type":"TouristAttraction","name":"Clazomenae","description":"The first philosopher to bring philosophy to Athens. He argued that a \"nous\", a mind, set the cosmos in order.","geo":{"@type":"GeoCoordinates","latitude":38.36,"longitude":26.77},"address":{"@type":"PostalAddress","addressRegion":"Urla, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":4,"item":{"@type":"TouristAttraction","name":"Assos","description":"After Plato's death (347 BC) Aristotle came to Assos and stayed about three years. Cleanthes, second head of the Stoic school, was also from Assos.","geo":{"@type":"GeoCoordinates","latitude":39.49,"longitude":26.34},"address":{"@type":"PostalAddress","addressRegion":"Ayvacık, Çanakkale","addressCountry":"TR"}}},{"@type":"ListItem","position":5,"item":{"@type":"TouristAttraction","name":"Pergamon","description":"Home to one of the greatest libraries of the ancient world, and birthplace of Galen (129–c. 200), physician and philosopher.","geo":{"@type":"GeoCoordinates","latitude":39.13,"longitude":27.18},"address":{"@type":"PostalAddress","addressRegion":"Bergama, İzmir","addressCountry":"TR"}}},{"@type":"ListItem","position":6,"item":{"@type":"TouristAttraction","name":"Hierapolis","description":"Epictetus, born a slave and later one of the most widely read Stoic teachers, was born here in the 50s AD.","geo":{"@type":"GeoCoordinates","latitude":37.93,"longitude":29.13},"address":{"@type":"PostalAddress","addressRegion":"Pamukkale, Denizli","addressCountry":"TR"}}},{"@type":"ListItem","position":7,"item":{"@type":"TouristAttraction","name":"Aphrodisias","description":"The most influential ancient commentator on Aristotle. An inscription found here in 2001 calls him one of the heads of the philosophical schools in Athens.","geo":{"@type":"GeoCoordinates","latitude":37.71,"longitude":28.72},"address":{"@type":"PostalAddress","addressRegion":"Karacasu, Aydın","addressCountry":"TR"}}},{"@type":"ListItem","position":8,"item":{"@type":"TouristAttraction","name":"Sinope","description":"Diogenes (c. 404–323 BC), emblem of Cynic philosophy, was a citizen of Sinope who fled or was exiled from the city.","geo":{"@type":"GeoCoordinates","latitude":42.03,"longitude":35.15},"address":{"@type":"PostalAddress","addressRegion":"Sinop","addressCountry":"TR"}}},{"@type":"ListItem","position":9,"item":{"@type":"TouristAttraction","name":"Soli and Tarsus","description":"Chrysippus (c. 280–207 BC), who built the Stoic system, was born in Soli near today's Mersin. Tarsus was the city of Stoics such as Antipater.","geo":{"@type":"GeoCoordinates","latitude":36.8,"longitude":34.7},"address":{"@type":"PostalAddress","addressRegion":"Mersin","addressCountry":"TR"}}},{"@type":"ListItem","position":10,"item":{"@type":"TouristAttraction","name":"Konya","description":"Rumi was born in Balkh in 1207 and died in Konya in 1273. After his death his disciples organised the Mevlevi order; Konya adds Sufi thought to the map.","geo":{"@type":"GeoCoordinates","latitude":37.87,"longitude":32.48},"address":{"@type":"PostalAddress","addressRegion":"Konya","addressCountry":"TR"}}},{"@type":"ListItem","position":11,"item":{"@type":"TouristAttraction","name":"Istanbul","description":"For a thousand years the Byzantine capital, Constantinople, kept ancient Greek philosophy alive by teaching and copying it. Psellos revived Plato here; Plethon was born here.","geo":{"@type":"GeoCoordinates","latitude":41.01,"longitude":28.98},"address":{"@type":"PostalAddress","addressRegion":"Istanbul","addressCountry":"TR"}}},{"@type":"ListItem","position":12,"item":{"@type":"TouristAttraction","name":"Cappadocia","description":"In the 4th century three thinkers from this region brought Greek philosophy into dialogue with Christian thought. Kayseri (Caesarea) was Basil's city.","geo":{"@type":"GeoCoordinates","latitude":38.64,"longitude":34.83},"address":{"@type":"PostalAddress","addressRegion":"Nevşehir, Kayseri","addressCountry":"TR"}}},{"@type":"ListItem","position":13,"item":{"@type":"TouristAttraction","name":"Antalya: Perge and Aspendos","description":"Apollonius, \"the Great Geometer\", was born in Perge. We still use the names ellipse, parabola and hyperbola from his Conics.","geo":{"@type":"GeoCoordinates","latitude":36.96,"longitude":30.85},"address":{"@type":"PostalAddress","addressRegion":"Antalya","addressCountry":"TR"}}},{"@type":"ListItem","position":14,"item":{"@type":"TouristAttraction","name":"Şanlıurfa and Harran","description":"At Göbekli Tepe people raised monumental structures more than 11,000 years ago. The school of Edessa, Urfa's ancient name, translated Greek works into Syriac; Thabit ibn Qurra, born in Harran, carried Greek mathematics into Arabic.","geo":{"@type":"GeoCoordinates","latitude":37.16,"longitude":38.79},"address":{"@type":"PostalAddress","addressRegion":"Şanlıurfa","addressCountry":"TR"}}},{"@type":"ListItem","position":15,"item":{"@type":"TouristAttraction","name":"Gaziantep and Zeugma","description":"The mosaics from the villas of Zeugma on the Euphrates set myth and theatre in stone. This is an art stop: you see the stories philosophy told, in pictures.","geo":{"@type":"GeoCoordinates","latitude":37.06,"longitude":37.38},"address":{"@type":"PostalAddress","addressRegion":"Gaziantep","addressCountry":"TR"}}},{"@type":"ListItem","position":16,"item":{"@type":"TouristAttraction","name":"Bodrum","description":"Herodotus, who wrote history as an \"inquiry\" (historia), was born here in ancient Halicarnassus. The Mausoleum, one of the Seven Wonders, stood in this city.","geo":{"@type":"GeoCoordinates","latitude":37.04,"longitude":27.43},"address":{"@type":"PostalAddress","addressRegion":"Muğla","addressCountry":"TR"}}},{"@type":"ListItem","position":17,"item":{"@type":"TouristAttraction","name":"İznik","description":"Hipparchus, a founder of astronomy, was born in ancient Nicaea. The city later hosted two great church councils and, in the 16th century, the famous İznik tiles.","geo":{"@type":"GeoCoordinates","latitude":40.43,"longitude":29.72},"address":{"@type":"PostalAddress","addressRegion":"Bursa","addressCountry":"TR"}}},{"@type":"ListItem","position":18,"item":{"@type":"TouristAttraction","name":"Mardin and Nusaybin","description":"The School of Nisibis (Nusaybin) was one of the centres that translated Greek works into Syriac. The Arabs came to know Greek thought chiefly through these Syriac translations.","geo":{"@type":"GeoCoordinates","latitude":37.31,"longitude":40.74},"address":{"@type":"PostalAddress","addressRegion":"Mardin","addressCountry":"TR"}}},{"@type":"ListItem","position":19,"item":{"@type":"TouristAttraction","name":"Troy","description":"The city of the siege Homer sang in the Iliad. Plato mentions those who call Homer \"the educator of Hellas\" and questions that power of poetry: this is a stop both for poetry and for the first great philosophical critique of it.","geo":{"@type":"GeoCoordinates","latitude":39.957,"longitude":26.239},"address":{"@type":"PostalAddress","addressRegion":"Çanakkale","addressCountry":"TR"}}},{"@type":"ListItem","position":20,"item":{"@type":"TouristAttraction","name":"Mount Nemrut","description":"King Antiochus I (r. 69–34 BC) built a hierotheseion on the summit: a temple-tomb and house of the gods. Colossal statues that merge Greek and Iranian gods bring the beliefs of two worlds together in stone.","geo":{"@type":"GeoCoordinates","latitude":37.98,"longitude":38.74},"address":{"@type":"PostalAddress","addressRegion":"Adıyaman","addressCountry":"TR"}}},{"@type":"ListItem","position":21,"item":{"@type":"TouristAttraction","name":"Lycia: Xanthos and Patara","description":"The cities of Lycia formed a league with a common council: large cities had three votes, middling ones two, small towns one. Montesquieu chose Lycia as the model of an excellent confederate republic; the American Federalist Papers cited it too.","geo":{"@type":"GeoCoordinates","latitude":36.33,"longitude":29.32},"address":{"@type":"PostalAddress","addressRegion":"Antalya, Muğla","addressCountry":"TR"}}},{"@type":"ListItem","position":22,"item":{"@type":"TouristAttraction","name":"Priene and Didyma","description":"Priene, the city of Bias, one of the Seven Sages, was refounded on its present site around 350 BC on a grid plan. Nearby Didyma held Apollo's oracle; there the Milesians began a temple meant to be the largest in the Greek world, and never finished it.","geo":{"@type":"GeoCoordinates","latitude":37.4,"longitude":27.42},"address":{"@type":"PostalAddress","addressRegion":"Aydın","addressCountry":"TR"}}}]}}</script>
 </head>
 <body>
-<header class="ust">
+<header class="ust ust-kompakt">
   <a class="marka-ana" href="/" aria-label="Antikyol"><img src="/logo.svg" alt="" width="40" height="40"><span>Antikyol</span></a>
-  <div class="kahraman">
+  <div class="acilis-baslik">
     <div class="etiket" id="ust-etiket"></div>
     <h1 id="baslik"></h1>
-    <p class="giris" id="giris"></p>
-    <ul class="sayilar" id="sayilar"></ul>
-    <div class="kahraman-dugmeler">
-      <button type="button" class="btn btn-koyu" data-eylem="haritaya-in" id="k-harita"></button>
-      <button type="button" class="btn btn-hayalet" data-eylem="rotalar" id="k-rota"></button>
-      <a class="ust-link" id="ust-link" href="/efes"></a>
-    </div>
   </div>
   <div class="dil" role="group" aria-label="Dil / Language">
     <button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button>
   </div>
 </header>
-<div class="ust-meander"><div class="meander" aria-hidden="true"></div></div>
-
-<main>
+<section class="dev-harita" aria-label="Map">
   <div class="harita-kutu">
     <div class="harita" id="harita"></div>
+    <span class="kaydir-ipucu" id="kaydir-ipucu" aria-hidden="true"></span>
     <div class="harita-araclar">
       <button type="button" class="cip" id="z-tum"></button>
       <button type="button" class="cip" id="z-ege"></button>
@@ -687,6 +722,18 @@ h1#baslik{font-size:clamp(44px,7vw,88px);line-height:1}
       <span class="not" id="harita-not"></span>
     </div>
     <div class="liste" id="liste"></div>
+  </div>
+</section>
+
+<main>
+  <div class="kahraman">
+    <p class="giris" id="giris"></p>
+    <ul class="sayilar" id="sayilar"></ul>
+    <div class="kahraman-dugmeler">
+      <button type="button" class="btn btn-koyu" data-eylem="haritaya-in" id="k-harita"></button>
+      <button type="button" class="btn btn-hayalet" data-eylem="rotalar" id="k-rota"></button>
+      <a class="ust-link" id="ust-link" href="/efes"></a>
+    </div>
   </div>
   <section class="panel" id="panel" aria-live="polite" tabindex="-1"></section>
 </main>
@@ -1121,7 +1168,13 @@ function rolyef(f){
 }
 function haritaCiz(){
   /* f: bir ekran pikselinin harita birimindeki karşılığı; işaretler her yakınlıkta aynı boyda görünsün */
-  var v = GORUNUM[D.zum], gen = $('harita').clientWidth || 760, f = v[2] / gen;
+  var v = GORUNUM[D.zum], kutuGen = $('harita').clientWidth || 760, gen = kutuGen;
+  /* Telefonda harita küçülmesin: ekranın büyük kısmını kaplayacak yükseklikte çiz, yana kaydırılır */
+  if (window.matchMedia && matchMedia('(max-width:700px)').matches){
+    var hedefY = Math.round(Math.min(window.innerHeight * 0.58, 520));
+    gen = Math.max(kutuGen, Math.round(hedefY * v[2] / v[3]));
+  }
+  var f = v[2] / gen;
   var r = 12 * f, yaz = 12.5 * f;
   var dar = gen < 600 && D.zum === 'tum';   /* telefonda Ege pinleri üst üste biner: tek bir küme rozeti göster */
   var pinler = YERLER.map(function(yer, i){
@@ -1147,7 +1200,7 @@ function haritaCiz(){
     '<text class="deniz-ad" x="' + (v[0] + 18 * f) + '" y="' + (v[1] + v[3] * 0.62) + '" style="font-size:' + (12 * f) + 'px" transform="rotate(-90 ' + (v[0] + 18 * f) + ' ' + (v[1] + v[3] * 0.62) + ')">' + (D.dil === 'tr' ? 'EGE DENİZİ' : 'AEGEAN SEA') + '</text>';
   var kal = 7 * f, katman = '';
   for (var kk = 6; kk >= 1; kk--) katman += '<use href="#tr-kara" class="yan" transform="translate(0 ' + (kal * kk / 6) + ')" style="fill:' + ['#B79466', '#BF9D70', '#C6A57A', '#CDAE85', '#D4B68F', '#DABE99'][6 - kk] + '"/>';
-  $('harita').innerHTML = '<svg viewBox="' + v.join(' ') + '" role="group" aria-label="' + h(t('baslik')) + '">' +
+  $('harita').innerHTML = '<svg viewBox="' + v.join(' ') + '"' + (gen > kutuGen ? ' style="width:' + gen + 'px;max-width:none"' : '') + ' role="group" aria-label="' + h(t('baslik')) + '">' +
     '<defs><path id="tr-kara" d="' + H.turkiye + '"/>' +
       '<linearGradient id="deniz-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E4EFF4"/><stop offset="1" stop-color="#C9DDE8"/></linearGradient>' +
       '<linearGradient id="kara-g" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#FBF5E8"/><stop offset="1" stop-color="#EEDFC2"/></linearGradient>' +
@@ -1300,7 +1353,7 @@ function panelCiz(odakla){
     '<div><h3>' + h(m.kim) + '</h3><p class="soluk neden" style="margin-top:4px">' + h(m.neden) + '</p><a class="tam-sayfa" href="/places/' + SLUG[yer.id] + '">' + h(t('tamSayfa')) + ' →</a></div>' +
     (sekme === 'gezi' ? '' : konakKart(yer)) +
     sekmeler + '<div class="sekme-ic" role="tabpanel">' + icerik + '</div>';
-  if (odakla && window.matchMedia('(max-width:900px)').matches) p.scrollIntoView({ behavior:'smooth', block:'start' });
+  if (odakla) p.scrollIntoView({ behavior:'smooth', block:'start' });
 }
 
 var YOL_SVG = {
@@ -1562,6 +1615,13 @@ var haritaGorunur = true;
 function haritayaGuncelle(){ var b = $('haritaya'); if (b) b.hidden = haritaGorunur || !D.secili; }
 if ('IntersectionObserver' in window) new IntersectionObserver(function(g){ haritaGorunur = g[0].isIntersecting; haritayaGuncelle(); }).observe($('harita'));
 $('haritaya').addEventListener('click', function(){ $('harita').scrollIntoView({ behavior:'smooth', block:'start' }); });
+
+/* Telefonda dev harita yana kayar: ilk kaydırmada ipucu kaybolur */
+(function(){ var k = $('harita'), ip = $('kaydir-ipucu'); if (!k || !ip) return;
+  function yazi(){ ip.textContent = D.dil === 'tr' ? 'Tüm Türkiye için kaydır →' : 'Swipe to see all of Türkiye →'; }
+  yazi(); document.addEventListener('click', function(e){ if (e.target.closest('[data-dil]')) setTimeout(yazi, 0); });
+  k.addEventListener('scroll', function(){ if (k.scrollLeft > 20) ip.classList.add('gizli'); }, { passive:true });
+})();
 window.addEventListener('resize', function(){ clearTimeout(haritaCiz.z); haritaCiz.z = setTimeout(haritaCiz, 150); });
 window.addEventListener('hashchange', function(){ var id = location.hash.slice(1); if (bul(id) && id !== D.secili) sec(id, true); });
 

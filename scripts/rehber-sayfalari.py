@@ -12,8 +12,8 @@ ALAN = 'https://antikyol.com'
 KOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'guides')
 BETIK = os.path.dirname(os.path.abspath(__file__))
 # Ortaklık bağlantılarını ortaklik.js'in kendisi üretir (node gerekir); statik adresler JS'siz de takip kodlu olur.
-def _ort(saglayici, kasaba):
-    kod = "global.window={};require(process.argv[1]);process.stdout.write(window.ORTAKLIK.otel(process.argv[2],process.argv[3]))"
+def _ort(saglayici, kasaba, islev='otel'):
+    kod = "global.window={};require(process.argv[1]);process.stdout.write(window.ORTAKLIK." + islev + "(process.argv[2],process.argv[3]))"
     return subprocess.run(['node', '-e', kod, os.path.join(BETIK, '..', 'ortaklik.js'), saglayici, kasaba], capture_output=True, text=True, check=True).stdout
 ORT_SURUM = open(os.path.join(BETIK, 'ortaklik-surum.txt')).read().strip()  # scripts/sayfalar.mjs yazar
 
@@ -21,18 +21,16 @@ def e(x): return html.escape(x, quote=True)
 
 def otel(kasaba, baslik, alt='Compare hotels'):
     return f'''<div class="cta"><small>{e(alt)}</small><b>{e(baslik)}</b><div class="dugmeler">
-<a href="{e(_ort('booking', kasaba))}" data-otel="booking" data-kasaba="{e(kasaba)}" target="_blank" rel="sponsored noopener">Booking.com</a>
 <a href="{e(_ort('hotels', kasaba))}" data-otel="hotels" data-kasaba="{e(kasaba)}" target="_blank" rel="sponsored noopener">Hotels.com</a>
 </div></div>'''
 
 def tur(sorgu, baslik, alt='Tours and tickets'):
-    q = urllib.parse.quote(sorgu)
     return f'''<div class="cta tur"><small>{e(alt)}</small><b>{e(baslik)}</b><div class="dugmeler">
-<a href="https://www.getyourguide.com/s/?q={q}" data-tur="getyourguide" data-sorgu="{e(sorgu)}" target="_blank" rel="sponsored noopener">GetYourGuide</a>
-<a href="https://www.viator.com/searchResults/all?text={q}" data-tur="viator" data-sorgu="{e(sorgu)}" target="_blank" rel="sponsored noopener">Viator</a>
+<a href="{e(_ort('getyourguide', sorgu, 'tur'))}" data-tur="getyourguide" data-sorgu="{e(sorgu)}" target="_blank" rel="sponsored noopener">GetYourGuide</a>
+<a href="{e(_ort('viator', sorgu, 'tur'))}" data-tur="viator" data-sorgu="{e(sorgu)}" target="_blank" rel="sponsored noopener">Viator</a>
 </div></div>'''
 
-ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Booking.com, Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>'
+ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>'
 
 def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
     adres = (ALAN + '/guides/' + slug) if ALAN else ''

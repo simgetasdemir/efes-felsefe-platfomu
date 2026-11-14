@@ -78,7 +78,7 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 {sss_html}
 {ACIKLAMA}
 <h2>Keep exploring</h2>
-<div class="ilgili">{ilgili_html}<a href="/places/">All 22 places, one page each →</a><a href="/turkey">Open the philosophy map of Türkiye →</a></div>
+<div class="ilgili">{ilgili_html}<a href="/places/">All 30 places, one page each →</a><a href="/turkey">Open the philosophy map of Türkiye →</a></div>
 </main>
 <footer>Travel times are approximate; check opening hours and tickets before you go. Ideas are summarised from the Stanford Encyclopedia of Philosophy and other scholarly sources linked on the map.</footer>
 <script src="/ortaklik.js?v={ORT_SURUM}"></script>
@@ -535,7 +535,7 @@ SAYFALAR.append(dict(
   sss=[('What is the most impressive ancient site in Turkey?', 'For most visitors, Ephesus: it is the most complete Roman city in the region. For age, Göbekli Tepe; for setting, Mount Nemrut at sunrise.'),
        ('Does Turkey have more Greek ruins than Greece?', 'Many guides say so. Western Türkiye, ancient Ionia, Aeolis, Caria and Lycia, was full of Greek cities, and many are well preserved because they were abandoned rather than built over.'),
        ('Which ruins can you combine in one trip?', 'Ephesus, Miletus, Priene, Didyma, Aphrodisias and Hierapolis are all within a few hours of each other on the Aegean side, and make a good four- or five-day route.')],
-  ilgili=[('/places/', 'All 22 places'), ('/guides/turkey-history-itinerary-10-days', 'A 10-day history itinerary'), ('/guides/ancient-greek-philosophers-from-turkey', 'Philosophers from Türkiye')]))
+  ilgili=[('/places/', 'All 30 places'), ('/guides/turkey-history-itinerary-10-days', 'A 10-day history itinerary'), ('/guides/ancient-greek-philosophers-from-turkey', 'Philosophers from Türkiye')]))
 
 # Hedef: "Turkey itinerary 10 days"
 SAYFALAR.append(dict(
@@ -613,7 +613,7 @@ SAYFALAR.append(dict(
        ('Which Greek philosophers were born in Turkey?', 'Among others: Thales, Anaximander and Anaximenes (Miletus), Heraclitus (Ephesus), Anaxagoras (Clazomenae), Bias (Priene), Diogenes (Sinope), Cleanthes (Assos), Chrysippus (Soli) and Epictetus (Hierapolis).'),
        ('Was Aristotle from Turkey?', 'No. He was born in Stagira in northern Greece, but he lived in Assos, on the coast of today\'s Türkiye, for some years around 347 to 345 BC.'),
        ('What was the Ionian school?', 'The name given to the early philosophers of Ionia, especially Thales, Anaximander and Anaximenes of Miletus, who tried to explain the world through natural causes.')],
-  ilgili=[('/places/', 'All 22 places'), ('/passport', 'Your Philosophy Passport'), ('/guides/best-ancient-ruins-in-turkey', 'The 15 best ancient ruins')]))
+  ilgili=[('/places/', 'All 30 places'), ('/passport', 'Your Philosophy Passport'), ('/guides/best-ancient-ruins-in-turkey', 'The 15 best ancient ruins')]))
 
 # ---------------------------------------------------------------- Merkez sayfa
 SAYFALAR.append(dict(
@@ -646,7 +646,7 @@ SAYFALAR.append(dict(
 <a href="/guides/mount-nemrut-sunrise">Mount Nemrut at sunrise →</a>
 <a href="/guides/visiting-troy-turkey">Visiting Troy →</a>
 <a href="/guides/ancient-greek-philosophers-from-turkey">Ancient Greek philosophers from Türkiye →</a>
-<a href="/places/">All 22 places, one page each →</a>
+<a href="/places/">All 30 places, one page each →</a>
 <a href="/passport">Your Philosophy Passport: stamps and badges →</a>
 </div>
 <h2>The ten routes</h2>

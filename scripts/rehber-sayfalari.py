@@ -6,18 +6,23 @@ Metni değiştirmek için aşağıdaki SAYFALAR listesini düzenle ve betiği ye
 Otel ve tur bağlantılarının kimlikleri ortaklik.js dosyasından gelir; burada kimlik yazılmaz.
 Alan adı belli olunca ALAN değişkenini doldur: canonical ve paylaşım adresleri tam olur.
 """
-import html, json, os, re, urllib.parse
+import html, json, os, re, subprocess, urllib.parse
 
 ALAN = 'https://antikyol.com'
 KOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'guides')
+BETIK = os.path.dirname(os.path.abspath(__file__))
+# Ortaklık bağlantılarını ortaklik.js'in kendisi üretir (node gerekir); statik adresler JS'siz de takip kodlu olur.
+def _ort(saglayici, kasaba):
+    kod = "global.window={};require(process.argv[1]);process.stdout.write(window.ORTAKLIK.otel(process.argv[2],process.argv[3]))"
+    return subprocess.run(['node', '-e', kod, os.path.join(BETIK, '..', 'ortaklik.js'), saglayici, kasaba], capture_output=True, text=True, check=True).stdout
+ORT_SURUM = open(os.path.join(BETIK, 'ortaklik-surum.txt')).read().strip()  # scripts/sayfalar.mjs yazar
 
 def e(x): return html.escape(x, quote=True)
 
 def otel(kasaba, baslik, alt='Compare hotels'):
-    q = urllib.parse.quote(kasaba + ', Türkiye')
     return f'''<div class="cta"><small>{e(alt)}</small><b>{e(baslik)}</b><div class="dugmeler">
-<a href="https://www.booking.com/searchresults.html?ss={q}" data-otel="booking" data-kasaba="{e(kasaba)}" target="_blank" rel="sponsored noopener">Booking.com</a>
-<a href="https://www.hotels.com/Hotel-Search?destination={q}" data-otel="hotels" data-kasaba="{e(kasaba)}" target="_blank" rel="sponsored noopener">Hotels.com</a>
+<a href="{e(_ort('booking', kasaba))}" data-otel="booking" data-kasaba="{e(kasaba)}" target="_blank" rel="sponsored noopener">Booking.com</a>
+<a href="{e(_ort('hotels', kasaba))}" data-otel="hotels" data-kasaba="{e(kasaba)}" target="_blank" rel="sponsored noopener">Hotels.com</a>
 </div></div>'''
 
 def tur(sorgu, baslik, alt='Tours and tickets'):
@@ -78,7 +83,7 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 <div class="ilgili">{ilgili_html}<a href="/places/">All 22 places, one page each →</a><a href="/">Open the philosophy map →</a></div>
 </main>
 <footer>Travel times are approximate; check opening hours and tickets before you go. Ideas are summarised from the Stanford Encyclopedia of Philosophy and other scholarly sources linked on the map.</footer>
-<script src="/ortaklik.js"></script>
+<script src="/ortaklik.js?v={ORT_SURUM}"></script>
 <script>ORTAKLIK.guncelle();</script>
 </body>
 </html>

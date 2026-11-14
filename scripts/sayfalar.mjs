@@ -5,7 +5,17 @@
 import fs from 'fs'; import path from 'path'; import vm from 'vm'; import { fileURLToPath } from 'url';
 const KOK = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ALAN = 'https://antikyol.com';
-const html = fs.readFileSync(path.join(KOK, 'index.html'), 'utf8');
+let html = fs.readFileSync(path.join(KOK, 'index.html'), 'utf8');
+
+/* Ortaklık bağlantıları: ortaklik.js'i burada da çalıştır, statik adresler JS'siz de takip kodlu olsun.
+   Sürüm (ORT_SURUM) değişince tarayıcılar eski ortaklik.js kopyasını kullanmaz. */
+const ortKod = fs.readFileSync(path.join(KOK, 'ortaklik.js'), 'utf8');
+const ortBaglam = { window: {} }; vm.runInNewContext(ortKod, ortBaglam);
+const ORT = ortBaglam.window.ORTAKLIK;
+const ORT_SURUM = (await import('crypto')).createHash('md5').update(ortKod).digest('hex').slice(0, 8);
+const yeniHtml = html.replace(/<script src="\/?ortaklik\.js(\?v=[0-9a-f]+)?"><\/script>/, '<script src="/ortaklik.js?v=' + ORT_SURUM + '"></script>');
+if (yeniHtml !== html) { fs.writeFileSync(path.join(KOK, 'index.html'), yeniHtml); html = yeniHtml; }
+fs.writeFileSync(path.join(KOK, 'scripts', 'ortaklik-surum.txt'), ORT_SURUM + '\n');
 
 /* "var AD = " ile başlayan bir JS değişmezini dengeli parantez sayarak çıkar */
 function blok(ad){
@@ -33,10 +43,9 @@ const ETIKET = { 'plato.stanford.edu':'SEP', 'iep.utm.edu':'IEP', 'mathshistory.
 const etiket = u => { for (const k in ETIKET) if (u.includes(k)) return ETIKET[k]; return 'Source'; };
 
 function otel(kasaba, baslik){
-  const q = enc(kasaba + ', Türkiye');
   return `<div class="cta"><small>Stay nearby</small><b>${e(baslik)}</b><div class="dugmeler">
-<a href="https://www.booking.com/searchresults.html?ss=${q}" data-otel="booking" data-kasaba="${e(kasaba)}" target="_blank" rel="sponsored noopener">Booking.com</a>
-<a href="https://www.hotels.com/Hotel-Search?destination=${q}" data-otel="hotels" data-kasaba="${e(kasaba)}" target="_blank" rel="sponsored noopener">Hotels.com</a></div></div>`;
+<a href="${e(ORT.otel('booking', kasaba))}" data-otel="booking" data-kasaba="${e(kasaba)}" target="_blank" rel="sponsored noopener">Booking.com</a>
+<a href="${e(ORT.otel('hotels', kasaba))}" data-otel="hotels" data-kasaba="${e(kasaba)}" target="_blank" rel="sponsored noopener">Hotels.com</a></div></div>`;
 }
 function tur(sorgu, baslik){
   const q = enc(sorgu);
@@ -75,7 +84,7 @@ ${ALAN ? `<link rel="canonical" href="${ALAN}${adres}">\n<meta property="og:url"
 ${ust()}`;
 }
 const SON = `<footer>Ideas are summarised in this site's own words from the Stanford Encyclopedia of Philosophy and the other sources linked on each page. Travel times are approximate; check opening hours before you go.</footer>
-<script src="/ortaklik.js"></script>
+<script src="/ortaklik.js?v=${ORT_SURUM}"></script>
 <script>ORTAKLIK.guncelle();</script>`;
 
 const yerBul = id => YERLER.find(y => y.id === id);

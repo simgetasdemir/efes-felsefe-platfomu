@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /* Mekân sayfalarını (places/*.html) ve pasaport verisini (yer-veri.js) üretir.
-   Veri tek kaynaktan gelir: index.html içindeki YERLER, SANAT, DERIN, ROTALAR... ve felsefe-veri.js.
-   Kullanım: node scripts/sayfalar.mjs   (index.html ya da felsefe-veri.js değişince yeniden çalıştır) */
+   Veri tek kaynaktan gelir: turkey.html (Türkiye haritası, /turkey) içindeki YERLER, SANAT, DERIN, ROTALAR... ve felsefe-veri.js.
+   Kullanım: node scripts/sayfalar.mjs   (turkey.html ya da felsefe-veri.js değişince yeniden çalıştır) */
 import fs from 'fs'; import path from 'path'; import vm from 'vm'; import { fileURLToPath } from 'url';
 const KOK = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ALAN = 'https://antikyol.com';
-let html = fs.readFileSync(path.join(KOK, 'index.html'), 'utf8');
+let html = fs.readFileSync(path.join(KOK, 'turkey.html'), 'utf8');
 
 /* Ortaklık bağlantıları: ortaklik.js'i burada da çalıştır, statik adresler JS'siz de takip kodlu olsun.
    Sürüm (ORT_SURUM) değişince tarayıcılar eski ortaklik.js kopyasını kullanmaz. */
@@ -14,7 +14,7 @@ const ortBaglam = { window: {} }; vm.runInNewContext(ortKod, ortBaglam);
 const ORT = ortBaglam.window.ORTAKLIK;
 const ORT_SURUM = (await import('crypto')).createHash('md5').update(ortKod).digest('hex').slice(0, 8);
 const yeniHtml = html.replace(/<script src="\/?ortaklik\.js(\?v=[0-9a-f]+)?"><\/script>/, '<script src="/ortaklik.js?v=' + ORT_SURUM + '"></script>');
-if (yeniHtml !== html) { fs.writeFileSync(path.join(KOK, 'index.html'), yeniHtml); html = yeniHtml; }
+if (yeniHtml !== html) { fs.writeFileSync(path.join(KOK, 'turkey.html'), yeniHtml); html = yeniHtml; }
 fs.writeFileSync(path.join(KOK, 'scripts', 'ortaklik-surum.txt'), ORT_SURUM + '\n');
 
 /* "var AD = " ile başlayan bir JS değişmezini dengeli parantez sayarak çıkar */
@@ -159,7 +159,9 @@ ${SON}
 
 /* Pasaport sayfası için hafif veri */
 const veri = {
-  yerler: YERLER.map(y => ({ id:y.id, slug:SLUG[y.id], renk:RENK[y.id], amblem:AMBLEM[y.id], yunan:y.yunan, mh:y.mh || y.tr.kim.split(',')[0], ad:{ tr:y.tr.ad, en:y.en.ad } })),
+  yerler: YERLER.map(y => ({ id:y.id, slug:SLUG[y.id], renk:RENK[y.id], amblem:AMBLEM[y.id], yunan:y.yunan, mh:y.mh || y.tr.kim.split(',')[0], ad:{ tr:y.tr.ad, en:y.en.ad },
+    lat:y.lat, lon:y.lon, il:y.tr.il, kim:{ tr:y.tr.kim, en:y.en.kim }, donem:{ tr:y.tr.donem, en:y.en.donem }, neden:{ tr:y.tr.neden, en:y.en.neden },
+    kasaba:(YER_ARAMA[y.id] || {}).kasaba || '', tur:(YER_ARAMA[y.id] || {}).tur || '' })),
   rotalar: ROTALAR.map(r => ({ id:r.id, renk:r.renk, duraklar:r.duraklar, ad:{ tr:r.tr.ad, en:r.en.ad } }))
 };
 fs.writeFileSync(path.join(KOK, 'yer-veri.js'), '/* scripts/sayfalar.mjs üretir; elle düzenleme. */\nwindow.YER_VERI = ' + JSON.stringify(veri) + ';\n');

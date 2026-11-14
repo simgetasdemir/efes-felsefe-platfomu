@@ -18,9 +18,9 @@ window.ORTAKLIK = {
   hotels: { goster: true,
     parametreler: 'clickref=1101lE8SjmCG&rffrid=aff.hcom.US.038.000.1011l444930.kwrd%3D1101lE8SjmCG&affcid=HCOM-US.DIRECT.PHG.1011l444930&afflid=1101lE8SjmCG&affdtl=PHG.1101lE8SjmCG.PZuCgXVVHz',
     baglantilar: {
-    'Selçuk': '', 'Kuşadası': '', 'Şirince': '', 'Didim': '', 'Urla': '', 'Behramkale': '', 'Bergama': '',
+    'Selçuk': 'https://www.hotels.com/Hotel-Search?destination=Selcuk%2C%20Izmir%2C%20Turkey&clickref=1101lE8SjmCG&rffrid=aff.hcom.US.038.000.1011l444930.kwrd%3D1101lE8SjmCG&affcid=HCOM-US.DIRECT.PHG.1011l444930&afflid=1101lE8SjmCG&affdtl=PHG.1101lE8SjmCG.PZuCgXVVHz', 'Kuşadası': '', 'Şirince': '', 'Didim': '', 'Urla': '', 'Behramkale': '', 'Bergama': '',
     'Pamukkale': '', 'Karahayıt': '', 'Denizli': '', 'Karacasu': '', 'Sinop': '', 'Mersin': '', 'Tarsus': '', 'Konya': '',
-    'İstanbul': '', 'İznik': '', 'Göreme': '', 'Antalya': '', 'Side': '', 'Şanlıurfa': '', 'Gaziantep': '', 'Mardin': '', 'Bodrum': '', 'Ürgüp': '', 'Çanakkale': '', 'Kahta': '', 'Kalkan': '', 'Kaş': ''
+    'İstanbul': '', 'İznik': '', 'Göreme': 'https://www.hotels.com/Hotel-Search?destination=Goreme%2C%20Nevsehir%2C%20Turkey&clickref=1101lE8SmXRt&rffrid=aff.hcom.US.038.000.1011l444930.kwrd%3D1101lE8SmXRt&affcid=HCOM-US.DIRECT.PHG.1011l444930&afflid=1101lE8SmXRt&affdtl=PHG.1101lE8SmXRt.PZtxEv0egq', 'Antalya': '', 'Side': '', 'Şanlıurfa': '', 'Gaziantep': '', 'Mardin': '', 'Bodrum': '', 'Ürgüp': '', 'Çanakkale': '', 'Kahta': '', 'Kalkan': '', 'Kaş': ''
   } },
 
   /* GetYourGuide Partner Program: panelde verilen "partner_id". */

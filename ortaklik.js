@@ -29,7 +29,7 @@ window.ORTAKLIK = {
   getyourguide: { goster: true, partner_id: 'FLFFSW2' },
 
   /* Viator Affiliate Program: panelde verilen "pid" (P00 ile başlar) ve "mcid". */
-  viator: { goster: true, pid: '', mcid: '' },
+  viator: { goster: true, pid: 'P00331749', mcid: '42383', campaign: 'antikyol' },
 
   /* Sesli rehber paketi bekleme listesi: bir form adresi (Tally, Google Forms, Mailchimp...).
      Boşsa bölüm "yakında" olarak görünür ve yalnızca ücretsiz Efes rehberine yönlendirir. */
@@ -56,7 +56,7 @@ window.ORTAKLIK = {
   };
   O.tur = function(saglayici, sorgu){
     if (saglayici === 'getyourguide') return 'https://www.getyourguide.com/s/?q=' + enc(sorgu) + (O.getyourguide.partner_id ? '&partner_id=' + enc(O.getyourguide.partner_id) : '');
-    if (saglayici === 'viator') return 'https://www.viator.com/searchResults/all?text=' + enc(sorgu) + (O.viator.pid ? '&pid=' + enc(O.viator.pid) + (O.viator.mcid ? '&mcid=' + enc(O.viator.mcid) : '') + '&medium=link' : '');
+    if (saglayici === 'viator') return 'https://www.viator.com/searchResults/all?text=' + enc(sorgu) + (O.viator.pid ? '&pid=' + enc(O.viator.pid) + (O.viator.mcid ? '&mcid=' + enc(O.viator.mcid) : '') + '&medium=link' + (O.viator.campaign ? '&campaign=' + enc(O.viator.campaign) : '') : '');
     return '';
   };
   /* En az bir ortaklık kimliği dolu mu? (açıklama metnini göstermek için) */

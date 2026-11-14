@@ -1246,7 +1246,7 @@ function panelCiz(odakla){
   var icerik;
   if (sekme === 'gezi'){
     icerik =
-      (yer.rehber ? '<a class="btn btn-koyu" href="' + yer.rehber + '">' + h(t('rehber')) + ' →</a>' : '') +
+      (yer.rehber ? '<a class="btn btn-koyu" href="' + efesAdres() + '">' + h(t('rehber')) + ' →</a>' : '') +
       sanatBolum(yer) +
       '<section><div class="etiket" style="margin-bottom:10px">' + h(t('rota')) + '</div><ol class="rota">' + m.rota.map(function(r){ return '<li><b>' + h(r[0]) + '</b><span>' + h(r[1]) + '</span></li>'; }).join('') + '</ol></section>' +
       '<div class="muhur-kutu">' + muhurSVG(yer, muhurlu) + '<div style="display:flex;flex-direction:column;gap:8px"><p class="not">' + h(muhurlu ? t('muhurlu') + ' · ' + D.muhur[yer.id] : t('muhurNot')) + '</p>' +
@@ -1379,7 +1379,7 @@ function sesBolumCiz(){
   $('ses-bolum').innerHTML = '<div class="ses-kart"><div class="ses-ikon">' + KULAKLIK_SVG + '</div><div class="ses-metin">' +
     '<div class="etiket">' + h(t('sesEtiket')) + '</div><h2 id="ses-h">' + h(t('sesBaslik')) + '</h2><p>' + h(t('sesAlt')) + '</p>' +
     '<div class="ses-dugmeler">' + (kayit ? '<a class="btn btn-okra" href="' + h(kayit) + '" target="_blank" rel="noopener">' + h(t('sesKayit')) + '</a>' : '<span class="ses-yakinda">' + h(t('sesYakinda')) + '</span>') +
-    '<a class="btn btn-hayalet" href="/efes">' + h(t('sesDene')) + ' →</a></div></div></div>';
+    '<a class="btn btn-hayalet" href="' + efesAdres() + '">' + h(t('sesDene')) + ' →</a></div></div></div>';
 }
 function rehberBolumCiz(){
   $('rehber-bolum').innerHTML = '<div class="etiket">ΟΔΗΓΟΣ</div><h2 id="rehber-h">' + h(t('rehberBaslik')) + '</h2>' +
@@ -1431,10 +1431,12 @@ function metinCiz(){
   $('k-harita').textContent = t('kHarita'); $('k-rota').textContent = t('kRota');
   $('z-tum').textContent = t('tum'); $('z-ege').textContent = t('ege'); $('z-bag').textContent = t('baglarGoster'); $('harita-not').textContent = (D.zum === 'tum' ? t('egeNot') + ' ' : '') + (D.bag ? t('baglarNot') : '');
   var zr = $('z-rota'), RR = rotaBul(D.rota); zr.hidden = !RR; if (RR){ zr.textContent = t('rotaCip').replace('{ad}', RR[D.dil].ad); zr.style.setProperty('--r', RR.renk); }
-  $('ust-link').textContent = t('efesLink'); $('haritaya').textContent = t('haritaya');
+  $('ust-link').textContent = t('efesLink'); $('ust-link').href = efesAdres(); $('haritaya').textContent = t('haritaya');
   $('alt').innerHTML = '<p>' + h(t('alt1')) + '</p><p>' + h(t('alt2')) + '</p>';
   document.querySelectorAll('[data-dil]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-dil') === D.dil); });
 }
+/* Efes gezi rehberine doğrudan, seçili dilde git (giriş ekranını atla) */
+function efesAdres(){ return '/efes?gezi=1&dil=' + D.dil; }
 function hepsi(odakla){ metinCiz(); haritaCiz(); listeCiz(); panelCiz(odakla); rotaBolumCiz(); konakBolumCiz(); sesBolumCiz(); rehberBolumCiz(); pasaportCiz(); haritayaGuncelle(); }
 
 /* ==========================================================================

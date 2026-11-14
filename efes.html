@@ -386,6 +386,27 @@ details.koyu-alinti cite{color:#D9CFC0}
   #yan li b{font-family:var(--display);font-size:22px;color:var(--okra);min-width:64px}
   #yan small{font-size:14.5px;color:#AEB9C6}
 }
+
+/* ==========================================================================
+   HARİTA İLE AYNI SİTE: açık zemin, üst şerit ve haritaya dönüş
+   ========================================================================== */
+.harita-serit{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:440px;margin:0 auto;padding:10px 16px;background:rgba(246,243,236,.98);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #ECE5D8;font-family:var(--govde)}
+.harita-serit a{display:inline-flex;align-items:center;gap:8px;min-height:40px;color:#1F2A36;text-decoration:none;font-weight:600;font-size:17px}
+.harita-serit a svg{flex:none}
+.harita-serit span{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8A4518;font-weight:600;white-space:nowrap}
+@media (min-width:700px){
+  html,body{background:#F6F3EC}
+  #zemin{display:none!important}
+  #app{box-shadow:0 1px 2px rgba(40,30,20,.06),0 30px 80px -30px rgba(40,30,20,.35);border-radius:0 0 22px 22px}
+  .harita-serit{border-radius:0;box-shadow:0 1px 0 #ECE5D8}
+}
+@media (min-width:1180px){
+  #yan{color:#1F2A36}
+  #yan .etiket{color:#A0561F}
+  #yan p,#yan li{color:#3E4A57}
+  #yan li b{color:#A0561F}
+  #yan small{color:#4A5868}
+}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -404,6 +425,7 @@ details.koyu-alinti cite{color:#D9CFC0}
   </ul>
   <small>Telefonda tam ekran açılır. Giriş gerekmez, ilerlemen bu cihazda saklanır.</small>
 </aside>
+<nav class="harita-serit" aria-label="Site"><a href="/" id="harita-don"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><b id="harita-don-ad">Türkiye Felsefe Haritası</b></a><span id="harita-serit-ad">Efes</span></nav>
 <div id="app" aria-live="off"></div>
 
 <script>
@@ -1196,7 +1218,21 @@ function ekranProfil(){
 
 var EKRANLAR = { gezi:ekranGezi, durak:ekranDurak, pasaport:ekranPasaport, bugun:ekranBugun, yamac:ekranYamac, matematik:ekranMatematik, acilis:ekranAcilis, liman:ekranLiman, harita:ekranHarita, kutuphane:ekranKutuphane, oda:ekranOda, tiyatro:ekranTiyatro, agora:ekranAgora, artemis:ekranArtemis, profil:ekranProfil };
 
+function seritGuncelle(){
+  var en = (P.gezi && P.gezi.dil === 'en'), b = document.getElementById('harita-don-ad'), s = document.getElementById('harita-serit-ad');
+  if (b) b.textContent = en ? 'Philosophy Map of Türkiye' : 'Türkiye Felsefe Haritası';
+  if (s) s.textContent = en ? 'Ephesus' : 'Efes';
+  var l = document.getElementById('harita-don'); if (l) l.href = '/#efes';
+  var y = document.getElementById('yan');
+  if (y && y.getAttribute('data-dil') !== (en ? 'en' : 'tr')){
+    y.setAttribute('data-dil', en ? 'en' : 'tr');
+    y.innerHTML = en
+      ? '<div class="etiket">ΕΦΕΣΟΣ</div><h2>Ephesus</h2><p>Learn philosophy in the city of Heraclitus by living it, not just reading it.</p><ul><li><b>Walk</b><span>Six stops with audio and a passport</span></li><li><b>Read</b><span>Source-based reading rooms in the Library of Celsus</span></li><li><b>Think</b><span>Five quiet minutes at the Temple of Artemis</span></li></ul><small>Opens full screen on a phone. No sign-in; your progress stays on this device.</small>'
+      : '<div class="etiket">ΕΦΕΣΟΣ</div><h2>Efes</h2><p>Herakleitos’un kentinde felsefeyi okuyarak değil, yaşayarak öğren.</p><ul><li><b>Gez</b><span>Altı durak, sesli anlatım ve pasaport</span></li><li><b>Oku</b><span>Celsus’ta kaynaklı okuma odaları</span></li><li><b>Düşün</b><span>Artemis’te beş dakika, tek başına</span></li></ul><small>Telefonda tam ekran açılır. Giriş gerekmez, ilerlemen bu cihazda saklanır.</small>';
+  }
+}
 function ciz(){
+  seritGuncelle();
   app.classList.toggle('gunes', !!(P.gezi && P.gezi.gunes));
   app.innerHTML = EKRANLAR[gecici.ekran]();
   if (gecici.ekran === 'tiyatro'){ tiyatroCiz(); }
@@ -1620,6 +1656,15 @@ async function pasaportKartiCiz(){
 /* ---------- başlat ---------- */
 if ('serviceWorker' in navigator && location.protocol !== 'file:') { window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
 tiyatroSifirla();
+var URL_DIL = null;
+/* Haritadan gelen bağlantı: /efes?gezi=1&dil=en doğrudan gezi rehberini açar */
+(function(){
+  try {
+    var q = new URLSearchParams(location.search);
+    if (q.get('dil') === 'en' || q.get('dil') === 'tr'){ URL_DIL = q.get('dil'); gz().dil = URL_DIL; }
+    if (q.get('gezi') === '1' || location.hash === '#gezi') gecici.ekran = 'gezi';
+  } catch (e) {}
+})();
 ciz();
 
 /* ---------- bağımsız site: Kâtip sunucuya, kayıt tarayıcıya ---------- */
@@ -1680,6 +1725,7 @@ Promise.all([kullan('db'), kullan('user')]).then(async function(r){
     if (snap.exists){ var d = snap.data() || {}; Object.keys(VARSAYILAN).forEach(function(k){ if (d[k] !== undefined) P[k] = JSON.parse(JSON.stringify(d[k])); }); }
   } catch(e){}
   kayit.yuklendi = true;
+  if (URL_DIL) gz().dil = URL_DIL;
   if (!(gecici.tiyatro.bekliyor || gecici.odaBekliyor || gecici.agora.bekliyor) && gecici.ekran !== 'liman') ciz();
 });
 })();

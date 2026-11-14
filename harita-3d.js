@@ -117,6 +117,7 @@
       if (ac) gemiYola();
     });
     map.on('zoom', etiketler);
+    ['dragstart', 'wheel', 'touchstart'].forEach(function(o){ map.on(o, function(){ ilkUcusIptal(); }); });
   }
   function t3(tr, en){ return D.dil === 'tr' ? tr : en; }
 
@@ -163,7 +164,7 @@
       k.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); zumla3('ege'); });
       kume = new mapboxgl.Marker({ element: k }).setLngLat([27.75, 38.5]).addTo(map);
     }
-    kume.getElement().setAttribute('aria-label', t('ege'));
+    kume.getElement().setAttribute('aria-label', t('ege')); kume.getElement().title = t('ege');
     etiketler();
   }
   /* Uzakta Ege'deki 10 durak üst üste biner: tek rozet; telefonda uzaktayken adlar gizli, numara ve liste yeter */
@@ -282,14 +283,19 @@
     if (son.dil !== D.dil){ map.getSource('denizler-kaynak').setData(denizVeri()); map.setLayoutProperty('kent', 'text-field', D.dil === 'tr' ? ['get', 'name'] : ['coalesce', ['get', 'name_en'], ['get', 'name']]); }
     if (son.rota !== D.rota) rotaCanlandir();
     var ilk = !son.ilk, yeniSecim = D.secili && son.secili !== D.secili && !D.rota;
-    if (ilk){ gorunum(); if (D.secili && !D.rota) setTimeout(function(){ if (D.secili) yereUc(bul(D.secili)); }, hareket() ? 3400 : 0); }
+    if (!ilk && (yeniSecim || son.zum !== D.zum || son.rota !== D.rota)) ilkUcusIptal();
+    if (ilk){ gorunum(); if (D.secili && !D.rota) ilkUcus = setTimeout(function(){ ilkUcus = 0; if (D.secili) yereUc(bul(D.secili)); }, hareket() ? 3400 : 0); }
     else if (yeniSecim) yereUc(bul(D.secili));
     else if (son.zum !== D.zum || son.rota !== D.rota) gorunum();
     son = { ilk: true, zum: D.zum, rota: D.rota, secili: D.secili, dil: D.dil };
     var zb = document.getElementById('z-bag'), zt = document.getElementById('z-tum'), ze = document.getElementById('z-ege');
     if (zb) zb.setAttribute('aria-pressed', !!D.bag); if (zt) zt.setAttribute('aria-pressed', D.zum === 'tum'); if (ze) ze.setAttribute('aria-pressed', D.zum === 'ege');
   }
+  /* Adres #konya gibi bir yerle açılınca açılış uçuşundan sonra o yere gidilir; kullanıcı bu arada başka bir şeye dokunursa bu uçuş iptal */
+  var ilkUcus = 0;
+  function ilkUcusIptal(){ if (ilkUcus){ clearTimeout(ilkUcus); ilkUcus = 0; } }
   function zumla3(z){
+    ilkUcusIptal();
     if (z === D.zum && son.zum === z){ son.zum = null; }
     D.zum = z; if (typeof metinCiz === 'function') metinCiz();
     ciz();

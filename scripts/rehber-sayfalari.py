@@ -251,15 +251,45 @@ SAYFALAR.append(dict(
 ''',
   ilgili=[('/#antalya', 'Perge and Aspendos on the philosophy map'), ('/guides/where-to-stay-in-cappadocia', 'Where to stay in Cappadocia')]))
 
+# ---------------------------------------------------------------- Likya
+SAYFALAR.append(dict(
+  slug='lycian-way-xanthos-patara',
+  baslik='Lycia and the Lycian Way: Xanthos, Letoon, Patara and where to stay',
+  aciklama='A three-day plan for ancient Lycia: the pillar tombs of Xanthos, the Letoon, the assembly hall and beach of Patara, a day on the Lycian Way, and the best bases in Kalkan and Kaş.',
+  etiket='Lycia · Antalya and Muğla',
+  giris='The cities of Lycia governed themselves as a league with a common council, in which large cities had three votes, middling ones two and small towns one. Montesquieu called it the model of an excellent confederate republic, and Alexander Hamilton quoted him in the Federalist Papers. Today the same coast is walked on the Lycian Way.',
+  ozet=['<b>Kalkan</b> is the closest small town to Patara and Xanthos, with sea-view hotels.',
+        '<b>Kaş</b>, a little further east, is livelier and a good base for diving, boat trips and the coastal path.',
+        'Xanthos and the Letoon are a UNESCO World Heritage site; Patara has the league\'s assembly hall and a long beach.'],
+  govde=f'''
+<h2>Kalkan: closest to the ruins</h2>
+<p>Kalkan is a former fishing village of white houses above a small harbour. Patara and Xanthos are both a short drive away, so you can be at the sites early and on the beach in the afternoon.</p>
+{otel('Kalkan', 'Hotels in Kalkan')}
+<h2>Kaş: by the sea</h2>
+<p>Kaş has a small ancient theatre facing the sea, many restaurants and boat trips along the coast. It suits a longer stay and a day or two on the Lycian Way.</p>
+{otel('Kaş', 'Hotels in Kaş')}
+<h2>Xanthos and the Letoon</h2>
+<p>Xanthos was the capital of Lycia. UNESCO calls its rock tombs, pillar tombs and pillar-mounted sarcophagi a novel type of funerary architecture, and notes that the Nereid Monument found here directly influenced the Mausoleum of Halicarnassus. The longest and most important texts in the Lycian language were found here and at the nearby Letoon, the league's sanctuary.</p>
+{tur('Xanthos Patara', 'Tours and tickets for Xanthos and Patara')}
+<h2>Patara</h2>
+<p>Patara held the assembly hall of the Lycian League, built in the early first century BC. Nearby stand a Roman lighthouse and one of the longest beaches in Türkiye. Saint Nicholas was born here, according to tradition, in the third century.</p>
+<h2>The Lycian Way</h2>
+<p>The Lycian Way is a long-distance walking route along the coast, established in 1999, from near Fethiye towards Antalya. You do not need to walk all of it: a single coastal stretch between Kalkan and Kaş is a good taste of the path.</p>
+<h2>The model republic</h2>
+<blockquote>Were I to give a model of an excellent confederate republic, I should pitch upon that of Lycia.</blockquote>
+<p class="not">Montesquieu, The Spirit of the Laws, Book IX, 3 (Nugent translation). Quoted by Alexander Hamilton in Federalist No. 9.</p>
+''',
+  ilgili=[('/#likya', 'Lycia on the philosophy map'), ('/guides/antalya-ancient-cities-perge-aspendos', 'Perge, Aspendos and Side from Antalya')]))
+
 # ---------------------------------------------------------------- Merkez sayfa
 SAYFALAR.append(dict(
   slug='philosophy-trip-turkey',
   baslik='A philosophy trip through Türkiye: places, routes and guides',
-  aciklama='Plan a trip to the places where philosophy and art were born in Türkiye: Ephesus, Istanbul, Cappadocia, Göbekli Tepe, Pergamon, Konya and more, with nine ready-made routes.',
+  aciklama='Plan a trip to the places where philosophy and art were born in Türkiye: Ephesus, Istanbul, Cappadocia, Göbekli Tepe, Troy, Lycia, Konya and more, with ten ready-made routes.',
   etiket='Travel guides',
   giris='Many of the first philosophers lived on the coasts of what is now Türkiye. You can still walk through their cities: the theatres where people gathered, the libraries, the harbours. These guides help you plan the trip, choose where to stay and know what you are looking at.',
-  ozet=['Eighteen philosophy and art stops from Göbekli Tepe to Rumi, on one <a href="/">interactive map</a>.',
-        'Nine ready-made routes, from the Aegean coast to Istanbul, Cappadocia, Antalya and Mesopotamia.',
+  ozet=['Twenty-two philosophy and art stops from Göbekli Tepe to Rumi, on one <a href="/">interactive map</a>.',
+        'Ten ready-made routes, from Troy and the Aegean coast to Istanbul, Cappadocia, Lycia and Mesopotamia.',
         'Hotel and tour suggestions for every night of every route.'],
   govde=f'''
 <h2>Guides</h2>
@@ -270,12 +300,13 @@ SAYFALAR.append(dict(
 <a href="/guides/where-to-stay-in-istanbul">Where to stay in Istanbul for Hagia Sophia →</a>
 <a href="/guides/where-to-stay-in-cappadocia">Where to stay in Cappadocia →</a>
 <a href="/guides/antalya-ancient-cities-perge-aspendos">Perge, Aspendos and Side from Antalya →</a>
+<a href="/guides/lycian-way-xanthos-patara">Lycia and the Lycian Way →</a>
 </div>
-<h2>The nine routes</h2>
+<h2>The ten routes</h2>
 <h3>Aegean and Pamukkale · 4 days</h3>
 <p>Ephesus, Miletus, Aphrodisias and Hierapolis: from Heraclitus to Epictetus. Nights in Selçuk, Didim and Pamukkale.</p>
-<h3>Northern Aegean · 3 days</h3>
-<p>Clazomenae near Urla, Pergamon and Assos: the shores of Anaxagoras, Galen and Aristotle. Nights in Urla, Bergama and Behramkale.</p>
+<h3>Northern Aegean and Troy · 4 days</h3>
+<p>Clazomenae near Urla, Pergamon, Assos and Troy: the shores of Anaxagoras, Galen, Aristotle and Homer. Nights in Urla, Bergama, Behramkale and Çanakkale.</p>
 <h3>Konya and the Mediterranean · 2 days</h3>
 <p>The Mevlana Museum and Seljuk tilework in Konya, then Tarsus and Soli, home of the Stoic Chrysippus. Nights in Konya and Mersin.</p>
 <h3>Diogenes' Sinop · 2 days</h3>
@@ -286,10 +317,12 @@ SAYFALAR.append(dict(
 <p>The rock churches of Göreme and the land of the Cappadocian Fathers, then Rumi's Konya. Two nights in Göreme, one in Konya.</p>
 <h3>The ancient cities of Antalya · 3 days</h3>
 <p>Perge, home of Apollonius, the theatre of Aspendos and Side. Two nights in Antalya, one in Side.</p>
-<h3>Mesopotamia: Zeugma, Göbekli Tepe, Mardin · 4 days</h3>
-<p>The Zeugma mosaics, Göbekli Tepe, one of the earliest known monumental sites, Harran and the Syriac monasteries of Mardin. Nights in Gaziantep, Şanlıurfa and Mardin.</p>
-<h3>Miletus and Bodrum · 2 days</h3>
-<p>From the first philosophers at Miletus to Herodotus and the Mausoleum at Halicarnassus. Two nights in Bodrum.</p>
+<h3>Mesopotamia: Zeugma, Nemrut, Göbekli Tepe, Mardin · 5 days</h3>
+<p>The Zeugma mosaics, the colossal statues of Mount Nemrut, Göbekli Tepe, one of the earliest known monumental sites, Harran and the Syriac monasteries of Mardin. Nights in Gaziantep, Kahta, Şanlıurfa and Mardin.</p>
+<h3>Priene, Miletus and Bodrum · 3 days</h3>
+<p>Priene, city of Bias, one of the Seven Sages, the oracle of Apollo at Didyma, the first philosophers at Miletus, then Herodotus and the Mausoleum at Halicarnassus. A night in Didim, two in Bodrum.</p>
+<h3>Lycia: Xanthos, Letoon, Patara · 3 days</h3>
+<p>Montesquieu's model republic: pillar tombs, the league's assembly hall at Patara and a day on the Lycian Way. Two nights in Kalkan, one in Kaş.</p>
 <p><a href="/#rota-bolum">See the routes on the map →</a></p>
 {otel('Selçuk', 'Start in Selçuk, the base for Ephesus', 'Most trips begin here')}
 ''',

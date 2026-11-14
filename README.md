@@ -82,7 +82,7 @@ Gerçek maliyeti ilk günlerde Anthropic Console’daki **Usage** ekranından iz
 
 ## Türkiye Felsefe Haritası (ana sayfa `/`)
 
-- `index.html`: Göbeklitepe'den Mevlânâ'ya on sekiz mekânlık harita (Ege'deki 10 felsefe durağına ek olarak İstanbul, Kapadokya, Antalya, Şanlıurfa, Gaziantep, Bodrum, İznik ve Mardin). Varsayılan dil İngilizce. Her mekânda filozof, söz kartı (indirilebilir PNG), yürüyüş rotası, pasaport mührü, çevre otelleri ve kaynaklar var. TR + EN.
+- `index.html`: Göbeklitepe'den Mevlânâ'ya yirmi iki mekânlık harita (Ege'deki 10 felsefe durağına ek olarak İstanbul, Kapadokya, Antalya, Şanlıurfa, Gaziantep, Bodrum, İznik, Mardin, Troya, Nemrut Dağı, Likya ve Priene-Didim). Varsayılan dil İngilizce. Her mekânda filozof, söz kartı (indirilebilir PNG), yürüyüş rotası, pasaport mührü, çevre otelleri ve kaynaklar var. TR + EN.
 - Mekân metinleri aynı dosyadaki `YERLER` listesindedir. Kaynak dosyası: proje klasöründeki `efes/turkiye-felsefe-mekanlari.md`. Sitedeki tüm sözler kaynakta doğrulandı; `dogrulandi:false` yapılan bir söz sayfada "kontrol ediliyor" diye etiketlenir. Birincil metin bağlantıları `birincil` alanındadır.
 - `DERIN`: her mekânın sesli anlatımı (Dinle, cihazın yapay sesiyle) ve düşünme sorusu (Düşün). Notlar yalnızca kullanıcının tarayıcısında saklanır.
 - `felsefe-veri.js`: her mekânın Düşünce sekmesi (temel fikirler, hayat çizgisi, bilmediklerimiz, mirası). Stanford Encyclopedia of Philosophy maddelerinin kendi sözlerimizle özetidir; her fikir ilgili SEP bölümüne bağlanır. SEP maddesi olmayan Diogenes için IEP, Mevlânâ için SEP'in İslam mistisizmi maddesi ve Britannica kullanıldı. Yeni mekânlarda SEP (Bizans felsefesi, Arapçaya Yunan kaynakları), IEP, MacTutor, Britannica, UNESCO ve birincil metinler kullanıldı. Tartışmalı iddialar (ör. Harran'ın "ilk üniversite" olduğu) "Bilmediklerimiz" bölümünde kaynaklarla birlikte açıkça belirtilir.
@@ -108,7 +108,7 @@ Bir sağlayıcıyı tamamen gizlemek için `goster: false` yap.
 
 ### Rehber yazıları (`guides/`)
 
-İngilizce, arama motoru için yazılmış sayfalar: `/guides/philosophy-trip-turkey`, `/guides/where-to-stay-in-ephesus`, `/guides/ephesus-to-pamukkale-itinerary`, `/guides/where-to-stay-in-pamukkale`, `/guides/where-to-stay-in-istanbul`, `/guides/where-to-stay-in-cappadocia`, `/guides/antalya-ancient-cities-perge-aspendos`. Metinler `scripts/rehber-sayfalari.py` içinde; değiştirdikten sonra `python3 scripts/rehber-sayfalari.py` çalıştır. Alan adı belli olunca betikteki `ALAN` değişkenini doldur.
+İngilizce, arama motoru için yazılmış sayfalar: `/guides/philosophy-trip-turkey`, `/guides/where-to-stay-in-ephesus`, `/guides/ephesus-to-pamukkale-itinerary`, `/guides/where-to-stay-in-pamukkale`, `/guides/where-to-stay-in-istanbul`, `/guides/where-to-stay-in-cappadocia`, `/guides/antalya-ancient-cities-perge-aspendos`, `/guides/lycian-way-xanthos-patara`. Metinler `scripts/rehber-sayfalari.py` içinde; değiştirdikten sonra `python3 scripts/rehber-sayfalari.py` çalıştır. Alan adı belli olunca betikteki `ALAN` değişkenini doldur.
 
 ## Alan adını bağlama (Vercel)
 

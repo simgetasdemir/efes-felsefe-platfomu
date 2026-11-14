@@ -16,7 +16,7 @@ window.ORTAKLIK = {
   hotels: { goster: true, baglantilar: {
     'Selçuk': '', 'Kuşadası': '', 'Şirince': '', 'Didim': '', 'Urla': '', 'Behramkale': '', 'Bergama': '',
     'Pamukkale': '', 'Karahayıt': '', 'Denizli': '', 'Karacasu': '', 'Sinop': '', 'Mersin': '', 'Tarsus': '', 'Konya': '',
-    'İstanbul': '', 'İznik': '', 'Göreme': '', 'Antalya': '', 'Side': '', 'Şanlıurfa': '', 'Gaziantep': '', 'Mardin': '', 'Bodrum': '', 'Ürgüp': ''
+    'İstanbul': '', 'İznik': '', 'Göreme': '', 'Antalya': '', 'Side': '', 'Şanlıurfa': '', 'Gaziantep': '', 'Mardin': '', 'Bodrum': '', 'Ürgüp': '', 'Çanakkale': '', 'Kahta': '', 'Kalkan': '', 'Kaş': ''
   } },
 
   /* GetYourGuide Partner Program: panelde verilen "partner_id". */

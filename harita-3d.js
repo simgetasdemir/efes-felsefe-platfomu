@@ -167,7 +167,7 @@
     kume.getElement().setAttribute('aria-label', t('ege')); kume.getElement().title = t('ege');
     etiketler();
   }
-  /* Uzakta Ege'deki 10 durak üst üste biner: tek rozet; telefonda uzaktayken adlar gizli, numara ve liste yeter */
+  /* Uzakta Ege'deki 11 durak üst üste biner: tek rozet; telefonda uzaktayken adlar gizli, numara ve liste yeter */
   function etiketler(){
     if (!map) return;
     var z = map.getZoom(), yakin = z >= 6.2, kumele = z < 5.9;

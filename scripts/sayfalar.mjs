@@ -43,7 +43,7 @@ const FOTOLAR = gfKum.window.FOTOLAR || {};
 const e = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const enc = encodeURIComponent;
 const amblem = (id, renk, b = 56) => `<svg viewBox="0 0 64 64" width="${b}" height="${b}" fill="none" stroke="${renk}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${AMBLEM[id]}</svg>`;
-const ETIKET = { 'plato.stanford.edu':'SEP', 'iep.utm.edu':'IEP', 'mathshistory.st-andrews.ac.uk':'MacTutor', 'britannica.com':'Britannica', 'whc.unesco.org':'UNESCO', 'wikipedia.org':'Wikipedia', 'perseus.tufts.edu':'Perseus', 'gutenberg.org':'Gutenberg', 'constitution.org':'Montesquieu', 'avalon.law.yale.edu':'Federalist', 'britishmuseum.org':'British Museum', 'uchicago.edu':'LacusCurtius' };
+const ETIKET = { 'plato.stanford.edu':'SEP', 'iep.utm.edu':'IEP', 'mathshistory.st-andrews.ac.uk':'MacTutor', 'britannica.com':'Britannica', 'whc.unesco.org':'UNESCO', 'wikipedia.org':'Wikipedia', 'perseus.tufts.edu':'Perseus', 'gutenberg.org':'Gutenberg', 'constitution.org':'Montesquieu', 'avalon.law.yale.edu':'Federalist', 'britishmuseum.org':'British Museum', 'uchicago.edu':'LacusCurtius', 'ich.unesco.org':'UNESCO', 'classics.mit.edu':'MIT Classics', 'islamansiklopedisi.org.tr':'TDV' };
 const etiket = u => { for (const k in ETIKET) if (u.includes(k)) return ETIKET[k]; return 'Source'; };
 
 function otel(kasaba, baslik){

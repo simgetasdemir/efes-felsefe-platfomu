@@ -7,7 +7,8 @@ Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak için
 
 | Dosya | Ne işe yarar |
 |---|---|
-| `index.html` | Ana sayfa: Türkiye Felsefe Haritası. |
+| `index.html` | Ana sayfa: Dünya Felsefe Rotası küresi (`node scripts/dunya-sayfa.mjs` üretir, elle düzenleme). |
+| `turkey.html` | Türkiye Felsefe Haritası (`/turkey`). |
 | `efes.html` | Efes uygulaması (`/efes` adresinde): ekranlar, metinler, görseller. |
 | `harita-veri.js`, `felsefe-veri.js` | Harita çizgileri ve Düşünce sekmesi içerikleri. |
 | `vercel.json` | Kısa adresler (`/efes`), eski `/turkiye/` adresinin ana sayfaya yönlendirilmesi, önbellek ayarları. |
@@ -24,7 +25,7 @@ Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak için
 - Her durakta dört adım var: **Bak**, **Dinle** (telefonun kendi yapay sesiyle, internetsiz de çalışır), **Düşün** (tek soru, isteğe bağlı not) ve **Mühür al**.
 - Mühürler **Efes Pasaportu**'nda toplanır, pasaport paylaşılabilir bir görsel karta dönüşür.
 - Gezi ekranları Türkçe ve İngilizcedir; sitenin geri kalanı şimdilik Türkçedir.
-- Durak metinleri `index.html` içindeki `DURAKLAR` listesindedir. Yayından önce sahada yürünüp bir uzmana okutulmalıdır.
+- Durak metinleri `efes.html` içindeki `DURAKLAR` listesindedir. Yayından önce sahada yürünüp bir uzmana okutulmalıdır.
 - `sw.js` içindeki `KAYIT` adını (ör. `efes-v2`) her büyük güncellemede değiştir; böylece eski kopyalar temizlenir.
 
 ## Nasıl çalışıyor?
@@ -57,7 +58,7 @@ Bu paket, Claude dışında kendi alan adında, herkese açık yayınlamak için
 Vercel’de **Settings → Domains** bölümünden kendi alan adını (ör. `efes.org.tr`) bağlayabilirsin.
 
 ### 5. Paylaşım önizlemesini tamamla
-Site WhatsApp, X ya da Instagram’da paylaşılınca `og.jpg` görseli çıkar. Bazı uygulamalar görselin tam adresini ister. Adresin belli olunca `index.html` içinde `<meta property="og:image" content="og.jpg">` satırını `https://senin-adresin/og.jpg` olarak değiştir.
+Site WhatsApp, X ya da Instagram’da paylaşılınca `og.jpg` görseli çıkar. Bazı uygulamalar görselin tam adresini ister. Adresin belli olunca `turkey.html` içinde `<meta property="og:image" content="og.jpg">` satırını `https://senin-adresin/og.jpg` olarak değiştir.
 
 ## Ayarlar (Vercel ortam değişkenleri)
 
@@ -82,7 +83,7 @@ Gerçek maliyeti ilk günlerde Anthropic Console’daki **Usage** ekranından iz
 
 ## Türkiye Felsefe Haritası (ana sayfa `/`)
 
-- `index.html`: Göbeklitepe'den Mevlânâ'ya yirmi iki mekânlık harita (Ege'deki 10 felsefe durağına ek olarak İstanbul, Kapadokya, Antalya, Şanlıurfa, Gaziantep, Bodrum, İznik, Mardin, Troya, Nemrut Dağı, Likya ve Priene-Didim). Varsayılan dil İngilizce. Her mekânda filozof, söz kartı (indirilebilir PNG), yürüyüş rotası, pasaport mührü, çevre otelleri ve kaynaklar var. TR + EN.
+- `turkey.html` (`/turkey`): Göbeklitepe'den Mevlânâ'ya yirmi iki mekânlık harita (Ege'deki 10 felsefe durağına ek olarak İstanbul, Kapadokya, Antalya, Şanlıurfa, Gaziantep, Bodrum, İznik, Mardin, Troya, Nemrut Dağı, Likya ve Priene-Didim). Varsayılan dil İngilizce. Her mekânda filozof, söz kartı (indirilebilir PNG), yürüyüş rotası, pasaport mührü, çevre otelleri ve kaynaklar var. TR + EN.
 - Mekân metinleri aynı dosyadaki `YERLER` listesindedir. Kaynak dosyası: proje klasöründeki `efes/turkiye-felsefe-mekanlari.md`. Sitedeki tüm sözler kaynakta doğrulandı; `dogrulandi:false` yapılan bir söz sayfada "kontrol ediliyor" diye etiketlenir. Birincil metin bağlantıları `birincil` alanındadır.
 - `DERIN`: her mekânın sesli anlatımı (Dinle, cihazın yapay sesiyle) ve düşünme sorusu (Düşün). Notlar yalnızca kullanıcının tarayıcısında saklanır.
 - `felsefe-veri.js`: her mekânın Düşünce sekmesi (temel fikirler, hayat çizgisi, bilmediklerimiz, mirası). Stanford Encyclopedia of Philosophy maddelerinin kendi sözlerimizle özetidir; her fikir ilgili SEP bölümüne bağlanır. SEP maddesi olmayan Diogenes için IEP, Mevlânâ için SEP'in İslam mistisizmi maddesi ve Britannica kullanıldı. Yeni mekânlarda SEP (Bizans felsefesi, Arapçaya Yunan kaynakları), IEP, MacTutor, Britannica, UNESCO ve birincil metinler kullanıldı. Tartışmalı iddialar (ör. Harran'ın "ilk üniversite" olduğu) "Bilmediklerimiz" bölümünde kaynaklarla birlikte açıkça belirtilir.
@@ -114,7 +115,7 @@ Anahtar kelime hedefli yazılar (her birinde sık sorulan sorular ve FAQ yapısa
 
 ### Mekân sayfaları ve pasaport
 
-Her mekânın kendi İngilizce sayfası var: `/places/ephesus`, `/places/troy` … ve dizin `/places/`. Bu sayfalar ve `yer-veri.js`, `index.html` içindeki verilerden üretilir: `node scripts/sayfalar.mjs`. Haritada bir mekânı değiştirdikten sonra bu komutu yeniden çalıştır. Sayfa adresleri `index.html` içindeki `SLUG` tablosundan gelir.
+Her mekânın kendi İngilizce sayfası var: `/places/ephesus`, `/places/troy` … ve dizin `/places/`. Bu sayfalar ve `yer-veri.js`, `turkey.html` içindeki verilerden üretilir: `node scripts/sayfalar.mjs`. Haritada bir mekânı değiştirdikten sonra bu komutu yeniden çalıştır. Sayfa adresleri `turkey.html` içindeki `SLUG` tablosundan gelir.
 
 `/passport` (passport.html): toplanan mühürler, düşünce okulu rozetleri ve tamamlanan rota rozetleri. Mühürler yalnızca tarayıcıda (`fh-muhur`) saklanır.
 

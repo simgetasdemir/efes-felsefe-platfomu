@@ -68,7 +68,7 @@ const html = `<!doctype html>
 <main class="kure-bolum" id="kure-bolum" aria-labelledby="baslik">
   <div class="kure" id="kure" aria-label="Globe"></div>
   <div class="ua" data-ulke-atlasi data-aktif=""></div>
-  <div class="ust-dugmeler" role="group" aria-label="Menu"><button type="button" class="ust-ana" data-eylem="kesfet">Explore</button><button type="button" data-eylem="okuyucu">Understand</button><button type="button" data-eylem="plan" aria-haspopup="dialog" aria-controls="plan">Set out</button><button type="button" data-eylem="basla">Experience</button></div>
+  <div class="ust-dugmeler" role="group" aria-label="Menu"><button type="button" class="ust-ana" data-eylem="kesfet">Explore</button><button type="button" data-eylem="okuyucu">Understand</button><button type="button" data-eylem="basla">Experience</button></div>
   <div class="kure-bas">
     <div class="etiket" id="etiket">ΦΙΛΟΣΟΦΙΑ · ΚΟΣΜΟΣ</div>
     <h1 id="baslik">World Philosophy Route</h1>
@@ -81,7 +81,6 @@ const html = `<!doctype html>
   <aside class="panel" id="panel" hidden aria-live="polite"></aside>
   <button type="button" class="plan-dugme" id="plan-dugme" data-eylem="plan" aria-haspopup="dialog" aria-controls="plan">${IKON}<span>Plan your visit</span></button>
 </main>
-<div class="alt-cubuk"><div class="dugmeler alt-dugmeler"><button type="button" class="btn btn-altin" data-eylem="basla" id="basla">Begin the journey</button><a class="btn btn-hayalet" href="#oku" data-eylem="okuyucu" id="oku">Read the route</a></div></div>
 <div class="okuyucu" id="okuyucu" role="dialog" aria-modal="true" aria-label="World Philosophy Route" aria-hidden="true">
   <div class="o-ust"><span class="o-cubuk-yol"><span class="o-cubuk" id="o-cubuk"></span></span><span class="o-sayac" id="o-sayac"></span><button type="button" class="o-plan" id="o-plan" data-eylem="plan" aria-haspopup="dialog" aria-controls="plan" aria-label="Plan your visit">${IKON}<span>Plan</span></button><button type="button" class="o-kapat" id="o-kapat" data-eylem="okuyucu-kapat" aria-label="Close">×</button></div>
   <div class="o-pencere"><div class="sayfalar" id="sayfalar">

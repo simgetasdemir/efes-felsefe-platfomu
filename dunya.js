@@ -34,7 +34,7 @@
     document.documentElement.lang = dil;
     document.title = dil === 'tr' ? 'Antikyol · Dünya Felsefe Rotası: Milet\'ten Kyoto\'ya 29 durak' : 'Antikyol · World Philosophy Route: 29 places from Miletus to Kyoto';
     $('#etiket').textContent = t.etiket; $('#baslik').textContent = t.baslik; $('#alt').textContent = t.alt; $('#giris').textContent = t.giris;
-    $('#basla').textContent = t.basla; $('#oku').textContent = t.oku; $('#kure-pasif').textContent = t.kurePasif; $('#ipucu').textContent = t.ipucu;
+    if ($('#basla')) $('#basla').textContent = t.basla; if ($('#oku')) $('#oku').textContent = t.oku; $('#kure-pasif').textContent = t.kurePasif; $('#ipucu').textContent = t.ipucu;
     $('#o-onceki').setAttribute('aria-label', t.onceki); $('#o-sonraki').setAttribute('aria-label', t.sonraki); $('#o-kapat').setAttribute('aria-label', t.kapat);
     var n = document.querySelectorAll('.site-nav a'); t.nav.forEach(function(x, i){ if (n[i]) n[i].textContent = x; });
     var u = document.querySelectorAll('.ust-dugmeler button'); t.ust.forEach(function(x, i){ if (u[i]) u[i].textContent = x; });

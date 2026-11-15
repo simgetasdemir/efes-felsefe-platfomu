@@ -253,3 +253,8 @@ body.ev .kure-bolum{flex:1;height:auto;min-height:0}
 .alt-cubuk{flex:none;display:flex;justify-content:center;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:var(--lacivert);border-top:1px solid rgba(201,161,91,.25)}
 .alt-dugmeler{flex-wrap:nowrap}
 @media (max-width:700px){ .alt-dugmeler{width:100%}.alt-dugmeler .btn{flex:1;text-align:center;justify-content:center} }
+
+/* Ziyaretini planla: Ülke Atlası madalyonuyla aynı aileden, sıcak bronz-toprak ton */
+.plan-dugme{background:linear-gradient(180deg,#B5682C,#8A4719);border-color:#D9B66E;color:#FBF1DE;box-shadow:0 0 0 3px rgba(20,32,46,.55),0 10px 24px -12px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,225,180,.3)}
+.plan-dugme svg{color:#F3D99A}
+.plan-dugme:hover{background:linear-gradient(180deg,#C2733A,#96501F);border-color:#E9CF94}

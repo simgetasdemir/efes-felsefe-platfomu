@@ -37,6 +37,7 @@
     $('#basla').textContent = t.basla; $('#oku').textContent = t.oku; $('#kure-pasif').textContent = t.kurePasif; $('#ipucu').textContent = t.ipucu;
     $('#o-onceki').setAttribute('aria-label', t.onceki); $('#o-sonraki').setAttribute('aria-label', t.sonraki); $('#o-kapat').setAttribute('aria-label', t.kapat);
     var n = document.querySelectorAll('.site-nav a'); t.nav.forEach(function(x, i){ if (n[i]) n[i].textContent = x; });
+    var u = document.querySelectorAll('.ust-dugmeler button'); t.ust.forEach(function(x, i){ if (u[i]) u[i].textContent = x; });
     $('#plan-dugme span').textContent = t.plan; $('#o-plan span').textContent = t.planKisa; $('#o-plan').setAttribute('aria-label', t.plan);
     document.querySelectorAll('.dil button').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-dil') === dil); });
     caglarCiz();
@@ -405,6 +406,7 @@
       else if (ey === 'sonraki' && secili != null && secili < DURAK.length - 1) sec(secili + 1);
       else if (ey === 'onceki' && secili > 0) sec(secili - 1);
       else if (ey === 'basa' || ey === 'kapat') kapat();
+      else if (ey === 'kesfet'){ planKapat(); if (okuyucuAcik) okuyucuKapat(); kapat(); donuyor = true; }
       else if (ey === 'turkiye'){ if (kureYok()) return; e.preventDefault(); donuyor = false; if (okuyucuAcik) okuyucuKapat(); turkiye(); }
       else if (ey === 'tr-genel') turkiye();
       else if (ey === 'tr-sonraki' && trMod){ var k = TRL.indexOf(YER[trMod]); yerSec(TRL[(k + 1) % TRL.length].id); }

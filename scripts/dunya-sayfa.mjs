@@ -77,11 +77,11 @@ const html = `<!doctype html>
     <p class="kure-pasif" id="kure-pasif"></p>
   </div>
   <span class="ipucu" id="ipucu" aria-hidden="true"></span>
-  <div class="dugmeler alt-dugmeler"><button type="button" class="btn btn-altin" data-eylem="basla" id="basla">Begin the journey</button><a class="btn btn-hayalet" href="#oku" data-eylem="okuyucu" id="oku">Read the route</a></div>
   <div class="caglar" id="caglar" role="group" aria-label="Eras"></div>
   <aside class="panel" id="panel" hidden aria-live="polite"></aside>
   <button type="button" class="plan-dugme" id="plan-dugme" data-eylem="plan" aria-haspopup="dialog" aria-controls="plan">${IKON}<span>Plan your visit</span></button>
 </main>
+<div class="alt-cubuk"><div class="dugmeler alt-dugmeler"><button type="button" class="btn btn-altin" data-eylem="basla" id="basla">Begin the journey</button><a class="btn btn-hayalet" href="#oku" data-eylem="okuyucu" id="oku">Read the route</a></div></div>
 <div class="okuyucu" id="okuyucu" role="dialog" aria-modal="true" aria-label="World Philosophy Route" aria-hidden="true">
   <div class="o-ust"><span class="o-cubuk-yol"><span class="o-cubuk" id="o-cubuk"></span></span><span class="o-sayac" id="o-sayac"></span><button type="button" class="o-plan" id="o-plan" data-eylem="plan" aria-haspopup="dialog" aria-controls="plan" aria-label="Plan your visit">${IKON}<span>Plan</span></button><button type="button" class="o-kapat" id="o-kapat" data-eylem="okuyucu-kapat" aria-label="Close">×</button></div>
   <div class="o-pencere"><div class="sayfalar" id="sayfalar">

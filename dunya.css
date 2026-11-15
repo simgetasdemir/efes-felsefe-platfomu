@@ -34,7 +34,7 @@ a{color:#1F5C8A}
 .panel-acik .kure-bas,.panel-acik .kure-bolum::before{opacity:0;pointer-events:none}
 .panel-acik .kure-bas *{pointer-events:none}
 .etiket{font-family:var(--ui);font-size:12.5px;letter-spacing:.24em;font-weight:600;color:var(--altin)}
-.kure-bas h1{font-weight:600;font-size:clamp(36px,5.2vw,62px);line-height:1;margin:10px 0 8px;color:#F7F1E4;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.6)}
+.kure-bas h1{font-weight:600;font-size:clamp(32px,4.4vw,52px);line-height:1;margin:10px 0 8px;color:#F7F1E4;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.6)}
 .kure-bas .alt{font-style:italic;font-size:clamp(19px,2vw,23px);margin:0 0 12px;color:var(--krem)}
 .kure-bas .giris{font-size:17.5px;color:#D6CCB8;margin:0 0 18px;text-shadow:0 1px 12px rgba(0,0,0,.8)}
 .dugmeler{display:flex;gap:10px;flex-wrap:wrap}
@@ -209,7 +209,7 @@ body.ev .kure-bolum{flex:1;height:auto;min-height:0}
   .dil{margin-left:auto}
   .kure-bas{right:16px;top:18px}
   .kure-bas .giris{display:none}
-  .kure-bas h1{font-size:36px}
+  .kure-bas h1{font-size:31px}
   .panel{top:auto;left:0;right:0;bottom:0;width:auto;max-height:58%;border-radius:18px 18px 0 0}
   .panel .foto img{height:180px}
   .panel-acik .kure-bas{opacity:0;pointer-events:none}

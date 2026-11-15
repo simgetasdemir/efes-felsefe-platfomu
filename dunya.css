@@ -295,3 +295,5 @@ body.ev .kure-bolum{flex:1;height:auto;min-height:0}
 .plan-not{font-family:'EB Garamond',Georgia,serif;font-style:italic;font-size:14px;color:#6E5A3A;border-top:1px solid rgba(122,85,32,.3);text-align:center;margin-top:22px}
 .plan-yok{font-family:'EB Garamond',Georgia,serif;font-size:17px;color:#2A2013;text-align:center}
 @media (max-width:640px){.plan{border-left:0;border-top:1px solid #A9874B;box-shadow:0 -4px 0 rgba(20,32,46,.55),0 -20px 40px -16px rgba(0,0,0,.7);overflow-x:hidden}.plan-ust{border-radius:18px 18px 0 0}.plan h2{font-size:32px}}
+.plan-bag em.logo{width:58px;height:44px;border-radius:10px;background:#fff;border:1px solid rgba(122,85,32,.3)}
+.plan-bag em.logo img{display:block;max-width:44px;max-height:32px;width:auto;height:auto}

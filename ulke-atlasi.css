@@ -1,17 +1,18 @@
 /* ÜLKE ATLASI düğmesi ve panosu (ulke-atlasi.js) */
 .ua{position:absolute;top:16px;left:16px;z-index:30;font-family:'EB Garamond',Georgia,serif}
-.ua-btn{display:flex;align-items:center;gap:12px;padding:5px 18px 5px 5px;border-radius:999px;cursor:pointer;font:inherit;text-align:left;
+.ua-btn{display:flex;align-items:center;gap:9px;padding:4px 14px 4px 4px;border-radius:999px;cursor:pointer;font:inherit;text-align:left;
   background:linear-gradient(180deg,#2B2216,#17120B);border:1px solid #8C6A33;box-shadow:0 0 0 3px rgba(20,32,46,.6),0 6px 18px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,230,180,.15);color:#EAD7AE}
 .ua-btn:hover{border-color:#C9A15B}
 .ua-btn:focus-visible{outline:2px solid #C9A15B;outline-offset:3px}
-.ua-mad{width:50px;height:50px;border-radius:50%;flex:none;display:grid;place-items:center;
+.ua-mad{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;
   background:radial-gradient(circle at 35% 30%,#E9D29C,#B8873E 55%,#6E4A1C);box-shadow:inset 0 0 0 2px #5A3C15,inset 0 0 0 4px #D9B66E,0 2px 4px rgba(0,0,0,.5);transition:transform .6s}
+.ua-mad svg{width:31px;height:31px}
 .ua.acik .ua-mad,.ua-btn:hover .ua-mad{transform:rotate(30deg)}
-.ua-yazi b{display:block;font-size:16px;letter-spacing:.18em;font-weight:600;color:#E9CF94;line-height:1.2}
-.ua-yazi i{display:block;font-size:13.5px;color:#B9A27A;letter-spacing:.03em}
-.ua-ok{margin-left:2px;color:#C9A15B;font-size:13px;transition:transform .2s}
+.ua-yazi b{display:block;font-size:13px;letter-spacing:.16em;font-weight:600;color:#E9CF94;line-height:1.2}
+.ua-yazi i{display:block;font-size:11.5px;color:#B9A27A;letter-spacing:.03em}
+.ua-ok{margin-left:0;color:#C9A15B;font-size:11px;transition:transform .2s}
 .ua.acik .ua-ok{transform:rotate(180deg)}
-.ua-pano{margin-top:10px;width:300px;max-width:calc(100vw - 32px);padding:14px;border-radius:14px;box-sizing:border-box;
+.ua-pano{margin-top:8px;width:290px;max-width:calc(100vw - 32px);padding:14px;border-radius:14px;box-sizing:border-box;
   background:radial-gradient(ellipse at 20% 0%,#FBF3E0,#EFE0BF 60%,#E2CC9F);border:1px solid #A9874B;box-shadow:0 0 0 4px rgba(20,32,46,.55),0 14px 34px rgba(0,0,0,.5);color:#2A2013}
 .ua-pano[hidden]{display:none}
 .ua-pano h4{margin:0 0 8px;font-size:12.5px;letter-spacing:.22em;color:#7A5520;font-weight:600;border-bottom:1px solid rgba(122,85,32,.35);padding-bottom:8px}
@@ -25,9 +26,9 @@
 .ua-ulke.sec small{color:#C9B48A}
 @media (max-width:640px){
   .ua{top:10px;left:10px}
-  .ua-btn{gap:8px;padding:4px 12px 4px 4px}
-  .ua-mad{width:40px;height:40px}.ua-mad svg{width:32px;height:32px}
-  .ua-yazi b{font-size:13.5px;letter-spacing:.14em}.ua-yazi i{display:none}
+  .ua-btn{gap:7px;padding:3px 11px 3px 3px}
+  .ua-mad{width:32px;height:32px}.ua-mad svg{width:26px;height:26px}
+  .ua-yazi b{font-size:11.5px;letter-spacing:.12em}.ua-yazi i{display:none}
 }
 .ua-alt{margin:10px 2px 0;font-family:Inter,system-ui,sans-serif;font-size:12px;color:#6E5A3A}
 .ua-alt a{color:#7A5520}

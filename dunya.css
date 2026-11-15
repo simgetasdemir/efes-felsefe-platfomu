@@ -248,3 +248,15 @@ body.ev .kure-bolum{flex:1;height:auto;min-height:0}
   .site-ust .dil{margin-left:0}
   .kure-bolum .mapboxgl-ctrl-top-right{display:none}
 }
+
+/* Yolculuğa başla / Rotayı oku: haritanın altında, ortada */
+.alt-dugmeler{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);z-index:5;flex-wrap:nowrap;transition:opacity .4s}
+.ipucu{bottom:146px}
+.panel-acik .alt-dugmeler{opacity:0;pointer-events:none}
+.kure-yok .alt-dugmeler{position:static;transform:none;margin:0 clamp(16px,4vw,56px) 24px}
+@media (max-width:700px){
+  .alt-dugmeler{left:12px;right:12px;bottom:132px;transform:none;justify-content:center}
+  .alt-dugmeler .btn{flex:1;text-align:center;justify-content:center}
+  .ipucu{bottom:196px}
+}
+.alt-dugmeler .btn-hayalet{background:rgba(10,18,28,.85);backdrop-filter:blur(4px)}

@@ -25,6 +25,9 @@
   function h(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function d(x){ return x[dil]; }
   function tn(s){ return String(s).replace('{n}', Y.length); }
+  var PMAD = '<svg width="34" height="34" viewBox="0 0 40 40" fill="none" stroke="#5A3C15" stroke-width="1.3"><circle cx="20" cy="20" r="16"/><circle cx="20" cy="20" r="12.5" stroke-dasharray="1 2.2"/><path d="M20 7l2.6 13L20 33l-2.6-13z" fill="#5A3C15" fill-opacity=".85"/><path d="M7 20l13-2.6L33 20l-13 2.6z" fill="#5A3C15" fill-opacity=".35"/><circle cx="20" cy="20" r="1.6" fill="#E9D29C"/></svg>';
+  var PEM = { otel: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8M3 14h18v4M21 14v-1a3 3 0 0 0-3-3h-7v4"/><circle cx="7" cy="11.5" r="1.7"/></svg>',
+    tur: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M5 5h14l1 2M6 7v11M10 7v11M14 7v11M18 7v11M3 20h18"/></svg>' };
   var IKON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>';
 
   /* ---------- metinler ---------- */
@@ -358,14 +361,14 @@
     if (k[0] === 'y'){ var y = YER[id]; ad = y.ad[dil]; otel = y.kasaba; tur = y.tur; sayfa = '/places/' + y.slug; }
     else { var x = DURAK[SIRA[id]], pl = PLAN[id]; ad = x[dil].ad; if (pl){ otel = pl.otel; tur = pl.tur; } }
     var kisa = otel ? otel.split(',')[0] : '';
-    var s = '<div class="plan-ust"><span class="etiket">' + IKON + h(t.plan) + '</span><button type="button" class="plan-kapat" data-eylem="plan-kapat" aria-label="' + h(t.kapat) + '">×</button></div>' +
+    var s = '<div class="plan-ust"><span class="plan-mad" aria-hidden="true">' + PMAD + '</span><span class="plan-ad"><b>' + h(t.plan) + '</b><i>' + h(t.planAlt) + '</i></span><button type="button" class="plan-kapat" data-eylem="plan-kapat" aria-label="' + h(t.kapat) + '">×</button></div>' +
       '<div class="plan-govde"><label class="plan-etiket" for="plan-sec">' + h(t.planNerede) + '</label><select id="plan-sec">' +
       '<optgroup label="' + h(t.planTr) + '">' + Y.map(function(y){ return '<option value="y:' + y.id + '"' + (k === 'y:' + y.id ? ' selected' : '') + '>' + h(y.ad[dil]) + '</option>'; }).join('') + '</optgroup>' +
       '<optgroup label="' + h(t.planDunya) + '">' + DURAK.filter(function(x){ return !DURAK_YER[x.id]; }).map(function(x){ return '<option value="d:' + x.id + '"' + (k === 'd:' + x.id ? ' selected' : '') + '>' + h(x[dil].ad) + ' · ' + h(x[dil].ulke) + '</option>'; }).join('') + '</optgroup></select>' +
-      '<h2 id="plan-baslik">' + h(ad) + '</h2>';
+      '<h2 id="plan-baslik">' + h(ad) + '</h2><span class="plan-sus" aria-hidden="true"></span>';
     if (otel && O){
-      s += '<h3>' + h(t.planKal) + '</h3><div class="plan-baglar">' + O.oteller().map(function(sg){ return '<a class="plan-bag" href="' + h(O.otel(sg, otel)) + '" target="_blank" rel="sponsored noopener"><b>' + h(O.ad[sg]) + '</b><small>' + h(t.planOtel.replace('{k}', kisa)) + '</small><span aria-hidden="true">↗</span></a>'; }).join('') + '</div>';
-      s += '<h3>' + h(t.planTur) + '</h3><div class="plan-baglar">' + O.turlar().map(function(sg){ return '<a class="plan-bag" href="' + h(O.tur(sg, tur)) + '" target="_blank" rel="sponsored noopener"><b>' + h(O.ad[sg]) + '</b><small>' + h(t.planTurlar.replace('{k}', tur)) + '</small><span aria-hidden="true">↗</span></a>'; }).join('') + '</div>';
+      s += '<h3>' + h(t.planKal) + '</h3><div class="plan-baglar">' + O.oteller().map(function(sg){ return '<a class="plan-bag" href="' + h(O.otel(sg, otel)) + '" target="_blank" rel="sponsored noopener"><em aria-hidden="true">' + PEM.otel + '</em><b>' + h(O.ad[sg]) + '</b><small>' + h(t.planOtel.replace('{k}', kisa)) + '</small><span aria-hidden="true">→</span></a>'; }).join('') + '</div>';
+      s += '<h3>' + h(t.planTur) + '</h3><div class="plan-baglar">' + O.turlar().map(function(sg){ return '<a class="plan-bag" href="' + h(O.tur(sg, tur)) + '" target="_blank" rel="sponsored noopener"><em aria-hidden="true">' + PEM.tur + '</em><b>' + h(O.ad[sg]) + '</b><small>' + h(t.planTurlar.replace('{k}', tur)) + '</small><span aria-hidden="true">→</span></a>'; }).join('') + '</div>';
       if (sayfa) s += '<a class="tr-yer plan-sayfa" href="' + sayfa + '">' + h(t.planSayfa.replace('{k}', ad)) + '</a>';
       if (O.kazanc()) s += '<p class="plan-not">' + h(t.planAcik) + '</p>';
     } else s += '<p class="plan-yok">' + h(t.planYok) + '</p>';

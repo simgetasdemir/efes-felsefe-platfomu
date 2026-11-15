@@ -48,9 +48,9 @@
     if (map && hazir) isaretAdlari();
   }
   function caglarCiz(){
-    $('#caglar').innerHTML = '<button type="button" class="cag-cip" data-cag="">' + h(T[dil].tumu) + '</button>' + V.caglar.map(function(c){
+    $('#caglar').innerHTML = V.caglar.map(function(c){
       return '<button type="button" class="cag-cip" data-cag="' + c.id + '" style="--c:' + c.renk + '"><i></i>' + h(d(c).ad) + ' <small>' + h(d(c).tarih) + '</small></button>';
-    }).join('') + (Y.length ? '<button type="button" class="cag-cip tr-cip" data-eylem="turkiye"><i></i>' + h(tn(T[dil].trCip)) + '</button>' : '');
+    }).join('');
   }
 
   /* ---------- okuyucu: sayfa sayfa ---------- */

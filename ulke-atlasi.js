@@ -32,7 +32,7 @@
           return '<a class="ua-ulke' + (bu ? ' sec' : '') + '" href="' + u.href + '"' + (bu ? ' aria-current="page"' : '') + '>' +
             '<span class="em"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">' + EM[u.em] + '</svg></span>' +
             '<span><b>' + h(u.ad[d]) + '</b><small>' + h(bu ? t.burada : u.alt[d]) + '</small></span></a>';
-        }).join('') + '<p class="ua-alt"><a href="/places/">' + t.mekan + '</a> · <a href="/">' + t.dunya + '</a></p></nav>';
+        }).join('') + '<p class="ua-alt"><a href="/places/">' + t.mekan + '</a>' + (location.pathname === '/' || location.pathname === '/index.html' ? '' : ' · <a href="/">' + t.dunya + '</a>') + '</p></nav>';
     }
     function ac(v){ acik = v; kok.querySelector('.ua-btn').setAttribute('aria-expanded', v); kok.querySelector('.ua-pano').hidden = !v; kok.classList.toggle('acik', v); }
     ciz();

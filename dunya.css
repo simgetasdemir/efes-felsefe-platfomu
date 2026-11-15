@@ -209,7 +209,7 @@ body.ev .kure-bolum{flex:1;height:auto;min-height:0}
   .dil{margin-left:auto}
   .kure-bas{right:16px;top:18px}
   .kure-bas .giris{display:none}
-  .kure-bas h1{font-size:31px}
+  .kure-bas h1{font-size:min(31px,7.3vw);white-space:nowrap}
   .panel{top:auto;left:0;right:0;bottom:0;width:auto;max-height:58%;border-radius:18px 18px 0 0}
   .panel .foto img{height:180px}
   .panel-acik .kure-bas{opacity:0;pointer-events:none}

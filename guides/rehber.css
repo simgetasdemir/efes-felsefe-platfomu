@@ -142,6 +142,10 @@ footer{max-width:760px;margin:0 auto;padding:0 16px 40px;font-family:var(--ui);f
 .okuma b{font-size:22px;font-weight:600}
 .okuma span{font-size:16px;color:var(--soluk)}
 .okuma p{margin:8px 0 0;font-size:17px}
+.okuma .kitap-bul{margin-top:12px;padding-top:10px;border-top:1px solid #E6D9BD;font-family:var(--sans);font-size:15px;color:var(--soluk)}
+.okuma .kitap-bul small{display:inline;margin-right:6px}
+.okuma .kitap-bul a{color:var(--toprak);text-underline-offset:3px}
+.okuma .kitap-bul em{font-style:normal;font-size:13px;opacity:.8}
 /* "Buraya gitmek istersen": sakin, okumanın devamı gibi */
 .yer-sayfa .cta{background:#fff;color:var(--koyu);border:1px solid var(--ince);box-shadow:none;border-radius:16px}
 .yer-sayfa .cta small{color:var(--toprak)}

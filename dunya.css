@@ -95,6 +95,8 @@ a{color:#1F5C8A}
 .soru span{font-style:normal}
 .kaynaklar ul{margin:2px 0 10px;padding-left:18px;font-size:16.5px}
 .kaynaklar li.arslan{list-style:'📖 ';color:var(--soluk)}
+.kaynaklar li.arslan .kitap-bul{display:block;margin-top:4px;font-size:.92em}
+.kaynaklar li.arslan .kitap-bul em{font-style:normal;font-size:.88em;opacity:.8}
 .tr-yer{display:block;width:max-content;font-family:var(--ui);font-size:14.5px;font-weight:600;color:var(--toprak);text-decoration:none;margin:2px 0 12px}
 
 /* ana sayfa kaymaz */

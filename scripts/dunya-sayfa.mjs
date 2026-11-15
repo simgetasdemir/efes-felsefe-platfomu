@@ -74,10 +74,10 @@ const html = `<!doctype html>
     <h1 id="baslik">World Philosophy Route</h1>
     <p class="alt" id="alt">From Miletus to Kyoto: 2,600 years of thought in 29 places</p>
     <p class="giris" id="giris"></p>
-    <div class="dugmeler"><button type="button" class="btn btn-altin" data-eylem="basla" id="basla">Begin the journey</button><a class="btn btn-hayalet" href="#oku" data-eylem="okuyucu" id="oku">Read the route</a></div>
     <p class="kure-pasif" id="kure-pasif"></p>
   </div>
   <span class="ipucu" id="ipucu" aria-hidden="true"></span>
+  <div class="dugmeler alt-dugmeler"><button type="button" class="btn btn-altin" data-eylem="basla" id="basla">Begin the journey</button><a class="btn btn-hayalet" href="#oku" data-eylem="okuyucu" id="oku">Read the route</a></div>
   <div class="caglar" id="caglar" role="group" aria-label="Eras"></div>
   <aside class="panel" id="panel" hidden aria-live="polite"></aside>
   <button type="button" class="plan-dugme" id="plan-dugme" data-eylem="plan" aria-haspopup="dialog" aria-controls="plan">${IKON}<span>Plan your visit</span></button>

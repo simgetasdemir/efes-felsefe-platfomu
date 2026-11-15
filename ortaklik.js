@@ -33,7 +33,22 @@ window.ORTAKLIK = {
 
   /* Sesli rehber paketi bekleme listesi: bir form adresi (Tally, Google Forms, Mailchimp...).
      Boşsa bölüm "yakında" olarak görünür ve yalnızca ücretsiz Efes rehberine yönlendirir. */
-  sesliRehber: { kayit: '' }
+  sesliRehber: { kayit: '' },
+
+  /* KİTAPLAR: okuma önerilerinin yanındaki "Kitabı bul" bağlantıları.
+     Kimlik boşken bağlantılar yine kitap aramasına gider, yalnızca komisyon gelmez.
+     amazonTr: Amazon.com.tr Ortaklık Programı'nın verdiği takip kimliği (ör. antikyol-21).
+     amazon:   Amazon Associates (amazon.com) takip kimliği (ör. antikyol-20).
+     kitapyurdu, dr: bir ortaklık ağının verdiği derin bağlantı şablonu;
+               şablonda kitap adresinin geleceği yere {url} yaz. Örnek: 'https://ag.example/r?id=123&ulp={url}'
+     bookshop: Bookshop.org affiliate kimliği (panelde "Affiliate ID"). */
+  kitap: {
+    amazonTr:   { goster: true, tag: '' },
+    kitapyurdu: { goster: true, sablon: '' },
+    dr:         { goster: true, sablon: '' },
+    amazon:     { goster: true, tag: '' },
+    bookshop:   { goster: true, id: '' }
+  }
 };
 
 (function(O){
@@ -60,10 +75,34 @@ window.ORTAKLIK = {
     if (saglayici === 'viator') return 'https://www.viator.com/searchResults/all?text=' + enc(sorgu) + (O.viator.pid ? '&pid=' + enc(O.viator.pid) + (O.viator.mcid ? '&mcid=' + enc(O.viator.mcid) : '') + '&medium=link' + (O.viator.campaign ? '&campaign=' + enc(O.viator.campaign) : '') : '');
     return '';
   };
+  /* Kitapçılar. dil 'tr': Türkçe kitaplar için Türkiye'deki kitapçılar; 'en': İngilizce kitaplar için. */
+  O.kitapAd = { amazonTr: 'Amazon.com.tr', kitapyurdu: 'Kitapyurdu', dr: 'D&R', amazon: 'Amazon', bookshop: 'Bookshop.org' };
+  O.kitapcilar = function(dil){
+    var K = O.kitap || {};
+    return (dil === 'en' ? ['bookshop', 'amazon'] : ['amazonTr', 'kitapyurdu', 'dr']).filter(function(k){ return K[k] && K[k].goster; });
+  };
+  O.kitapAdres = function(s, sorgu, isbn){
+    var K = (O.kitap || {})[s] || {}, q = enc(sorgu);
+    function sab(x){ return K.sablon ? K.sablon.replace('{url}', enc(x)) : x; }
+    if (s === 'amazonTr') return 'https://www.amazon.com.tr/s?k=' + q + '&i=stripbooks' + (K.tag ? '&tag=' + enc(K.tag) : '');
+    if (s === 'amazon') return 'https://www.amazon.com/s?k=' + q + '&i=stripbooks' + (K.tag ? '&tag=' + enc(K.tag) : '');
+    if (s === 'kitapyurdu') return sab('https://www.kitapyurdu.com/index.php?route=product/search&filter_name=' + q);
+    if (s === 'dr') return sab('https://www.dr.com.tr/search?q=' + q);
+    if (s === 'bookshop') return (K.id && isbn) ? 'https://bookshop.org/a/' + enc(K.id) + '/' + enc(isbn) : 'https://bookshop.org/search?keywords=' + q;
+    return '';
+  };
+  /* "Amazon.com.tr · Kitapyurdu · D&R" bağlantıları (HTML). Sayfa üreticileri de bunu kullanır. */
+  O.kitapLinkleri = function(dil, sorgu, isbn){
+    function h(x){ return String(x).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    return O.kitapcilar(dil).map(function(k){
+      return '<a href="' + h(O.kitapAdres(k, sorgu, isbn)) + '" data-kitap="' + k + '" data-sorgu="' + h(sorgu) + '"' + (isbn ? ' data-isbn="' + h(isbn) + '"' : '') + ' target="_blank" rel="sponsored noopener">' + h(O.kitapAd[k]) + '</a>';
+    }).join(' · ');
+  };
   /* En az bir ortaklık kimliği dolu mu? (açıklama metnini göstermek için) */
   O.kazanc = function(){
     if (O.booking.aid || (O.booking.awinmid && O.booking.awinaffid) || O.hotels.parametreler || O.getyourguide.partner_id || O.viator.pid) return true;
     var b = O.hotels.baglantilar || {}; for (var k in b) if (b[k]) return true;
+    var K = O.kitap || {}; for (var j in K) if (K[j].tag || K[j].sablon || K[j].id) return true;
     return false;
   };
   /* Rehber sayfaları için: data-otel="booking" data-kasaba="Selçuk" ya da data-tur="viator" data-sorgu="Ephesus"
@@ -76,6 +115,10 @@ window.ORTAKLIK = {
     (kok || document).querySelectorAll('a[data-tur]').forEach(function(a){
       var s = a.getAttribute('data-tur'); if (!O[s] || !O[s].goster){ a.remove(); return; }
       a.href = O.tur(s, a.getAttribute('data-sorgu'));
+    });
+    (kok || document).querySelectorAll('a[data-kitap]').forEach(function(a){
+      var s = a.getAttribute('data-kitap'), K = O.kitap || {}; if (!K[s] || !K[s].goster){ a.remove(); return; }
+      a.href = O.kitapAdres(s, a.getAttribute('data-sorgu'), a.getAttribute('data-isbn'));
     });
     (kok || document).querySelectorAll('[data-aciklama]').forEach(function(p){ p.hidden = !O.kazanc(); });
   };

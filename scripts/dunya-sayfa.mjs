@@ -9,7 +9,7 @@ import crypto from 'node:crypto';
 const KOK = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ctx = { window: {} };
 vm.createContext(ctx);
-for (const f of ['dunya-veri.js', 'dunya-foto.js', 'dunya-sayfalar.js']) vm.runInContext(fs.readFileSync(path.join(KOK, f), 'utf8'), ctx);
+for (const f of ['ortaklik.js', 'dunya-veri.js', 'dunya-foto.js', 'dunya-sayfalar.js']) vm.runInContext(fs.readFileSync(path.join(KOK, f), 'utf8'), ctx);
 const V = ctx.window.DUNYA, F = ctx.window.DUNYA_FOTO;
 const h = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const CAG = Object.fromEntries(V.caglar.map((c, i) => [c.id, { ...c, no: i }]));

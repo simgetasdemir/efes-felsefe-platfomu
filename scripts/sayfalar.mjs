@@ -55,7 +55,7 @@ function tur(sorgu, baslik){
 <a href="${e(ORT.tur('getyourguide', sorgu))}" data-tur="getyourguide" data-sorgu="${e(sorgu)}" target="_blank" rel="sponsored noopener">GetYourGuide</a>
 <a href="${e(ORT.tur('viator', sorgu))}" data-tur="viator" data-sorgu="${e(sorgu)}" target="_blank" rel="sponsored noopener">Viator</a></div></div>`;
 }
-const ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>';
+const ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Hotels.com, GetYourGuide, Viator and booksellers). If you book or buy through them, this site may earn a commission at no extra cost to you.</p>';
 
 function ust(){
   return `<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/turkey#kesfet">Explore</a><a href="/places/">Places</a><a href="/guides/philosophy-trip-turkey">Guides</a><a href="/passport">Passport</a></nav></header>`;
@@ -130,7 +130,7 @@ ${f ? `<h2>Timeline</h2><ol class="zaman">${f.hayat.map(z => `<li><span>${e(z[0]
 ${rotalar.length ? `<h2>Routes that include ${e(m.ad)}</h2><div class="ilgili">${rotalar.map(r => `<a href="/?rota=${r.id}#rota-bolum">${e(r.en.ad)} · ${e(r.en.sure)} →</a>`).join('')}</div>` : ''}
 ${baglar.length ? `<h2>Connections</h2><ul class="bag-liste">${baglar.map(b => { const o = yerBul(b.a === yer.id ? b.b : b.a); return `<li><a href="/places/${SLUG[o.id]}">${e(o.en.ad)}</a>: ${e(b.en)}</li>`; }).join('')}</ul>` : ''}
 ${ara ? `<h2>If you want to go</h2><p>${e(m.ad)} is a place you can still walk through. If reading about ${e(m.kim.split(/[,;]/)[0])} makes you want to see it, these are the nearest places to stay and the guided visits on offer.</p>${otel(ara.kasaba, 'Stay in or near ' + ara.kasaba)}${tur(ara.tur, 'Guided visits: ' + m.ad)}` : ''}
-${yer.id in OKUMA ? `<aside class="okuma"><small>Further reading in Turkish</small><b>Ahmet Arslan, <i>İlkçağ Felsefe Tarihi</i></b><span>${OKUMA[yer.id] ? e(OKUMA[yer.id].replace('Cilt', 'Vol.')) + ' · ' : ''}İstanbul Bilgi Üniversitesi Yayınları</span><p>The standard Turkish history of ancient philosophy, by the philosopher Ahmet Arslan. A natural next step after this page for Turkish readers.</p></aside>` : ''}
+${yer.id in OKUMA ? `<aside class="okuma"><small>Further reading in Turkish</small><b>Ahmet Arslan, <i>İlkçağ Felsefe Tarihi</i></b><span>${OKUMA[yer.id] ? e(OKUMA[yer.id].replace('Cilt', 'Vol.')) + ' · ' : ''}İstanbul Bilgi Üniversitesi Yayınları</span><p>The standard Turkish history of ancient philosophy, by the philosopher Ahmet Arslan. A natural next step after this page for Turkish readers.</p><p class="kitap-bul"><small>Find the book</small> ${ORT.kitapLinkleri('tr', 'Ahmet Arslan İlkçağ Felsefe Tarihi')} <em>(affiliate links)</em></p></aside>` : ''}
 <h2>Sources</h2><ul class="kaynak-liste">${(F ? F.kaynak.map(k => [k[0] + ', ' + k[1], k[2]]) : []).concat(yer.kaynaklar).map(k => `<li><a href="${e(k[1])}" target="_blank" rel="noopener">${e(k[0])}</a></li>`).join('')}</ul>
 ${ACIKLAMA}
 <nav class="komsu" aria-label="More places"><a href="/places/${SLUG[onceki.id]}">← ${e(onceki.en.ad)}</a><a href="/places/${SLUG[sonraki.id]}">${e(sonraki.en.ad)} →</a></nav>

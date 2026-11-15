@@ -229,3 +229,22 @@ body.ev .kure-bolum{flex:1;height:auto;min-height:0}
   .tr-liste{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Ülke Atlası (sol üst) ve ana düğmeler (sağ üst) */
+.kure-bolum .ua{top:16px;left:clamp(16px,4vw,56px)}
+.kure-bas{top:clamp(96px,13vh,120px)}
+.ust-dugmeler{position:absolute;top:16px;right:64px;z-index:7;display:flex;gap:8px;transition:opacity .3s}
+.ust-dugmeler button{font-family:var(--ui);font-weight:600;font-size:14.5px;color:#F3E7CF;cursor:pointer;padding:11px 17px;border-radius:999px;
+  background:rgba(14,24,36,.82);border:1px solid rgba(201,161,91,.55);backdrop-filter:blur(4px)}
+.ust-dugmeler button:hover{border-color:var(--altin);color:#fff}
+.ust-dugmeler .ust-ana{background:var(--altin);color:var(--lacivert);border-color:var(--altin)}
+.panel-acik .ust-dugmeler{opacity:0;pointer-events:none}
+.kure-yok .kure-bolum .ua{position:relative;top:0;left:0;margin:16px}
+@media (max-width:700px){
+  .ust-dugmeler{top:66px;left:10px;right:10px;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .ust-dugmeler button{flex:none;font-size:13px;padding:8px 13px}
+  .kure-bas{top:118px}
+  .site-ust .site-nav{order:0;flex:none;margin:0 0 0 auto;overflow:visible}
+  .site-ust .dil{margin-left:0}
+  .kure-bolum .mapboxgl-ctrl-top-right{display:none}
+}

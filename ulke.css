@@ -1,0 +1,92 @@
+/* Ülke Atlası sayfaları (germany.html, uk.html, usa.html) */
+:root{
+  --lacivert:#14202E; --derin:#0A121C; --altin:#C9A15B; --krem:#F3E7CF;
+  --mermer:#F4F1EA; --murekkep:#1C2A3A; --soluk:#4A5868; --cizgi:#D8CFBC; --toprak:#A0561F;
+  --yazi:'EB Garamond','Garamond','Iowan Old Style',Georgia,serif; --ui:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--lacivert);color:var(--murekkep);font-family:var(--yazi);font-size:18px;line-height:1.6}
+html[lang="tr"] .l-en{display:none!important}
+html:not([lang="tr"]) .l-tr{display:none!important}
+a{color:var(--toprak)}
+
+.site-ust{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:24px;padding:12px 28px;background:var(--lacivert);color:#F3ECDD;box-shadow:0 1px 0 rgba(201,161,91,.25)}
+.marka-ana{display:flex;align-items:center;gap:10px;text-decoration:none;color:#F7F1E4;font-family:var(--ui);font-weight:700;font-size:23px;letter-spacing:-.01em}
+.marka-ana img{display:block}
+.site-nav{margin-left:auto;display:flex;gap:22px}
+.site-nav a{color:#E6DCC7;text-decoration:none;font-family:var(--ui);font-weight:500;font-size:16px}
+.site-nav a:hover{color:var(--altin)}
+.dil{display:inline-flex;border:1px solid rgba(201,161,91,.5);border-radius:999px;overflow:hidden}
+.dil button{border:0;background:none;min-height:40px;padding:0 12px;font-family:var(--ui);font-weight:600;font-size:14px;color:#E6DCC7;cursor:pointer}
+.dil button[aria-pressed="true"]{background:var(--altin);color:var(--lacivert)}
+
+.harita-bolum{position:relative;height:calc(100svh - 65px);min-height:560px;background:var(--derin);overflow:hidden}
+.harita{position:absolute;inset:0}
+.harita.mapboxgl-map{position:absolute!important;inset:0}
+.harita-yok .harita{display:none}
+.harita-yok .harita-bolum{height:auto;min-height:0;padding:96px 16px 32px}
+.harita-yok .bas{position:static;max-width:780px;margin:0 auto}
+.bas{position:absolute;left:clamp(16px,3vw,40px);bottom:clamp(20px,5vh,48px);max-width:520px;z-index:5;color:#F3ECDD;
+  padding:22px 24px;border-radius:18px;background:rgba(10,18,28,.78);border:1px solid rgba(201,161,91,.35);backdrop-filter:blur(6px);transition:opacity .4s}
+.panel-acik .bas{opacity:0;pointer-events:none}
+.etiket{margin:0;font-family:var(--ui);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--altin)}
+.bas h1{margin:6px 0 8px;font-weight:600;font-size:clamp(30px,4vw,46px);line-height:1.05;color:#F7F1E4;text-wrap:balance}
+.giris{margin:0 0 14px;font-size:17.5px;color:#D6CCB8}
+.btn-liste{display:inline-block;font-family:var(--ui);font-weight:600;font-size:15px;color:var(--lacivert);background:var(--altin);border-radius:999px;padding:10px 18px;text-decoration:none}
+
+/* işaretler */
+.isaret{display:flex;align-items:center;gap:6px;cursor:pointer;background:none;border:0;padding:0;font:inherit}
+.isaret .no{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--lacivert);color:#F3E7CF;font-family:var(--ui);font-weight:700;font-size:13px;
+  border:2px solid var(--altin);box-shadow:0 0 0 3px rgba(201,161,91,.25),0 3px 8px rgba(0,0,0,.5);transition:transform .2s}
+.isaret .ad{font-family:var(--yazi);font-weight:600;font-size:16px;color:#F3ECDD;text-shadow:0 1px 3px #000,0 0 8px #0A121C;white-space:nowrap}
+.isaret.e-sol{flex-direction:row-reverse}.isaret.e-ust{flex-direction:column-reverse;gap:2px}.isaret.e-alt{flex-direction:column;gap:2px}
+.isaret:hover .no,.isaret.sec .no{transform:scale(1.18);background:var(--altin);color:var(--lacivert)}
+
+/* panel */
+.panel-acik .mapboxgl-ctrl-top-right{display:none}
+.panel{position:absolute;z-index:8;top:16px;right:16px;bottom:16px;width:min(460px,44vw);overflow-y:auto;background:var(--mermer);color:var(--murekkep);border-radius:18px;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.7);border-top:4px solid var(--altin);padding:26px 26px 22px}
+.panel[hidden]{display:none}
+.panel-kapat{position:sticky;top:0;float:right;width:40px;height:40px;border-radius:50%;border:0;background:var(--lacivert);color:#F3E7CF;font-size:22px;cursor:pointer;margin:-8px -8px 0 8px}
+.panel .yer-no{display:none}
+.panel-gez{display:flex;justify-content:space-between;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--cizgi)}
+.panel-gez button{font-family:var(--ui);font-weight:600;font-size:14px;border:1px solid var(--cizgi);background:#fff;border-radius:999px;padding:9px 14px;cursor:pointer;color:var(--murekkep)}
+
+/* madde içeriği (liste ve panel ortak) */
+.ust{margin:0;font-family:var(--ui);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--toprak)}
+.yer h2,.panel h2{margin:4px 0 2px;font-size:32px;line-height:1.1;font-weight:600}
+.kim{margin:0 0 12px;font-style:italic;color:var(--soluk)}
+.ozet{font-size:19px}
+.yer h3,.panel h3{margin:18px 0 4px;font-family:var(--ui);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--lacivert)}
+.yer ul,.panel ul{margin:0;padding-left:20px}
+.yer-alt{margin-top:16px;padding-top:12px;border-top:1px solid var(--cizgi);font-family:var(--ui);font-size:14px;line-height:1.55}
+.yer-alt p{margin:6px 0}
+.yer-alt b{font-weight:600;margin-right:6px;color:var(--soluk)}
+.plan a{display:inline-block;margin-right:12px;color:var(--soluk)}
+
+/* liste */
+.yerler{background:var(--mermer);padding:48px 16px 40px}
+.yer{position:relative;max-width:780px;margin:0 auto 28px;background:#fff;border:1px solid var(--cizgi);border-radius:16px;padding:26px 28px 20px 84px;scroll-margin-top:84px}
+.yer-no{position:absolute;left:24px;top:28px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--lacivert);color:#F3E7CF;font-family:var(--ui);font-weight:700;border:2px solid var(--altin)}
+.aciklama{max-width:780px;margin:0 auto;font-family:var(--ui);font-size:13px;color:var(--soluk)}
+
+.alt{background:var(--lacivert);color:#B9AE98;padding:28px 16px 40px;font-family:var(--ui);font-size:14px;text-align:center}
+.alt nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 20px;margin-bottom:10px}
+.alt a{color:#E6DCC7}
+
+@media (max-width:760px){
+  body{font-size:17px}
+  .site-ust{padding:10px 16px;gap:12px}
+  .marka-ana{font-size:20px}.marka-ana img{width:32px;height:32px}
+  .site-nav{gap:14px}.site-nav a{font-size:15px}
+  .harita-bolum{height:calc(100svh - 60px);min-height:520px}
+  .bas{left:12px;right:12px;bottom:12px;padding:16px 18px;max-width:none}
+  .bas h1{font-size:28px}
+  .giris{font-size:16px}
+  .panel{top:auto;left:8px;right:8px;bottom:8px;width:auto;max-height:72%;padding:20px 18px}
+  .isaret .ad{display:none}
+  .yer{padding:22px 18px 18px}
+  .yer-no{position:static;margin-bottom:8px}
+  .yer h2,.panel h2{font-size:27px}
+}

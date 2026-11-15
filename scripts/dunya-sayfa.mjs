@@ -55,17 +55,20 @@ const html = `<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/dunya.css">
+<link rel="stylesheet" href="/ulke-atlasi.css">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'Antikyol', url: 'https://antikyol.com/', inLanguage: ['en', 'tr'], alternateName: ['World Philosophy Route', 'Dünya Felsefe Rotası'] })}</script>
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>
 <body class="ev">
 <header class="site-ust">
   <a class="marka-ana" href="/" aria-label="Antikyol"><img src="/logo.svg" alt="" width="36" height="36"><span class="marka-yazi">antikyol</span></a>
-  <nav class="site-nav" aria-label="Site"><a href="/turkey" data-eylem="turkiye">Türkiye</a><a href="#oku" data-eylem="okuyucu">Read</a><a href="/places/">Places</a><a href="/passport">Passport</a></nav>
+  <nav class="site-nav" aria-label="Site"><a href="/passport">Passport</a></nav>
   <div class="dil" role="group" aria-label="Dil / Language"><button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button></div>
 </header>
 <main class="kure-bolum" id="kure-bolum" aria-labelledby="baslik">
   <div class="kure" id="kure" aria-label="Globe"></div>
+  <div class="ua" data-ulke-atlasi data-aktif=""></div>
+  <div class="ust-dugmeler" role="group" aria-label="Menu"><button type="button" class="ust-ana" data-eylem="kesfet">Explore</button><button type="button" data-eylem="okuyucu">Understand</button><button type="button" data-eylem="plan" aria-haspopup="dialog" aria-controls="plan">Set out</button><button type="button" data-eylem="basla">Experience</button></div>
   <div class="kure-bas">
     <div class="etiket" id="etiket">ΦΙΛΟΣΟΦΙΑ · ΚΟΣΜΟΣ</div>
     <h1 id="baslik">World Philosophy Route</h1>
@@ -95,6 +98,8 @@ ${sayfalar}
 <script src="/dunya-foto.js"></script>
 <script src="/dunya-sayfalar.js"></script>
 <script src="/dunya.js"></script>
+<script src="/ulke-veri.js"></script>
+<script src="/ulke-atlasi.js"></script>
 <script>if ('serviceWorker' in navigator) window.addEventListener('load', function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); });</script>
 </body>
 </html>

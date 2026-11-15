@@ -250,7 +250,16 @@ body.ev .kure-bolum{flex:1;height:auto;min-height:0}
 }
 
 
-/* Ziyaretini planla: Ülke Atlası madalyonuyla aynı aileden, sıcak bronz-toprak ton */
-.plan-dugme{background:linear-gradient(180deg,#B5682C,#8A4719);border-color:#D9B66E;color:#FBF1DE;box-shadow:0 0 0 3px rgba(20,32,46,.55),0 10px 24px -12px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,225,180,.3)}
+/* Ziyaretini planla: okyanus mavisi, ince dalga dokusu, altın kenar */
+.plan-dugme{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4' fill='none' stroke='%23BFE3F2' stroke-opacity='.28' stroke-width='1.2'/%3E%3C/svg%3E") repeat-x 0 78%/40px 12px,radial-gradient(ellipse at 30% 0%,#3FA3C8 0%,#1C6F9A 45%,#0F4468 100%);border-color:#D9B66E;color:#F4FBFF;text-shadow:0 1px 2px rgba(4,30,50,.6);box-shadow:0 0 0 3px rgba(20,32,46,.55),0 10px 24px -12px rgba(0,0,0,.85),inset 0 1px 0 rgba(220,245,255,.35)}
 .plan-dugme svg{color:#F3D99A}
-.plan-dugme:hover{background:linear-gradient(180deg,#C2733A,#96501F);border-color:#E9CF94}
+.plan-dugme:hover{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4' fill='none' stroke='%23BFE3F2' stroke-opacity='.28' stroke-width='1.2'/%3E%3C/svg%3E") repeat-x 10px 78%/40px 12px,radial-gradient(ellipse at 30% 0%,#4DB2D6 0%,#2380AE 45%,#124D75 100%);border-color:#E9CF94}
+
+/* Ülke Atlası sağ üstte (yakınlaştırma düğmelerinin solunda); Explore / Understand / Experience sol üstte */
+.kure-bolum .ua{left:auto;right:64px;display:flex;flex-direction:column;align-items:flex-end;transition:opacity .3s}
+.panel-acik .kure-bolum .ua{opacity:0;pointer-events:none}
+.ust-dugmeler{right:auto;left:clamp(16px,4vw,56px)}
+@media (max-width:700px){
+  .kure-bolum .ua{right:10px}
+  .ust-dugmeler{left:10px;right:10px}
+}

@@ -299,3 +299,14 @@ body.ev .kure-bolum{flex:1;height:auto;min-height:0}
 @media (max-width:640px){.plan{border-left:0;border-top:1px solid #A9874B;box-shadow:0 -4px 0 rgba(20,32,46,.55),0 -20px 40px -16px rgba(0,0,0,.7);overflow-x:hidden}.plan-ust{border-radius:18px 18px 0 0}.plan h2{font-size:32px}}
 .plan-bag em.logo{width:72px;height:44px;border-radius:10px;background:#fff;border:1px solid rgba(122,85,32,.3)}
 .plan-bag em.logo img{display:block;max-width:60px;max-height:32px;width:auto;height:auto}
+
+/* Başlık ve alt başlık masaüstünde tek satır */
+@media (min-width:901px){
+  .kure-bas{max-width:min(660px,calc(100vw - 360px))}
+  .kure-bas h1{white-space:nowrap;text-wrap:nowrap}
+  .kure-bas .alt{white-space:nowrap}
+  .kure-bas .giris{max-width:470px}
+}
+@media (max-width:900px){
+  .kure-bas .alt{white-space:nowrap;font-size:min(19px,3.85vw)}
+}

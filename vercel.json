@@ -42,7 +42,7 @@
       ]
     },
     {
-      "source": "/ortaklik.js",
+      "source": "/(ortaklik|reklam).js",
       "headers": [
         {
           "key": "Cache-Control",

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<title>Shop Antikyol: tours, books and gear for ancient Türkiye</title>
+<meta name="description" content="Our picks for a trip through ancient Türkiye: tickets and tours for Ephesus, Cappadocia and Göbekli Tepe, philosophy books and travel gear.">
+<meta name="theme-color" content="#14202E">
+<meta name="verification" content="01c7">
+<link rel="canonical" href="https://antikyol.com/shop">
+<meta property="og:title" content="Shop Antikyol: our picks for ancient Türkiye">
+<meta property="og:description" content="Tours, philosophy books and travel gear, chosen for a trip from Ephesus to Cappadocia.">
+<meta property="og:image" content="https://antikyol.com/og.jpg">
+<meta property="og:url" content="https://antikyol.com/shop">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="/guides/rehber.css">
+<style>
+/* /shop: LTK tarzı öneri sayfası (Instagram/TikTok biyografi bağlantısı) */
+main{max-width:1160px;padding:0 16px 56px}
+.profil{text-align:center;padding:28px 0 6px}
+.profil .avatar{width:88px;height:88px;border-radius:50%;margin:0 auto;display:block;box-shadow:0 0 0 4px #fff,0 0 0 5px var(--altin),0 18px 34px -18px rgba(20,32,46,.8)}
+.profil h1{font-size:clamp(30px,6vw,42px);margin:14px 0 0}
+.profil .tutamac{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--soluk);letter-spacing:.02em}
+.profil .giris{max-width:560px;margin:10px auto 0;font-size:19px;line-height:1.45}
+.profil .aciklama{max-width:560px;margin:10px auto 0;font-family:var(--sans);font-size:12.5px;line-height:1.5;color:var(--soluk)}
+.dil-sec{display:inline-flex;border:1px solid rgba(201,161,91,.5);border-radius:999px;overflow:hidden}
+.dil-sec button{border:0;background:none;min-height:36px;padding:0 12px;font:inherit;font-weight:600;cursor:pointer;color:#E6DCC7}
+.dil-sec button[aria-pressed="true"]{background:var(--altin);color:var(--lacivert)}
+/* Koleksiyon çipleri: telefonda yatay kaydırılır, üstte yapışık kalır */
+.cipler{position:sticky;top:0;z-index:5;margin:18px -16px 0;padding:10px 16px;background:rgba(246,243,236,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--ince)}
+.cipler::-webkit-scrollbar{display:none}
+.cipler button{flex:none;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--ince);background:#fff;font-family:var(--sans);font-size:14.5px;font-weight:600;color:var(--koyu);cursor:pointer;white-space:nowrap}
+.cipler button[aria-pressed="true"]{background:var(--lacivert);border-color:var(--lacivert);color:#F7F1E4}
+@media (min-width:900px){.cipler{justify-content:center}}
+@media (max-width:480px){.magazalar{gap:4px}.magazalar a{font-size:11.5px;padding:0 8px}}
+.koleksiyon{scroll-margin-top:70px}
+.koleksiyon[hidden]{display:none}
+.kol-bas{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:34px 0 4px}
+.kol-bas h2{margin:0;font-size:clamp(25px,4vw,30px)}
+.kol-bas span{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--soluk);white-space:nowrap}
+.kol-alt{margin:0 0 14px;color:var(--soluk);font-size:17px;line-height:1.45}
+.izgara{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}
+@media (min-width:640px){.izgara{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 16px}}
+@media (min-width:1000px){.izgara{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Ürün kartı */
+.kart{display:flex;flex-direction:column;min-width:0}
+.kart-ana{display:block;text-decoration:none;color:var(--koyu)}
+.kart-gorsel{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--ince);box-shadow:var(--golge)}
+.kart-gorsel img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.kart-ana:hover .kart-gorsel img{transform:scale(1.04)}
+.rozet-mag{position:absolute;left:8px;bottom:8px;max-width:calc(100% - 16px);padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.94);font-family:var(--sans);font-size:11.5px;font-weight:700;color:var(--lacivert);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kart-ana b{display:block;margin-top:8px;font-size:18px;line-height:1.2;font-weight:600}
+.kart-ana small{display:block;margin-top:3px;font-family:var(--sans);font-size:12.5px;line-height:1.4;color:var(--soluk)}
+.magazalar{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.magazalar a{display:inline-flex;align-items:center;min-height:32px;padding:0 9px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px var(--ince);font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--koyu);text-decoration:none}
+.magazalar a:first-child{background:var(--lacivert);color:#F7F1E4;box-shadow:none}
+/* Kitap kapağı ve eşya kartı: fotoğraf yerine çizim */
+.kapak{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:18px 14px 40px 22px;color:#F7F1E4;background:linear-gradient(160deg,var(--k1),var(--k2))}
+.kapak::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:rgba(232,211,166,.45)}
+.kapak em{font-family:var(--sans);font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--altin-acik)}
+.kapak strong{font-size:clamp(19px,3.2vw,25px);line-height:1.12;font-weight:600}
+.kapak i{font-size:15px;color:#E3DACB}
+.esya{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#FFFDF8,#EFE6D4)}
+.esya svg{width:46%;height:auto;color:var(--lacivert)}
+.yer-notu{font-family:var(--sans);font-size:11px;color:var(--soluk);margin-top:2px}
+.kredi{margin-top:44px;font-family:var(--sans);font-size:12px;line-height:1.6;color:var(--soluk)}
+.kredi summary{cursor:pointer;font-weight:600}
+.kredi a{color:var(--soluk)}
+</style>
+</head>
+<body>
+<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/" id="n-harita">Map</a><a href="/places/" id="n-yerler">Places</a><a href="/guides/philosophy-trip-turkey" id="n-rehber">Guides</a><span class="dil-sec" role="group" aria-label="Language"><button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button></span></nav></header>
+<main>
+<section class="profil">
+  <img class="avatar" src="/logo.svg" alt="" width="88" height="88">
+  <h1 id="baslik">Shop Antikyol</h1>
+  <div class="tutamac">@antikyol</div>
+  <p class="giris" id="giris"></p>
+  <p class="aciklama" id="aciklama"></p>
+  <!-- Ortaklık ağı site doğrulama kodu: doğrulama bitene kadar silme ya da değiştirme -->
+  <p class="aciklama">Verification code: 01c7</p>
+</section>
+<nav class="cipler" id="cipler" aria-label="Collections"></nav>
+<div id="koleksiyonlar"></div>
+<details class="kredi"><summary id="kredi-bas">Photo credits</summary><p id="kredi"></p></details>
+</main>
+<footer id="alt"></footer>
+<script src="/ortaklik.js"></script>
+<script src="/foto-veri.js"></script>
+<script>
+(function(){
+  var O = window.ORTAKLIK, F = window.FOTOLAR || {}, $ = function(i){ return document.getElementById(i); };
+  function oku(k, v){ try { var x = JSON.parse(localStorage.getItem(k)); return x == null ? v : x; } catch(e){ return v; } }
+  var dil = oku('fh-dil', (navigator.language || 'en').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en');
+  var h = function(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); };
+
+  /* ======================================================================
+     KOLEKSİYONLAR: sayfadaki her şey bu listeden gelir.
+     Yeni bir öneri eklemek için ilgili koleksiyonun "urunler" listesine bir satır ekle.
+     Ortaklık kimlikleri burada DEĞİL, ortaklik.js içinde: orası boşsa bağlantı yine çalışır,
+     yalnızca komisyon gelmez.
+       tur:   GetYourGuide + Viator araması       (ortaklik.js → getyourguide, viator)
+       kitap: Türkçe ya da İngilizce kitapçılar   (ortaklik.js → kitap)
+       esya:  Amazon araması                      (ortaklik.js → kitap.amazonTr.tag / kitap.amazon.tag)
+     foto: [img/foto klasörü, sıra]  (Wikimedia Commons, atıf sayfanın altında kendiliğinden çıkar)
+     ====================================================================== */
+  var KOLEKSIYONLAR = [
+    { id:'tours', tur:'tur',
+      ad:{ en:'Tours & tickets', tr:'Turlar ve biletler' },
+      alt:{ en:'Skip-the-line tickets, day trips and the one balloon ride everyone asks about.', tr:'Sırasız biletler, günübirlik turlar ve herkesin sorduğu o balon turu.' },
+      urunler:[
+        { sorgu:'Ephesus', foto:['efes',2], ad:{ en:'Ephesus tickets & guided tours', tr:'Efes biletleri ve rehberli turlar' }, not:{ en:'With the Terrace Houses', tr:'Yamaç Evler dahil' } },
+        { sorgu:'Cappadocia hot air balloon', foto:['kapadokya',4], ad:{ en:'Cappadocia balloon flight', tr:'Kapadokya balon turu' }, not:{ en:'Book a few days ahead', tr:'Birkaç gün önceden ayırt' } },
+        { sorgu:'Pamukkale Hierapolis', foto:['hierapolis',0], ad:{ en:'Pamukkale & Hierapolis', tr:'Pamukkale ve Hierapolis' }, not:{ en:'Day trips from Selçuk', tr:'Selçuk\'tan günübirlik' } },
+        { sorgu:'Gobekli Tepe', foto:['sanliurfa',1], ad:{ en:'Göbekli Tepe & Karahan Tepe', tr:'Göbeklitepe ve Karahantepe' }, not:{ en:'11,000-year-old pillars', tr:'11.000 yıllık dikilitaşlar' } },
+        { sorgu:'Hagia Sophia', foto:['istanbul',1], ad:{ en:'Hagia Sophia & old Istanbul', tr:'Ayasofya ve tarihi İstanbul' }, not:{ en:'Guided walks', tr:'Rehberli yürüyüşler' } },
+        { sorgu:'Troy', foto:['troya',4], ad:{ en:'Troy day trip', tr:'Troya günübirlik tur' }, not:{ en:'Ruins and the Troy Museum', tr:'Ören yeri ve Troya Müzesi' } },
+        { sorgu:'Mount Nemrut', foto:['nemrut',4], ad:{ en:'Mount Nemrut sunrise', tr:'Nemrut\'ta gün doğumu' }, not:{ en:'Colossal heads at dawn', tr:'Şafakta dev başlar' } },
+        { sorgu:'Aspendos Perge', foto:['antalya',2], ad:{ en:'Perge & Aspendos from Antalya', tr:'Antalya\'dan Perge ve Aspendos' }, not:{ en:'The best Roman theatre', tr:'En sağlam Roma tiyatrosu' } }
+      ] },
+    { id:'books', tur:'kitap',
+      ad:{ en:'Philosophy books', tr:'Felsefe kitapları' },
+      alt:{ en:'What to read before you stand where these thinkers lived.', tr:'Bu düşünürlerin yaşadığı yerde durmadan önce okunacaklar.' },
+      urunler:[
+        /* tr/en: kitabın o dildeki adı, yazarı ve kitapçıda aranacak metin. Yalnızca tr varsa iki dilde de Türkçe kitapçılar çıkar. */
+        { renk:['#14202E','#3A4B5E'], yer:{ en:'Hierapolis', tr:'Hierapolis' },
+          tr:{ ad:'Enkheiridion', yazar:'Epiktetos', sorgu:'Epiktetos Enkheiridion' }, en:{ ad:'The Handbook', yazar:'Epictetus', sorgu:'Epictetus Enchiridion' } },
+        { renk:['#5A2E14','#A0561F'], yer:{ en:'Ephesus', tr:'Efes' },
+          tr:{ ad:'Fragmanlar', yazar:'Herakleitos', sorgu:'Herakleitos Fragmanlar' }, en:{ ad:'Fragments', yazar:'Heraclitus', sorgu:'Heraclitus Fragments' } },
+        { renk:['#2C3A2A','#5C6F4A'], yer:{ en:'Rome, on the Danube', tr:'Roma, Tuna kıyısı' },
+          tr:{ ad:'Kendime Düşünceler', yazar:'Marcus Aurelius', sorgu:'Marcus Aurelius Kendime Düşünceler' }, en:{ ad:'Meditations', yazar:'Marcus Aurelius', sorgu:'Marcus Aurelius Meditations' } },
+        { renk:['#3B1F2B','#7A3E55'], yer:{ en:'Troy', tr:'Troya' },
+          tr:{ ad:'İlyada', yazar:'Homeros', sorgu:'Homeros İlyada' }, en:{ ad:'The Iliad', yazar:'Homer', sorgu:'Homer Iliad' } },
+        { renk:['#1D3340','#2F6B7A'], yer:{ en:'Halicarnassus (Bodrum)', tr:'Halikarnassos (Bodrum)' },
+          tr:{ ad:'Tarih', yazar:'Herodotos', sorgu:'Herodotos Tarih' }, en:{ ad:'The Histories', yazar:'Herodotus', sorgu:'Herodotus Histories' } },
+        { renk:['#4A3A12','#8C6B22'], yer:{ en:'All of Ionia', tr:'Bütün İonya' },
+          tr:{ ad:'Ünlü Filozofların Yaşamları ve Öğretileri', yazar:'Diogenes Laertios', sorgu:'Diogenes Laertios Ünlü Filozofların Yaşamları' }, en:{ ad:'Lives of the Eminent Philosophers', yazar:'Diogenes Laertius', sorgu:'Diogenes Laertius Lives of the Eminent Philosophers' } },
+        { renk:['#2A2440','#584C86'], yer:{ en:'Konya', tr:'Konya' },
+          tr:{ ad:'Mesnevî', yazar:'Mevlânâ', sorgu:'Mevlana Mesnevi' }, en:{ ad:'The Masnavi', yazar:'Rumi', sorgu:'Rumi Masnavi' } },
+        { renk:['#14202E','#A0561F'], yer:{ en:'In Turkish', tr:'Türkçe başvuru kitabı' },
+          tr:{ ad:'İlkçağ Felsefe Tarihi', yazar:'Ahmet Arslan', sorgu:'Ahmet Arslan İlkçağ Felsefe Tarihi' } }
+      ] },
+    { id:'gear', tur:'esya',
+      ad:{ en:'Travel gear', tr:'Yol çantası' },
+      alt:{ en:'Marble streets are slippery, the sun is strong and Nemrut is cold before dawn. What we pack.', tr:'Mermer sokaklar kaygandır, güneş serttir, Nemrut şafaktan önce soğuktur. Çantamızda olanlar.' },
+      urunler:[
+        { ikon:'ayakkabi', ad:{ en:'Walking shoes with grip', tr:'Kaymaz yürüyüş ayakkabısı' }, not:{ en:'For polished Roman paving', tr:'Cilalı Roma taşları için' }, sorgu:{ en:'lightweight hiking shoes', tr:'hafif yürüyüş ayakkabısı' } },
+        { ikon:'sapka', ad:{ en:'Wide-brim sun hat', tr:'Geniş kenarlı şapka' }, not:{ en:'Little shade at Ephesus', tr:'Efes\'te gölge az' }, sorgu:{ en:'packable wide brim sun hat', tr:'katlanabilir geniş kenarlı güneş şapkası' } },
+        { ikon:'sise', ad:{ en:'Insulated water bottle', tr:'Termos su şişesi' }, not:{ en:'Keeps water cold all day', tr:'Suyu gün boyu soğuk tutar' }, sorgu:{ en:'insulated water bottle', tr:'çelik termos su şişesi' } },
+        { ikon:'canta', ad:{ en:'Light daypack', tr:'Hafif sırt çantası' }, not:{ en:'Small enough for museum lockers', tr:'Müze dolabına sığar' }, sorgu:{ en:'packable daypack', tr:'katlanabilir sırt çantası' } },
+        { ikon:'fener', ad:{ en:'Head torch', tr:'Kafa lambası' }, not:{ en:'For the dark climb up Nemrut', tr:'Nemrut\'a karanlıkta tırmanış için' }, sorgu:{ en:'rechargeable headlamp', tr:'şarjlı kafa lambası' } },
+        { ikon:'mont', ad:{ en:'Packable windproof jacket', tr:'Katlanır rüzgârlık' }, not:{ en:'Balloon mornings are cold', tr:'Balon sabahları soğuk' }, sorgu:{ en:'packable windbreaker jacket', tr:'katlanabilir rüzgarlık mont' } },
+        { ikon:'sarj', ad:{ en:'Power bank', tr:'Taşınabilir şarj aleti' }, not:{ en:'Maps and photos all day', tr:'Gün boyu harita ve fotoğraf' }, sorgu:{ en:'slim power bank 10000mah', tr:'ince powerbank 10000 mah' } },
+        { ikon:'priz', ad:{ en:'Travel adapter (Type F)', tr:'Seyahat adaptörü' }, not:{ en:'Türkiye uses EU plugs', tr:'Yurt dışından gelen dostlar için' }, sorgu:{ en:'universal travel adapter europe', tr:'universal seyahat adaptörü' } }
+      ] }
+  ];
+
+  var T = {
+    en:{ baslik:'Shop Antikyol', giris:'Our picks for a trip through ancient Türkiye: the tours worth booking, the books to read on the way and what goes in the bag.',
+         aciklama:'Links on this page are affiliate links (GetYourGuide, Viator, bookstores). If you book or buy through them, Antikyol may earn a commission at no extra cost to you.',
+         hepsi:'All', adet:'{n} picks', kredi:'Photo credits', foto:'Photos from Wikimedia Commons:',
+         harita:'Map', yerler:'Places', rehberler:'Guides', alt:'Antikyol · Prices and availability are set by each store, not by us.' },
+    tr:{ baslik:'Antikyol seçkisi', giris:'Antik Türkiye gezisi için seçtiklerimiz: ayırtmaya değer turlar, yolda okunacak kitaplar ve çantaya girenler.',
+         aciklama:'Bu sayfadaki bağlantılar ortaklık bağlantılarıdır (GetYourGuide, Viator, kitapçılar). Bunlar üzerinden rezervasyon ya da alışveriş yaparsan Antikyol, sana ek bir ücret çıkmadan komisyon kazanabilir.',
+         hepsi:'Hepsi', adet:'{n} öneri', kredi:'Fotoğraf atıfları', foto:'Fotoğraflar Wikimedia Commons\'tan:',
+         harita:'Harita', yerler:'Mekânlar', rehberler:'Rehberler', alt:'Antikyol · Fiyat ve uygunluğu her mağaza kendisi belirler.' }
+  };
+
+  /* Eşya çizimleri: 24×24, çizgi */
+  var IKON = {
+    ayakkabi:'<path d="M2 16v-3.5c2 0 3.5-.6 4.5-2L8 8.5l3 1.5c1 .5 2 2 3.5 2.5l5 1.2A2.5 2.5 0 0 1 21.5 16v1H2v-1Z"/><path d="M2 17h19.5M9 11l1.5-1.5M11 12.5 12.5 11"/>',
+    sapka:'<path d="M2.5 15.5c2 1.7 5.3 2.5 9.5 2.5s7.5-.8 9.5-2.5"/><path d="M6.5 15.2c0-4 2.4-7.2 5.5-7.2s5.5 3.2 5.5 7.2"/><path d="M6.8 13.2c3.4.9 7 .9 10.4 0"/>',
+    sise:'<rect x="8" y="6" width="8" height="15" rx="2.5"/><path d="M9.5 6V3.5h5V6M8 11h8"/>',
+    canta:'<path d="M6 9a6 6 0 0 1 12 0v10.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19.5V9Z"/><path d="M9 3.6V3h6v.6M8.5 13h7v4h-7z"/>',
+    fener:'<path d="M3 12c3-4.5 15-4.5 18 0"/><rect x="9" y="9.5" width="6" height="5" rx="1.5"/><path d="M12 17v4M8.5 16.5 6.5 20M15.5 16.5l2 3.5"/>',
+    mont:'<path d="M9 3.5 12 6l3-2.5 4.5 2L21 12l-2.5 1V20.5h-13V13L3 12l1.5-6.5L9 3.5Z"/><path d="M12 6v14.5"/>',
+    sarj:'<rect x="6.5" y="3" width="11" height="18" rx="2.5"/><path d="m12.8 7.5-2.6 4.5h3.6l-2.6 4.5"/>',
+    priz:'<rect x="6" y="5" width="12" height="11" rx="3"/><path d="M10 16v2.5a2 2 0 0 0 4 0V16"/><circle cx="9.8" cy="10.5" r=".9"/><circle cx="14.2" cy="10.5" r=".9"/>'
+  };
+
+  var kullanilanFoto = {};
+  function foto(f){
+    var p = (F[f[0]] || [])[f[1]]; if (!p) return '';
+    kullanilanFoto[f[0] + f[1]] = p;
+    return '<img src="' + h(p.kucuk || p.src) + '" alt="' + h(p.baslik[dil] || p.baslik.en) + '" loading="lazy" decoding="async">';
+  }
+  function bag(href, metin, ek){ return '<a href="' + h(href) + '" target="_blank" rel="sponsored noopener"' + (ek || '') + '>' + h(metin) + '</a>'; }
+
+  function kart(k, u){
+    var gorsel, ad, not, rozet, magazalar = [], ana;
+    if (k.tur === 'tur'){
+      var turlar = O.turlar();
+      if (!turlar.length) return '';
+      ana = O.tur(turlar[0], u.sorgu);
+      gorsel = foto(u.foto); ad = u.ad[dil]; not = u.not[dil]; rozet = O.ad[turlar[0]];
+      turlar.forEach(function(s){ magazalar.push(bag(O.tur(s, u.sorgu), O.ad[s])); });
+    } else if (k.tur === 'kitap'){
+      var kd = (dil === 'en' && u.en) ? 'en' : 'tr', b = u[kd], kitapcilar = O.kitapcilar(kd);
+      if (!kitapcilar.length) return '';
+      ana = O.kitapAdres(kitapcilar[0], b.sorgu);
+      gorsel = '<div class="kapak" style="--k1:' + u.renk[0] + ';--k2:' + u.renk[1] + '"><em>' + h(u.yer[dil]) + '</em><strong>' + h(b.ad) + '</strong><i>' + h(b.yazar) + '</i></div>';
+      ad = b.ad; not = b.yazar; rozet = O.kitapAd[kitapcilar[0]];
+      kitapcilar.forEach(function(s){ magazalar.push(bag(O.kitapAdres(s, b.sorgu), O.kitapAd[s])); });
+    } else if (k.tur === 'esya'){
+      var s = dil === 'en' ? 'amazon' : 'amazonTr';
+      if (!(O.kitap && O.kitap[s] && O.kitap[s].goster)) return '';
+      ana = O.urunAdres(s, u.sorgu[dil]);
+      gorsel = '<div class="esya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + IKON[u.ikon] + '</svg></div>';
+      ad = u.ad[dil]; not = u.not[dil]; rozet = O.kitapAd[s];
+    }
+    return '<article class="kart"><a class="kart-ana" href="' + h(ana) + '" target="_blank" rel="sponsored noopener"><div class="kart-gorsel">' + gorsel + '<span class="rozet-mag">' + h(rozet) + '</span></div><b>' + h(ad) + '</b><small>' + h(not) + '</small></a>' +
+      (magazalar.length > 1 ? '<div class="magazalar">' + magazalar.join('') + '</div>' : '') + '</article>';
+  }
+
+  var secili = (location.hash || '').slice(1);
+  function ciz(){
+    var t = T[dil]; kullanilanFoto = {};
+    document.documentElement.lang = dil;
+    $('baslik').textContent = t.baslik; $('giris').textContent = t.giris; $('aciklama').textContent = t.aciklama;
+    $('n-harita').textContent = t.harita; $('n-yerler').textContent = t.yerler; $('n-rehber').textContent = t.rehberler;
+    $('kredi-bas').textContent = t.kredi; $('alt').textContent = t.alt;
+    if (!KOLEKSIYONLAR.some(function(k){ return k.id === secili; })) secili = '';
+    $('cipler').innerHTML = '<button type="button" data-kol="">' + h(t.hepsi) + '</button>' + KOLEKSIYONLAR.map(function(k){
+      return '<button type="button" data-kol="' + k.id + '">' + h(k.ad[dil]) + '</button>';
+    }).join('');
+    $('koleksiyonlar').innerHTML = KOLEKSIYONLAR.map(function(k){
+      var kartlar = k.urunler.map(function(u){ return kart(k, u); }).filter(Boolean);
+      if (!kartlar.length) return '';
+      return '<section class="koleksiyon" id="' + k.id + '" data-kol-id="' + k.id + '"><div class="kol-bas"><h2>' + h(k.ad[dil]) + '</h2><span>' + h(t.adet.replace('{n}', kartlar.length)) + '</span></div><p class="kol-alt">' + h(k.alt[dil]) + '</p><div class="izgara">' + kartlar.join('') + '</div></section>';
+    }).join('');
+    $('kredi').innerHTML = h(t.foto) + ' ' + Object.keys(kullanilanFoto).map(function(x){
+      var p = kullanilanFoto[x];
+      return '<a href="' + h(p.kaynak) + '" target="_blank" rel="noopener">' + h(p.baslik[dil] || p.baslik.en) + '</a>, ' + h(p.yazar) + ' (<a href="' + h(p.lisansUrl || p.kaynak) + '" target="_blank" rel="noopener">' + h(p.lisans) + '</a>)';
+    }).join(' · ');
+    document.querySelectorAll('[data-dil]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-dil') === dil); });
+    sec(secili, false);
+  }
+  /* Bir koleksiyon seçilince yalnızca o görünür; adres #tours gibi olur, biyografiye doğrudan koleksiyon bağlantısı konabilir. */
+  function sec(id, kaydir){
+    secili = id;
+    document.querySelectorAll('[data-kol]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-kol') === id); });
+    document.querySelectorAll('.koleksiyon').forEach(function(s){ s.hidden = !!id && s.getAttribute('data-kol-id') !== id; });
+    try { history.replaceState(null, '', id ? '#' + id : location.pathname); } catch(x){}
+    var c = document.querySelector('[data-kol="' + id + '"]'); if (c && c.scrollIntoView) c.scrollIntoView({ block:'nearest', inline:'center' });
+    if (kaydir){ var y = $('cipler').offsetTop; if (window.scrollY > y) window.scrollTo(0, y); }
+  }
+  document.addEventListener('click', function(e){
+    var k = e.target.closest('[data-kol]'); if (k){ sec(k.getAttribute('data-kol'), true); return; }
+    var b = e.target.closest('[data-dil]'); if (!b) return;
+    dil = b.getAttribute('data-dil'); try { localStorage.setItem('fh-dil', JSON.stringify(dil)); } catch(x){} ciz();
+  });
+  window.addEventListener('hashchange', function(){ var id = (location.hash || '').slice(1); sec(KOLEKSIYONLAR.some(function(k){ return k.id === id; }) ? id : '', false); });
+  ciz();
+})();
+</script>
+</body>
+</html>

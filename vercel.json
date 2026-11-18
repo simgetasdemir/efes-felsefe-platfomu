@@ -17,6 +17,11 @@
       "permanent": true
     },
     {
+      "source": "/links",
+      "destination": "/shop",
+      "permanent": false
+    },
+    {
       "source": "/index",
       "destination": "/",
       "permanent": true

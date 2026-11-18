@@ -107,6 +107,20 @@ Haritadaki ve rehber sayfalarındaki tüm otel ve tur düğmeleri `ortaklik.js` 
 
 Bir sağlayıcıyı tamamen gizlemek için `goster: false` yap.
 
+### Reklamlar (Google AdSense, tek ayar yeri: `reklam.js`)
+
+Reklamlar yalnızca mekân sayfalarında (`/places/...`) ve rehber yazılarında (`/guides/...`) yüklenir. Ana sayfa küresi, `/turkey`, ülke sayfaları, `/efes`, `/walk` ve `/passport` reklamsızdır; küre ve kaydırma/klavye gezintisi etkilenmez. `reklam.js` içinde `yayinci` boşken hiçbir şey yüklenmez.
+
+1. adsense.google.com → hesap aç → site olarak `antikyol.com` ekle.
+2. **Yayıncı kimliğini** (ca-pub-…) `reklam.js` içindeki `yayinci` alanına yaz.
+3. Kök klasöre `ads.txt` dosyası ekle, içinde tek satır: `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0` (numara ca-pub- olmadan).
+4. `node scripts/sayfalar.mjs` ve `python3 scripts/rehber-sayfalari.py` çalıştır (sayfalardaki `reklam.js?v=` sürümü yenilenir), sonra yayınla.
+5. AdSense'te siteyi **incelemeye gönder**. Onay birkaç gün ile birkaç hafta sürebilir.
+6. **Çerez onayı:** AdSense → **Gizlilik ve mesajlaşma** → **Avrupa düzenlemeleri** mesajını oluşturup yayınla. AEA, Birleşik Krallık ve İsviçre ziyaretçileri için Google'ın sertifikalı onay penceresidir; ayrıca kod gerekmez, `adsbygoogle.js` ile kendiliğinden gelir. Bu mesaj olmadan bu ülkelerde reklam gösterimi kısıtlanır.
+7. İstersen **Otomatik reklamlar**ı panelden aç (yalnızca reklam kodunun olduğu sayfalarda çalışır), ya da bir "Makale içi" reklam birimi oluşturup `data-ad-slot` numarasını `yaziIci` alanına yaz; reklam yazının ortasına ve sonuna yakın, otel/tur kutularından uzağa konur.
+
+Gizlilik ve çerez politikası `/privacy` (privacy.html) sayfasındadır; mekân ve rehber sayfalarının altından bağlanır. KVKK için veri sorumlusunun adı ve e-postası bu sayfada güncel olmalı.
+
 ### Rehber yazıları (`guides/`)
 
 İngilizce, arama motoru için yazılmış sayfalar: `/guides/philosophy-trip-turkey`, `/guides/where-to-stay-in-ephesus`, `/guides/ephesus-to-pamukkale-itinerary`, `/guides/where-to-stay-in-pamukkale`, `/guides/where-to-stay-in-istanbul`, `/guides/where-to-stay-in-cappadocia`, `/guides/antalya-ancient-cities-perge-aspendos`, `/guides/lycian-way-xanthos-patara`. Metinler `scripts/rehber-sayfalari.py` içinde; değiştirdikten sonra `python3 scripts/rehber-sayfalari.py` çalıştır. Alan adı belli olunca betikteki `ALAN` değişkenini doldur.

@@ -30,6 +30,14 @@ def tur(sorgu, baslik, alt='Tours and tickets'):
 <a href="{e(_ort('viator', sorgu, 'tur'))}" data-tur="viator" data-sorgu="{e(sorgu)}" target="_blank" rel="sponsored noopener">Viator</a>
 </div></div>'''
 
+def planla(baslik, geceler, turlar=()):
+    """Rehber sonu 'Plan this route' kutusu: her gece için otel düğmesi, isteğe bağlı tur düğmeleri."""
+    oteller = ''.join(f'<a href="{e(_ort("hotels", k))}" data-otel="hotels" data-kasaba="{e(k)}" target="_blank" rel="sponsored noopener"><span>{e(g)}</span>{e(k)}</a>' for g, k in geceler)
+    tur_html = ''.join(f'<a href="{e(_ort("getyourguide", q, "tur"))}" data-tur="getyourguide" data-sorgu="{e(q)}" target="_blank" rel="sponsored noopener"><span>Tickets</span>{e(ad)}</a>' for ad, q in turlar)
+    return f'''<div class="cta plan"><small>Plan this route</small><b>{e(baslik)}</b>
+<p>A hotel for each night on Hotels.com, and tickets for the three big sites. Book the busy stops first: in spring and autumn, small hotels in Selçuk and Pamukkale fill up early.</p>
+<div class="dugmeler">{oteller}</div>{f'<div class="dugmeler">{tur_html}</div>' if tur_html else ''}</div>'''
+
 ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Hotels.com, GetYourGuide, Viator). If you book through them, this site may earn a commission at no extra cost to you.</p>'
 
 def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
@@ -166,6 +174,7 @@ SAYFALAR.append(dict(
         '<b>Karahayıt</b>, a few kilometres north, has larger hotels with thermal pools.',
         '<b>Denizli</b>, the nearby city, is the transport hub, with the bus station and a wider choice of hotels.'],
   govde=f'''
+{otel('Pamukkale', 'Check tonight\'s prices in Pamukkale', 'Short on time?')}
 <h2>Pamukkale village</h2>
 <p>The small village below the terraces is mostly guesthouses and family hotels, many with a view of the white slopes. From here you can walk up the travertines from the lower entrance as soon as the site opens, and come back down for sunset.</p>
 {otel('Pamukkale', 'Hotels in Pamukkale village')}
@@ -636,6 +645,7 @@ SAYFALAR.append(dict(
 <p><b>From Kuşadası.</b> Kuşadası is about 30 minutes away by car. Minibuses (<i>dolmuş</i>) run often between Kuşadası and Selçuk, and many taxis and tours wait at the cruise port.</p>
 <p><b>From İzmir and the airport.</b> İzmir Adnan Menderes Airport is about 60 km north of Selçuk. Regional trains run from the airport station and from İzmir to Selçuk, which takes about an hour and a half; by car it is about an hour.</p>
 {otel('Selçuk', 'Stay in Selçuk, next to the ruins', 'Where to stay')}
+{tur('Ephesus from Kusadasi', 'Ephesus tours with pick-up from Kuşadası and İzmir', 'No car? Go with a tour')}
 <h2>Upper gate or lower gate?</h2>
 <p>Ephesus has two entrances. The <b>upper gate</b> (south) sits near the State Agora and the Odeon; the <b>lower gate</b> (north) is by the Great Theatre and the old harbour road. The site lies on a slope, so most people start at the upper gate and walk downhill along Curetes Street to the Library of Celsus and out through the lower gate. Taxis wait at both, and drivers know the routine: they drop you at the top and pick you up at the bottom.</p>
 <h2>Tickets and the Terrace Houses</h2>
@@ -684,6 +694,7 @@ SAYFALAR.append(dict(
 {tur('Pamukkale from Selcuk', 'Day trips to Pamukkale from Selçuk and Kuşadası')}
 <h2>From Istanbul</h2>
 <p>The quickest way is a <b>flight from Istanbul to Denizli Çardak Airport</b>, about an hour and ten minutes. From the airport, shuttle buses and taxis go to Denizli and Pamukkale, about an hour by road. <b>Overnight buses</b> from Istanbul take about ten to twelve hours.</p>
+{tur('Denizli airport transfer Pamukkale', 'Airport transfers and day tours from Denizli', 'Arriving by plane')}
 <h2>From Antalya</h2>
 <p>Buses from Antalya to Denizli take about four hours over the Taurus Mountains. By car it is about 240 km. Many hotels in Antalya sell long day tours to Pamukkale, but staying a night is much more relaxed.</p>
 <h2>From İzmir</h2>
@@ -747,6 +758,7 @@ SAYFALAR.append(dict(
 {tur('Pamukkale', 'Pamukkale tours, balloon flights and tickets')}
 <h2>Shorter or longer</h2>
 <p><b>Five days:</b> skip Assos and Pergamon, start in İzmir and do days 4 to 7. <b>Ten days:</b> add a day for Miletus and Didyma, the cities of the first philosophers (see <a href="/guides/ephesus-to-pamukkale-itinerary">Ephesus to Pamukkale in 4 days</a>), and begin with two days in Istanbul (see <a href="/guides/turkey-history-itinerary-10-days">Turkey in 10 days</a>).</p>
+{planla('Troy to Pamukkale in 7 days', [('Night 1', 'Çanakkale'), ('Night 2', 'Assos'), ('Night 3', 'Bergama'), ('Nights 4–5', 'Selçuk'), ('Nights 6–7', 'Pamukkale')], [('Troy', 'Troy Turkey'), ('Ephesus', 'Ephesus'), ('Pamukkale', 'Pamukkale')])}
 <p class="not">Drive times are approximate and assume no long stops. Check opening hours and ticket prices before you go: they change each season.</p>
 ''',
   sss=[('Is 7 days enough to see the ancient sites of Turkey?', 'Seven days is enough for the western coast: Troy, Assos, Pergamon, Ephesus, Aphrodisias and Pamukkale. Sites further east, such as Cappadocia, Mount Nemrut and Göbekli Tepe, need a separate trip or a flight.'),

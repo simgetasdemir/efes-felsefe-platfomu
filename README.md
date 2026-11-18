@@ -109,7 +109,7 @@ Bir sağlayıcıyı tamamen gizlemek için `goster: false` yap.
 
 ### Öneri sayfası: `/shop` (biyografi bağlantısı)
 
-`/shop` (shop.html; `/links` de buraya yönlenir), Instagram ve TikTok biyografisine konacak LTK tarzı öneri sayfası: koleksiyon çipleri, iki sütunlu kartlar (telefonda), her kartta ortaklık bağlantısı. Koleksiyonlar: **Nerede kalınır** (Hotels.com), **Turlar ve biletler** (GetYourGuide, Viator), **Felsefe kitapları** (kitapçılar), **Yol çantası** (Amazon). Koleksiyona doğrudan bağlantı verilebilir: `antikyol.com/shop#stay`, `#tours`, `#books`, `#gear`.
+`/shop` (shop.html; `/links` de buraya yönlenir), Instagram ve TikTok biyografisine konacak LTK tarzı öneri sayfası: koleksiyon çipleri, iki sütunlu kartlar (telefonda), her kartta ortaklık bağlantısı. Koleksiyonlar: **Turlar ve biletler** (GetYourGuide, Viator), **Felsefe kitapları** (kitapçılar), **Yol çantası** (Amazon). Koleksiyona doğrudan bağlantı verilebilir: `antikyol.com/shop#tours`, `#books`, `#gear`.
 
 Öneri eklemek ya da çıkarmak için `shop.html` içindeki `KOLEKSIYONLAR` listesini düzenle. Kimlikler yine yalnızca `ortaklik.js` içinde. Kitap ve yol çantası kartlarının komisyon getirmesi için `kitap.amazonTr.tag` ve `kitap.amazon.tag` (Amazon Ortaklık kimlikleri) doldurulmalı; boşken bağlantılar çalışır ama komisyon gelmez.
 

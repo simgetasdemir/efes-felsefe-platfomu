@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
-<title>Shop Antikyol: hotels, tours, books and gear for ancient Türkiye</title>
-<meta name="description" content="Our picks for a trip through ancient Türkiye: where to stay in Selçuk, Pamukkale and Cappadocia, tickets for Ephesus and Göbekli Tepe, philosophy books and travel gear.">
+<title>Shop Antikyol: tours, books and gear for ancient Türkiye</title>
+<meta name="description" content="Our picks for a trip through ancient Türkiye: tickets and tours for Ephesus, Cappadocia and Göbekli Tepe, philosophy books and travel gear.">
 <meta name="theme-color" content="#14202E">
 <link rel="canonical" href="https://antikyol.com/shop">
 <meta property="og:title" content="Shop Antikyol: our picks for ancient Türkiye">
-<meta property="og:description" content="Hotels, tours, philosophy books and travel gear, chosen for a trip from Ephesus to Cappadocia.">
+<meta property="og:description" content="Tours, philosophy books and travel gear, chosen for a trip from Ephesus to Cappadocia.">
 <meta property="og:image" content="https://antikyol.com/og.jpg">
 <meta property="og:url" content="https://antikyol.com/shop">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,26 +99,12 @@ main{max-width:1160px;padding:0 16px 56px}
      Yeni bir öneri eklemek için ilgili koleksiyonun "urunler" listesine bir satır ekle.
      Ortaklık kimlikleri burada DEĞİL, ortaklik.js içinde: orası boşsa bağlantı yine çalışır,
      yalnızca komisyon gelmez.
-       otel:  Hotels.com kasaba araması          (ortaklik.js → hotels)
        tur:   GetYourGuide + Viator araması       (ortaklik.js → getyourguide, viator)
        kitap: Türkçe ya da İngilizce kitapçılar   (ortaklik.js → kitap)
        esya:  Amazon araması                      (ortaklik.js → kitap.amazonTr.tag / kitap.amazon.tag)
      foto: [img/foto klasörü, sıra]  (Wikimedia Commons, atıf sayfanın altında kendiliğinden çıkar)
      ====================================================================== */
   var KOLEKSIYONLAR = [
-    { id:'stay', tur:'otel',
-      ad:{ en:'Where to stay', tr:'Nerede kalınır' },
-      alt:{ en:'The towns we sleep in to reach the ruins early, before the heat and the tour buses.', tr:'Ören yerlerine sabah erkenden, sıcaktan ve tur otobüslerinden önce varmak için kaldığımız kasabalar.' },
-      urunler:[
-        { kasaba:'Selçuk', foto:['efes',0], ad:{ en:'Selçuk, for Ephesus', tr:'Selçuk, Efes için' }, not:{ en:'3 km from the ruins', tr:'Ören yerine 3 km' }, rehber:'/guides/where-to-stay-in-ephesus' },
-        { kasaba:'Pamukkale', foto:['hierapolis',1], ad:{ en:'Pamukkale village', tr:'Pamukkale köyü' }, not:{ en:'Walk to the travertines at sunrise', tr:'Gün doğarken travertenlere yürü' }, rehber:'/guides/where-to-stay-in-pamukkale' },
-        { kasaba:'Göreme', foto:['kapadokya',2], ad:{ en:'Göreme, Cappadocia', tr:'Göreme, Kapadokya' }, not:{ en:'Cave hotels under the balloons', tr:'Balonların altında mağara oteller' }, rehber:'/guides/where-to-stay-in-cappadocia' },
-        { kasaba:'İstanbul', foto:['istanbul',4], ad:{ en:'Istanbul old city', tr:'İstanbul tarihi yarımada' }, not:{ en:'Sultanahmet, by Hagia Sophia', tr:'Sultanahmet, Ayasofya yanı' }, rehber:'/guides/where-to-stay-in-istanbul' },
-        { kasaba:'Çanakkale', foto:['troya',3], ad:{ en:'Çanakkale, for Troy', tr:'Çanakkale, Troya için' }, not:{ en:'On the Dardanelles waterfront', tr:'Boğaz kıyısında' } },
-        { kasaba:'Şanlıurfa', foto:['sanliurfa',4], ad:{ en:'Şanlıurfa, for Göbekli Tepe', tr:'Şanlıurfa, Göbeklitepe için' }, not:{ en:'15 km from the site', tr:'Ören yerine 15 km' } },
-        { kasaba:'Kahta', foto:['nemrut',0], ad:{ en:'Kahta, for Mount Nemrut', tr:'Kâhta, Nemrut için' }, not:{ en:'Closest town for the sunrise', tr:'Gün doğumu için en yakın ilçe' } },
-        { kasaba:'Bergama', foto:['bergama',0], ad:{ en:'Bergama, for Pergamon', tr:'Bergama, Pergamon için' }, not:{ en:'Acropolis and Asclepieion', tr:'Akropol ve Asklepion' } }
-      ] },
     { id:'tours', tur:'tur',
       ad:{ en:'Tours & tickets', tr:'Turlar ve biletler' },
       alt:{ en:'Skip-the-line tickets, day trips and the one balloon ride everyone asks about.', tr:'Sırasız biletler, günübirlik turlar ve herkesin sorduğu o balon turu.' },
@@ -170,13 +156,13 @@ main{max-width:1160px;padding:0 16px 56px}
   ];
 
   var T = {
-    en:{ baslik:'Shop Antikyol', giris:'Our picks for a trip through ancient Türkiye: the towns we stay in, the tours worth booking, the books to read on the way and what goes in the bag.',
-         aciklama:'Links on this page are affiliate links (Hotels.com, GetYourGuide, Viator, bookstores). If you book or buy through them, Antikyol may earn a commission at no extra cost to you.',
-         hepsi:'All', adet:'{n} picks', rehber:'Guide', kredi:'Photo credits', foto:'Photos from Wikimedia Commons:',
+    en:{ baslik:'Shop Antikyol', giris:'Our picks for a trip through ancient Türkiye: the tours worth booking, the books to read on the way and what goes in the bag.',
+         aciklama:'Links on this page are affiliate links (GetYourGuide, Viator, bookstores). If you book or buy through them, Antikyol may earn a commission at no extra cost to you.',
+         hepsi:'All', adet:'{n} picks', kredi:'Photo credits', foto:'Photos from Wikimedia Commons:',
          harita:'Map', yerler:'Places', rehberler:'Guides', alt:'Antikyol · Prices and availability are set by each store, not by us.' },
-    tr:{ baslik:'Antikyol seçkisi', giris:'Antik Türkiye gezisi için seçtiklerimiz: kaldığımız kasabalar, ayırtmaya değer turlar, yolda okunacak kitaplar ve çantaya girenler.',
-         aciklama:'Bu sayfadaki bağlantılar ortaklık bağlantılarıdır (Hotels.com, GetYourGuide, Viator, kitapçılar). Bunlar üzerinden rezervasyon ya da alışveriş yaparsan Antikyol, sana ek bir ücret çıkmadan komisyon kazanabilir.',
-         hepsi:'Hepsi', adet:'{n} öneri', rehber:'Rehber', kredi:'Fotoğraf atıfları', foto:'Fotoğraflar Wikimedia Commons\'tan:',
+    tr:{ baslik:'Antikyol seçkisi', giris:'Antik Türkiye gezisi için seçtiklerimiz: ayırtmaya değer turlar, yolda okunacak kitaplar ve çantaya girenler.',
+         aciklama:'Bu sayfadaki bağlantılar ortaklık bağlantılarıdır (GetYourGuide, Viator, kitapçılar). Bunlar üzerinden rezervasyon ya da alışveriş yaparsan Antikyol, sana ek bir ücret çıkmadan komisyon kazanabilir.',
+         hepsi:'Hepsi', adet:'{n} öneri', kredi:'Fotoğraf atıfları', foto:'Fotoğraflar Wikimedia Commons\'tan:',
          harita:'Harita', yerler:'Mekânlar', rehberler:'Rehberler', alt:'Antikyol · Fiyat ve uygunluğu her mağaza kendisi belirler.' }
   };
 
@@ -202,14 +188,7 @@ main{max-width:1160px;padding:0 16px 56px}
 
   function kart(k, u){
     var gorsel, ad, not, rozet, magazalar = [], ana;
-    if (k.tur === 'otel'){
-      var oteller = O.oteller();
-      if (!oteller.length) return '';
-      ana = O.otel(oteller[0], u.kasaba);
-      gorsel = foto(u.foto); ad = u.ad[dil]; not = u.not[dil]; rozet = O.ad[oteller[0]];
-      oteller.forEach(function(s){ magazalar.push(bag(O.otel(s, u.kasaba), O.ad[s])); });
-      if (u.rehber) magazalar.push('<a href="' + h(u.rehber) + '">' + h(T[dil].rehber) + '</a>');
-    } else if (k.tur === 'tur'){
+    if (k.tur === 'tur'){
       var turlar = O.turlar();
       if (!turlar.length) return '';
       ana = O.tur(turlar[0], u.sorgu);

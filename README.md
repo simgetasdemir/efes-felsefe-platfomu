@@ -107,6 +107,12 @@ Haritadaki ve rehber sayfalarındaki tüm otel ve tur düğmeleri `ortaklik.js` 
 
 Bir sağlayıcıyı tamamen gizlemek için `goster: false` yap.
 
+### Öneri sayfası: `/shop` (biyografi bağlantısı)
+
+`/shop` (shop.html; `/links` de buraya yönlenir), Instagram ve TikTok biyografisine konacak LTK tarzı öneri sayfası: koleksiyon çipleri, iki sütunlu kartlar (telefonda), her kartta ortaklık bağlantısı. Koleksiyonlar: **Nerede kalınır** (Hotels.com), **Turlar ve biletler** (GetYourGuide, Viator), **Felsefe kitapları** (kitapçılar), **Yol çantası** (Amazon). Koleksiyona doğrudan bağlantı verilebilir: `antikyol.com/shop#stay`, `#tours`, `#books`, `#gear`.
+
+Öneri eklemek ya da çıkarmak için `shop.html` içindeki `KOLEKSIYONLAR` listesini düzenle. Kimlikler yine yalnızca `ortaklik.js` içinde. Kitap ve yol çantası kartlarının komisyon getirmesi için `kitap.amazonTr.tag` ve `kitap.amazon.tag` (Amazon Ortaklık kimlikleri) doldurulmalı; boşken bağlantılar çalışır ama komisyon gelmez.
+
 ### Rehber yazıları (`guides/`)
 
 İngilizce, arama motoru için yazılmış sayfalar: `/guides/philosophy-trip-turkey`, `/guides/where-to-stay-in-ephesus`, `/guides/ephesus-to-pamukkale-itinerary`, `/guides/where-to-stay-in-pamukkale`, `/guides/where-to-stay-in-istanbul`, `/guides/where-to-stay-in-cappadocia`, `/guides/antalya-ancient-cities-perge-aspendos`, `/guides/lycian-way-xanthos-patara`. Metinler `scripts/rehber-sayfalari.py` içinde; değiştirdikten sonra `python3 scripts/rehber-sayfalari.py` çalıştır. Alan adı belli olunca betikteki `ALAN` değişkenini doldur.

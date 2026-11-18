@@ -41,7 +41,9 @@ window.ORTAKLIK = {
      amazon:   Amazon Associates (amazon.com) takip kimliği (ör. antikyol-20).
      kitapyurdu, dr: bir ortaklık ağının verdiği derin bağlantı şablonu;
                şablonda kitap adresinin geleceği yere {url} yaz. Örnek: 'https://ag.example/r?id=123&ulp={url}'
-     bookshop: Bookshop.org affiliate kimliği (panelde "Affiliate ID"). */
+     bookshop: Bookshop.org affiliate kimliği (panelde "Affiliate ID").
+     Amazon kimlikleri (amazonTr.tag, amazon.tag) /shop sayfasındaki "Yol çantası" ürünlerinde de kullanılır:
+     Amazon Ortaklık kimliği bütün ürünler için geçerlidir. */
   kitap: {
     amazonTr:   { goster: true, tag: '' },
     kitapyurdu: { goster: true, sablon: '' },
@@ -90,6 +92,11 @@ window.ORTAKLIK = {
     if (s === 'dr') return sab('https://www.dr.com.tr/search?q=' + q);
     if (s === 'bookshop') return (K.id && isbn) ? 'https://bookshop.org/a/' + enc(K.id) + '/' + enc(isbn) : 'https://bookshop.org/search?keywords=' + q;
     return '';
+  };
+  /* /shop "Yol çantası": kitap dışı ürünler için Amazon araması (aynı ortaklık kimliğiyle). s: 'amazonTr' ya da 'amazon'. */
+  O.urunAdres = function(s, sorgu){
+    var K = (O.kitap || {})[s] || {};
+    return (s === 'amazon' ? 'https://www.amazon.com/s?k=' : 'https://www.amazon.com.tr/s?k=') + enc(sorgu) + (K.tag ? '&tag=' + enc(K.tag) : '');
   };
   /* "Amazon.com.tr · Kitapyurdu · D&R" bağlantıları (HTML). Sayfa üreticileri de bunu kullanır. */
   O.kitapLinkleri = function(dil, sorgu, isbn){

@@ -45,7 +45,7 @@ window.ORTAKLIK = {
      Amazon kimlikleri (amazonTr.tag, amazon.tag) /shop sayfasındaki "Yol çantası" ürünlerinde de kullanılır:
      Amazon Ortaklık kimliği bütün ürünler için geçerlidir. */
   kitap: {
-    amazonTr:   { goster: true, tag: '' },
+    amazonTr:   { goster: true, tag: 'antikyol0c-21' },
     kitapyurdu: { goster: true, sablon: '' },
     dr:         { goster: true, sablon: '' },
     amazon:     { goster: true, tag: '' },

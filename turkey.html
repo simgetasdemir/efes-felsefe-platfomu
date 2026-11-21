@@ -1014,6 +1014,14 @@ html.yl-acik{overflow:hidden}
 .atlas .harita-araclar .not{color:#B9AE98}
 .atlas-alt-blok{max-width:760px;margin:0 auto;padding:22px 16px 0;text-align:center}
 .atlas-metin{margin:0;font-family:'EB Garamond',Georgia,serif;font-size:clamp(19px,1.8vw,23px);line-height:1.5;color:#F3E7CF}
+/* Keşfet ve Anla bölümlerinin başındaki alışveriş bağlantıları (Amazon.com.tr ortaklık) */
+.alisveris-bag{margin:14px 0 0;font-family:'Inter',system-ui,sans-serif;font-size:14px;text-align:center}
+.alisveris-bag a{display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border-radius:999px;background:#C9A15B;color:#14202E;font-weight:600;text-decoration:none}
+.alisveris-bag a:hover{background:#E8D3A6}
+.alisveris-bag small{display:block;margin-top:6px;font-size:12px;color:#B9AE98}
+.kitap-bag{margin:0 0 18px;text-align:left}
+.kitap-bag small{display:inline;margin:0 0 0 8px;color:#5B6675}
+@media (max-width:600px){.kitap-bag{padding:0 16px}.kitap-bag a{min-height:44px;padding:6px 16px;line-height:1.3}.kitap-bag small{display:block;margin:6px 0 0}}
 .atlas-dugmeler{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px}
 .atlas-dugmeler .btn{min-height:48px;padding:0 22px;font-family:'Inter',system-ui,sans-serif;font-size:15px}
 .btn-atlas{background:transparent;color:#E8D3A6;border:1px solid rgba(201,161,91,.6)}
@@ -1052,6 +1060,7 @@ html.yl-acik{overflow:hidden}
   <div class="atlas-bas">
     <h1 id="atlas-h">DİJİTAL KÜLTÜR ATLASI</h1>
     <p class="atlas-alt" id="atlas-alt"><em>The geography of ideas</em></p>
+    <p class="alisveris-bag"><a id="kiyafet-al" href="https://www.amazon.com.tr/" target="_blank" rel="sponsored noopener"></a> <small id="kiyafet-not"></small></p>
   </div>
   <div class="dev-harita" aria-label="Map">
     <div class="harita-kutu">
@@ -1096,6 +1105,7 @@ html.yl-acik{overflow:hidden}
 </section>
 
 <section class="kesfet" id="kesfet" aria-labelledby="kesfet-h">
+  <p class="alisveris-bag kitap-bag"><a id="kitap-al" href="/shop#books"></a> <small id="kitap-not"></small></p>
   <div class="kesfet-bas">
     <div><h2 id="kesfet-h"></h2><p class="kesfet-sonuc" id="kesfet-sonuc" aria-live="polite"></p></div>
     <div class="filtreler" id="filtreler" role="group"></div>
@@ -1764,6 +1774,8 @@ function gununSozu(){
 function aramaCiz(){
   gununSozu();
   $('kesfet-h').textContent = t('kesfetH');
+  $('kitap-al').textContent = ty('Filozofların kitaplarını satın al →', 'Buy the philosophers’ books →');
+  $('kitap-not').textContent = ty('Amazon.com.tr ve kitapçılar. Ortaklık bağlantıları; Antikyol komisyon kazanabilir.', 'Amazon and bookstores. Affiliate links; Antikyol may earn a commission.');
   $('filtreler').setAttribute('aria-label', t('okulH'));
   $('filtreler').innerHTML = [['', t('arHerTur')]].concat(Object.keys(OKUL_AD).map(function(k){ return [k, t(OKUL_AD[k])]; })).map(function(o){
     return '<button type="button" class="filtre' + (D.filtre.okul === o[0] ? ' acik' : '') + '" data-eylem="filtre" data-k="' + o[0] + '" aria-pressed="' + (D.filtre.okul === o[0]) + '">' + h(o[1]) + '</button>'; }).join('');
@@ -2336,6 +2348,10 @@ function atlasMetin(){
   $('a-yolculuk').textContent = ty('Türkiye’yi gez: ' + YOLCULUK.length + ' şehir, durak durak →', 'Walk through Türkiye: ' + YOLCULUK.length + ' cities, stop by stop →');
   $('a-rota').textContent = ty('Kendi rotanı oluştur', 'Build your route');
   $('a-dunya').textContent = ty('Dünya felsefe rotası: Milet\'ten Kyoto\'ya', 'World philosophy route: Miletus to Kyoto');
+  /* Gezi kıyafetleri: Amazon.com.tr araması, kimlik ortaklik.js → kitap.amazonTr.tag */
+  if (O.urunAdres) $('kiyafet-al').href = O.urunAdres('amazonTr', ty('outdoor seyahat kıyafetleri', 'outdoor seyahat kıyafetleri'));
+  $('kiyafet-al').textContent = ty('Gezi kıyafetleri: Amazon’da alışveriş yap →', 'Travel clothing: shop on Amazon →');
+  $('kiyafet-not').textContent = ty('Ortaklık bağlantısı. Bir Amazon Ortağı olarak Antikyol, uygun alışverişlerden gelir elde eder.', 'Affiliate link. As an Amazon Associate, Antikyol earns from qualifying purchases.');
 }
 window.addEventListener('hashchange', function(){ var id = location.hash.slice(1); if (bul(id) && id !== D.secili) sec(id, true); });
 

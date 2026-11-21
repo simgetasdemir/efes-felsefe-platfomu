@@ -48,6 +48,17 @@ const amblem = (id, renk, b = 56) => `<svg viewBox="0 0 64 64" width="${b}" heig
 const ETIKET = { 'plato.stanford.edu':'SEP', 'iep.utm.edu':'IEP', 'mathshistory.st-andrews.ac.uk':'MacTutor', 'britannica.com':'Britannica', 'whc.unesco.org':'UNESCO', 'wikipedia.org':'Wikipedia', 'perseus.tufts.edu':'Perseus', 'gutenberg.org':'Gutenberg', 'constitution.org':'Montesquieu', 'avalon.law.yale.edu':'Federalist', 'britishmuseum.org':'British Museum', 'uchicago.edu':'LacusCurtius', 'ich.unesco.org':'UNESCO', 'classics.mit.edu':'MIT Classics', 'islamansiklopedisi.org.tr':'TDV' };
 const etiket = u => { for (const k in ETIKET) if (u.includes(k)) return ETIKET[k]; return 'Source'; };
 
+/* Arama sonuçları için elle yazılmış başlık ve açıklama (Search Console'da gösterim alıp tıklanmayan sayfalar).
+   Olmayan mekânlarda başlık ve açıklama verilerden otomatik kurulur. */
+const SEO = {
+  troya: ['Troy (Truva), Türkiye: Homer, the nine cities and how to visit',
+    'Visit Troy near Çanakkale: how Homer\'s city became nine cities on one hill, what to see on the site and in the Troy Museum, how to get there and where to stay.'],
+  sanliurfa: ['Göbekli Tepe and Şanlıurfa: 11,000-year-old monuments and how to visit',
+    'Göbekli Tepe, built over 11,000 years ago, is 15 km from Şanlıurfa. What it was, what to see, Karahan Tepe and Harran, and where to stay in the city of Abraham.'],
+  hierapolis: ['Hierapolis and Pamukkale: Epictetus, the travertines and how to visit',
+    'The white travertines of Pamukkale and the ancient city of Hierapolis above them, birthplace of the Stoic Epictetus: what to see, how to visit and where to stay.']
+};
+
 function otel(kasaba, baslik){
   return `<div class="cta"><small>Stay nearby</small><b>${e(baslik)}</b><div class="dugmeler">
 <a href="${e(ORT.otel('hotels', kasaba))}" data-otel="hotels" data-kasaba="${e(kasaba)}" target="_blank" rel="sponsored noopener">Hotels.com</a></div></div>`;
@@ -97,8 +108,9 @@ fs.mkdirSync(path.join(KOK, 'places'), { recursive: true });
 YERLER.forEach((yer, i) => {
   const m = yer.en, F = FELSEFE[yer.id], f = F && F.en, S = SANAT[yer.id], Dr = DERIN[yer.id].en, renk = RENK[yer.id], s = yer.soz, slug = SLUG[yer.id];
   const adres = '/places/' + slug;
-  const baslik = `${m.ad}: ${m.kim.split(/[,;]/)[0]}, what to see and where to stay`;
-  const aciklama = (m.neden.length > 150 ? m.neden.slice(0, m.neden.lastIndexOf(' ', 150)) + '…' : m.neden);
+  const seo = SEO[yer.id];
+  const baslik = seo ? seo[0] : `${m.ad}: ${m.kim.split(/[,;]/)[0]}, what to see and where to stay`;
+  const aciklama = seo ? seo[1] : (m.neden.length > 150 ? m.neden.slice(0, m.neden.lastIndexOf(' ', 150)) + '…' : m.neden);
   const ld = { '@context':'https://schema.org', '@graph':[
     { '@type':'TouristAttraction', name:m.ad, description:m.neden, geo:{ '@type':'GeoCoordinates', latitude:yer.lat, longitude:yer.lon }, address:{ '@type':'PostalAddress', addressRegion:m.il, addressCountry:'TR' } },
     { '@type':'BreadcrumbList', itemListElement:[{ '@type':'ListItem', position:1, name:'Antikyol', item:(ALAN || '') + '/' }, { '@type':'ListItem', position:2, name:m.ad, item:(ALAN || '') + adres }] } ] };

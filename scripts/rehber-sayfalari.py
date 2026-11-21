@@ -74,6 +74,9 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 <link rel="stylesheet" href="/guides/rehber.css">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 {sss_ld}
+<!-- Vercel Web Analytics (çerezsiz sayfa görüntüleme sayacı) -->
+<script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/turkey#kesfet">Explore</a><a href="/places/">Places</a><a href="/passport">Passport</a><a href="/guides/philosophy-trip-turkey">All guides</a></nav></header>

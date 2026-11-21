@@ -6,7 +6,7 @@ Metni değiştirmek için aşağıdaki SAYFALAR listesini düzenle ve betiği ye
 Otel ve tur bağlantılarının kimlikleri ortaklik.js dosyasından gelir; burada kimlik yazılmaz.
 Alan adı belli olunca ALAN değişkenini doldur: canonical ve paylaşım adresleri tam olur.
 """
-import html, json, os, re, subprocess, urllib.parse
+import hashlib, html, json, os, re, subprocess, urllib.parse
 
 ALAN = 'https://antikyol.com'
 KOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'guides')
@@ -16,6 +16,8 @@ def _ort(saglayici, kasaba, islev='otel'):
     kod = "global.window={};require(process.argv[1]);process.stdout.write(window.ORTAKLIK." + islev + "(process.argv[2],process.argv[3]))"
     return subprocess.run(['node', '-e', kod, os.path.join(BETIK, '..', 'ortaklik.js'), saglayici, kasaba], capture_output=True, text=True, check=True).stdout
 ORT_SURUM = open(os.path.join(BETIK, 'ortaklik-surum.txt')).read().strip()  # scripts/sayfalar.mjs yazar
+# reklam.js değişince tarayıcı eski kopyayı kullanmasın (sayfalar.mjs ile aynı sürüm)
+REK_SURUM = hashlib.md5(open(os.path.join(BETIK, '..', 'reklam.js'), 'rb').read()).hexdigest()[:8]
 
 def e(x): return html.escape(x, quote=True)
 
@@ -88,9 +90,10 @@ def sayfa(slug, baslik, aciklama, etiket, giris, ozet, govde, ilgili, sss=()):
 <h2>Keep exploring</h2>
 <div class="ilgili">{ilgili_html}<a href="/places/">All 30 places, one page each →</a><a href="/turkey">Open the philosophy map of Türkiye →</a></div>
 </main>
-<footer>Travel times are approximate; check opening hours and tickets before you go. Ideas are summarised from the Stanford Encyclopedia of Philosophy and other scholarly sources linked on the map.</footer>
+<footer>Travel times are approximate; check opening hours and tickets before you go. Ideas are summarised from the Stanford Encyclopedia of Philosophy and other scholarly sources linked on the map. <a href="/privacy">Privacy and cookies</a></footer>
 <script src="/ortaklik.js?v={ORT_SURUM}"></script>
 <script>ORTAKLIK.guncelle();</script>
+<script src="/reklam.js?v={REK_SURUM}" defer></script>
 </body>
 </html>
 '''

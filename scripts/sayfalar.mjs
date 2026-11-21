@@ -16,6 +16,8 @@ const ORT_SURUM = (await import('crypto')).createHash('md5').update(ortKod).dige
 const yeniHtml = html.replace(/<script src="\/?ortaklik\.js(\?v=[0-9a-f]+)?"><\/script>/, '<script src="/ortaklik.js?v=' + ORT_SURUM + '"></script>');
 if (yeniHtml !== html) { fs.writeFileSync(path.join(KOK, 'turkey.html'), yeniHtml); html = yeniHtml; }
 fs.writeFileSync(path.join(KOK, 'scripts', 'ortaklik-surum.txt'), ORT_SURUM + '\n');
+/* reklam.js (AdSense) yalnızca mekân sayfalarında yüklenir; sürüm aynı mantıkla */
+const REK_SURUM = (await import('crypto')).createHash('md5').update(fs.readFileSync(path.join(KOK, 'reklam.js'))).digest('hex').slice(0, 8);
 
 /* "var AD = " ile başlayan bir JS değişmezini dengeli parantez sayarak çıkar */
 function blok(ad){
@@ -96,9 +98,10 @@ ${ALAN ? `<link rel="canonical" href="${ALAN}${adres}">\n<meta property="og:url"
 <body>
 ${ust()}`;
 }
-const SON = `<footer>Ideas are summarised in this site's own words from the Stanford Encyclopedia of Philosophy and the other sources linked on each page. Travel times are approximate; check opening hours before you go.</footer>
+const SON = `<footer>Ideas are summarised in this site's own words from the Stanford Encyclopedia of Philosophy and the other sources linked on each page. Travel times are approximate; check opening hours before you go. <a href="/privacy">Privacy and cookies</a></footer>
 <script src="/ortaklik.js?v=${ORT_SURUM}"></script>
-<script>ORTAKLIK.guncelle();</script>`;
+<script>ORTAKLIK.guncelle();</script>
+<script src="/reklam.js?v=${REK_SURUM}" defer></script>`;
 
 const yerBul = id => YERLER.find(y => y.id === id);
 fs.mkdirSync(path.join(KOK, 'places'), { recursive: true });

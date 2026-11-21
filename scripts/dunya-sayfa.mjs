@@ -59,6 +59,9 @@ const html = `<!doctype html>
 <link rel="stylesheet" href="/ulke-atlasi.css">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'Antikyol', url: 'https://antikyol.com/', inLanguage: ['en', 'tr'], alternateName: ['World Philosophy Route', 'Dünya Felsefe Rotası'] })}</script>
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
+<!-- Vercel Web Analytics (çerezsiz sayfa görüntüleme sayacı) -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body class="ev">
 <header class="site-ust">

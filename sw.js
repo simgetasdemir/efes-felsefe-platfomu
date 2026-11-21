@@ -11,7 +11,7 @@ self.addEventListener('activate', function(e){
 });
 self.addEventListener('fetch', function(e){
   var u = new URL(e.request.url);
-  if (e.request.method !== 'GET' || u.pathname.indexOf('/api/') === 0) return;
+  if (e.request.method !== 'GET' || u.pathname.indexOf('/api/') === 0 || u.pathname.indexOf('/_vercel/') === 0) return;
   var yazi = u.host === 'fonts.googleapis.com' || u.host === 'fonts.gstatic.com';
   if (u.origin !== self.location.origin && !yazi) return;
   e.respondWith(

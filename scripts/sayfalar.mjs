@@ -92,6 +92,9 @@ ${ALAN ? `<link rel="canonical" href="${ALAN}${adres}">\n<meta property="og:url"
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@500;600;700&display=swap">
 <link rel="stylesheet" href="/guides/rehber.css">
 <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>${ek}
+<!-- Vercel Web Analytics (çerezsiz sayfa görüntüleme sayacı) -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 ${ust()}`;

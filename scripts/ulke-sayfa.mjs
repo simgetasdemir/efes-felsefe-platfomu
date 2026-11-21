@@ -77,6 +77,9 @@ for (const [id, u] of Object.entries(ULKE)){
 <link rel="stylesheet" href="/ulke-atlasi.css?v=${V.uacss}">
 <script>try{ if (JSON.parse(localStorage.getItem('fh-dil')) === 'tr') document.documentElement.lang = 'tr'; }catch(e){}</script>
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
+<!-- Vercel Web Analytics (çerezsiz sayfa görüntüleme sayacı) -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body data-ulke="${id}">
 <header class="site-ust">

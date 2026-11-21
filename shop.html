@@ -160,11 +160,11 @@ main{max-width:1160px;padding:0 16px 56px}
 
   var T = {
     en:{ baslik:'Shop Antikyol', giris:'Our picks for a trip through ancient Türkiye: the tours worth booking, the books to read on the way and what goes in the bag.',
-         aciklama:'Links on this page are affiliate links (GetYourGuide, Viator, bookstores). If you book or buy through them, Antikyol may earn a commission at no extra cost to you.',
+         aciklama:'Links on this page are affiliate links (GetYourGuide, Viator, Amazon, bookstores). If you book or buy through them, Antikyol may earn a commission at no extra cost to you. As an Amazon Associate, Antikyol earns from qualifying purchases.',
          hepsi:'All', adet:'{n} picks', kredi:'Photo credits', foto:'Photos from Wikimedia Commons:',
          harita:'Map', yerler:'Places', rehberler:'Guides', alt:'Antikyol · Prices and availability are set by each store, not by us.' },
     tr:{ baslik:'Antikyol seçkisi', giris:'Antik Türkiye gezisi için seçtiklerimiz: ayırtmaya değer turlar, yolda okunacak kitaplar ve çantaya girenler.',
-         aciklama:'Bu sayfadaki bağlantılar ortaklık bağlantılarıdır (GetYourGuide, Viator, kitapçılar). Bunlar üzerinden rezervasyon ya da alışveriş yaparsan Antikyol, sana ek bir ücret çıkmadan komisyon kazanabilir.',
+         aciklama:'Bu sayfadaki bağlantılar ortaklık bağlantılarıdır (GetYourGuide, Viator, Amazon.com.tr, kitapçılar). Bunlar üzerinden rezervasyon ya da alışveriş yaparsan Antikyol, sana ek bir ücret çıkmadan komisyon kazanabilir. Bir Amazon Ortağı olarak Antikyol, uygun alışverişlerden gelir elde eder.',
          hepsi:'Hepsi', adet:'{n} öneri', kredi:'Fotoğraf atıfları', foto:'Fotoğraflar Wikimedia Commons\'tan:',
          harita:'Harita', yerler:'Mekânlar', rehberler:'Rehberler', alt:'Antikyol · Fiyat ve uygunluğu her mağaza kendisi belirler.' }
   };
@@ -205,7 +205,8 @@ main{max-width:1160px;padding:0 16px 56px}
       ad = b.ad; not = b.yazar; rozet = O.kitapAd[kitapcilar[0]];
       kitapcilar.forEach(function(s){ magazalar.push(bag(O.kitapAdres(s, b.sorgu), O.kitapAd[s])); });
     } else if (k.tur === 'esya'){
-      var s = dil === 'en' ? 'amazon' : 'amazonTr';
+      /* amazon.com kimliği yoksa İngilizce görünümde de Amazon.com.tr kullanılır (komisyon gelen tek Amazon hesabı) */
+      var s = (dil === 'en' && O.kitap && O.kitap.amazon && O.kitap.amazon.tag) ? 'amazon' : 'amazonTr';
       if (!(O.kitap && O.kitap[s] && O.kitap[s].goster)) return '';
       ana = O.urunAdres(s, u.sorgu[dil]);
       gorsel = '<div class="esya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + IKON[u.ikon] + '</svg></div>';

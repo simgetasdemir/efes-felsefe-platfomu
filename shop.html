@@ -75,7 +75,7 @@ main{max-width:1160px;padding:0 16px 56px}
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/" id="n-harita">Map</a><a href="/places/" id="n-yerler">Places</a><a href="/guides/philosophy-trip-turkey" id="n-rehber">Guides</a><span class="dil-sec" role="group" aria-label="Language"><button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button></span></nav></header>
+<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/" id="n-harita">Map</a><a href="/places/" id="n-yerler">Places</a><a href="/guides/philosophy-trip-turkey" id="n-rehber">Guides</a><a href="/events" id="n-etkinlik">Events</a><span class="dil-sec" role="group" aria-label="Language"><button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button></span></nav></header>
 <main>
 <section class="profil">
   <img class="avatar" src="/logo.svg" alt="" width="88" height="88">
@@ -224,7 +224,7 @@ main{max-width:1160px;padding:0 16px 56px}
     var t = T[dil]; kullanilanFoto = {};
     document.documentElement.lang = dil;
     $('baslik').textContent = t.baslik; $('giris').textContent = t.giris; $('aciklama').textContent = t.aciklama;
-    $('n-harita').textContent = t.harita; $('n-yerler').textContent = t.yerler; $('n-rehber').textContent = t.rehberler;
+    $('n-harita').textContent = t.harita; $('n-yerler').textContent = t.yerler; $('n-rehber').textContent = t.rehberler; $('n-etkinlik').textContent = dil === 'tr' ? 'Etkinlikler' : 'Events';
     $('kredi-bas').textContent = t.kredi; $('alt').textContent = t.alt;
     if (!KOLEKSIYONLAR.some(function(k){ return k.id === secili; })) secili = '';
     $('cipler').innerHTML = '<button type="button" data-kol="">' + h(t.hepsi) + '</button>' + KOLEKSIYONLAR.map(function(k){

@@ -39,15 +39,11 @@ window.ORTAKLIK = {
      Kimlik boşken bağlantılar yine kitap aramasına gider, yalnızca komisyon gelmez.
      amazonTr: Amazon.com.tr Ortaklık Programı'nın verdiği takip kimliği (ör. antikyol-21).
      amazon:   Amazon Associates (amazon.com) takip kimliği (ör. antikyol-20).
-     kitapyurdu, dr: bir ortaklık ağının verdiği derin bağlantı şablonu;
-               şablonda kitap adresinin geleceği yere {url} yaz. Örnek: 'https://ag.example/r?id=123&ulp={url}'
      bookshop: Bookshop.org affiliate kimliği (panelde "Affiliate ID").
      Amazon kimlikleri (amazonTr.tag, amazon.tag) /shop sayfasındaki "Yol çantası" ürünlerinde de kullanılır:
      Amazon Ortaklık kimliği bütün ürünler için geçerlidir. */
   kitap: {
     amazonTr:   { goster: true, tag: 'antikyol0c-21' },
-    kitapyurdu: { goster: true, sablon: '' },
-    dr:         { goster: true, sablon: '' },
     amazon:     { goster: true, tag: '' },
     bookshop:   { goster: true, id: '' }
   }
@@ -78,18 +74,15 @@ window.ORTAKLIK = {
     return '';
   };
   /* Kitapçılar. dil 'tr': Türkçe kitaplar için Türkiye'deki kitapçılar; 'en': İngilizce kitaplar için. */
-  O.kitapAd = { amazonTr: 'Amazon.com.tr', kitapyurdu: 'Kitapyurdu', dr: 'D&R', amazon: 'Amazon', bookshop: 'Bookshop.org' };
+  O.kitapAd = { amazonTr: 'Amazon.com.tr', amazon: 'Amazon', bookshop: 'Bookshop.org' };
   O.kitapcilar = function(dil){
     var K = O.kitap || {};
-    return (dil === 'en' ? ['bookshop', 'amazon'] : ['amazonTr', 'kitapyurdu', 'dr']).filter(function(k){ return K[k] && K[k].goster; });
+    return (dil === 'en' ? ['bookshop', 'amazon'] : ['amazonTr']).filter(function(k){ return K[k] && K[k].goster; });
   };
   O.kitapAdres = function(s, sorgu, isbn){
     var K = (O.kitap || {})[s] || {}, q = enc(sorgu);
-    function sab(x){ return K.sablon ? K.sablon.replace('{url}', enc(x)) : x; }
     if (s === 'amazonTr') return 'https://www.amazon.com.tr/s?k=' + q + '&i=stripbooks' + (K.tag ? '&tag=' + enc(K.tag) : '');
     if (s === 'amazon') return 'https://www.amazon.com/s?k=' + q + '&i=stripbooks' + (K.tag ? '&tag=' + enc(K.tag) : '');
-    if (s === 'kitapyurdu') return sab('https://www.kitapyurdu.com/index.php?route=product/search&filter_name=' + q);
-    if (s === 'dr') return sab('https://www.dr.com.tr/search?q=' + q);
     if (s === 'bookshop') return (K.id && isbn) ? 'https://bookshop.org/a/' + enc(K.id) + '/' + enc(isbn) : 'https://bookshop.org/search?keywords=' + q;
     return '';
   };
@@ -98,7 +91,7 @@ window.ORTAKLIK = {
     var K = (O.kitap || {})[s] || {};
     return (s === 'amazon' ? 'https://www.amazon.com/s?k=' : 'https://www.amazon.com.tr/s?k=') + enc(sorgu) + (K.tag ? '&tag=' + enc(K.tag) : '');
   };
-  /* "Amazon.com.tr · Kitapyurdu · D&R" bağlantıları (HTML). Sayfa üreticileri de bunu kullanır. */
+  /* "Amazon.com.tr" (en: "Bookshop.org · Amazon") bağlantıları (HTML). Sayfa üreticileri de bunu kullanır. */
   O.kitapLinkleri = function(dil, sorgu, isbn){
     function h(x){ return String(x).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
     return O.kitapcilar(dil).map(function(k){
@@ -109,7 +102,7 @@ window.ORTAKLIK = {
   O.kazanc = function(){
     if (O.booking.aid || (O.booking.awinmid && O.booking.awinaffid) || O.hotels.parametreler || O.getyourguide.partner_id || O.viator.pid) return true;
     var b = O.hotels.baglantilar || {}; for (var k in b) if (b[k]) return true;
-    var K = O.kitap || {}; for (var j in K) if (K[j].tag || K[j].sablon || K[j].id) return true;
+    var K = O.kitap || {}; for (var j in K) if (K[j].tag || K[j].id) return true;
     return false;
   };
   /* Rehber sayfaları için: data-otel="booking" data-kasaba="Selçuk" ya da data-tur="viator" data-sorgu="Ephesus"

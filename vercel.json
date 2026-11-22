@@ -12,6 +12,11 @@
       "permanent": true
     },
     {
+      "source": "/etkinlikler",
+      "destination": "/events",
+      "permanent": false
+    },
+    {
       "source": "/world",
       "destination": "/",
       "permanent": true

@@ -10,7 +10,8 @@
      mekan  : mekân adı
      tarih  : "YYYY-AA-GGTSS:DD" (Türkiye saati)
      bilet  : [ad, fiyat (TL), not, kalan adet]  (kalan 0 ise "Tükendi")
-     link   : (isteğe bağlı) organizatörün kendi bilet sayfası. Varsa "Bilet al" oraya gider.
+     link   : (isteğe bağlı) organizatörün kendi sayfası. Varsa ayrıntıda "Organizatörün sayfası" düğmesi çıkar.
+              Sitede bilet satışı yok; fiyatlar yalnızca bilgi amaçlıdır.
      org    : organizatör adı
      aciklama
 */
@@ -103,5 +104,5 @@ window.ETKINLIK = (function(){
         { etkinlik:'sisli-kukla', gittim:false, mutlaka:false, yorum:'' }
       ] }
   ];
-  return { ILLER: ILLER, KONUM: KONUM, ILCELER: ILCELER, BOLGELER: BOLGELER, TURLER: TURLER, ETKINLIKLER: ETKINLIKLER, SECKILER: SECKILER, HIZMET: 0.05 };
+  return { ILLER: ILLER, KONUM: KONUM, ILCELER: ILCELER, BOLGELER: BOLGELER, TURLER: TURLER, ETKINLIKLER: ETKINLIKLER, SECKILER: SECKILER };
 })();

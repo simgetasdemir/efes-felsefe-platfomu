@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
-<title>Antikyol Etkinlikler: Türkiye'de konser, gezi, söyleşi ve atölye biletleri</title>
-<meta name="description" content="Türkiye'nin 81 ilinde konser, tiyatro, söyleşi, gezi ve atölyeler. İl ve ilçeye göre bul, biletini al.">
+<title>Antikyol Etkinlikler: Türkiye'de konser, gezi, söyleşi ve atölyeler</title>
+<meta name="description" content="Türkiye'nin 81 ilinde konser, tiyatro, söyleşi, gezi ve atölyeler. İl ve ilçeye göre bul, haftanın seçkisini oku.">
 <!-- Örnek etkinlikler gerçekleriyle değişene kadar arama motorlarına kapalı. Gerçek etkinlikler girilince bu satırı sil ve sitemap.xml'e /events ekle. -->
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#14202E">
 <link rel="canonical" href="https://antikyol.com/events">
 <meta property="og:title" content="Antikyol Etkinlikler">
-<meta property="og:description" content="Türkiye'nin 81 ilinde konser, gezi, söyleşi ve atölye biletleri.">
+<meta property="og:description" content="Türkiye'nin 81 ilinde konser, gezi, söyleşi ve atölyeler.">
 <meta property="og:image" content="https://antikyol.com/og-harita.jpg">
 <meta property="og:url" content="https://antikyol.com/events">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/guides/rehber.css">
 <style>
-/* /events: lacivert kapak, solda Türkiye haritası + sağda süzgeçler, altta bilet koçanı kartları */
+/* /events: lacivert kapak, solda Türkiye haritası + sağda süzgeçler, altta bilet koçanı görünümlü kartlar */
 :root{--deniz:#DCE7EE;--deniz-cizgi:#C3D5E1;--kara:#EFE7D6;--kara-cizgi:#B9A88A;--komsu:#E6E3DA;--ok:#2F7A4E}
 main.etk{max-width:1160px;padding:0 16px 64px}
 .etk-kapak{background:linear-gradient(135deg,var(--lacivert) 0%,#2A3A4F 100%);color:#fff}
@@ -87,7 +87,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
 .org-cta{margin-top:40px}
 .soluk{color:var(--soluk)}
 
-/* ayrıntı + bilet akışı */
+/* etkinlik ayrıntısı */
 .perde{position:fixed;inset:0;z-index:50;background:rgba(10,16,24,.62);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 20px) 12px calc(env(safe-area-inset-bottom,0px) + 20px)}
 .perde[hidden],.ornek-not[hidden],.secki[hidden]{display:none}
 /* Haftanın seçkisi: küratör notu. Olgular (tarih/mekân/fiyat) sans, kişisel sözler serif italik. */
@@ -126,45 +126,24 @@ main.etk{max-width:1160px;padding:0 16px 64px}
 .levha .kapak2 strong{font-size:clamp(26px,5vw,38px)}
 .kapat{position:absolute;top:10px;right:10px;z-index:3;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.4);color:#fff;font-size:22px;line-height:1}
 .levha-ic{padding:20px;display:grid;gap:18px;font-family:var(--sans);font-size:15px}
-.adimlar{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--soluk)}
-.adimlar .on{color:var(--toprak)}
 .bilgi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
 .bilgi div{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:inset 0 0 0 1px var(--ince)}
 .bilgi small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soluk);font-weight:600}
 .bilgi b{font-weight:600}
 .aciklama{font-family:var(--yazi);font-size:19px;line-height:1.5;margin:0;max-width:62ch}
 .katlar{display:grid;gap:8px}
-.kat{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:14px;align-items:center;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:inset 0 0 0 1px var(--ince)}
+.kat{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:inset 0 0 0 1px var(--ince)}
 .kat b{display:block}
 .kat small{color:var(--soluk)}
 .kat .f{font-weight:700;font-variant-numeric:tabular-nums}
-.adet{display:flex;align-items:center;gap:6px}
-.adet button{width:36px;height:36px;border-radius:10px;border:1px solid var(--ince);background:var(--zemin);font-weight:700;font-size:18px;color:var(--koyu)}
-.adet output{min-width:22px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
 .kat.yok{opacity:.55}
-.kat.yok .adet{font-size:12px;font-weight:700;color:var(--toprak);letter-spacing:.08em}
-.alt-cubuk{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ince);padding-top:14px}
-.toplam{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
-.toplam small{display:block;font-size:12px;font-weight:500;color:var(--soluk)}
+.kat.yok .alt-cubuk{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ince);padding-top:14px}
 .dugme{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:12px;border:0;background:var(--altin);color:var(--lacivert);font-weight:700;font-size:15.5px;text-decoration:none}
-.dugme:disabled{opacity:.4;cursor:not-allowed}
 .dugme.ikincil{background:transparent;color:var(--koyu);box-shadow:inset 0 0 0 1.5px var(--ince)}
-.form{display:grid;gap:12px}
-.form .iki3{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
-.form label{display:grid;gap:5px;font-size:13px;font-weight:600;color:var(--soluk)}
-.form input{font:inherit;font-size:15px;color:var(--koyu);background:#fff;border:1px solid var(--ince);border-radius:10px;min-height:44px;padding:0 12px;width:100%}
 .kutu-not{background:#FBF6EA;border:1px solid #E6D9BD;border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.5;color:#4A4030}
-.hata{color:#A3341F;font-weight:600;font-size:13.5px;min-height:1em}
-.ebilet{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;border:2px dashed var(--ince);border-radius:16px;padding:16px;background:#fff}
-.ebilet .kod{font-size:20px;font-weight:700;letter-spacing:.08em}
-.ebilet canvas{width:112px;height:112px;image-rendering:pixelated;background:#fff;padding:4px}
-.tamam{font-family:var(--yazi);font-size:30px;color:var(--ok);font-weight:600}
 @media (max-width:520px){
-  .kat{grid-template-columns:minmax(0,1fr) auto}
-  .kat .adet{grid-column:1/-1;justify-self:end}
-  .iki{grid-template-columns:1fr}
-  .ebilet{grid-template-columns:1fr}
-}
+  .kat   .iki{grid-template-columns:1fr}
+  }
 @media (prefers-reduced-motion:reduce){.bilet-kart{transition:none}.bilet-kart:hover{transform:none}}
 </style>
 <!-- Vercel Web Analytics (çerezsiz sayfa görüntüleme sayacı) -->
@@ -177,7 +156,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
 <section class="etk-kapak"><div class="ic">
   <div class="etiket">Antikyol Etkinlikler</div>
   <h1>Türkiye'nin 81 ilinde, bu hafta ne var?</h1>
-  <p>Efes'te bir söyleşiden Kadıköy'de bir konsere, Mardin'de fotoğraf yürüyüşünden Kapadokya'da gün doğumuna. Haritadan bir il seç, ilçeye in, biletini al.</p>
+  <p>Efes'te bir söyleşiden Kadıköy'de bir konsere, Mardin'de fotoğraf yürüyüşünden Kapadokya'da gün doğumuna. Haritadan bir il seç, ilçeye in, ne olduğunu gör.</p>
   <span class="ornek-not" id="ornek-not" hidden>Ön izleme: listedeki etkinlikler örnektir</span>
 </div></section>
 
@@ -208,7 +187,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
 
   <aside class="cta org-cta">
     <small>Organizatörler için</small>
-    <b>Etkinliğini Antikyol'da listele, biletini burada sat.</b>
+    <b>Etkinliğini Antikyol'da listele.</b>
     <p style="margin:0 0 12px;font-family:var(--sans);font-size:15px;color:#D9CFBD">Konser, gezi, söyleşi ya da atölye: hangi ilde olursa olsun. Bize Instagram'dan yaz.</p>
     <div class="dugmeler"><a href="https://www.instagram.com/antikyol/" target="_blank" rel="noopener">Instagram'dan yaz</a></div>
   </aside>
@@ -221,9 +200,6 @@ main.etk{max-width:1160px;padding:0 16px 64px}
 <script src="/etkinlik-veri.js"></script>
 <script>
 (function(){
-  /* Çevrimiçi ödeme altyapısı (iyzico, PayTR vb.) bağlanana kadar true kalır: son adım gerçek ödeme almaz. */
-  var ODEME_DEMO = true;
-
   var V = window.ETKINLIK, H = window.HARITA, $ = function(i){ return document.getElementById(i); };
   var IL = {}; V.ILLER.forEach(function(i){ IL[i.ad] = i; });
   var AY = ['OCA','ŞUB','MAR','NİS','MAY','HAZ','TEM','AĞU','EYL','EKİ','KAS','ARA'];
@@ -346,24 +322,13 @@ main.etk{max-width:1160px;padding:0 16px 64px}
     var c = e.target.closest('.bilet-kart'); if (c) ac(c.getAttribute('data-id'));
   });
 
-  /* ---------- ayrıntı ve bilet akışı ---------- */
-  var perde = $('perde'), levha = $('levha'), A = null, adet = [], once = null, alici = { ad:'', eposta:'', tel:'' };
-  var toplam = function(){ return A.bilet.reduce(function(s, b, i){ return s + b.fiyat * adet[i]; }, 0); };
-  var sayi = function(){ return adet.reduce(function(a, b){ return a + b; }, 0); };
-  var hizmet = function(){ return Math.round(toplam() * V.HIZMET); };
-  function bas(kisa){
-    return '<button type="button" class="kapat" aria-label="Kapat" data-kapat>×</button>' +
-      '<div class="kapak2' + (kisa ? ' kisa' : '') + '" style="' + renk(A) + '"><em>' + h(A.tur) + ' · ' + h(A.ilce) + ', ' + h(A.il) + '</em><strong id="l-baslik">' + h(A.ad) + '</strong></div>';
-  }
-  function adimlar(n){ return '<div class="adimlar">' + ['1 Bilet seç','2 Bilgiler','3 Ödeme'].map(function(a, i){ return '<span' + (i === n ? ' class="on"' : '') + '>' + a + '</span>'; }).join('') + '</div>'; }
-  function ozet(){
-    return '<div class="kutu-not">' + A.bilet.map(function(b, i){ return adet[i] ? adet[i] + ' × ' + h(b.ad) + ' · ' + tl(b.fiyat * adet[i]) : ''; }).filter(Boolean).join('<br>') +
-      (hizmet() ? '<br>Hizmet bedeli (%' + Math.round(V.HIZMET * 100) + ') · ' + tl(hizmet()) : '') + '<br><b>Toplam · ' + tl(toplam() + hizmet()) + '</b></div>';
-  }
+  /* ---------- etkinlik ayrıntısı ----------
+     Sitede bilet satışı yok: fiyatlar bilgi amaçlıdır. Etkinliğin link alanı varsa
+     "Organizatörün sayfası" düğmesi oraya gider. */
+  var perde = $('perde'), levha = $('levha'), A = null, once = null;
   function ac(id){
     A = E.filter(function(e){ return e.id === id; })[0]; if (!A) return;
-    adet = A.bilet.map(function(){ return 0; }); once = document.activeElement;
-    adim1(); perde.hidden = false; document.body.style.overflow = 'hidden';
+    once = document.activeElement; ayrinti(); perde.hidden = false; document.body.style.overflow = 'hidden';
     try { history.replaceState(null, '', '#' + A.id); } catch(x){}
     levha.querySelector('.kapat').focus();
   }
@@ -374,69 +339,20 @@ main.etk{max-width:1160px;padding:0 16px 64px}
   }
   perde.addEventListener('click', function(e){ if (e.target === perde || e.target.closest('[data-kapat]')) kapat(); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !perde.hidden) kapat(); });
-
-  function adim1(){
+  function ayrinti(){
     var d = new Date(A.tarih);
-    var dis = !!A.link;
-    levha.innerHTML = bas() + '<div class="levha-ic">' + (dis ? '' : adimlar(0)) +
+    levha.innerHTML = '<button type="button" class="kapat" aria-label="Kapat" data-kapat>×</button>' +
+      '<div class="kapak2" style="' + renk(A) + '"><em>' + h(A.tur) + ' · ' + h(A.ilce) + ', ' + h(A.il) + '</em><strong id="l-baslik">' + h(A.ad) + '</strong></div>' +
+      '<div class="levha-ic">' +
       '<div class="bilgi"><div><small>Tarih</small><b>' + d.toLocaleDateString('tr-TR', { day:'numeric', month:'long', weekday:'long' }) + '</b></div>' +
       '<div><small>Saat</small><b>' + saat(d) + '</b></div><div><small>Mekân</small><b>' + h(A.mekan) + '</b></div><div><small>Organizatör</small><b>' + h(A.org || '') + '</b></div></div>' +
       '<p class="aciklama">' + h(A.aciklama) + '</p>' + kuratorNotu(A) +
       (A.ornek ? '<div class="kutu-not">Bu bir örnek etkinliktir. Gerçek etkinlikler eklendiğinde bu not kalkar.</div>' : '') +
-      '<div class="katlar">' + A.bilet.map(function(b, i){
-        var az = b.kalan > 0 && b.kalan <= 12 ? (b.not ? ' · ' : '') + 'Son ' + b.kalan + ' bilet' : '';
-        return '<div class="kat' + (b.kalan === 0 ? ' yok' : '') + '"><div><b>' + h(b.ad) + '</b><small>' + h(b.not) + az + '</small></div><div class="f">' + tl(b.fiyat) + '</div>' +
-          (dis ? '<div></div>' : b.kalan === 0 ? '<div class="adet">TÜKENDİ</div>' : '<div class="adet"><button type="button" aria-label="Azalt" data-i="' + i + '" data-d="-1">−</button><output id="a' + i + '">0</output><button type="button" aria-label="Artır" data-i="' + i + '" data-d="1">+</button></div>') + '</div>';
+      '<div class="katlar">' + A.bilet.map(function(b){
+        return '<div class="kat' + (b.kalan === 0 ? ' yok' : '') + '"><div><b>' + h(b.ad) + '</b><small>' + h(b.not) + '</small></div><div class="f">' + (b.kalan === 0 ? 'Tükendi' : tl(b.fiyat)) + '</div></div>';
       }).join('') + '</div>' +
-      (dis ? '<div class="alt-cubuk"><span class="soluk" style="font-size:14px">Biletler organizatörün sitesinde satılıyor.</span><a class="dugme" href="' + h(A.link) + '" target="_blank" rel="noopener">Bilet al →</a></div>'
-           : '<div class="alt-cubuk"><div class="toplam" id="toplam"></div><button type="button" class="dugme" id="devam">Devam et</button></div>') + '</div>';
-    if (dis) return;
-    var guncelle = function(){ var n = sayi(); $('toplam').innerHTML = tl(toplam()) + '<small>' + (n ? n + ' bilet' : 'Bilet seçilmedi') + '</small>'; $('devam').disabled = !n; };
-    levha.querySelectorAll('.adet button').forEach(function(b){ b.addEventListener('click', function(){
-      var i = +b.getAttribute('data-i'), ust = Math.min(A.bilet[i].kalan, 10);
-      adet[i] = Math.max(0, Math.min(ust, adet[i] + +b.getAttribute('data-d'))); $('a' + i).textContent = adet[i]; guncelle();
-    }); });
-    guncelle(); $('devam').addEventListener('click', adim2);
-  }
-  function adim2(){
-    levha.innerHTML = bas(true) + '<div class="levha-ic">' + adimlar(1) +
-      '<form class="form" id="f-bilgi" novalidate><div class="iki3">' +
-      '<label>Ad soyad<input id="f-ad" autocomplete="name" required value="' + h(alici.ad) + '"></label>' +
-      '<label>E-posta<input id="f-eposta" type="email" autocomplete="email" required value="' + h(alici.eposta) + '"></label>' +
-      '<label>Telefon<input id="f-tel" type="tel" autocomplete="tel" required value="' + h(alici.tel) + '" placeholder="05xx xxx xx xx"></label></div>' +
-      '<p class="kutu-not" style="margin:0">E-biletin bu e-postaya gönderilir. Bilgilerin yalnızca bilet ve giriş kontrolü için organizatörle paylaşılır.</p>' + ozet() +
-      '<div class="hata" id="f-hata"></div><div class="alt-cubuk"><button type="button" class="dugme ikincil" id="geri">Geri</button><button class="dugme">Ödemeye geç</button></div></form></div>';
-    $('geri').onclick = adim1;
-    $('f-bilgi').addEventListener('submit', function(ev){
-      ev.preventDefault();
-      var ad = $('f-ad').value.trim(), ep = $('f-eposta').value.trim(), tel = $('f-tel').value.trim();
-      if (!ad || !/^\S+@\S+\.\S+$/.test(ep) || tel.replace(/\D/g, '').length < 10) { $('f-hata').textContent = 'Ad soyad, geçerli bir e-posta ve 10 haneli telefon numarası gerekli.'; return; }
-      alici = { ad: ad, eposta: ep, tel: tel }; adim3();
-    });
-  }
-  function adim3(){
-    levha.innerHTML = bas(true) + '<div class="levha-ic">' + adimlar(2) + ozet() +
-      (ODEME_DEMO ? '<div class="kutu-not"><b>Çevrimiçi ödeme yakında.</b> Bu adım şu an deneme modunda, kartından para çekilmez. Ödeme altyapısı bağlanınca bu düğme güvenli ödeme sayfasına gider.</div>' : '') +
-      '<div class="alt-cubuk"><button type="button" class="dugme ikincil" id="geri">Geri</button><button type="button" class="dugme" id="ode">' + tl(toplam() + hizmet()) + (ODEME_DEMO ? ' · Denemeyi tamamla' : ' öde') + '</button></div></div>';
-    $('geri').onclick = adim2;
-    $('ode').onclick = adim4;
-  }
-  function adim4(){
-    var r = function(){ return Math.random().toString(36).slice(2, 6).toUpperCase(); };
-    var kod = 'AKY-' + r() + '-' + r(), d = new Date(A.tarih);
-    levha.innerHTML = bas(true) + '<div class="levha-ic"><div class="tamam">' + (ODEME_DEMO ? 'Deneme bileti hazır' : 'Biletin hazır') + '</div>' +
-      '<div class="ebilet"><div><div class="kod">' + kod + '</div><div style="margin-top:6px">' + h(A.ad) + '<br><span class="soluk">' + d.toLocaleDateString('tr-TR', { day:'numeric', month:'long' }) + ' · ' + saat(d) + ' · ' + h(A.mekan) + ', ' + h(A.ilce) + '</span><br><span class="soluk">' + sayi() + ' bilet · ' + h(alici.ad) + '</span></div></div><canvas id="kod-resim" width="25" height="25" aria-label="Giriş kodu"></canvas></div>' +
-      '<p class="kutu-not" style="margin:0">' + (ODEME_DEMO ? 'Bu bir deneme. Ödeme açılınca e-bilet ' + h(alici.eposta) + ' adresine gönderilecek.' : 'E-biletin ' + h(alici.eposta) + ' adresine gönderildi. Kapıda bu kodu okutman yeterli.') + '</p>' +
-      '<div class="alt-cubuk"><span></span><button type="button" class="dugme" data-kapat>Etkinliklere dön</button></div></div>';
-    desen($('kod-resim'), kod);
-  }
-  /* Giriş kodu görseli: gerçek QR değil, ödeme altyapısı bağlanınca onun verdiği kodla değişecek. */
-  function desen(cv, tohum){
-    var x = cv.getContext('2d'), n = 25, s = 0; for (var i = 0; i < tohum.length; i++) s = (s * 31 + tohum.charCodeAt(i)) >>> 0;
-    var r = function(){ s ^= s << 13; s >>>= 0; s ^= s >> 17; s ^= s << 5; s >>>= 0; return s / 4294967296; };
-    x.fillStyle = '#fff'; x.fillRect(0, 0, n, n); x.fillStyle = '#14202E';
-    for (var a = 0; a < n; a++) for (var b = 0; b < n; b++) if (r() > .52) x.fillRect(a, b, 1, 1);
-    [[0,0],[18,0],[0,18]].forEach(function(p){ x.fillStyle = '#fff'; x.fillRect(p[0]-1, p[1]-1, 9, 9); x.fillStyle = '#14202E'; x.fillRect(p[0], p[1], 7, 7); x.fillStyle = '#fff'; x.fillRect(p[0]+1, p[1]+1, 5, 5); x.fillStyle = '#14202E'; x.fillRect(p[0]+2, p[1]+2, 3, 3); });
+      '<div class="alt-cubuk"><span class="soluk" style="font-size:14px">Fiyatlar organizatörden alınmıştır, değişebilir.</span>' +
+      (A.link ? '<a class="dugme" href="' + h(A.link) + '" target="_blank" rel="noopener">Organizatörün sayfası →</a>' : '<button type="button" class="dugme ikincil" data-kapat>Etkinliklere dön</button>') + '</div></div>';
   }
 
   /* ---------- haftanın seçkisi ---------- */

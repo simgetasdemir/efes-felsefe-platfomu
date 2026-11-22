@@ -31,6 +31,10 @@ jobs:
       - name: Çevrimdışı test
         working-directory: scripts/etkinlik
         run: python3 test_toplayici.py
+      - name: Kaynak keşfi (yalnızca PR)
+        if: github.event_name == 'pull_request'
+        working-directory: scripts/etkinlik
+        run: python3 kesif.py || true
       - name: Topla
         working-directory: scripts/etkinlik
         run: python3 toplayici.py --config kaynaklar.json --out cikti/etkinlikler --limit 150

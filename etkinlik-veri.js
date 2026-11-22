@@ -52,7 +52,7 @@ window.ETKINLIK = (function(){
   };
 
   var BOLGELER = ['Marmara','Ege','Akdeniz','İç Anadolu','Karadeniz','Doğu Anadolu','Güneydoğu Anadolu'];
-  var TURLER = { 'Konser':['#7A2E2A','#2B1A1F'], 'Tiyatro':['#4E3A6E','#1E1A2E'], 'Söyleşi':['#1F5C8A','#14202E'], 'Atölye':['#3F6B4E','#18261F'], 'Gezi':['#A0561F','#3A2414'], 'Festival':['#9C6B1E','#3B2A12'], 'Çocuk':['#2F7C8C','#14303A'] };
+  var TURLER = { 'Konser':['#7A2E2A','#2B1A1F'], 'Tiyatro':['#4E3A6E','#1E1A2E'], 'Söyleşi':['#1F5C8A','#14202E'], 'Atölye':['#3F6B4E','#18261F'], 'Gezi':['#A0561F','#3A2414'], 'Festival':['#9C6B1E','#3B2A12'], 'Çocuk':['#2F7C8C','#14303A'], 'Stand-up':['#8A5A12','#2E2010'], 'Sergi':['#5B6470','#1E242C'], 'Sinema':['#3A3F6E','#16182E'], 'Dans & Opera':['#7A3E5C','#2A1622'], 'Spor':['#2D6A4F','#13261D'], 'Etkinlik':['#14202E','#2A3A4F'] };
 
   var B = function(ad, fiyat, not, kalan){ return { ad: ad, fiyat: fiyat, not: not || '', kalan: kalan }; };
   var ETKINLIKLER = [

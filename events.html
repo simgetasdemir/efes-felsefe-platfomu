@@ -216,6 +216,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
 
 <script src="/harita-veri.js"></script>
 <script src="/etkinlik-veri.js"></script>
+<script src="/etkinlik-canli.js"></script>
 <script>
 (function(){
   var V = window.ETKINLIK, H = window.HARITA, $ = function(i){ return document.getElementById(i); };
@@ -223,12 +224,20 @@ main.etk{max-width:1160px;padding:0 16px 64px}
   var AY = ['OCA','ŞUB','MAR','NİS','MAY','HAZ','TEM','AĞU','EYL','EKİ','KAS','ARA'];
   var GUN = ['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'];
   var h = function(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); };
-  var tl = function(n){ return n === 0 ? 'Ücretsiz' : n.toLocaleString('tr-TR') + ' ₺'; };
+  var tl = function(n){ return n == null ? 'Fiyat kaynakta' : n === 0 ? 'Ücretsiz' : n.toLocaleString('tr-TR') + ' ₺'; };
+  /* en düşük bilinen fiyat; hiçbiri bilinmiyorsa null */
+  var enAz = function(e){ var f = e.bilet.map(function(b){ return b.fiyat; }).filter(function(x){ return x != null; }); return f.length ? Math.min.apply(null, f) : null; };
+  /* saati bilinmeyen (gün boyu süren) etkinlikler; bitiş tarihi varsa son gün */
+  var saatE = function(e, d){ return e.saatYok ? (e.bitis ? 'Son gün ' + new Date(e.bitis + 'T12:00').toLocaleDateString('tr-TR', { day:'numeric', month:'short' }) : 'Gün boyu') : saat(d); };
+  var yerYazi = function(e){ return e.ilce ? e.ilce + ', ' + e.il : e.il; };
   var kucuk = function(s){ return String(s).toLocaleLowerCase('tr-TR'); };
   var saat = function(d){ return d.toLocaleTimeString('tr-TR', { hour:'2-digit', minute:'2-digit' }); };
   var renk = function(e){ var r = V.TURLER[e.tur] || ['#14202E','#2A3A4F']; return '--k1:' + r[0] + ';--k2:' + r[1]; };
-  var E = V.ETKINLIKLER.slice().sort(function(a, b){ return a.tarih < b.tarih ? -1 : 1; });
+  /* Toplayıcıdan gelen gerçek etkinlikler (etkinlik-canli.js) varsa örnek etkinlikler gizlenir. */
+  var CANLI = window.ETKINLIK_CANLI || [];
+  var E = (CANLI.length ? V.ETKINLIKLER.filter(function(e){ return !e.ornek; }).concat(CANLI) : V.ETKINLIKLER).slice().sort(function(a, b){ return a.tarih < b.tarih ? -1 : 1; });
   if (E.some(function(e){ return e.ornek; })) $('ornek-not').hidden = false;
+  else if (CANLI.length) { $('ornek-not').textContent = 'Kaynaklar: İBB Kültür AŞ, İKSV, AKM · her sabah güncellenir'; $('ornek-not').hidden = false; }
 
   var S = { bolge:'', il:'', ilce:'', tur:'', zaman:'hepsi', ara:'' };
   try { var k = JSON.parse(sessionStorage.getItem('etk-suzgec')); if (k) Object.keys(S).forEach(function(x){ if (k[x] != null) S[x] = k[x]; }); } catch(x){}
@@ -245,7 +254,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
     var ilceler = [];
     if (S.il) {
       ilceler = (V.ILCELER[S.il] || []).slice();
-      E.forEach(function(e){ if (e.il === S.il && ilceler.indexOf(e.ilce) < 0) ilceler.push(e.ilce); });
+      E.forEach(function(e){ if (e.il === S.il && e.ilce && ilceler.indexOf(e.ilce) < 0) ilceler.push(e.ilce); });
       ilceler.sort(function(a, b){ return a.localeCompare(b, 'tr'); });
     }
     if (S.ilce && ilceler.indexOf(S.ilce) < 0) S.ilce = '';
@@ -255,7 +264,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
       return '<option value="' + h(d) + '"' + (d === S.ilce ? ' selected' : '') + '>' + h(d) + (n ? ' (' + n + ')' : '') + '</option>';
     }).join('');
   }
-  $('turler').innerHTML = [''].concat(Object.keys(V.TURLER)).map(function(t){ return '<button type="button" data-tur="' + h(t) + '">' + h(t || 'Hepsi') + '</button>'; }).join('');
+  $('turler').innerHTML = [''].concat(Object.keys(V.TURLER).filter(function(t){ return E.some(function(e){ return e.tur === t; }); })).map(function(t){ return '<button type="button" data-tur="' + h(t) + '">' + h(t || 'Hepsi') + '</button>'; }).join('');
   $('tarihler').innerHTML = [['hepsi','Tüm tarihler'],['bugun','Bugün'],['hafta','Bu hafta'],['haftasonu','Hafta sonu'],['ay','Bu ay']].map(function(z){ return '<button type="button" data-zaman="' + z[0] + '">' + z[1] + '</button>'; }).join('');
   $('ara').value = S.ara;
 
@@ -401,13 +410,13 @@ main.etk{max-width:1160px;padding:0 16px 64px}
 
   /* ---------- kartlar ---------- */
   function kart(e){
-    var d = new Date(e.tarih), il = IL[e.il] || {}, min = Math.min.apply(null, e.bilet.map(function(b){ return b.fiyat; })), yok = e.bilet.every(function(b){ return b.kalan === 0; });
+    var d = new Date(e.tarih), il = IL[e.il] || {}, min = enAz(e), yok = e.bilet.every(function(b){ return b.kalan === 0; });
     return '<button type="button" class="bilet-kart" data-id="' + h(e.id) + '">' +
-      '<div class="kapak2" style="' + renk(e) + '"><em>' + h(e.tur) + '</em><span class="plaka">' + String(il.plaka || '').padStart(2, '0') + ' · ' + h(kucuk(e.ilce).toLocaleUpperCase('tr-TR')) + '</span><strong>' + h(e.ad) + '</strong></div>' +
+      '<div class="kapak2" style="' + renk(e) + '"><em>' + h(e.tur) + '</em><span class="plaka">' + String(il.plaka || '').padStart(2, '0') + ' · ' + h((e.ilce || e.il).toLocaleUpperCase('tr-TR')) + '</span><strong>' + h(e.ad) + '</strong></div>' +
       '<div class="delik"></div>' +
       '<div class="kocan"><div class="gun"><small>' + AY[d.getMonth()] + '</small><b>' + String(d.getDate()).padStart(2, '0') + '</b></div>' +
-      '<div class="yer"><b>' + h(e.mekan) + '</b><small>' + h(e.ilce) + ', ' + h(e.il) + ' · ' + GUN[d.getDay()] + ' ' + saat(d) + '</small></div>' +
-      '<div class="fiyat">' + (yok ? '<span class="tukendi">Tükendi</span>' : tl(min) + (min > 0 && e.bilet.length > 1 ? '<small>başlayan</small>' : '')) + '</div></div></button>';
+      '<div class="yer"><b>' + h(e.mekan) + '</b><small>' + h(yerYazi(e)) + ' · ' + GUN[d.getDay()] + ' ' + saatE(e, d) + '</small></div>' +
+      '<div class="fiyat">' + (yok ? '<span class="tukendi">Tükendi</span>' : tl(min) + (min != null && min > 0 && e.bilet.length > 1 ? '<small>başlayan</small>' : '')) + '</div></div></button>';
   }
   function ciz(haritaya){
     try { sessionStorage.setItem('etk-suzgec', JSON.stringify(S)); } catch(x){}
@@ -453,17 +462,17 @@ main.etk{max-width:1160px;padding:0 16px 64px}
   function ayrinti(){
     var d = new Date(A.tarih);
     levha.innerHTML = '<button type="button" class="kapat" aria-label="Kapat" data-kapat>×</button>' +
-      '<div class="kapak2" style="' + renk(A) + '"><em>' + h(A.tur) + ' · ' + h(A.ilce) + ', ' + h(A.il) + '</em><strong id="l-baslik">' + h(A.ad) + '</strong></div>' +
+      '<div class="kapak2" style="' + renk(A) + '"><em>' + h(A.tur) + ' · ' + h(yerYazi(A)) + '</em><strong id="l-baslik">' + h(A.ad) + '</strong></div>' +
       '<div class="levha-ic">' +
-      '<div class="bilgi"><div><small>Tarih</small><b>' + d.toLocaleDateString('tr-TR', { day:'numeric', month:'long', weekday:'long' }) + '</b></div>' +
-      '<div><small>Saat</small><b>' + saat(d) + '</b></div><div><small>Mekân</small><b>' + h(A.mekan) + '</b></div><div><small>Organizatör</small><b>' + h(A.org || '') + '</b></div></div>' +
-      '<p class="aciklama">' + h(A.aciklama) + '</p>' + kuratorNotu(A) +
+      '<div class="bilgi"><div><small>Tarih</small><b>' + d.toLocaleDateString('tr-TR', { day:'numeric', month:'long', weekday:'long' }) + (A.bitis ? ' – ' + new Date(A.bitis + 'T12:00').toLocaleDateString('tr-TR', { day:'numeric', month:'long' }) : '') + '</b></div>' +
+      '<div><small>Saat</small><b>' + saatE(A, d) + '</b></div><div><small>Mekân</small><b>' + h(A.mekan) + '</b></div><div><small>' + (A.kaynak ? 'Kaynak' : 'Organizatör') + '</small><b>' + h(A.org || '') + '</b></div></div>' +
+      (A.aciklama ? '<p class="aciklama">' + h(A.aciklama) + '</p>' : '') + kuratorNotu(A) +
       (A.ornek ? '<div class="kutu-not">Bu bir örnek etkinliktir. Gerçek etkinlikler eklendiğinde bu not kalkar.</div>' : '') +
       '<div class="katlar">' + A.bilet.map(function(b){
         return '<div class="kat' + (b.kalan === 0 ? ' yok' : '') + '"><div><b>' + h(b.ad) + '</b><small>' + h(b.not) + '</small></div><div class="f">' + (b.kalan === 0 ? 'Tükendi' : tl(b.fiyat)) + '</div></div>';
       }).join('') + '</div>' +
-      '<div class="alt-cubuk"><span class="soluk" style="font-size:14px">Fiyatlar organizatörden alınmıştır, değişebilir.</span>' +
-      (A.link ? '<a class="dugme" href="' + h(A.link) + '" target="_blank" rel="noopener">Organizatörün sayfası →</a>' : '<button type="button" class="dugme ikincil" data-kapat>Etkinliklere dön</button>') + '</div></div>';
+      '<div class="alt-cubuk"><span class="soluk" style="font-size:14px">' + (A.kaynak ? 'Bilgiler ' + h(A.org) + ' sitesinden alındı, gitmeden önce kontrol et.' : 'Fiyatlar organizatörden alınmıştır, değişebilir.') + '</span>' +
+      (A.link ? '<a class="dugme" href="' + h(A.link) + '" target="_blank" rel="noopener">' + (A.kaynak ? 'Ayrıntılar ve bilet →' : 'Organizatörün sayfası →') + '</a>' : '<button type="button" class="dugme ikincil" data-kapat>Etkinliklere dön</button>') + '</div></div>';
   }
 
   /* ---------- haftanın seçkisi ---------- */
@@ -474,8 +483,8 @@ main.etk{max-width:1160px;padding:0 16px 64px}
     .sort(function(a, b){ return a.hafta < b.hafta ? 1 : -1; })[0] || null;
   var dolu = function(s){ return s && String(s).trim(); };
   var yerAd = function(s){ return s.ilce ? s.ilce + ', ' + s.il : s.il; };
-  var gunSaat = function(e){ var d = new Date(e.tarih); return GUN[d.getDay()] + ' ' + d.getDate() + ' ' + AY[d.getMonth()].charAt(0) + kucuk(AY[d.getMonth()].slice(1)) + ' · ' + saat(d); };
-  var enDusuk = function(e){ return e.bilet.every(function(b){ return b.kalan === 0; }) ? 'Tükendi' : tl(Math.min.apply(null, e.bilet.map(function(b){ return b.fiyat; }))); };
+  var gunSaat = function(e){ var d = new Date(e.tarih); return GUN[d.getDay()] + ' ' + d.getDate() + ' ' + AY[d.getMonth()].charAt(0) + kucuk(AY[d.getMonth()].slice(1)) + ' · ' + saatE(e, d); };
+  var enDusuk = function(e){ return e.bilet.every(function(b){ return b.kalan === 0; }) ? 'Tükendi' : tl(enAz(e)); };
   function kuratorNotu(e){
     if (!SK) return '';
     var s = SK.secimler.filter(function(x){ return x.etkinlik === e.id && dolu(x.yorum); })[0];
@@ -496,7 +505,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
         var e = EID[x.etkinlik];
         var rozet = (x.mutlaka ? '<b class="r-mutlaka">Mutlaka git</b>' : '') + (x.gittim ? '<b class="r-gittim">Gittim</b>' : '');
         return '<article class="secim' + (x.mutlaka ? ' mutlaka' : '') + '">' +
-          '<button type="button" class="secim-olgu" data-ac="' + h(e.id) + '" style="' + renk(e) + '"><em>' + h(e.tur) + ' · ' + h(e.ilce) + '</em><strong>' + h(e.ad) + '</strong><span>' + h(gunSaat(e)) + ' · ' + h(e.mekan) + ' · ' + enDusuk(e) + '</span></button>' +
+          '<button type="button" class="secim-olgu" data-ac="' + h(e.id) + '" style="' + renk(e) + '"><em>' + h(e.tur) + ' · ' + h(e.ilce || e.il) + '</em><strong>' + h(e.ad) + '</strong><span>' + h(gunSaat(e)) + ' · ' + h(e.mekan) + ' · ' + enDusuk(e) + '</span></button>' +
           '<div class="secim-not">' + (rozet ? '<div class="rozetler">' + rozet + '</div>' : '') +
           (dolu(x.yorum) ? '<p>“' + h(x.yorum.trim()) + '”</p>' : bos('Yorumun (yorum): neden bu etkinlik? Gittiysen gittim: true yap.')) +
           '<span class="kaynak">Tarih, mekân ve fiyat organizatörden.</span></div></article>';

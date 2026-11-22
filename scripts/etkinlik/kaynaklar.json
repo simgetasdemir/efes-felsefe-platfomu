@@ -1,0 +1,33 @@
+{
+  "_not": "Yalnızca kamu ve kurum kaynakları. Bilet satış sitelerini (Biletix, Passo, Bubilet vb.) izin ya da ortaklık olmadan EKLEME. Açıklama metni ve görsel toplanmaz; yalnızca başlık, tarih, mekân, ilçe, tür, fiyat ve bağlantı.",
+  "sources": [
+    {
+      "name": "kultur_istanbul",
+      "enabled": true,
+      "type": "wp_event_manager",
+      "base": "https://kultur.istanbul",
+      "post_type": "event_listing",
+      "venue_taxonomy": "event_listing_category",
+      "type_taxonomy": "event_listing_type",
+      "_not": "WP Event Manager. Liste REST API'den, tarih her etkinliğin sayfasındaki 'Tarih ve Zaman' kutusundan okunur (2026-11-22'de doğrulandı)."
+    },
+    {
+      "name": "iksv",
+      "enabled": false,
+      "type": "jsonld_pages",
+      "pages": [
+        "https://www.iksv.org/tr/etkinlik-takvimi"
+      ],
+      "_not": "2026-11-22: sayfada JSON-LD yok, 0 etkinlik geldi. Siteye özel ayrıştırıcı yazılana kadar kapalı."
+    },
+    {
+      "name": "akm",
+      "enabled": false,
+      "type": "jsonld_pages",
+      "pages": [
+        "https://www.akmistanbul.gov.tr/tr/etkinlikler"
+      ],
+      "_not": "2026-11-22: sayfada JSON-LD yok, 0 etkinlik geldi. Siteye özel ayrıştırıcı yazılana kadar kapalı."
+    }
+  ]
+}

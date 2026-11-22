@@ -1,0 +1,55 @@
+# Etkinlik toplayıcı: her sabah 06:00 (Türkiye) kamu/kurum kaynaklarından etkinlikleri toplar,
+# etkinlik-canli.js dosyasını günceller ve değiştiyse main'e yazar (Vercel siteyi yeniden yayınlar).
+# Pull request'lerde yalnızca deneme çalıştırması yapar, hiçbir şey yazmaz.
+name: Etkinlikleri topla
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "scripts/etkinlik/**"
+      - ".github/workflows/etkinlikler.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: etkinlikler
+  cancel-in-progress: false
+
+jobs:
+  topla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Çevrimdışı test
+        working-directory: scripts/etkinlik
+        run: python3 test_toplayici.py
+      - name: Kaynak keşfi (yalnızca PR)
+        if: github.event_name == 'pull_request'
+        working-directory: scripts/etkinlik
+        run: python3 kesif.py || true
+      - name: Topla
+        working-directory: scripts/etkinlik
+        run: python3 toplayici.py --config kaynaklar.json --out cikti/etkinlikler --limit 150
+      - name: Siteye çevir
+        working-directory: scripts/etkinlik
+        run: |
+          python3 donustur.py cikti/etkinlikler.json ../../etkinlik-canli.js
+          echo "### Toplanan etkinlikler" >> "$GITHUB_STEP_SUMMARY"
+          python3 -c "import json;r=json.load(open('cikti/etkinlikler.json'));import collections;c=collections.Counter(x['source'] for x in r);print('\n'.join(f'- {k}: {v}' for k,v in c.items()) or '- hiç etkinlik gelmedi')" >> "$GITHUB_STEP_SUMMARY"
+      - name: Değiştiyse yaz
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          if git diff --quiet -- etkinlik-canli.js; then echo "Değişiklik yok"; exit 0; fi
+          git config user.name "antikyol-etkinlik-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add etkinlik-canli.js
+          git commit -m "Etkinlikleri güncelle ($(TZ=Europe/Istanbul date +%Y-%m-%d))"
+          git push

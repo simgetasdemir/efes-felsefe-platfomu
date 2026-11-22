@@ -2,3 +2,5 @@ node_modules
 .vercel
 .env
 .env.local
+scripts/etkinlik/cikti/
+scripts/etkinlik/__pycache__/

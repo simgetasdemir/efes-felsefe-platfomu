@@ -1050,7 +1050,7 @@ html.yl-acik{overflow:hidden}
 <header class="site-ust">
   <a class="marka-ana" href="/" aria-label="Antikyol"><img src="/logo.svg" alt="" width="40" height="40"><span class="marka-yazi">antikyol</span></a>
   <nav class="site-nav" aria-label="Site">
-    <a href="#atlas" id="n-kesfet"></a><a href="#kesfet" id="n-kavram"></a><a href="#rota-bolum" id="n-rota"></a><a href="/walk/gobekli-tepe-sanliurfa" data-eylem="yolculuk" id="n-rehber"></a><a href="/" id="n-dunya"></a><a href="/passport" id="n-pasaport"></a>
+    <a href="#atlas" id="n-kesfet"></a><a href="#kesfet" id="n-kavram"></a><a href="#rota-bolum" id="n-rota"></a><a href="/walk/gobekli-tepe-sanliurfa" data-eylem="yolculuk" id="n-rehber"></a><a href="/" id="n-dunya"></a><a href="/passport" id="n-pasaport"></a><a href="/events" id="n-etkinlik"></a>
   </nav>
   <div class="dil" role="group" aria-label="Dil / Language">
     <button type="button" data-dil="en">EN</button><button type="button" data-dil="tr">TR</button>
@@ -2079,7 +2079,7 @@ function metinCiz(){
   document.title = 'Antikyol · ' + t('baslik');
   $('ust-etiket').textContent = t('etiket');
   $('baslik').innerHTML = h(t('kb')).replace(/\*([^*]+)\*/, '<em>$1</em>');
-  $('n-kesfet').textContent = t('nKesfet'); $('n-kavram').textContent = t('nKavram'); $('n-rota').textContent = t('nRota'); $('n-rehber').textContent = t('nRehber'); $('n-dunya').textContent = t('nDunya'); $('n-pasaport').textContent = t('nPasaport');
+  $('n-kesfet').textContent = t('nKesfet'); $('n-kavram').textContent = t('nKavram'); $('n-rota').textContent = t('nRota'); $('n-rehber').textContent = t('nRehber'); $('n-dunya').textContent = t('nDunya'); $('n-pasaport').textContent = t('nPasaport'); $('n-etkinlik').textContent = D.dil === 'tr' ? 'Etkinlikler' : 'Events';
   $('cekmece-kapat').setAttribute('aria-label', t('kapat'));
   aramaCiz();
   $('giris').textContent = t('giris');

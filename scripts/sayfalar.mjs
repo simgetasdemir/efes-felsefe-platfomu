@@ -69,7 +69,7 @@ function tur(sorgu, baslik){
 const ACIKLAMA = '<p class="not" data-aciklama hidden>Some links on this page are affiliate links (Hotels.com, GetYourGuide, Viator and booksellers). If you book or buy through them, this site may earn a commission at no extra cost to you.</p>';
 
 function ust(){
-  return `<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/turkey#kesfet">Explore</a><a href="/places/">Places</a><a href="/guides/philosophy-trip-turkey">Guides</a><a href="/passport">Passport</a></nav></header>`;
+  return `<header class="ust"><a class="marka" href="/"><img src="/logo.svg" alt="" width="34" height="34"><span>Antikyol</span></a><nav class="ust-nav"><a href="/turkey#kesfet">Explore</a><a href="/places/">Places</a><a href="/guides/philosophy-trip-turkey">Guides</a><a href="/passport">Passport</a><a href="/events">Events</a></nav></header>`;
 }
 function bas(baslik, aciklama, adres, ld, ek = ''){
   return `<!doctype html>

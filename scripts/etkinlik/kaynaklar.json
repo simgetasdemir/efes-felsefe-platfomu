@@ -1,0 +1,26 @@
+{
+  "_not": "Yalnızca kamu ve kurum kaynakları. Bilet satış sitelerini (Biletix, Passo, Bubilet vb.) izin ya da ortaklık olmadan EKLEME. Açıklama metni ve görsel toplanmaz; yalnızca başlık, tarih, mekân, ilçe, tür, fiyat ve bağlantı.",
+  "sources": [
+    {
+      "name": "kultur_istanbul",
+      "enabled": true,
+      "type": "wp_rest",
+      "base": "https://kultur.istanbul",
+      "post_type": "etkinlik",
+      "meta": {"start": "baslangic", "end": "bitis", "venue": "mekan", "price": "fiyat", "ticket": "bilet_linki"},
+      "_not": "WordPress sitesi. post_type ilk çalıştırmada doğrulanmalı: https://kultur.istanbul/wp-json/wp/v2/types"
+    },
+    {
+      "name": "iksv",
+      "enabled": true,
+      "type": "jsonld_pages",
+      "pages": ["https://www.iksv.org/tr/etkinlik-takvimi"]
+    },
+    {
+      "name": "akm",
+      "enabled": true,
+      "type": "jsonld_pages",
+      "pages": ["https://www.akmistanbul.gov.tr/tr/etkinlikler"]
+    }
+  ]
+}

@@ -21,4 +21,8 @@ assert iv[0].district == "Beyoğlu" and iv[0].start.startswith("2026-12-10T10") 
 d = T.dedupe(ev + [T.Event(title="caz gecesi & trio", start="2026-12-05T21:00", venue="Zorlu PSM", source="b")])
 assert len(d) == 2
 T.write(d, "/tmp/etkinlik_test"); print(open("/tmp/etkinlik_test.csv").read())
+# WP Event Manager tarih kutusu
+_h = '<div class="wpem-event-date"><h3>Tarih ve Zaman</h3><span>28-11-2026 15:00</span> - <span>17-01-2027</span></div>'
+assert T.parse_wpem_dates(_h) == ("2026-11-28T15:00", "2027-01-17"), T.parse_wpem_dates(_h)
+assert T.parse_wpem_dates("<p>yok</p>") == (None, None)
 print("OK")

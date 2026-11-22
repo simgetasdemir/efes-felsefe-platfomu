@@ -404,8 +404,71 @@ def run_ical(cfg, f: Fetcher, limit):
     return parse_ical(f.get(cfg["url"]), cfg["name"])[:limit]
 
 
+_TARIH_RE = re.compile(r"Tarih ve Zaman(.{0,600})", re.S)
+_GUN_RE = re.compile(r"(\d{2})-(\d{2})-(\d{4})(?:\s+(\d{1,2}:\d{2}))?")
+
+
+def parse_wpem_dates(page_html: str):
+    """WP Event Manager sayfasındaki 'Tarih ve Zaman' kutusundan başlangıç/bitiş (ISO)."""
+    m = _TARIH_RE.search(page_html)
+    if not m:
+        return None, None
+    text = re.sub(r"<[^>]+>", " ", m.group(1))
+    found = _GUN_RE.findall(text)
+    def iso(g):
+        d, mo, y, t = g
+        return f"{y}-{mo}-{d}" + (f"T{t.zfill(5)}" if t else "")
+    return (iso(found[0]) if found else None), (iso(found[1]) if len(found) > 1 else None)
+
+
+def run_wp_event_manager(cfg, f: Fetcher, limit):
+    """WordPress + WP Event Manager (ör. kultur.istanbul).
+    Liste REST API'den (başlık, bağlantı, mekân ve tür terimleri), tarih her etkinliğin
+    kendi sayfasından okunur. Açıklama ve görsel alınmaz."""
+    base = cfg["base"].rstrip("/")
+    ptype = cfg.get("post_type", "event_listing")
+    venue_tax = cfg.get("venue_taxonomy", "event_listing_category")
+    type_tax = cfg.get("type_taxonomy", "event_listing_type")
+    out, page = [], 1
+    while len(out) < limit:
+        url = f"{base}/wp-json/wp/v2/{ptype}?per_page=50&page={page}&_embed=1"
+        try:
+            items = json.loads(f.get(url))
+        except Exception as e:
+            if page == 1:
+                print(f"  ! {url}: {e}", file=sys.stderr)
+            break
+        if not items:
+            break
+        for it in items:
+            if len(out) >= limit:
+                break
+            terms = [t for grp in (it.get("_embedded", {}).get("wp:term") or []) for t in grp]
+            venues = [html.unescape(t.get("name", "")) for t in terms if t.get("taxonomy") == venue_tax]
+            types = [html.unescape(t.get("name", "")) for t in terms if t.get("taxonomy") == type_tax]
+            title = _strip_tags(it.get("title", {}).get("rendered", ""))
+            link = it.get("link")
+            try:
+                start, end = parse_wpem_dates(f.get(link))
+            except Exception as e:
+                print(f"  ! {link}: {e}", file=sys.stderr)
+                continue
+            if not start:
+                continue
+            venue = venues[0] if venues else None
+            price = "Ücretsiz" if any(norm(t) == norm("Ücretsiz") for t in types) else None
+            out.append(Event(
+                title=title, start=start, end=end, venue=venue,
+                district=detect_district(venue, title),
+                category=detect_category(" ".join(types), title),
+                price=price, ticket_url=link, source=cfg["name"], source_url=link,
+            ))
+        page += 1
+    return out[:limit]
+
+
 RUNNERS = {"jsonld_sitemap": run_jsonld_sitemap, "jsonld_pages": run_jsonld_pages,
-           "wp_rest": run_wp_rest, "ical": run_ical}
+           "wp_rest": run_wp_rest, "wp_event_manager": run_wp_event_manager, "ical": run_ical}
 
 
 # ---------------------------------------------------------------- çıktı

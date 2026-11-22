@@ -4,23 +4,30 @@
     {
       "name": "kultur_istanbul",
       "enabled": true,
-      "type": "wp_rest",
+      "type": "wp_event_manager",
       "base": "https://kultur.istanbul",
-      "post_type": "etkinlik",
-      "meta": {"start": "baslangic", "end": "bitis", "venue": "mekan", "price": "fiyat", "ticket": "bilet_linki"},
-      "_not": "WordPress sitesi. post_type ilk çalıştırmada doğrulanmalı: https://kultur.istanbul/wp-json/wp/v2/types"
+      "post_type": "event_listing",
+      "venue_taxonomy": "event_listing_category",
+      "type_taxonomy": "event_listing_type",
+      "_not": "WP Event Manager. Liste REST API'den, tarih her etkinliğin sayfasındaki 'Tarih ve Zaman' kutusundan okunur (2026-11-22'de doğrulandı)."
     },
     {
       "name": "iksv",
-      "enabled": true,
+      "enabled": false,
       "type": "jsonld_pages",
-      "pages": ["https://www.iksv.org/tr/etkinlik-takvimi"]
+      "pages": [
+        "https://www.iksv.org/tr/etkinlik-takvimi"
+      ],
+      "_not": "2026-11-22: sayfada JSON-LD yok, 0 etkinlik geldi. Siteye özel ayrıştırıcı yazılana kadar kapalı."
     },
     {
       "name": "akm",
-      "enabled": true,
+      "enabled": false,
       "type": "jsonld_pages",
-      "pages": ["https://www.akmistanbul.gov.tr/tr/etkinlikler"]
+      "pages": [
+        "https://www.akmistanbul.gov.tr/tr/etkinlikler"
+      ],
+      "_not": "2026-11-22: sayfada JSON-LD yok, 0 etkinlik geldi. Siteye özel ayrıştırıcı yazılana kadar kapalı."
     }
   ]
 }

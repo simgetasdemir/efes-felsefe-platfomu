@@ -46,9 +46,14 @@ def donustur(rows, simdi=None):
     bugun = simdi.replace(hour=0, minute=0, second=0, microsecond=0)
     out, gorulen = [], set()
     for r in rows:
-        d = yerel(r.get("start"))
-        if not r.get("title") or not d or d < bugun or d > bugun + timedelta(days=120):
+        d, son = yerel(r.get("start")), yerel(r.get("end"))
+        if not r.get("title") or not d or d > bugun + timedelta(days=120):
             continue
+        if d < bugun:
+            # Süren etkinlik (ör. sergi): bitişi bugün ya da sonraysa bugünden itibaren göster
+            if not son or son < bugun:
+                continue
+            d = bugun.replace(hour=d.hour, minute=d.minute)
         eid = slug(r["title"]) + "-" + d.strftime("%Y%m%d")
         if eid in gorulen:
             continue
@@ -57,6 +62,8 @@ def donustur(rows, simdi=None):
             "id": eid, "ad": r["title"].strip(), "tur": TUR.get(r.get("category") or "", "Etkinlik"),
             "il": "İstanbul", "ilce": r.get("district") or "", "mekan": (r.get("venue") or "").strip(),
             "tarih": d.strftime("%Y-%m-%dT%H:%M"),
+            "bitis": son.strftime("%Y-%m-%d") if son and son.date() > d.date() else "",
+            "saatYok": "T" not in (r.get("start") or ""),
             "bilet": [{"ad": "Bilet", "fiyat": fiyat(r.get("price")), "not": r.get("price") or "", "kalan": None}],
             "link": r.get("ticket_url") or r.get("source_url") or "",
             "org": KAYNAK.get(r.get("source"), r.get("source") or ""), "kaynak": True, "aciklama": ""
@@ -73,9 +80,11 @@ def main():
     zaman = datetime.now(TR).strftime("%Y-%m-%d %H:%M")
     with open(cikis, "w", encoding="utf-8") as fh:
         fh.write("/* Otomatik üretildi: scripts/etkinlik (GitHub Actions, her sabah). Elle düzenleme; değişiklikler bir sonraki çalıştırmada silinir.\n"
-                 "   Kaynaklar: İBB Kültür AŞ, İKSV, AKM. Yalnızca olgular (başlık, tarih, mekân, fiyat, bağlantı). Son güncelleme: " + zaman + " */\n")
+                 "   Kaynak: İBB Kültür AŞ (kultur.istanbul). Yalnızca olgular (başlık, tarih, mekân, fiyat, bağlantı). Son güncelleme: " + zaman + " */\n")
         fh.write("window.ETKINLIK_CANLI = " + json.dumps(ev, ensure_ascii=False, indent=0).replace("\n", "") + ";\n")
     print(f"{len(ev)} etkinlik → {cikis}", file=sys.stderr)
+    for e in ev[:25]:
+        print(f"  {e['tarih']}{' → ' + e['bitis'] if e['bitis'] else ''} | {e['tur']} | {e['ilce'] or '-'} | {e['mekan']} | {e['ad']}", file=sys.stderr)
 
 
 if __name__ == "__main__":

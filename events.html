@@ -227,6 +227,8 @@ main.etk{max-width:1160px;padding:0 16px 64px}
   var tl = function(n){ return n == null ? 'Fiyat kaynakta' : n === 0 ? 'Ücretsiz' : n.toLocaleString('tr-TR') + ' ₺'; };
   /* en düşük bilinen fiyat; hiçbiri bilinmiyorsa null */
   var enAz = function(e){ var f = e.bilet.map(function(b){ return b.fiyat; }).filter(function(x){ return x != null; }); return f.length ? Math.min.apply(null, f) : null; };
+  /* saati bilinmeyen (gün boyu süren) etkinlikler; bitiş tarihi varsa son gün */
+  var saatE = function(e, d){ return e.saatYok ? (e.bitis ? 'Son gün ' + new Date(e.bitis + 'T12:00').toLocaleDateString('tr-TR', { day:'numeric', month:'short' }) : 'Gün boyu') : saat(d); };
   var yerYazi = function(e){ return e.ilce ? e.ilce + ', ' + e.il : e.il; };
   var kucuk = function(s){ return String(s).toLocaleLowerCase('tr-TR'); };
   var saat = function(d){ return d.toLocaleTimeString('tr-TR', { hour:'2-digit', minute:'2-digit' }); };
@@ -413,7 +415,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
       '<div class="kapak2" style="' + renk(e) + '"><em>' + h(e.tur) + '</em><span class="plaka">' + String(il.plaka || '').padStart(2, '0') + ' · ' + h((e.ilce || e.il).toLocaleUpperCase('tr-TR')) + '</span><strong>' + h(e.ad) + '</strong></div>' +
       '<div class="delik"></div>' +
       '<div class="kocan"><div class="gun"><small>' + AY[d.getMonth()] + '</small><b>' + String(d.getDate()).padStart(2, '0') + '</b></div>' +
-      '<div class="yer"><b>' + h(e.mekan) + '</b><small>' + h(yerYazi(e)) + ' · ' + GUN[d.getDay()] + ' ' + saat(d) + '</small></div>' +
+      '<div class="yer"><b>' + h(e.mekan) + '</b><small>' + h(yerYazi(e)) + ' · ' + GUN[d.getDay()] + ' ' + saatE(e, d) + '</small></div>' +
       '<div class="fiyat">' + (yok ? '<span class="tukendi">Tükendi</span>' : tl(min) + (min != null && min > 0 && e.bilet.length > 1 ? '<small>başlayan</small>' : '')) + '</div></div></button>';
   }
   function ciz(haritaya){
@@ -462,8 +464,8 @@ main.etk{max-width:1160px;padding:0 16px 64px}
     levha.innerHTML = '<button type="button" class="kapat" aria-label="Kapat" data-kapat>×</button>' +
       '<div class="kapak2" style="' + renk(A) + '"><em>' + h(A.tur) + ' · ' + h(yerYazi(A)) + '</em><strong id="l-baslik">' + h(A.ad) + '</strong></div>' +
       '<div class="levha-ic">' +
-      '<div class="bilgi"><div><small>Tarih</small><b>' + d.toLocaleDateString('tr-TR', { day:'numeric', month:'long', weekday:'long' }) + '</b></div>' +
-      '<div><small>Saat</small><b>' + saat(d) + '</b></div><div><small>Mekân</small><b>' + h(A.mekan) + '</b></div><div><small>' + (A.kaynak ? 'Kaynak' : 'Organizatör') + '</small><b>' + h(A.org || '') + '</b></div></div>' +
+      '<div class="bilgi"><div><small>Tarih</small><b>' + d.toLocaleDateString('tr-TR', { day:'numeric', month:'long', weekday:'long' }) + (A.bitis ? ' – ' + new Date(A.bitis + 'T12:00').toLocaleDateString('tr-TR', { day:'numeric', month:'long' }) : '') + '</b></div>' +
+      '<div><small>Saat</small><b>' + saatE(A, d) + '</b></div><div><small>Mekân</small><b>' + h(A.mekan) + '</b></div><div><small>' + (A.kaynak ? 'Kaynak' : 'Organizatör') + '</small><b>' + h(A.org || '') + '</b></div></div>' +
       (A.aciklama ? '<p class="aciklama">' + h(A.aciklama) + '</p>' : '') + kuratorNotu(A) +
       (A.ornek ? '<div class="kutu-not">Bu bir örnek etkinliktir. Gerçek etkinlikler eklendiğinde bu not kalkar.</div>' : '') +
       '<div class="katlar">' + A.bilet.map(function(b){
@@ -481,7 +483,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
     .sort(function(a, b){ return a.hafta < b.hafta ? 1 : -1; })[0] || null;
   var dolu = function(s){ return s && String(s).trim(); };
   var yerAd = function(s){ return s.ilce ? s.ilce + ', ' + s.il : s.il; };
-  var gunSaat = function(e){ var d = new Date(e.tarih); return GUN[d.getDay()] + ' ' + d.getDate() + ' ' + AY[d.getMonth()].charAt(0) + kucuk(AY[d.getMonth()].slice(1)) + ' · ' + saat(d); };
+  var gunSaat = function(e){ var d = new Date(e.tarih); return GUN[d.getDay()] + ' ' + d.getDate() + ' ' + AY[d.getMonth()].charAt(0) + kucuk(AY[d.getMonth()].slice(1)) + ' · ' + saatE(e, d); };
   var enDusuk = function(e){ return e.bilet.every(function(b){ return b.kalan === 0; }) ? 'Tükendi' : tl(enAz(e)); };
   function kuratorNotu(e){
     if (!SK) return '';

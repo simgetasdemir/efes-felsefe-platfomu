@@ -77,5 +77,31 @@ window.ETKINLIK = (function(){
     { id:'troya-soylesi', ornek:true, ad:'Troya\'da İlyada Okuması', tur:'Söyleşi', il:'Çanakkale', ilce:'Merkez', mekan:'Troya Müzesi', tarih:'2026-12-13T14:00', org:'Antikyol', bilet:[B('Söyleşi',300,'Müze girişi hariç',40)], aciklama:'Homeros\'tan seçme bölümler, ardından antik kentte kısa yürüyüş.' },
     { id:'konya-sema', ornek:true, ad:'Şeb-i Arus Haftası Söyleşisi', tur:'Söyleşi', il:'Konya', ilce:'Karatay', mekan:'Mevlana Kültür Merkezi', tarih:'2026-12-15T18:00', org:'Örnek organizatör', bilet:[B('Söyleşi',0,'Ücretsiz, kayıt gerekli',120)], aciklama:'Mevlana\'nın düşüncesi üzerine söyleşi ve ardından sema gösterisi.' }
   ];
-  return { ILLER: ILLER, KONUM: KONUM, ILCELER: ILCELER, BOLGELER: BOLGELER, TURLER: TURLER, ETKINLIKLER: ETKINLIKLER, HIZMET: 0.05 };
+  /* ======================================================================
+     HAFTANIN SEÇKİSİ: senin kendi seçtiğin, gittiğin ya da önerdiğin etkinlikler.
+     Olgular (tarih, mekân, fiyat) yukarıdaki ETKINLIKLER listesinden otomatik gelir;
+     buraya yalnızca KENDİ sözlerini yaz. Boş bıraktığın alan sitede hiç görünmez.
+
+       hafta    : seçkinin başladığı pazartesi, "YYYY-AA-GG"
+       baslik   : ör. "Bu hafta Kadıköy'de"
+       il, ilce : seçkinin yeri (ilce boş olabilir)
+       yazar    : imza, ör. "Simge"
+       giris    : 2-3 cümlelik kişisel giriş
+       taslak   : true iken sitede gizli, yalnızca /events?taslak adresinde görünür.
+                  Yazını bitirince false yap.
+       secimler : [{ etkinlik: 'etkinlik-id',
+                     gittim: true yalnızca gerçekten gittiysen ("Gittim" rozeti),
+                     mutlaka: true ise "Mutlaka git" olarak öne çıkar,
+                     yorum: kendi yorumun }]
+     ====================================================================== */
+  var SECKILER = [
+    { id:'2026-11-23-istanbul', hafta:'2026-11-23', baslik:"Bu hafta İstanbul'da", il:'İstanbul', ilce:'', yazar:'', taslak:true,
+      giris:'',
+      secimler:[
+        { etkinlik:'kadikoy-akustik', gittim:false, mutlaka:false, yorum:'' },
+        { etkinlik:'beyoglu-dogaclama', gittim:false, mutlaka:false, yorum:'' },
+        { etkinlik:'sisli-kukla', gittim:false, mutlaka:false, yorum:'' }
+      ] }
+  ];
+  return { ILLER: ILLER, KONUM: KONUM, ILCELER: ILCELER, BOLGELER: BOLGELER, TURLER: TURLER, ETKINLIKLER: ETKINLIKLER, SECKILER: SECKILER, HIZMET: 0.05 };
 })();

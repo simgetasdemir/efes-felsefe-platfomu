@@ -142,3 +142,18 @@ Her mekânın kendi İngilizce sayfası var: `/places/ephesus`, `/places/troy` �
 Sitenin adresi **https://antikyol.com** (kök ad asıl adres; `www` buna yönlendirilmeli). Tüm sayfalarda `canonical`, `og:url` ve tam adresli paylaşım görseli var; `robots.txt` site haritasını gösterir. Yeni sayfa ekleyince `python3 scripts/sitemap.py` ile `sitemap.xml`'i yenile. Adres `scripts/sayfalar.mjs`, `scripts/rehber-sayfalari.py` ve `scripts/sitemap.py` içindeki `ALAN` değerinden gelir.
 
 Yayına alındıktan sonra Google Search Console'a `antikyol.com` alanını ekle, Vercel'e bir TXT kaydıyla doğrula ve `https://antikyol.com/sitemap.xml` adresini gönder.
+
+## Etkinlikler ve haftanın seçkisi (`/events`)
+
+- Etkinlikler `etkinlik-veri.js` içindeki `ETKINLIKLER` listesindedir. Tarih, mekân, fiyat gibi **olgular** buradan gelir.
+- **Haftanın seçkisi** (`SECKILER`) senin kendi sesindir: hangi etkinlikleri seçtiğin, neden seçtiğin, hangisine gerçekten gittiğin.
+  - `giris` ve her etkinliğin `yorum` alanına yalnızca kendi sözlerini yaz. Boş alan sitede hiç görünmez.
+  - `gittim: true` yalnızca gerçekten gittiğin etkinlikte. `mutlaka: true` olan öne çıkar.
+  - `taslak: true` iken seçki sitede gizlidir; `antikyol.com/events?taslak` adresinde nasıl görüneceğini ve hangi alanların boş olduğunu görürsün. Bitince `false` yap.
+  - Seçki bölümünün altındaki düğmeler Instagram gönderisi (4:5), hikâye (9:16) ve YouTube kapağı (16:9) için PNG indirir. Görsellerdeki tarih/mekân/fiyat veriden, tırnak içindeki sözler senin yorumlarından gelir.
+- Haftalık akış önerisi: pazartesi seçkiyi yayınla ve gönderiyi paylaş, perşembe hikâyede "mutlaka git"i hatırlat, hafta sonu gittiğin etkinlikten kısa video çek, ayda iki kez bunları bir YouTube bölümünde topla.
+- YouTube bölüm şablonu (8-12 dk):
+  1. Açılış (0:00-0:30): "Bu hafta [ilçe/il]'de [n] etkinlik seçtim, birine mutlaka gitmelisiniz."
+  2. Her etkinlik için 1-2 dk: kendi çektiğin görüntü + tarih, mekân, fiyat ekranda yazıyla + senin yorumun.
+  3. "Mutlaka git" bölümü: neden.
+  4. Kapanış: biletler ve tüm liste antikyol.com/events, açıklamaya etkinlik bağlantıları.

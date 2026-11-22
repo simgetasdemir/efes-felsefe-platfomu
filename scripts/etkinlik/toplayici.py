@@ -91,6 +91,8 @@ SEMT_ILCE = {
     "crr": "Şişli", "volkswagen arena": "Sarıyer", "uniq": "Sarıyer",
     "tüyap": "Büyükçekmece", "harbiye açıkhava": "Şişli",
     "küçükçiftlik": "Şişli", "salt galata": "Beyoğlu",
+    "borusan contemporary": "Sarıyer", "perili köşk": "Sarıyer", "taksim sanat": "Beyoğlu",
+    "istanbul kitapçısı kadıköy": "Kadıköy",
 }
 
 

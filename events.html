@@ -33,6 +33,24 @@ main.etk{max-width:1160px;padding:0 16px 64px}
 @media (max-width:900px){.ust-alan{grid-template-columns:minmax(0,1fr)}}
 .harita{position:relative;background:var(--deniz);border-radius:20px;overflow:hidden;border:1px solid var(--deniz-cizgi)}
 .harita svg{display:block;width:100%;height:auto}
+/* 3D harita: /turkey ile aynı lacivert + altın görünüm */
+.uc-kutu{width:100%;height:min(62vh,560px);min-height:360px}
+.uc-kutu.bekliyor{position:absolute;left:-10000px;top:0;width:800px}
+.harita.uc{background:#0B1520;border:0;box-shadow:0 0 0 1px rgba(201,161,91,.45),0 20px 44px -24px rgba(11,21,32,.8)}
+.harita.uc .harita-alt{background:var(--lacivert);color:#D9CFBD;border-top-color:rgba(201,161,91,.35)}
+.harita.uc .mapboxgl-canvas{outline:none}
+.harita.uc .mapboxgl-ctrl-group{background:rgba(20,32,46,.9);box-shadow:0 0 0 1px rgba(201,161,91,.5)}
+.harita.uc .mapboxgl-ctrl-group button+button{border-top-color:rgba(201,161,91,.3)}
+.harita.uc .mapboxgl-ctrl-icon{filter:invert(1) sepia(.5) saturate(1.6)}
+.harita.uc .mapboxgl-ctrl-attrib{background:rgba(20,32,46,.75);color:#B9AE98}
+.harita.uc .mapboxgl-ctrl-attrib a{color:#E8D3A6}
+.pin3{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;padding:0;cursor:pointer;font-family:var(--sans);transform-origin:top center}
+.pin3 .say{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--toprak);color:#fff;font-weight:700;font-size:14px;box-shadow:0 0 0 2px #F7F1E4,0 6px 14px -4px rgba(0,0,0,.6);transition:background .15s}
+.pin3 .ad{font-size:12px;font-weight:600;color:#F7F1E4;text-shadow:0 1px 3px #05090F,0 0 6px #05090F;white-space:nowrap}
+.pin3:hover .say,.pin3:focus-visible .say{background:var(--altin);color:var(--lacivert)}
+.pin3.secili .say{background:var(--altin);color:var(--lacivert);box-shadow:0 0 0 3px var(--lacivert),0 0 0 5px var(--altin)}
+.pin3.soluk{opacity:.45}
+@media (max-width:700px){.uc-kutu{height:min(52vh,440px);min-height:320px}}
 .harita .komsu{fill:var(--komsu);stroke:#CFC9BB;stroke-width:.8;vector-effect:non-scaling-stroke}
 .harita .kara{fill:var(--kara);stroke:var(--kara-cizgi);stroke-width:1.2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .harita .kara.secili-ulke{fill:#F3ECDD}
@@ -238,12 +256,14 @@ main.etk{max-width:1160px;padding:0 16px 64px}
     }).join('');
   }
   $('turler').innerHTML = [''].concat(Object.keys(V.TURLER)).map(function(t){ return '<button type="button" data-tur="' + h(t) + '">' + h(t || 'Hepsi') + '</button>'; }).join('');
-  $('tarihler').innerHTML = [['hepsi','Tüm tarihler'],['hafta','Bu hafta'],['haftasonu','Hafta sonu'],['ay','Bu ay']].map(function(z){ return '<button type="button" data-zaman="' + z[0] + '">' + z[1] + '</button>'; }).join('');
+  $('tarihler').innerHTML = [['hepsi','Tüm tarihler'],['bugun','Bugün'],['hafta','Bu hafta'],['haftasonu','Hafta sonu'],['ay','Bu ay']].map(function(z){ return '<button type="button" data-zaman="' + z[0] + '">' + z[1] + '</button>'; }).join('');
   $('ara').value = S.ara;
 
   function zamanUyar(t){
-    if (S.zaman === 'hepsi') return true;
     var simdi = new Date(), d = new Date(t), bas = new Date(simdi); bas.setHours(0,0,0,0);
+    if (d < bas) return false; /* dünden eski etkinlikler listeden kendiliğinden düşer */
+    if (S.zaman === 'hepsi') return true;
+    if (S.zaman === 'bugun') { var yarin = new Date(bas); yarin.setDate(bas.getDate() + 1); return d < yarin; }
     if (S.zaman === 'ay') return d >= bas && d.getMonth() === simdi.getMonth() && d.getFullYear() === simdi.getFullYear();
     var pzt = new Date(bas); pzt.setDate(bas.getDate() - (bas.getDay() + 6) % 7);
     var sonra = new Date(pzt); sonra.setDate(pzt.getDate() + 7);
@@ -277,16 +297,107 @@ main.etk{max-width:1160px;padding:0 16px 64px}
         '<text class="ad" x="' + p[0].toFixed(1) + '" y="' + (p[1] + r + 14).toFixed(1) + '">' + h(il) + '</text></g>';
     }).join('');
     svg.innerHTML = '<path class="komsu" d="' + H.komsu + '"></path><path class="kara" d="' + H.turkiye + '"></path>' + pinler;
+    if (U3.map) isaretler(sayi);
     var iller = Object.keys(sayi).length, top = 0; Object.keys(sayi).forEach(function(k){ top += sayi[k]; });
     $('harita-ozet').textContent = iller + ' ilde ' + top + ' etkinlik';
   }
   function ilSec(il){
     S.il = S.il === il ? '' : il; S.ilce = '';
     if (S.il && S.bolge && IL[S.il].bolge !== S.bolge) S.bolge = '';
-    ciz(true);
+    ciz(true); ucKamera();
   }
   $('harita-svg').addEventListener('click', function(e){ var p = e.target.closest('.pin'); if (p) ilSec(p.getAttribute('data-il')); });
   $('harita-svg').addEventListener('keydown', function(e){ var p = e.target.closest('.pin'); if (p && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); ilSec(p.getAttribute('data-il')); } });
+
+  /* ---------- 3D harita (Mapbox GL) ----------
+     /turkey sayfasındaki harita-3d.js ile aynı anahtar ve lacivert + altın tema.
+     WebGL yoksa, Mapbox açılmazsa ya da adres ?harita=klasik ise yukarıdaki SVG harita kalır. */
+  var U3 = { map: null, isaret: {} };
+  var ANAHTAR = 'pk.eyJ1IjoidGFzZGVtaXJzaW1nZSIsImEiOiJjbXdncmQxMjQwa21uMnlyMG12MHFjc2RkIn0.lFcrHH50LqDEmqO_t8FU3Q';
+  var MB = 'https://api.mapbox.com/mapbox-gl-js/v3.34.1/mapbox-gl';
+  var TUM = [[25.4, 35.55], [45.0, 42.35]];
+  var azHareket = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function ucStil(){
+    var ALTIN = '#C9A15B';
+    return { version: 8, glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
+      sources: {
+        sokak: { type: 'vector', url: 'mapbox://mapbox.mapbox-streets-v8' },
+        ulke: { type: 'vector', url: 'mapbox://mapbox.country-boundaries-v1' },
+        dem: { type: 'raster-dem', url: 'mapbox://mapbox.mapbox-terrain-dem-v1', tileSize: 512, maxzoom: 14 },
+        golge: { type: 'raster-dem', url: 'mapbox://mapbox.mapbox-terrain-dem-v1', tileSize: 512, maxzoom: 14 }
+      },
+      terrain: { source: 'dem', exaggeration: 1.6 },
+      fog: { color: '#1A2A3D', 'high-color': '#0E1A2A', 'horizon-blend': 0.08, 'space-color': '#060B12', 'star-intensity': 0.35, range: [1.5, 12] },
+      layers: [
+        { id: 'kara', type: 'background', paint: { 'background-color': '#21334A' } },
+        { id: 'su', type: 'fill', source: 'sokak', 'source-layer': 'water', paint: { 'fill-color': '#0A121C' } },
+        { id: 'komsu', type: 'fill', source: 'ulke', 'source-layer': 'country_boundaries',
+          filter: ['all', ['!=', ['get', 'iso_3166_1'], 'TR'], ['match', ['get', 'worldview'], ['all', 'US'], true, false]], paint: { 'fill-color': '#0E1824', 'fill-opacity': 0.6 } },
+        { id: 'kabartma', type: 'hillshade', source: 'golge',
+          paint: { 'hillshade-shadow-color': '#05090F', 'hillshade-highlight-color': 'rgba(201,161,91,0.55)', 'hillshade-accent-color': '#2A2618', 'hillshade-exaggeration': ['interpolate', ['linear'], ['zoom'], 4, 0.35, 8, 0.6], 'hillshade-illumination-direction': 315 } },
+        { id: 'il-sinir', type: 'line', source: 'sokak', 'source-layer': 'admin', filter: ['all', ['==', ['get', 'admin_level'], 1], ['==', ['get', 'maritime'], 0], ['match', ['get', 'worldview'], ['all', 'US'], true, false]],
+          paint: { 'line-color': ALTIN, 'line-opacity': 0.18, 'line-dasharray': [2, 2], 'line-width': ['interpolate', ['linear'], ['zoom'], 4, 0.4, 9, 1] } },
+        { id: 'sinir', type: 'line', source: 'sokak', 'source-layer': 'admin', filter: ['all', ['==', ['get', 'admin_level'], 0], ['==', ['get', 'maritime'], 0], ['match', ['get', 'worldview'], ['all', 'US'], true, false]],
+          paint: { 'line-color': ALTIN, 'line-opacity': 0.55, 'line-width': ['interpolate', ['linear'], ['zoom'], 4, 0.7, 9, 1.6] } },
+        { id: 'kent', type: 'symbol', source: 'sokak', 'source-layer': 'place_label', minzoom: 6.5,
+          filter: ['all', ['==', ['get', 'iso_3166_1'], 'TR'], ['==', ['get', 'class'], 'settlement'], ['<=', ['get', 'symbolrank'], 11]],
+          layout: { 'text-field': ['get', 'name'], 'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'], 'text-size': 11, 'text-optional': true },
+          paint: { 'text-color': '#B9AE98', 'text-opacity': 0.8, 'text-halo-color': '#14202E', 'text-halo-width': 1.2 } }
+      ] };
+  }
+  function ucBaslat(){
+    try { if (/[?&]harita=klasik\b/.test(location.search)) return; var c = document.createElement('canvas'); if (!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')))) return; } catch(x){ return; }
+    var fig = $('harita-svg').parentNode, kutu = document.createElement('div');
+    kutu.className = 'uc-kutu bekliyor'; fig.insertBefore(kutu, $('harita-svg'));
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = MB + '.css'; document.head.appendChild(l);
+    var js = document.createElement('script'); js.src = MB + '.js'; js.async = true; js.onerror = vazgec;
+    js.onload = function(){
+      var map, hazir = false;
+      try {
+        mapboxgl.accessToken = ANAHTAR;
+        map = new mapboxgl.Map({ container: kutu, style: ucStil(), projection: 'mercator', bounds: TUM, fitBoundsOptions: { padding: 16 },
+          pitch: 45, maxPitch: 70, minZoom: 3.2, maxZoom: 12, cooperativeGestures: true, attributionControl: false,
+          locale: { 'ScrollZoomBlocker.CtrlMessage': 'Yakınlaştırmak için Ctrl + kaydır', 'ScrollZoomBlocker.CmdMessage': 'Yakınlaştırmak için ⌘ + kaydır', 'TouchPanBlocker.Message': 'Haritayı iki parmakla hareket ettir' } });
+      } catch(x){ return vazgec(); }
+      map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
+      map.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), 'top-right');
+      var zaman = setTimeout(function(){ if (!hazir) vazgec(); }, 25000);
+      map.on('error', function(e){ if (!hazir && e && e.error && /40[13]|Unauthorized|Forbidden/i.test(String(e.error.message || e.error.status))) vazgec(); });
+      map.on('load', function(){
+        hazir = true; clearTimeout(zaman);
+        kutu.classList.remove('bekliyor'); fig.classList.add('uc'); $('harita-svg').hidden = true;
+        U3.map = map; map.resize(); harita(); ucKamera(true);
+      });
+      function vazgec2(){ try { map.remove(); } catch(x){} }
+      vazgec.map = vazgec2;
+    };
+    function vazgec(){ if (vazgec.map) vazgec.map(); U3.map = null; kutu.remove(); fig.classList.remove('uc'); $('harita-svg').hidden = false; }
+  }
+  function isaretler(sayi){
+    Object.keys(U3.isaret).forEach(function(il){ if (!sayi[il]) { U3.isaret[il].remove(); delete U3.isaret[il]; } });
+    Object.keys(sayi).forEach(function(il){
+      if (!V.KONUM[il]) return;
+      var m = U3.isaret[il];
+      if (!m) {
+        var el = document.createElement('button'); el.type = 'button'; el.className = 'pin3';
+        el.innerHTML = '<span class="say"></span><span class="ad">' + h(il) + '</span>';
+        el.addEventListener('click', function(ev){ ev.stopPropagation(); ilSec(il); });
+        m = U3.isaret[il] = new mapboxgl.Marker({ element: el, anchor: 'top' }).setLngLat([V.KONUM[il][1], V.KONUM[il][0]]).addTo(U3.map);
+      }
+      var e = m.getElement();
+      e.querySelector('.say').textContent = sayi[il];
+      e.classList.toggle('secili', S.il === il); e.classList.toggle('soluk', !!S.il && S.il !== il);
+      e.setAttribute('aria-label', il + ', ' + sayi[il] + ' etkinlik'); e.setAttribute('aria-pressed', S.il === il);
+    });
+  }
+  function ucKamera(ilk){
+    var map = U3.map; if (!map) return;
+    var o;
+    if (S.il && V.KONUM[S.il]) o = { center: [V.KONUM[S.il][1], V.KONUM[S.il][0]], zoom: 7.4, pitch: 58, bearing: -12 };
+    else { var c = map.cameraForBounds(TUM, { padding: 16, pitch: 45 }); if (!c) return; o = { center: c.center, zoom: c.zoom, pitch: 45, bearing: 0 }; }
+    o.duration = azHareket ? 0 : (ilk ? 2400 : 1600); o.essential = false;
+    if (azHareket) map.jumpTo(o); else map.flyTo(o);
+  }
 
   /* ---------- kartlar ---------- */
   function kart(e){
@@ -448,6 +559,7 @@ main.etk{max-width:1160px;padding:0 16px 64px}
 
   seckiCiz();
   ciz();
+  ucBaslat();
   var ilk = (location.hash || '').slice(1); if (ilk) ac(ilk);
 })();
 </script>
